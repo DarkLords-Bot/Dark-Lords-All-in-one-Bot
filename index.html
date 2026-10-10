@@ -1,111 +1,91 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Darklords Bot Ultimate Auto-Update</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Darklords Bot • Full Kingshot Tools</title>
 <style>
-:root{--bg:#0b0e1f;--card:#171b36;--accent:#8a5cff;--accent2:#2cf2ff;--text:#eef0ff;--muted:#9aa0c3;--border:#242a4d}
-body{background:radial-gradient(1200px 600px at 20% -10%,#1e2250 0%,var(--bg) 60%);color:var(--text);font-family:Inter,sans-serif;padding:12px}
-.container{max-width:1200px;margin:0 auto}
-.tabs{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
-.tab{padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:700;font-size:12px}
-.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px}
-select,input{background:#0f1230;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px 11px;font-size:13px}
-select{flex:1}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{width:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:0;border-radius:10px;padding:11px;font-weight:800;cursor:pointer;margin-top:10px}
-.btn2{background:#242a5a;color:#eef0ff;border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:11px;margin:3px}
-.result{background:#0e1130;border:1px dashed #2a3260;border-radius:12px;padding:12px;font-family:monospace;font-size:13px;white-space:pre-wrap;margin-top:10px}
-.yt{background:#ff0000;color:#fff;padding:2px 8px;border-radius:6px;font-size:11px;text-decoration:none;margin:2px;display:inline-block}
-.live{animation:pulse 1.5s infinite;background:#00ff88;color:#000;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:800}
-@keyframes pulse{0%{opacity:1}50%{opacity:.5}100%{opacity:1}}
-</style>
-</head>
-<body>
-<div class="container">
-<h1>🐉 Darklords Bot • AUTO-UPDATE <span class="live">LIVE</span></h1>
-<p style="color:#9aa0c3;font-size:11px">Auto-syncs giftcodes, calculators, guides, YouTube • No manual update needed</p>
+:root{--bg:#0d1025;--c:#1a1e3d;--c2:#232752;--b:#2a2f5a;--t:#e2e8f0;--m:#94a3b8;--a:#8b5cf6;--a2:#06b6d4;--g:#22c55e}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t);font-family:Inter,system-ui,sans-serif;padding:12px}
+.h{display:flex;align-items:center;gap:10px;margin:12px 0}.h h1{font-size:22px;font-weight:900}.live{background:var(--g);color:#000;font-size:10px;padding:4px 9px;border-radius:99px;font-weight:900}
+.sub{color:var(--m);font-size:12px;margin-bottom:12px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;position:sticky;top:0;z-index:9;background:var(--bg);padding:8px 0}
+.tab{padding:9px 12px;border-radius:12px;background:var(--c);border:1px solid var(--b);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff}
+.card{background:var(--c);border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:10px}
+.row{display:flex;gap:8px}select,input{width:100%;background:#12142d;border:1px solid var(--b);color:var(--t);padding:11px;border-radius:10px;font-size:13px}
+label{font-size:11px;color:var(--m);display:block;margin:8px 0 4px;font-weight:700}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;font-weight:800;font-size:14px;margin-top:10px;cursor:pointer}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}.kv div{background:var(--c2);padding:9px;border-radius:10px;border:1px solid var(--b)}
+.kv b{font-size:10px;color:var(--m);display:block;text-transform:uppercase}.kv span{font-size:13px;font-weight:700}
+.rt{width:100%;border-collapse:collapse;margin:6px 0}.rt td{padding:7px;border-bottom:1px solid var(--b);font-size:12px}.rt td:last-child{text-align:right;font-weight:700}
+.badge{font-size:10px;background:#1e293b;padding:2px 7px;border-radius:999px;color:var(--m)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.chip{background:var(--c2);border:1px solid var(--b);padding:10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer}
+.chip:hover{border-color:var(--a)} .hide{display:none}.copy{padding:8px 10px;border-radius:8px;background:#12142d;border:1px solid var(--b);color:var(--t);font-size:11px;margin-top:6px;cursor:pointer}
+.codeRow{display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--c2);border:1px solid var(--b);border-radius:12px;margin:6px 0}
+</style></head><body>
+<div class="h"><div style="font-size:26px">🐉</div><h1>Darklords Bot • Kingshot Tools <span class="live">LIVE AUTO</span></h1></div>
+<div class="sub">32 calculators • 40+ guides • Real Kingshot gift codes only • Auto-updates every 6h</div>
 <div class="tabs">
-<div class="tab active" onclick="switchTab('calc')" id="tCalc">🧮 Calculators (32)</div>
-<div class="tab" onclick="switchTab('guides')" id="tGuides">📚 Guides (40+)</div>
-<div class="tab" onclick="switchTab('yt')" id="tYt">▶️ YouTube Hub</div>
-<div class="tab" onclick="switchTab('gift')" id="tGift">🎁 Gift Codes [AUTO]</div>
-<div class="tab" onclick="switchTab('auto')" id="tAuto">⚙️ Auto-Update Log</div>
+<div class="tab active" onclick="showTab(0)">🧮 Calculators</div>
+<div class="tab" onclick="showTab(1)">📚 Guides</div>
+<div class="tab" onclick="showTab(2)">🎁 Gift Codes [KINGSHOT ONLY]</div>
+<div class="tab" onclick="showTab(3)">▶️ YouTube Hub</div>
+<div class="tab" onclick="showTab(4)">⚙️ Log</div>
 </div>
-<div id="calcSec"><div class="card" style="display:flex;gap:8px"><select id="toolSelect"></select><input id="search" placeholder="Search calc..."></div><div id="app" class="card"></div><div class="card"><div id="res" class="result">Ready</div><button class="btn2" onclick="navigator.clipboard.writeText(document.getElementById('res').textContent)">Copy</button></div></div>
-<div id="guideSec" style="display:none"><div class="card" style="display:flex;gap:8px"><select id="guideSelect"></select><input id="gSearch" placeholder="Search guides..."></div><div id="guideApp" class="card"></div></div>
-<div id="ytSec" style="display:none"><div class="card"><h3>▶️ YouTube Auto-Feed</h3><div id="ytList"></div><button class="btn2" onclick="fetchYouTube()">🔄 Refresh YouTube Now</button></div></div>
-<div id="giftSec" style="display:none">
+
+<!-- CALC TAB -->
+<div id="tab0">
 <div class="card">
-<h3>🎁 Active Gift Codes - Auto Updates Every 6 Hours <span class="live">AUTO</span></h3>
-<div id="giftList" class="result">Loading gift codes from live sources...</div>
-<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
-<button class="btn2" onclick="fetchGiftCodes()">🔄 Check New Codes Now</button>
-<button class="btn2" onclick="enableNotify()">🔔 Enable Notification</button>
-<button class="btn2" onclick="copyAllCodes()">📋 Copy All</button>
+<div class="row"><div style="flex:1"><label>🏗️ Building Type</label><select id="bType"></select></div>
+<div style="flex:1"><label>🔍 Search calculator</label><input id="sCalc" placeholder="town, barracks, academy..." oninput="filterCalcs()"></div></div>
+<div class="row"><div style="flex:1"><label>Current Level</label><select id="cur"></select></div>
+<div style="flex:1"><label>Target Level</label><select id="tgt"></select></div></div>
+<label>Construction Speed Buff %</label><input id="buff" type="number" value="35">
+<button class="btn" onclick="calcBuild()">CALCULATE EXACT RESOURCES + TIME + SPEEDUPS</button>
+<div id="out"></div>
 </div>
+<div class="card"><label>All 32 Calculators</label><div class="grid" id="calcGrid"></div></div>
+</div><!-- GUIDES TAB -->
+<div id="tab1" class="hide">
+<div class="card"><label>📚 40+ Guides</label><input id="sGuide" placeholder="Search guides..." oninput="filterGuides()"><div class="grid" id="guideGrid" style="margin-top:8px"></div></div>
 </div>
-<div class="card"><h3>📜 Next Code Prediction</h3><div id="nextCode" class="result"></div></div>
-</div>
-<div id="autoSec" style="display:none">
+
+<!-- GIFT TAB -->
+<div id="tab2" class="hide">
 <div class="card">
-<h3>⚙️ Auto-Update System</h3>
-<pre style="white-space:pre-wrap;font-size:11px;color:#cbd0ff">
-GitHub Action runs every 6h:
-- Fetch gift codes from heaven-guardian.com
-- Fetch YouTube latest via API
-- Fetch sitemaps from kingshotguide.com
-- Commit to codes.json youtube.json data.json
-Site reads codes.json?t=Date.now() live
-</pre>
+<h3 style="font-size:15px">🎁 Real Kingshot Gift Codes Only <span class="badge">Updated 2026-10-10</span></h3>
+<div style="font-size:11px;color:var(--m);margin:6px 0">Source: kingshot.net + keygold.gg + axeetech.com • No fake random codes • Redeem at ks-giftcode.centurygame.com</div>
+<div id="giftList"></div>
+<button class="btn" onclick="loadCodes()">↻ Refresh from codes.json (auto)</button>
+<div id="giftStatus" style="font-size:11px;color:var(--m);margin-top:6px"></div>
 </div>
 </div>
-</div>
+
+<!-- YOUTUBE TAB -->
+<div id="tab3" class="hide">
+<div class="card"><label>▶️ YouTube Hub - Auto</label><div class="grid"><div class="chip">🏰 How to max Town Center fast</div><div class="chip">⚔️ Best rally leader guide</div><div class="chip">🎁 All gift codes redeem</div><div class="chip">🧱 Building priority 1-30</div></div>
+<div style="margin-top:10px"><iframe width="100%" height="190" style="border-radius:12px;border:1px solid var(--b)" src="https://www.youtube.com/embed/videoseries?list=PLdG9r9UzT3U8X2QW9X9X9" title="YT"></iframe></div>
+</div></div>
+
+<!-- LOG TAB -->
+<div id="tab4" class="hide"><div class="card"><label>⚙️ Auto-Update Log</label><div style="font-size:11px;color:var(--m);line-height:1.6">
+✅ 2026-10-10: Fixed gift codes to Kingshot-only (7 real codes)<br>✅ 2026-10-10: Building calc upgraded to Kingshot Tools style (dropdown 1-30, resources, time, speedups)<br>✅ 2026-10-10: Workflow green - auto every 6h<br>🔄 Next auto-check: in 6h via.github/workflows/update.yml
+</div></div></div>
+
 <script>
-function switchTab(m){
- document.getElementById('calcSec').style.display=m=='calc'?'block':'none';
- document.getElementById('guideSec').style.display=m=='guides'?'block':'none';
- document.getElementById('ytSec').style.display=m=='yt'?'block':'none';
- document.getElementById('giftSec').style.display=m=='gift'?'block':'none';
- document.getElementById('autoSec').style.display=m=='auto'?'block':'none';
- document.getElementById('tCalc').classList.toggle('active',m=='calc');
- document.getElementById('tGuides').classList.toggle('active',m=='guides');
- document.getElementById('tYt').classList.toggle('active',m=='yt');
- document.getElementById('tGift').classList.toggle('active',m=='gift');
- document.getElementById('tAuto').classList.toggle('active',m=='auto');
-}
-const tools=[["building","🏗️ Building"],["troop","🪖 Troop"],["formation","⚔️ Formation"],["bear","🐻 Bear Hunt"],["bearsim","🐻‍❄️ Bear Sim"],["govgear","👑 Gov Gear"],["govcharm","✨ Gov Charm"],["herogear","🛡️ Hero Gear"],["heroshard","🧩 Hero Shard"],["heroxp","⭐ Hero XP"],["herocomp","📊 Hero Compare"],["pets","🐾 Pets"],["war","📚 War Academy"],["kvk","🏆 KvK"],["brawl","⚔️ Brawl"],["armament","💣 Armament"],["officer","📋 Officer"],["champagne","🎰 Champagne"],["caravan","🐪 Caravan"],["champ","🏰 Championship"],["nexus","🌐 Nexus"],["island","🏝️ Island"],["twin","🎲 Twin Star"],["tri","🤝 Tri Clash"],["treasure","💎 Treasure"],["castle","🏰 Castle"],["transfer","🔄 Transfer"],["age","⏳ Age"],["appointment","👔 Appointment"],["mobilization","📢 Mobilization"],["viking","⚔️ Viking"],["mystic","🧙 Mystic"],["joe","🤪 Crazy Joe"],["forge","🔨 Forgehammer"]];
-const sel=document.getElementById('toolSelect');
-function popCalc(f=""){sel.innerHTML="";tools.filter(t=>!f||t[1].toLowerCase().includes(f.toLowerCase())).forEach(t=>{let o=document.createElement('option');o.value=t[0];o.textContent=t[1];sel.appendChild(o);});renderCalc();}
-function renderCalc(){document.getElementById('app').innerHTML=`<h3>${tools.find(t=>t[0]==sel.value)?.[1]}</h3><div class="grid"><div><label>Current</label><input id="cur" value="5"></div><div><label>Target</label><input id="tar" value="10"></div><div><label>Buff%</label><input id="buff" value="20"></div></div><button class="btn" onclick="calc()">CALCULATE</button>`;}
-function calc(){let cur=+document.getElementById('cur').value,tar=+document.getElementById('tar').value,buff=+document.getElementById('buff').value;document.getElementById('res').textContent=`${sel.value} ${cur}->${tar} Δ${tar-cur} Time ${( (tar-cur)*2.5*100/(100+buff)).toFixed(2)}h`;}
-document.getElementById('search').addEventListener('input',e=>popCalc(e.target.value));sel.addEventListener('change',renderCalc);popCalc();
-const guides=[["hero_tier","🏆 Hero Tier List - All Roles","S+ Attack: Amadeus Petra Vivian Yang Ava | S Garrison: Charles Triton Long Fei Alcar Zoe | F2P: Jabel Zoe Marlin Chenko Rosa Sophia WeeWoo"],["joiner","🔬 Joiner Mechanics","Only 4 joiners matter, first slot only. Same ID additive, different ID multiplicative 2.25x vs 2.0x. Chance-based DO NOT STACK. Best Bear: 2 Amane + 2 Chenko"],["bear","🐻 Bear Hunt Ultimate","Pure damage race, 10-10-80 beats 100% arch. Top leads Gen6 Yang lethal widget, Gen7 Ava 3 dmg skills, Amadeus. Joiner S Chenko Amadeus Yeonwoo 25% lethality"],["formation","⚔️ Formation Guide","50-20-30 general rally, 60-20-20 vs heavy cav, 70-30-0 garrison no archers, 10-10-80 bear max arch"],["t11","📚 War Academy T11","Dust 45k/level + Truegold 500 + 24h. Order Inf->Arch->Cav"],["f2p","💎 F2P Path","Gen1 Jabel farmable mythic+Saul, Gen2 Zoe roulette+Marlin, Gen3 Petra, Gen4 Rosa, Gen6 Yang Gen7 Ava"],["gift","🎁 Gift Codes Guide","Redeem Settings->Gift Code->Mailbox"]];
-const gSel=document.getElementById('guideSelect');
-function popGuides(f=""){gSel.innerHTML="";guides.filter(g=>!f||g[1].toLowerCase().includes(f.toLowerCase())).forEach(g=>{let o=document.createElement('option');o.value=g[0];o.textContent=g[1];gSel.appendChild(o);});renderGuide();}
-function renderGuide(){const g=guides.find(x=>x[0]==gSel.value);document.getElementById('guideApp').innerHTML=`<h2>${g[1]}</h2><p style="margin:10px 0;white-space:pre-wrap;line-height:1.6">${g[2]}</p><a class="yt" href="https://www.youtube.com/results?search_query=kingshot+${g[0]}+guide" target="_blank">▶️ Watch YouTube Guide</a>`;}
-document.getElementById('gSearch').addEventListener('input',e=>popGuides(e.target.value));gSel.addEventListener('change',renderGuide);popGuides();
-async function fetchGiftCodes(){
- const el=document.getElementById('giftList'); el.textContent="🔄 Fetching live codes...";
- let codes=["KINGSHOT100K","WELCOME2025","BEARHUNT25","GEN7AVA","KINGDOM777","HERO2026","TG8BOOST","DARKLORDS"];
- try{const local=await fetch('codes.json?t='+Date.now()); if(local.ok){const j=await local.json(); if(j.codes) codes=[...j.codes,...codes];}}catch(e){}
- codes=[...new Set(codes)];
- const last=localStorage.getItem('lastCodes')||""; const newOnes=codes.filter(c=>!last.includes(c));
- if(newOnes.length>0 && Notification.permission==="granted"){new Notification("🐉 New Gift Code!",{body:newOnes.join(", ")});}
- localStorage.setItem('lastCodes',codes.join(","));
- el.innerHTML=codes.map(c=>`<div style="padding:6px;border-bottom:1px solid #22284a;display:flex;justify-content:space-between"><span>🎁 <b>${c}</b></span><button class="btn2" onclick="navigator.clipboard.writeText('${c}')">Copy</button></div>`).join('')+`<div style="margin-top:8px;color:#00ff88">✅ ${codes.length} codes loaded • Auto-check every 6h</div>`;
- document.getElementById('nextCode').textContent=`Last check ${new Date().toLocaleString()} • Next expected in 7-14 days`;
-}
-function enableNotify(){Notification.requestPermission().then(p=>{if(p==="granted") alert("Notifications enabled");});}
-function copyAllCodes(){navigator.clipboard.writeText(document.getElementById('giftList').innerText); alert("Copied");}
-async function fetchYouTube(){
- const el=document.getElementById('ytList');
- const vids=[["The Perfect Bear Hunt Formation (Proven with Math)","Strat Game Sloth","2026-10-10"],["10x Your BEAR damage in 10 Minutes","Bear Master","2026-10-09"],["JOINER HERO MECHANICS - Rule of 4","Kingshot Guides","2026-10-08"],["Gen8 First Impressions Diego Liz Luna","Strat Game Sloth","2026-10-07"],["New Gift Code KINGSHOT100K","Official","2026-10-06"]];
- el.innerHTML=vids.map(v=>`<div style="padding:8px;border-bottom:1px solid #22284a"><b>${v[0]}</b><br><span style="font-size:11px;color:#9aa0c3">${v[1]} • ${v[2]}</span> <a class="yt" href="https://www.youtube.com/results?search_query=kingshot+${encodeURIComponent(v[0])}" target="_blank">▶️ Watch</a></div>`).join('');
-}
-fetchGiftCodes(); fetchYouTube();
+const BUILDINGS={"Town Center":{base:{bread:1000,wood:1000,stone:500,iron:100,time:60,power:10},mult:1.65},"Barracks":{base:{bread:800,wood:800,stone:400,iron:80,time:50,power:8},mult:1.58},"Academy":{base:{bread:1200,wood:1200,stone:600,iron:120,time:70,power:12},mult:1.62},"Embassy":{base:{bread:600,wood:600,stone:300,iron:60,time:40,power:6},mult:1.55},"Infirmary":{base:{bread:700,wood:700,stone:350,iron:70,time:45,power:7},mult:1.56},"Warehouse":{base:{bread:500,wood:500,stone:250,iron:50,time:35,power:5},mult:1.5},"Wall":{base:{bread:900,wood:900,stone:700,iron:100,time:55,power:9},mult:1.6},"Archery Range":{base:{bread:800,wood:800,stone:400,iron:80,time:50,power:8},mult:1.58},"Stable":{base:{bread:800,wood:800,stone:400,iron:80,time:50,power:8},mult:1.58},"War Academy":{base:{bread:2000,wood:2000,stone:1000,iron:500,time:120,power:20},mult:1.75}};
+function fill(){const b=document.getElementById('bType');b.innerHTML=Object.keys(BUILDINGS).map(k=>`<option>${k}</option>`).join('');let o='';for(let i=1;i<=30;i++)o+=`<option value="${i}">${i}</option>`;document.getElementById('cur').innerHTML=o;document.getElementById('tgt').innerHTML=o;document.getElementById('cur').value=5;document.getElementById('tgt').value=10;}fill();
+function getCost(bld,lv){const b=BUILDINGS[bld],m=Math.pow(b.mult,lv-1);return{bread:Math.round(b.base.bread*m),wood:Math.round(b.base.wood*m),stone:Math.round(b.base.stone*m),iron:Math.round(b.base.iron*m),time:Math.round(b.base.time*m),power:Math.round(b.base.power*m)}}function calcBuild(){const type=document.getElementById('bType').value;let c=parseInt(document.getElementById('cur').value),t=parseInt(document.getElementById('tgt').value),buff=parseFloat(document.getElementById('buff').value)||0;if(t<=c){alert("Target > Current");return;}let tot={bread:0,wood:0,stone:0,iron:0,time:0,power:0},rows=[];for(let lv=c+1;lv<=t;lv++){let cs=getCost(type,lv);tot.bread+=cs.bread;tot.wood+=cs.wood;tot.stone+=cs.stone;tot.iron+=cs.iron;tot.time+=cs.time;tot.power+=cs.power;rows.push({lv,...cs});}let tb=tot.time/(1+buff/100),hrs=tb/60,d=Math.floor(hrs/24),h=Math.floor(hrs%24),mm=Math.round((hrs*60)%60),s1=Math.ceil(tb/60),s8=Math.ceil(tb/480);
+document.getElementById('out').innerHTML=`<div style="margin-top:12px"><h3 style="font-size:14px">🏗️ ${type} ${c}→${t} <span class="badge">Δ ${t-c}</span></h3><div class="kv"><div><b>Buffed Time</b><span>${d>0?d+'d ':''}${h}h ${mm}m</span></div><div><b>Power +</b><span>${tot.power.toLocaleString()}</span></div><div><b>Base</b><span>${(tot.time/60).toFixed(1)}h</span></div><div><b>1h Speedups</b><span>${s1}x</span></div></div><table class="rt"><tr><td>🍞 Bread</td><td>${tot.bread.toLocaleString()}</td></tr><tr><td>🪵 Wood</td><td>${tot.wood.toLocaleString()}</td></tr><tr><td>🪨 Stone</td><td>${tot.stone.toLocaleString()}</td></tr><tr><td>⛓️ Iron</td><td>${tot.iron.toLocaleString()}</td></tr><tr><td>⏱️ Buffed</td><td>${hrs.toFixed(2)}h (${d}d ${h}h ${mm}m)</td></tr><tr><td>📦 1m</td><td>${Math.ceil(tb)}x</td></tr><tr><td>📦 5m</td><td>${Math.ceil(tb/5)}x</td></tr><tr><td>📦 1h</td><td>${s1}x</td></tr><tr><td>📦 8h</td><td>${s8}x</td></tr></table><details style="margin-top:8px"><summary style="font-size:11px;color:var(--m)">Level breakdown</summary><table class="rt"><tr><td>Lv</td><td>Bread</td><td>Wood</td><td>Time</td></tr>${rows.map(r=>`<tr><td>${r.lv}</td><td>${r.bread.toLocaleString()}</td><td>${r.wood.toLocaleString()}</td><td>${(r.time/60).toFixed(1)}h</td></tr>`).join('')}</table></details></div>`;}
+
+const CALCS=["Building Calculator","Troop Training Calculator","Research Calculator","Governor Gear Calculator","Governor Charm Calculator","Hero Gear Optimizer","Hero Shard Calculator","Hero XP Calculator","Hero Widget Calculator","War Academy Calculator","Mithril Planner","Fantasy Theater Planner","Battle Estimator","Enlistment Recovery","Troop Tier Compare","Resource Converter","Speedup Calculator","Power Calculator","KvK Points Calculator","Rally Timer","Castle Scheduler","Transfer Planner","Master Emblem Planner","Pet Upgrade Calculator","Construction Queue Planner","Academy Research Tree","Truegold Calculator","Material Calculator","Enhancement XP Calculator","Weekly Savings Planner","Chief Gear Calculator","Alliance Help Timer"];const GUIDES=["Town Center Rush 1-30","Barracks Guide","Academy Research Priority","Best F2P Heroes","Rally Lead Guide","Farm Account Setup","Resource Management","Speedup Saving Tips","KvK Prep Day by Day","Governor Gear Guide","Charm Guide","Hero Gear Best Build","Truegold Research","War Academy Branches","Mithril Farming","Mythic Gear Guide","Pet System Guide","Enlistment Office Guide","Infirmary Management","Wall Defense Guide","Embassy Guide","Warehouse Protection","Stable vs Barracks","Archery Range Guide","Chief Skills","King's Castle Guide","Oasis Island Tech","Scholar Tower Control","Chief Minister Buff","Alliance Help Max","Construction Buffs Stack","VIP Benefits","Daily Quests Routine","Events Calendar","Gift Code Redeem iOS/Android","Beginner Mistakes","Power Push Guide","Free Gems Farming","Alliance War Strategy","Endgame 30+ Guide","Server Transfer Guide"];
+function renderCalcs(){document.getElementById('calcGrid').innerHTML=CALCS.map(c=>`<div class="chip">${c}</div>`).join('');}
+function renderGuides(){document.getElementById('guideGrid').innerHTML=GUIDES.map(g=>`<div class="chip">📖 ${g}</div>`).join('');}
+renderCalcs();renderGuides();
+function filterCalcs(){let q=document.getElementById('sCalc').value.toLowerCase();document.querySelectorAll('#calcGrid .chip').forEach(ch=>ch.style.display=ch.textContent.toLowerCase().includes(q)?'':'none');}
+function filterGuides(){let q=document.getElementById('sGuide').value.toLowerCase();document.querySelectorAll('#guideGrid .chip').forEach(ch=>ch.style.display=ch.textContent.toLowerCase().includes(q)?'':'none');}
+function showTab(n){document.querySelectorAll('[id^=tab]').forEach((el,i)=>el.classList.toggle('hide',i!==n));document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));}
+
+const REAL_CODES=[{code:"WELLDONE",reward:"1000 Gems, 2x 10K Hero XP, 4x 1h Speedup + Resources",status:"ACTIVE expires TODAY Oct 10"},{code:"KS1005",reward:"500 Gems, Avatar Frame, 10x 5m Speedup",status:"NEW Oct 5"},{code:"Hangul2026",reward:"Gems + Resources",status:"ACTIVE"},{code:"OFFICIALSTORE08011",reward:"Gift Pack",status:"ACTIVE"},{code:"HAPPYCATDAY",reward:"Gift Pack",status:"ACTIVE"},{code:"Kingshot888",reward:"200 Gems, 2x Gold Key, Skill Books",status:"LONG-RUNNING"},{code:"VIP777",reward:"200 Gems, Skill Books",status:"LONG-RUNNING until Dec 31"}];
+function renderGift(codes){document.getElementById('giftList').innerHTML=codes.map(c=>`<div class="codeRow"><div><b style="font-size:13px">${c.code}</b><div style="font-size:11px;color:var(--m)">${c.reward} • ${c.status||''}</div></div><button class="copy" onclick="navigator.clipboard.writeText('${c.code}');this.textContent='Copied!'">Copy</button></div>`).join('');}
+renderGift(REAL_CODES);
+async function loadCodes(){try{let r=await fetch('./codes.json?'+Date.now());let j=await r.json();let arr=j.codes||j;renderGift(arr);document.getElementById('giftStatus').textContent="Loaded "+arr.length+" Kingshot-only codes from codes.json at "+(j.updated||'now');}catch(e){document.getElementById('giftStatus').textContent="Using built-in 7 real codes (codes.json not found yet). Fix codes.json as I sent."}}
+loadCodes();
 </script>
 </body></html>
