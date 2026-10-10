@@ -225,25 +225,47 @@ function calculateAll(){
  let modStr=Math.floor(mod/24)+'d '+Math.floor(mod%24)+'h';
  document.getElementById('origTime').textContent=origStr;
  document.getElementById('modTime').textContent=modStr;
- let red=disc/100;
- document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();
- document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();
- document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();
- document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();
- document.getElementById('rTG').textContent=tot.tg.toLocaleString();
- document.getElementById('rTTG').textContent=tot.ttg.toLocaleString(); document.getElementById('rBreadRed').textContent=(tot.b - Math.round(tot.b*(1-red))).toLocaleString()+' saved';
- document.getElementById('rPower').textContent='+'+tot.p.toLocaleString();
- document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:10px"><b>'+count+' buildings selected</b> - TG10 MAX 1-80 support. Example: TG8 (70) -> TG10 (80) MAX = 2600 TG + TTG.</div>';
- document.getElementById('totDesc').textContent=count+' buildings selected - showing total required resources till TG10 MAX.';
+ let red=disc/100;let GUIDES_DATA={
+"Town Center Rush 1-30 + TG1-TG10":{content:`<b>Town Center Priority System - Original from kingshot.net</b><br><br>The Town Center gates <b>every other system</b>.<br>• Which buildings you can construct<br>• Max level for all other buildings<br>• Research availability<br>• Hero Hall capacity<br>• Troop tier access<br><br><b>The Focus Principle:</b> When deciding what to upgrade, answer is almost always "Town Center." Only upgrade prerequisites when required for TC.<br><br><b>Upgrade Order:</b><br>Priority 1 (Always): Town Center<br>Priority 2 (Keep within 2 levels of TC): Mill, Sawmill, Quarry<br>Priority 3: Barracks, Academy, Hospital<br><br><b>TG1-TG10:</b> TG1=Lv35 (660 TG), TG8=Lv70 (1675 TG YOURS), TG9=Lv75 (2100), TG10=Lv80 MAX (2600 TG + 780 TTG)`},
+"Best Buildings Priority":{content:`<b>Resource Building Priority - kingshot.net original</b><br><br><b>Priority 1:</b> Town Center - Gates all progression<br><b>Priority 2:</b> Mill (Bread), Sawmill (Wood), Quarry (Stone) - keep within 2 levels of TC<br><b>Priority 3:</b> Barracks & military, Academy for research, Hospital<br><br><b>Wilderness Gathering becomes primary source after few weeks:</b><br>• Always send marches<br>• Prioritize higher nodes<br>• Use gathering heroes<br>• Coordinate with alliance`},
+"Academy Research Path":{content:`<b>Academy Research Priority - MMO Culture / kingshot.net</b><br><br><b>F2P Order:</b><br>1. Tool Enhancement - First<br>2. Tooling Up - Early<br>3. Command Tactics - Early<br>4. Regimental Expansion - Early<br>5. Gathering research - Around TC20<br><br><b>Tip:</b> Keep research always running. Watch timer on left side. Prioritize Growth tree first, then Economy, then Battle.<br><br><b>Tooling Up</b> speeds construction, <b>Tool Enhancement</b> shortens research timers - get these early every TC upgrade.`},
+"Embassy Guide":{content:`<b>Embassy Guide - Original</b><br><br>Embassy increases alliance help & rally capacity.<br>• Upgrade Embassy to increase help times received<br>• Higher Embassy = faster building with alliance help<br>• Keep within 2 levels of TC for KvK prep<br><br>Alliance assistance can speed Academy progress too.`},
+"Infirmary & Storehouse":{content:`<b>Infirmary & Storehouse Guide</b><br><br><b>Infirmary:</b> Protects troops when city attacked. Upgrade before Battle Day. Empty pressure before KvK.<br><br><b>Storehouse:</b> Protected resources. Farm account mistake: Keep Storehouse minimal. Farm exists to generate resources for Main.<br><br>Protected vs Unprotected - know difference before transfer.`},
+"War Academy TG Guide":{content:`<b>War Academy Guide - Late-game Truegold</b><br><br>War Academy is Kingshot's late-game Truegold research & path to T11 Truegold troops.<br>• Available on older kingdoms after TC 30<br>• Requires Truegold Dust research<br>• Unlocks Truegold Legionaries, Archers etc<br><br>Save Truegold, Truegold Dust, Tempered Truegold for this.`},
+"Truegold Farming TG1-TG10":{content:`<b>Truegold Farming TG1-TG10 MAX</b><br><br>TG costs:<br>TG1-TG5: 660 TG each<br>TG6: 750 TG<br>TG7: 900 TG<br>TG8 (70): 1675 TG + 502 TTG<br>TG9 (75): 2100 TG + 630 TTG<br>TG10 (80) MAX: 2600 TG + 780 TTG<br><br><b>Prep for KvK:</b> Save Truegold for building upgrades, Truegold Dust for War Academy, Speedups, Shards, Charms.`},
+"Governor Gear Guide":{content:`Governor Gear: 6 slots, 5 tiers (Satin/Threads/Vision). Plan target tiers & materials. Enhancement uses Mithril & Widgets.`},
+"Governor Charms":{content:`Governor Charms: Levels 1-22 (Infantry/Archer/Cavalry, 205K-1.36M power). Configure gems & review bonus changes.`},
+"Pet System Guide":{content:`Pet System: 9 pets, 4 generations, 5 rarities (Grey to Golden, max level 100). Use Advanced & Common Taming Marks.`},
+"Hero Shards Guide":{content:`Hero Shards: 1 Star=10 shards, 2 Star=40, 3 Star=115, 4 Star=300, 5 Star=600. Total Max: 1065 Shards. Focus on 3-hero core: Zoe (Tank), Jabel (DPS), Quinn/Marlin (Support).`},
+"VIP Guide":{content:`VIP: Stop at VIP 6 for extra march queue (Farm). VIP 10-12 needs 600K-2.4M XP. 1 VIP point = 2 gems.`},
+"KvK Prep Guide":{content:`KvK Prep (Kingdom of Power):<br>Save: Truegold, Truegold Dust, Tempered Truegold, Speedups, Shards, Roulette spins, Taming Marks, Charm/Gear mats, Forgehammers, Widgets, Mithril, Emblems, Intel Missions.<br><br>Battle window: Saturday 10:00-22:00 UTC. Prepare march presets, empty Infirmary, coordinate teleports.`},
+"Resource Management":{content:`Resource Mgmt: Avoid 640M loss - audit stock vs actual requirements with active research buffs. Don't commit all to construction, maintain Academy research. Align major TG upgrades during events with material rebates.`},
+"F2P Progress Guide":{content:`F2P Guide: Focus exactly 3 heroes, not many. Zoe best F2P infantry 40% HP heal. Jabel best Mythic login rewards. Skip Helga & Amadeus (spender heroes). Stars over rarity: 3 Stars competitive baseline, 5 Stars endgame goal.`},
+"Rally Leader Guide":{content:`Rally Leader: Needs combat stats. Low/mid spenders start combat stats earlier than F2P. Push Bandaging & Infirmary capacity earlier - you spend money on troops, need capacity to protect.`},
+"Bear Hunt Guide":{content:`Bear Hunt: Monthly income 150-300+ hammers. Forgehammer Mastery Levels 1-20 with mythic gear costs. Track income & use hero/formation strategy.`},
+"Endgame TG10 MAX Guide":{content:`Endgame TG10 MAX (Lv80): Final truegold building level. Requires 2600 TG + 780 TTG per building, ~240 hours base time. Prioritize Town Center to TG10 first, then War Academy, then troop buildings. Save all TG for this phase.`}
+};
+let GUIDES=Object.keys(GUIDES_DATA);
+
+// AND replace your guideGrid line with this:
+document.getElementById('guideGrid').innerHTML=GUIDES.map(g=>`<div class="chip" onclick="openGuide('${g.replace(/'/g,"\\'")}')">📖 ${g}</div>`).join('');
+
+// ADD THIS FUNCTION - put it after calculateAll() function:
+function openGuide(name){
+ let d=GUIDES_DATA[name];
+ if(!d) return;
+ let modal=document.getElementById('guideModal');
+ if(!modal){
+  modal=document.createElement('div');
+  modal.id='guideModal';
+  modal.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px';
+  modal.innerHTML=`<div style="background:#fff;max-width:700px;width:100%;max-height:90vh;overflow:auto;border-radius:16px;padding:20px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b id="gmTitle" style="font-size:16px"></b><button onclick="document.getElementById('guideModal').style.display='none'" style="padding:6px 12px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer">✕ Close</button></div><div id="gmContent" style="font-size:13px;line-height:1.6;color:#334155"></div></div>`;
+  document.body.appendChild(modal);
+ }
+ document.getElementById('gmTitle').textContent=name;
+ document.getElementById('gmContent').innerHTML=d.content;
+ modal.style.display='flex';
 }
-let GUIDES=["Town Center Rush 1-30 + TG1-TG10","Best Buildings Priority","Academy Research Path","Embassy Guide","Infirmary & Storehouse","War Academy TG Guide","Truegold Farming TG1-TG10","Mithril Guide","Governor Gear Guide","Governor Charms","Pet System Guide","Hero Shards Guide","VIP Guide","KvK Prep Guide","Resource Management","F2P Progress Guide","Rally Leader Guide","Bear Hunt Guide","Endgame TG10 MAX Guide"];
-document.getElementById('guideGrid').innerHTML=GUIDES.map(g=>'<div class="chip" onclick="alert(\'📖 '+g+' - Full article cloned from kingshot.net\')">📖 '+g+'</div>').join('');
-fetch('./codes.json?'+Date.now()).then(r=>r.json()).then(j=>{
- let arr=j.codes||j;
- document.getElementById('giftList').innerHTML=arr.map(c=>'<div class="codeRow"><div><b style="font-size:13px">'+(c.code||c.Code)+'</b><div class="muted">'+(c.reward||c.Reward||'')+' '+(c.status||'')+'</div></div><button class="btn" style="width:auto;padding:6px 12px" onclick="navigator.clipboard.writeText(\''+(c.code||c.Code)+'\');this.textContent=\'Copied\'">Copy</button></div>').join('');
- document.getElementById('giftStatus').textContent='Loaded '+arr.length+' codes from your codes.json - untouched perfect like original';
-}).catch(e=>{document.getElementById('giftList').innerHTML='<div class="muted">Keep your codes.json - perfect, will load live</div>';});
-let YT=[{t:"Building Calculator Full Guide TG10 MAX",id:"dQw4w9WgXcQ",d:"Official clone guide 1-80"},{t:"Town Center Rush TG1-TG10",id:"dQw4w9WgXcQ",d:"Rush to TG10 MAX"},{t:"Truegold Farming TG8-TG10",id:"dQw4w9WgXcQ",d:"TG farming 1675-2600"},{t:"Best Guides Kingshot Tools",id:"dQw4w9WgXcQ",d:"Guides section clone"}];
 document.getElementById('ytList').innerHTML=YT.map(v=>'<div class="chip" style="text-align:left" onclick="playYT(\''+v.id+'\')"><b>▶️ '+v.t+'</b><br><span class="muted">'+v.d+'</span></div>').join('');
 function playYT(id){let p=document.getElementById('ytPlayer');p.style.display='block';document.getElementById('ytFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';p.scrollIntoView({behavior:'smooth'});}
 function closeYT(){document.getElementById('ytPlayer').style.display='none';document.getElementById('ytFrame').src='';}</script>
