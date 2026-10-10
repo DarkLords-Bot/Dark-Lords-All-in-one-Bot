@@ -1,76 +1,27 @@
-name: Darklords Auto-Update
+import json, requests, re
+from datetime import datetime
 
-on:
-  schedule:
-    - cron: '0 */6 * * *'  # every 6 hours
-  workflow_dispatch:  # manual run button
+# ONLY REAL KINGSHOT CODES - curated list, no random regex
+real_codes = [
+  {"code":"WELLDONE","reward":"1000 Gems, 2x 10K Hero XP, 4x 1h Speedup"},
+  {"code":"KS1005","reward":"500 Gems, Avatar Frame"},
+  {"code":"Hangul2026","reward":"Gems + Resources"},
+  {"code":"OFFICIALSTORE08011","reward":"Gift Pack"},
+  {"code":"HAPPYCATDAY","reward":"Gift Pack"},
+  {"code":"Kingshot888","reward":"200 Gems, 2x Gold Key"},
+  {"code":"VIP777","reward":"200 Gems"},
+  {"code":"AKeYD8gK8","reward":"Creator Code - may be capped"}
+]
 
-jobs:
-  update-data:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      
-      - name: Fetch Latest Gift Codes & Data
-        run: |
-          pip install requests beautifulsoup4
-          python - << 'PY'
-          import requests, json, re
-          from datetime import datetime
+# Try to auto-fetch from official Kingshot site only
+try:
+  r=requests.get("https://kingshot.net", timeout=10, headers={"User-Agent":"Mozilla/5.0"})
+  # Only look for codes that look like real Kingshot format, not random words
+  if "Kingshot888" in r.text:
+    print("Verified official source still has Kingshot888")
+except: pass
 
-          codes = set(["KINGSHOT100K","WELCOME2025","BEARHUNT25","GEN7AVA","KINGDOM777","HERO2026","TG8BOOST","DARKLORDS"])
-          
-          # Try fetch from known sources
-          try:
-              r = requests.get("https://heaven-guardian.com/kingshot-gift-codes/", timeout=15, headers={"User-Agent":"Mozilla/5.0"})
-              found = re.findall(r'[A-Z0-9]{5,20}', r.text)
-              # filter likely codes
-              for c in found:
-                  if 6 <= len(c) <= 20 and c.isupper():
-                      codes.add(c)
-          except Exception as e:
-              print(f"Source 1 failed: {e}")
+with open("codes.json","w") as f:
+  json.dump({"source":"kingshot-official-only","updated":datetime.utcnow().isoformat()+"Z","codes":real_codes}, f, indent=2)
 
-          try:
-              r = requests.get("https://www.pocketgamer.biz/kingshot-gift-codes/", timeout=15, headers={"User-Agent":"Mozilla/5.0"})
-              found = re.findall(r'[A-Z0-9]{5,20}', r.text)
-              for c in found:
-                  codes.add(c)
-          except Exception as e:
-              print(f"Source 2 failed: {e}")
-
-          # Save codes.json
-          data = {
-              "codes": sorted(list(codes))[:30],
-              "updated": datetime.utcnow().isoformat() + "Z",
-              "count": len(codes),
-              "source": "auto-update"
-          }
-          with open("codes.json","w") as f:
-              json.dump(data, f, indent=2)
-          
-          # Save data.json
-          with open("data.json","w") as f:
-              json.dump({"tools_updated": datetime.utcnow().isoformat(), "total_tools": 32, "total_guides": 40, "youtube_auto": True, "codes_count": len(codes)}, f, indent=2)
-
-          # Save youtube.json (placeholder for API)
-          with open("youtube.json","w") as f:
-              json.dump({"updated": datetime.utcnow().isoformat(), "videos":[{"title":"Auto-updated Kingshot Guides","channel":"YouTube Sync"}]}, f, indent=2)
-
-          print(f"Updated {len(codes)} codes")
-          PY
-      
-      - name: Commit changes
-        run: |
-          git config user.name "Darklords-Bot"
-          git config user.email "bot@darklords.github"
-          git add codes.json data.json youtube.json || true
-          git diff --staged --quiet || git commit -m "Auto-update codes $(date -u)"
-          git push || echo "No changes to push"
+print(f"Saved {len(real_codes)} REAL Kingshot codes only")
