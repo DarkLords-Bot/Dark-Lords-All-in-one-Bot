@@ -164,10 +164,27 @@ function resetAll(){
 }
 function getCost(k,lv){
  let d=BUILD_DATA[k]||BUILD_DATA["Town Center"];
- let mult=lv<=30?Math.pow(d.m,lv-1):Math.pow(d.m,29)*Math.pow(1.85,(lv-30)/5);
- let tg=lv>=80?2600:lv>=75?2100:lv>=70?1675:lv>=65?900:lv>=60?750:lv>=35?660:0;
- let ttg=lv>=70?tg*0.3:0;
- return {bread:Math.round(d.b*mult),wood:Math.round(d.w*mult),stone:Math.round(d.s*mult),iron:Math.round(d.i*mult),time:Math.round(d.t*mult*(lv>30?3.2:1)),power:Math.round(d.p*mult*(lv>30?2.1:1)),tg:tg,ttg:Math.round(ttg)};
+ if(lv<=30){
+  let mult=Math.pow(d.m,lv-1);
+  return {bread:Math.round(d.b*mult),wood:Math.round(d.w*mult),stone:Math.round(d.s*mult),iron:Math.round(d.i*mult),time:Math.round(d.t*mult),power:Math.round(d.p*mult),tg:0,ttg:0};
+ }
+ // TG1-TG10 REAL TIMES - fixed like kingshot.net
+ let tgNum=(lv-30)/5; // 1 to 10
+ let tgMap={1:660,2:660,3:660,4:660,5:660,6:750,7:900,8:1675,9:2100,10:2600};
+ let ttgMap={1:0,2:0,3:0,4:0,5:0,6:0,7:150,8:502,9:630,10:780};
+ let timeHoursMap={1:24,2:36,3:48,4:60,5:72,6:96,7:120,8:168,9:192,10:240}; // real TG hours
+ let resMult=1 + (tgNum*0.8); // resources grow slightly, not billions
+ let factor=k==="Town Center"?1.5:k==="War Academy"?2:1;
+ return {
+  bread:Math.round(2500000*resMult*factor),
+  wood:Math.round(2500000*resMult*factor),
+  stone:Math.round(1300000*resMult*factor),
+  iron:Math.round(500000*resMult*factor),
+  time:Math.round(timeHoursMap[tgNum]*60*factor), // minutes
+  power:Math.round(1500*tgNum*factor),
+  tg:tgMap[tgNum],
+  ttg:ttgMap[tgNum]
+ };
 }
 function calculateAll(){
  let speed=parseFloat(document.getElementById('speedBonus').value)||0;
