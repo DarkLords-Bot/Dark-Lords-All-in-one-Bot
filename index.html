@@ -61,7 +61,8 @@ nav{display:flex;gap:8px;flex-wrap:wrap}
  content:''; position:absolute; top:0; left:-50%; width:200%; height:2px;
  background: linear-gradient(90deg, transparent, #ffd700, transparent);
  opacity:.6; animation: shine 3s infinite linear;
-}@keyframes shine{0%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+}
+ @keyframes shine{0%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
 .card h2{
  font-family:Cinzel; font-size:15px; letter-spacing:1px;
  background: linear-gradient(180deg, #fffbd0, #ffd700); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
@@ -147,7 +148,9 @@ select:focus,input:focus{outline:none; border-color:#ffd700; box-shadow:0 0 12px
 <button class="navbtn" id="n1" onclick="showTab(1)">Guides</button>
 <button class="navbtn" id="n2" onclick="showTab(2)">Gift Codes</button>
 <button class="navbtn" id="n3" onclick="showTab(3)">YouTube</button>
-</nav><div class="wrap">
+</nav>
+</header>
+<div class="wrap">
 <div id="tab0">
 <div class="card">
 <h2>⚙️ Set All Buildings - Golden Command</h2>
@@ -209,7 +212,7 @@ function showTab(n){for(let i=0;i<4;i++){let t=document.getElementById('tab'+i);
 const TROOP=["Infantry Barracks","Stables","Archery Range"];
 const OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];
 const ALL=[...TROOP,...OTHER];
-</header>const BUILD_DATA={"Town Center":{b:1000,w:1000,s:500,i:100,t:60,p:10,m:1.65},"Infantry Barracks":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Stables":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Archery Range":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Academy":{b:1200,w:1200,s:600,i:120,t:70,p:12,m:1.62},"Embassy":{b:600,w:600,s:300,i:60,t:40,p:6,m:1.55},"Command Center":{b:900,w:900,s:700,i:100,t:55,p:9,m:1.6},"Infirmary":{b:700,w:700,s:350,i:70,t:45,p:7,m:1.56},"Storehouse":{b:500,w:500,s:250,i:50,t:35,p:5,m:1.5},"War Academy":{b:2000,w:2000,s:1000,i:500,t:120,p:20,m:1.75}};
+const BUILD_DATA={"Town Center":{b:1000,w:1000,s:500,i:100,t:60,p:10,m:1.65},"Infantry Barracks":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Stables":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Archery Range":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Academy":{b:1200,w:1200,s:600,i:120,t:70,p:12,m:1.62},"Embassy":{b:600,w:600,s:300,i:60,t:40,p:6,m:1.55},"Command Center":{b:900,w:900,s:700,i:100,t:55,p:9,m:1.6},"Infirmary":{b:700,w:700,s:350,i:70,t:45,p:7,m:1.56},"Storehouse":{b:500,w:500,s:250,i:50,t:35,p:5,m:1.5},"War Academy":{b:2000,w:2000,s:1000,i:500,t:120,p:20,m:1.75}};
 function levelOptions(){
  let o='<option value="">Current Level</option>';
  for(let i=1;i<=30;i++) o+='<option value="'+i+'">Level '+i+'</option>';
@@ -275,7 +278,8 @@ function getCost(k,lv){
   tg:tgMap[tgNum]||0,
   ttg:ttgMap[tgNum]||0
  };
-}function calculateAll(){
+}
+ function calculateAll(){
  let speed=parseFloat(document.getElementById('speedBonus').value)||0;
  let pet=parseFloat(document.getElementById('petBonus').value)||0;
  let king=parseFloat(document.getElementById('kingdomBonus').value)||0;
@@ -326,7 +330,8 @@ function getCost(k,lv){
  document.getElementById('rPower').textContent='+'+tot.p.toLocaleString();
  document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:10px"><b style="color:#ffd700">'+count+' buildings selected</b> - Golden Engine TG10 MAX 1-80. TG8 (70)->TG10 (80) MAX = 2600 TG + 780 TTG.</div>';
  document.getElementById('totDesc').textContent=count+' buildings selected - showing total required resources till TG10 MAX - Golden Vault.';
-}const GUIDES_DATA={
+}
+ const GUIDES_DATA={
 "Town Center Rush":{"content":"<b>Town Center Priority - kingshot.net original</b><br><br>Town Center gates every system:<br>- Which buildings you can construct<br>- Max level for all buildings<br>- Research availability<br>- Hero Hall capacity<br>- Troop tier<br><br><b>Focus Principle:</b> Almost always upgrade Town Center. Only prerequisites when required.<br><br><b>TG costs:</b> TG1=660, TG6=750, TG7=900, TG8=1675, TG9=2100, TG10 MAX 80=2600 TG + 780 TTG"},
 "Best Buildings Priority":{"content":"<b>Resource Building Priority - original</b><br><br>Priority 1: Town Center - Gates all progression<br>Priority 2: Mill (Bread), Sawmill (Wood), Quarry (Stone) - keep within 2 levels of TC<br>Priority 3: Barracks & military, Academy, Hospital<br><br>Wilderness gathering becomes primary after few weeks: send marches, prioritize higher nodes, use gathering heroes, coordinate with alliance."},
 "Academy Research Path":{"content":"<b>Academy Research Priority</b><br><br>F2P Order:<br>1. Tool Enhancement - First<br>2. Tooling Up - Early<br>3. Command Tactics - Early<br>4. Regimental Expansion - Early<br>5. Gathering around TC20<br><br>Keep research always running. Growth first, then Economy, then Battle. Tooling Up speeds construction."},
@@ -354,7 +359,8 @@ function openGuide(name){
  document.getElementById('gmTitle').textContent=name;
  document.getElementById('gmContent').innerHTML=d.content;
  document.getElementById('guideModal').style.display='flex';
-}try{
+}
+try{
 fetch('./codes.json?'+Date.now()).then(r=>{
  if(!r.ok) throw new Error('no codes.json');
  return r.json();
@@ -389,4 +395,6 @@ function playYT(id){let p=document.getElementById('ytPlayer');p.style.display='b
 function closeYT(){document.getElementById('ytPlayer').style.display='none';document.getElementById('ytFrame').src='';}
 document.getElementById('guideModal').addEventListener('click',function(e){if(e.target.id==='guideModal') e.target.style.display='none';});
 </script>
-</body></html><link rel="icon" href="logo.png"><div class="logo-badge"><img src="logo.png" style="width:100%;height:100%;border-radius:14px;object-fit:cover"></div>
+</body></html>
+<link rel="icon" href="logo.png">
+<div class="logo-badge"><img src="logo.png" style="width:100%;height:100%;border-radius:14px;object-fit:cover"></div>
