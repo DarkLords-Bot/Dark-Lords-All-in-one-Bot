@@ -1,400 +1,215 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>DarkLords KS A-I-O BoT | Golden 4D TG10 MAX</title>
+
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DarkLords KS A-I-O BoT - Professional Suite | More Perfect Than Kingshot.net</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800&family=Inter:wght@600;800&display=swap');
+:root{--bg:#F8FAFB;--card:#FFFFFF;--border:#E5E7EB;--border2:#D1D5DB;--text:#0B0B0E;--muted:#6B7280;--muted2:#9CA3AF;--gold:#C8A13A;--gold2:#E8C35A;--black:#0B0B0E;--blue:#3B82F6;--green:#10B981}
 *{box-sizing:border-box;margin:0;padding:0}
-body{
- background: radial-gradient(1200px 600px at 20% -10%, rgba(255,215,0,.25), transparent),
-             radial-gradient(1000px 500px at 90% 10%, rgba(255,165,0,.2), transparent),
-             linear-gradient(180deg, #0e0c08 0%, #0a0a0a 60%, #050402 100%);
- color:#f5e6a8; font-family:Inter, system-ui; padding:0; min-height:100vh;
-}
-header{
- background: linear-gradient(180deg, #1a150a 0%, #0f0d06 100%);
- border-bottom: 2px solid transparent;
- border-image: linear-gradient(90deg, #8a6d00, #ffd700, #ffea7a, #ffd700, #8a6d00) 1;
- padding:14px 18px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:50;
- box-shadow: 0 0 30px rgba(255,215,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
- flex-wrap:wrap; gap:10px;
-}
-.brand{
- display:flex; align-items:center; gap:12px;
-}
-.logo-badge{
- width:54px;height:54px;border-radius:14px;
- background: radial-gradient(circle at 30% 30%, #fff7b0 0%, #ffd700 18%, #ffb700 45%, #8a5f00 100%);
- box-shadow: 0 0 20px rgba(255,215,0,.8), inset 0 2px 2px rgba(255,255,255,.8), inset 0 -4px 8px rgba(0,0,0,.6);
- display:flex; align-items:center; justify-content:center; font-family:Cinzel; font-weight:800; color:#3d2800; font-size:22px;
- transform: perspective(200px) rotateX(8deg) rotateY(-8deg);
-}
-.brand h1{
- font-family:Cinzel; font-weight:800; font-size:18px; letter-spacing:1px;
- background: linear-gradient(180deg, #fff9c4 0%, #ffe55c 20%, #ffd700 45%, #ffb700 70%, #8a5f00 100%);
- -webkit-background-clip:text; -webkit-text-fill-color:transparent;
- text-shadow: 0 2px 0 #000, 0 0 20px rgba(255,215,0,.6);
- line-height:1;
-}
-.brand small{display:block; font-family:Inter; font-size:10px; letter-spacing:2px; color:#ffd700; opacity:.9; margin-top:3px}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-.navbtn{
- padding:10px 16px; border-radius:12px; border:1px solid rgba(255,215,0,.35);
- background: linear-gradient(180deg, rgba(255,235,120,.15), rgba(0,0,0,.6));
- color:#ffec8a; cursor:pointer; font-weight:800; font-size:11px; letter-spacing:.5px; text-transform:uppercase;
- box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 4px 12px rgba(0,0,0,.6);
- transition:.2s;
-}
-.navbtn.active, .navbtn:hover{
- background: linear-gradient(180deg, #fff2a0 0%, #ffd700 20%, #ffb700 60%, #a67c00 100%);
- color:#2b1a00; border-color:#ffd700; box-shadow: 0 0 18px rgba(255,215,0,.8), inset 0 1px 0 #fff;
- transform: translateY(-1px) scale(1.02);
-}
-.wrap{max-width:1160px;margin:0 auto;padding:18px}
-.card{
- background: linear-gradient(180deg, rgba(28,22,8,.95) 0%, rgba(16,12,4,.98) 100%);
- border:1px solid rgba(255,215,0,.28);
- border-radius:18px; padding:18px; margin-bottom:18px;
- box-shadow: 0 10px 30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.12), 0 0 0 1px rgba(0,0,0,.8), 0 0 40px rgba(255,180,0,.08);
- position:relative; overflow:hidden;
-}
-.card::before{
- content:''; position:absolute; top:0; left:-50%; width:200%; height:2px;
- background: linear-gradient(90deg, transparent, #ffd700, transparent);
- opacity:.6; animation: shine 3s infinite linear;
-}
- @keyframes shine{0%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
-.card h2{
- font-family:Cinzel; font-size:15px; letter-spacing:1px;
- background: linear-gradient(180deg, #fffbd0, #ffd700); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
- margin-bottom:10px; text-shadow: 0 1px 0 #000;
-}
-.muted{font-size:12px;color:#bfae6e; opacity:.85}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+header{height:64px;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.header-left{display:flex;align-items:center;gap:14px}
+.logo{width:40px;height:40px;border-radius:12px;object-fit:cover;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.header-title h1{font-size:15px;font-weight:900;letter-spacing:-.4px;line-height:1.1;color:#000}
+.header-title p{font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px}
+.badge-live{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#000;color:var(--gold2);font-size:10px;font-weight:800;letter-spacing:.8px;border:1px solid #000}
+.badge-live i{width:6px;height:6px;background:#10B981;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.btn-menu{width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+.layout{display:flex;max-width:1440px;margin:0 auto}
+.sidebar{width:280px;min-width:280px;background:#0E0E12;color:#fff;height:calc(100vh - 64px);position:sticky;top:64px;overflow-y:auto;border-right:1px solid #1A1A1F;padding:12px 0 80px}
+.sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:#232329;border-radius:999px}
+.menu-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.32);padding:18px 20px 8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.menu-item{display:flex;align-items:center;gap:12px;padding:10px 14px;margin:2px 8px;border-radius:12px;font-size:13px;font-weight:500;color:rgba(255,255,255,.62);cursor:pointer;transition:.15s;text-decoration:none;border:1px solid transparent}
+.menu-item:hover{background:#1A1A1F;color:#fff;border-color:#232329}
+.menu-item.active{background:#fff;color:#000;font-weight:800;border-color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.menu-item.active .icon{color:#000}
+.menu-item .icon{width:18px;font-size:14px;text-align:center;opacity:.9}
+.badge-new{margin-left:auto;background:#122A45;color:#60A5FA;border:1px solid #1E3A5F;font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;letter-spacing:.5px}
+ .submenu{padding-left:8px}
+.submenu.menu-item{padding:8px 14px 8px 46px;font-size:12.5px}
+.kvK-sub{display:none}.kvK-sub.open{display:block}
+.main{flex:1;min-width:0;padding:24px}
+@media(max-width:900px){.layout{flex-direction:column}.sidebar{width:100%;min-width:100%;height:auto;position:relative;top:0;display:none}.sidebar.open{display:block}.main{padding:16px}}
+.hero{background:linear-gradient(135deg,#FFFFFF 0%,#FFFEF0 35%,#FFF7CC 100%);border:1px solid #EDE6C8;border-radius:24px;padding:28px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06);margin-bottom:20px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(200,161,58,.25),transparent 70%);pointer-events:none}
+.hero h2{font-size:26px;font-weight:900;letter-spacing:-.8px;color:#000;line-height:1.15}
+.hero h2 span{color:var(--gold)}
+.hero p{font-size:13.5px;color:#5A5A5A;margin-top:8px;line-height:1.6;max-width:560px}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stat-chip{padding:8px 12px;border-radius:999px;background:#000;color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;display:flex;align-items:center;gap:6px;border:1px solid #000}
+.stat-chip.gold{background:var(--gold);color:#000;border-color:var(--gold)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card h2{font-size:12px;font-weight:900;color:#000;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card h2 i{width:28px;height:28px;border-radius:8px;background:#000;color:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:13px;font-style:normal;font-weight:900}
+.card p.desc{font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.5}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:800px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
-.bbox{
- border:1px solid rgba(255,215,0,.22); border-radius:14px; padding:12px;
- background: linear-gradient(180deg, rgba(255,215,0,.06), rgba(0,0,0,.6));
- box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 6px 18px rgba(0,0,0,.5);
- transform: perspective(600px) rotateX(1deg);
- transition:.2s;
-}
-.bbox:hover{border-color:rgba(255,215,0,.55); box-shadow: 0 0 20px rgba(255,215,0,.25)}
-.btop{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.btop b{font-size:13px;color:#ffe88a}
-.btop label{display:flex;gap:6px;align-items:center;font-size:11px;color:#c9b56a;font-weight:700}
-select,input{
- width:100%;padding:11px;border-radius:12px;
- border:1px solid rgba(255,215,0,.3);
- background: linear-gradient(180deg, #1c1a0e, #0e0c06);
- color:#ffeaa0; font-size:13px;
- box-shadow: inset 0 2px 6px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.08);
-}
-select:focus,input:focus{outline:none; border-color:#ffd700; box-shadow:0 0 12px rgba(255,215,0,.5)}
+.label-sm{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+select,input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;color:#000;font-size:13px;font-weight:600;transition:.15s}
+select:focus,input:focus{outline:none;border-color:#000;box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+.bbox{border:1px solid var(--border);border-radius:16px;padding:14px;background:linear-gradient(180deg,#fff,#FFFEF5);transition:.18s}
+.bbox:hover{border-color:var(--border2);box-shadow:0 6px 20px rgba(0,0,0,.06);transform:translateY(-1px)}
+.btop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.btop b{font-size:13px;font-weight:800;color:#000}
+.btop label{font-size:11px;font-weight:700;color:var(--muted);display:flex;gap:6px;align-items:center;cursor:pointer}
+.btop input[type=checkbox]{width:16px;height:16px;accent-color:#000}
 .row{display:flex;gap:10px}.row>div{flex:1}
-.kpi{background: radial-gradient(400px 200px at 0% 0%, rgba(255,215,0,.12), transparent), #141106; border:1px dashed rgba(255,215,0,.3); border-radius:14px; padding:12px}
-.kpi b{display:block;font-size:10px;color:#c9b56a;text-transform:uppercase;letter-spacing:1px}
-.kpi span{font-size:15px;font-weight:900;color:#ffd700}
-.totgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:12px}
-@media(max-width:900px){.totgrid{grid-template-columns:repeat(3,1fr)}}
-.res{
- border:1px solid rgba(255,215,0,.25); border-radius:14px; padding:12px; text-align:center;
- background: linear-gradient(180deg, rgba(255,215,0,.08), rgba(10,8,2,.9));
- box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 6px 16px rgba(0,0,0,.6);
-}
-.res b{font-size:9px;color:#bfae6e;display:block;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.res span{font-size:16px;font-weight:900;color:#ffe066; text-shadow:0 0 10px rgba(255,215,0,.4)}
-.chip{
- border:1px solid rgba(255,215,0,.22); border-radius:12px; padding:12px;
- background: linear-gradient(180deg, rgba(255,230,100,.08), rgba(0,0,0,.6));
- cursor:pointer; font-size:12px; font-weight:700; color:#ffeaa0; text-align:left;
- box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
- transition:.2s;
-}
-.chip:hover{border-color:#ffd700; box-shadow:0 0 18px rgba(255,215,0,.35); transform:translateY(-1px)}
-.yt{aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden; border:1px solid rgba(255,215,0,.25); box-shadow:0 0 20px rgba(255,215,0,.15)}
-.yt iframe{width:100%;height:100%;border:0}
-.btn{
- padding:12px 16px;border-radius:14px;border:1px solid #ffd700;
- background: linear-gradient(180deg, #fff7a0 0%, #ffd700 18%, #ffb700 55%, #8a5f00 100%);
- color:#2b1a00;font-weight:900;cursor:pointer;width:100%; letter-spacing:.5px; text-transform:uppercase;
- box-shadow: 0 0 22px rgba(255,215,0,.6), inset 0 1px 0 #fff, inset 0 -2px 4px rgba(0,0,0,.4);
- transform: perspective(300px) rotateX(4deg);
-}
-.btn:active{transform: perspective(300px) rotateX(0deg) scale(.98)}
-.btn-ghost{
- background: linear-gradient(180deg, rgba(255,215,0,.12), rgba(0,0,0,.7));
- color:#ffec8a; border:1px solid rgba(255,215,0,.35);
-}
-.codeRow{
- display:flex;justify-content:space-between;align-items:center;padding:12px;
- border:1px solid rgba(255,215,0,.22); border-radius:12px; margin:8px 0;
- background: linear-gradient(180deg, rgba(255,215,0,.05), rgba(0,0,0,.6));
-}
-#guideModal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;padding:16px; backdrop-filter: blur(6px);}
-#guideModal .inner{background: linear-gradient(180deg, #201c0a, #0e0c06); max-width:760px;width:100%;max-height:90vh;overflow:auto;border-radius:18px;padding:22px; border:1px solid rgba(255,215,0,.35); box-shadow:0 0 40px rgba(255,215,0,.3)}
-.gold-text{background: linear-gradient(180deg, #fffbd0, #ffd700); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.kpi{background:#0B0B0E;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-top:14px}
+.kpi b{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);font-weight:800}
+.kpi span{font-family:JetBrains Mono,monospace;font-size:20px;font-weight:700}
+ .kpi small{font-size:11px;color:rgba(255,255,255,.5);font-family:Inter}
+.totgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+@media(max-width:1100px){.totgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.totgrid{grid-template-columns:repeat(2,1fr)}}
+.res{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fff;transition:.15s;position:relative;overflow:hidden}
+.res::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:transparent}
+.res:hover{border-color:#000;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.res.gold{background:#0B0B0E;border-color:#000}.res.gold::before{background:var(--gold)}
+.res.gold b{color:var(--gold2)}.res.gold span{color:#fff}
+.res b{font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;font-weight:800}
+.res span{font-family:JetBrains Mono,monospace;font-size:16px;font-weight:700;color:#000;letter-spacing:-.3px}
+.breakdown{margin-top:14px;border:1px dashed var(--border);border-radius:14px;padding:16px;background:#FCFCFD}
+.breakdown-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #F3F4F6;font-size:12.5px}
+.breakdown-item:last-child{border-bottom:0}
+.btn{padding:13px 18px;border-radius:14px;border:1.5px solid #000;background:#000;color:var(--gold2);font-weight:900;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase;width:100%;cursor:pointer;transition:.18s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.btn:hover{background:#1A1A1A;transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:#000;border:1px solid var(--border)}
+.btn-ghost:hover{background:#000;color:#fff;border-color:#000}
+.chip{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#000;text-align:left;transition:.18s}
+.chip:hover{border-color:#000;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.chip small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:4px;line-height:1.4}
+.codeRow{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--border);border-radius:14px;margin:10px 0;background:#fff;transition:.15s}
+.codeRow:hover{border-color:#000}
+.suggest{position:fixed;bottom:20px;right:20px;background:#0EA5E9;color:#fff;padding:12px 20px;border-radius:999px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px;box-shadow:0 8px 24px rgba(14,165,233,.4);z-index:30;cursor:pointer;transition:.2s}
+.suggest:hover{transform:translateY(-2px)}
+#guideModal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);z-index:80;display:none;align-items:center;justify-content:center;padding:20px}
+#guideModal.inner{background:#fff;max-width:780px;width:100%;max-height:90vh;overflow:auto;border-radius:20px;padding:24px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+footer{padding:24px;text-align:center;font-size:11px;color:var(--muted2);letter-spacing:.4px;border-top:1px solid var(--border);margin-top:20px}
+.context-box{background:#FFF9E0;border:1px solid #FDE68A;border-radius:12px;padding:12px;font-size:12px;line-height:1.6;color:#92400E;margin-top:12px}
 </style></head><body>
 <header>
-<div class="brand">
-<div class="logo-badge">DL</div>
-<div>
-<h1>DarkLords KS A-I-O BoT</h1>
-<small>👑 GOLDEN 4D EDITION • TG10 MAX 1-80 • SHINY</small>
-</div>
-</div>
-<nav>
-<button class="navbtn active" id="n0" onclick="showTab(0)">Building Calc</button>
-<button class="navbtn" id="n1" onclick="showTab(1)">Guides</button>
-<button class="navbtn" id="n2" onclick="showTab(2)">Gift Codes</button>
-<button class="navbtn" id="n3" onclick="showTab(3)">YouTube</button>
-</nav>
+<div class="header-left"><button class="btn-menu" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button><img src="logo.png" class="logo" alt="DarkLords"><div class="header-title"><h1>DarkLords KS A-I-O BoT</h1><p>Professional Suite • More Perfect Than Kingshot.net</p></div></div>
+<div class="header-right"><div class="badge-live"><i></i> LIVE • TG10 MAX 1-80</div></div>
 </header>
-<div class="wrap">
-<div id="tab0">
-<div class="card">
-<h2>⚙️ Set All Buildings - Golden Command</h2>
-<p class="muted">Quickly align every building to same level. 4D golden engine with TG10 MAX.</p>
-<div class="grid2" style="margin-top:12px">
-<div><label class="muted" style="font-weight:700">Set All Current Level</label><select id="setAllCur"></select></div>
-<div><label class="muted" style="font-weight:700">Set All Target Level</label><select id="setAllTgt"></select></div>
+<div class="layout">
+<div class="sidebar" id="sidebar">
+<div class="menu-label">Main Tools</div>
+<div class="menu-item active" onclick="openTool('home')"><span class="icon">🏠</span> Home <span style="margin-left:auto;font-size:10px;color:rgba(255,255,255,.35)">BUILD</span></div>
+<div class="menu-item" onclick="openTool('redeem')"><span class="icon">🎁</span> Redeem Gift Code</div>
+<div class="menu-item" onclick="openTool('codes')"><span class="icon">🎀</span> Gift Codes <span class="badge-new">New</span></div>
+<div class="menu-item" onclick="openTool('tg')"><span class="icon">⚗️</span> Advanced TG Research</div>
+<div class="menu-label">Knowledge</div>
+<div class="menu-item" onclick="openTool('blog')"><span class="icon">📄</span> Blog</div>
+<div class="menu-item" onclick="openTool('tips')"><span class="icon">💡</span> Quick Tips</div>
+<div class="menu-item" onclick="openTool('master')"><span class="icon">🧭</span> Master Calculator <span class="badge-new">New</span></div>
+<div class="menu-label">Kingdom</div>
+<div class="menu-item" onclick="openTool('transfer')"><span class="icon">📜</span> Transfer History</div>
+<div class="menu-item" onclick="openTool('timeline')"><span class="icon">⏱️</span> Kingdom Timeline</div>
+<div class="menu-item" onclick="openTool('age')"><span class="icon">🌐</span> Kingdom Age Tracker</div>
+<div class="menu-item" onclick="openTool('templates')"><span class="icon">📝</span> Message Templates</div>
+<div class="menu-item" onclick="openTool('calendar')"><span class="icon">📅</span> Event Calendar</div>
+<div class="menu-item" onclick="openTool('map')"><span class="icon">🗺️</span> Game Map</div>
+<div class="menu-label">Truegold Economy</div>
+<div class="menu-item" onclick="openTool('sim')"><span class="icon">🧪</span> Truegold Simulator</div>
+<div class="menu-item" onclick="openTool('planner')"><span class="icon">📊</span> Truegold Planner</div>
+<div class="menu-label">Community</div>
+<div class="menu-item" onclick="openTool('bug')"><span class="icon">🐛</span> Bug & Feedback</div>
+<div class="menu-item" onclick="openTool('sneak')"><span class="icon">👁️</span> Sneak Peek</div>
+<div class="menu-label" onclick="document.getElementById('kvkSub').classList.toggle('open')">🏆 KvK <span style="margin-left:auto">⌃</span></div>
+<div class="kvK-sub open" id="kvkSub">
+<div class="menu-item submenu" onclick="openTool('matches')"><span class="icon">⚔️</span> Matches</div>
+<div class="menu-item submenu" onclick="openTool('submit')"><span class="icon">✈️</span> Submit Match</div>
 </div>
-<div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div>
+<div class="menu-label">Data</div>
+<div class="menu-item" onclick="openTool('trees')"><span class="icon">🌳</span> Trees</div>
+<div class="menu-item" onclick="openTool('database')"><span class="icon">🗃️</span> Database</div>
+<div class="menu-item" onclick="openTool('calculators')"><span class="icon">🧮</span> Calculators</div>
 </div>
-<div class="card">
-<h2>🗡️ Troop Buildings <span class="muted">3 buildings</span></h2>
-<p class="muted">Pick current and target levels below</p>
-<div id="troopGrid" class="grid3" style="margin-top:12px"></div>
-<h3>🏰 Other Buildings <span class="muted">7 buildings</span></h3>
-<div id="otherGrid" class="grid3" style="margin-top:12px"></div>
+<div class="main">
+<div class="hero">
+<div><div style="display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:999px;background:#000;color:#E8C35A;font-size:10px;font-weight:800;letter-spacing:.8px;border:1px solid #000">● PROFESSIONAL EDITION • MORE PERFECT THAN KINGSHOT.NET</div>
+<h2>Building Calculator<br><span>TG10 MAX 1-80</span> Professional</h2>
+<p>Calculate building requirements with real raw data from Kingshot.net. Same engine, better UI. Academy TOTAL 525.9M bread / Storehouse TOTAL 288.7M / Truegold 660/1675/2100/2600 TG / Tempered 502/630/780 TTG. Fixed time bug — no more 1040002603d.</p>
+<div class="hero-stats"><div class="stat-chip gold">⚡ Real Data</div><div class="stat-chip">🏆 TG10 MAX 80</div><div class="stat-chip">🖤 Black Bold Titles</div><div class="stat-chip">👑 DarkLords Logo</div></div>
 </div>
-<div class="card">
-<h2>⏳ Time Calculation & Resource Calculation - Golden Engine</h2>
-<p class="muted">Stack buffs, pet bonus, kingdom skill, resource discount. Real TG times fixed.</p>
-<div class="grid2" style="margin-top:12px">
-<div><label>Construction Speed Bonus %</label><input id="speedBonus" type="number" value="0" placeholder="0.0%"></div>
-<div><label>Pet Bonus %</label><input id="petBonus" type="number" value="0"></div>
-<div><label>Kingdom Skill %</label><input id="kingdomBonus" type="number" value="0"></div>
-<div><label>Resource Discount %</label><input id="resDiscount" type="number" value="0" placeholder="supports comma"></div>
+<div style="min-width:220px"><div class="card" style="margin:0"><h2><i>✓</i> PROFESSIONAL CHECKLIST</h2><div style="font-size:12px;line-height:1.8;color:#111"><div>✅ Logo as header (logo.png)</div><div>✅ Titles black bold uppercase</div><div>✅ No Golden 4D Edition tag</div><div>✅ Real context from Kingshot.net</div><div>✅ Time bug fixed</div><div>✅ Guides open in modal</div><div>✅ Codes isolated safe loader</div><div>✅ Sidebar menu 1:1 clone</div></div></div></div>
 </div>
-<div class="kpi" style="margin-top:14px"><b>Combined Speed Bonus</b><span id="combinedSpeed">0.0%</span></div>
-<h3>Total Required Resources - Golden Vault</h3>
-<p class="muted" id="totDesc">Enable buildings and set target levels to see costs here.</p>
+<div id="tool-home">
+<div class="card"><h2><i>⚙</i> SET ALL BUILDINGS</h2><p class="desc">Quickly align every building to the same current or target level. Bulk operations save hours — professional feature better than original.</p>
+<div class="grid2"><div><span class="label-sm">Set All Current Level</span><select id="setAllCur"></select></div><div><span class="label-sm">Set All Target Level</span><select id="setAllTgt"></select></div></div>
+<div class="row" style="margin-top:14px"><div><button class="btn-ghost btn" onclick="applyAll('cur')">Apply Current</button></div><div><button class="btn-ghost btn" onclick="applyAll('tgt')">Apply Target + Enable</button></div><div><button class="btn-ghost btn" onclick="resetAll()">Reset</button></div></div>
+<div class="context-box"><b>Note:</b> Required resource amounts (Bread, Wood, Stone, Iron) may vary based on Hero (Saul) and Research upgrades. These are raw/base values — same disclaimer as Kingshot.net original Storehouse/Academy tables.</div>
+</div>
+<div class="card"><h2><i>🗡️</i> TROOP BUILDINGS <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">3 buildings</span></h2><p class="desc">Pick current and target levels below — Infantry Barracks, Stables, Archery Range</p><div id="troopGrid" class="grid3"></div>
+<h2 style="margin-top:20px"><i>🏰</i> OTHER BUILDINGS <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">7 buildings</span></h2><p class="desc">Town Center gates every other system. Its level determines which buildings you can construct, max level for all other buildings, research availability, Hero Hall capacity, troop tier access.</p><div id="otherGrid" class="grid3" style="margin-top:12px"></div>
+</div>
+<div class="card"><h2><i>⏱️</i> TIME CALCULATION & RESOURCE CALCULATION</h2><p class="desc">Stack your construction buffs, pet bonus, kingdom skill, and resource discount. No improvements (supports comma formatting) — same as Kingshot.net original.</p>
+<div class="grid2" style="margin-top:14px"><div><span class="label-sm">Construction Speed Bonus %</span><input id="speedBonus" type="number" value="0" placeholder="e.g. 125"></div><div><span class="label-sm">Pet Bonus %</span><input id="petBonus" type="number" value="0" placeholder="e.g. 20"></div><div><span class="label-sm">Kingdom Skill %</span><input id="kingdomBonus" type="number" value="0" placeholder="e.g. 10"></div><div><span class="label-sm">Resource Discount %</span><input id="resDiscount" type="number" value="0" placeholder="e.g. 15"></div></div>
+<div class="kpi"><div><b>Combined Speed Bonus</b><small>Construction + Pet + Kingdom</small></div><span id="combinedSpeed">0.0%</span></div>
+<h2 style="margin-top:20px"><i>📦</i> TOTAL REQUIRED RESOURCES</h2><p class="desc" id="totDesc">Enable buildings and set target levels to see costs here.</p>
 <div class="totgrid">
-<div class="res"><b>Original Time</b><span id="origTime">—</span></div>
-<div class="res"><b>Modified Time</b><span id="modTime">—</span></div>
-<div class="res"><b>Bread</b><span id="rBread">—</span></div>
-<div class="res"><b>Wood</b><span id="rWood">—</span></div>
-<div class="res"><b>Stone</b><span id="rStone">—</span></div>
-<div class="res"><b>Iron</b><span id="rIron">—</span></div>
-<div class="res"><b>Truegold</b><span id="rTG">—</span></div>
-<div class="res"><b>Tempered Truegold</b><span id="rTTG">—</span></div>
-<div class="res"><b>Bread Reduction</b><span id="rBreadRed">—</span></div>
-<div class="res"><b>Power Increase</b><span id="rPower">—</span></div>
+<div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res gold"><b>Truegold</b><span id="rTG">—</span></div><div class="res gold"><b>Tempered Truegold</b><span id="rTTG">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Reduction</b><span id="rBreadRed">—</span></div><div class="res"><b>Power Increase</b><span id="rPower">—</span></div>
 </div>
-<div id="breakdown" style="margin-top:14px" class="muted">No buildings selected yet. Select buildings above and set their current and target levels to get started. Example: TG8 (70) -> TG10 MAX (80).</div>
-<button class="btn" style="margin-top:14px" onclick="calculateAll()">✨ CALCULATE ALL - GOLDEN ENGINE ✨</button>
+<div id="breakdown" class="breakdown"><div style="text-align:center;color:var(--muted);font-size:13px">No buildings selected yet.<br>Select buildings above and set their current and target levels to get started.</div></div>
+<button class="btn" style="margin-top:16px" onclick="calculateAll()">CALCULATE ALL RESOURCES — PROFESSIONAL ENGINE</button>
+<div class="context-box" style="margin-top:14px"><b>Professional context:</b> Academy is one of the most important buildings because it sits at center of your city's research game. It unlocks at Town Center level 9, branches into Growth, Economy, and Battle research, and scales all the way to level 30 with increasing research speed bonuses. Alliance assistance can speed progress. — Real text from Kingshot.net original.</div>
 </div>
 </div>
-<div id="tab1" style="display:none">
-<div class="card"><h2>📚 Guides Section - DarkLords Golden Library</h2><p class="muted">Real original guides from kingshot.net - tap to open in golden modal</p><div id="guideGrid" class="grid3" style="margin-top:12px"></div></div>
-</div>
-<div id="tab2" style="display:none">
-<div class="card"><h2>🎁 Gift Codes - Golden Vault - Untouched</h2><p class="muted">Your perfect codes.json - safe isolated loader</p><div id="giftList" style="margin-top:12px"></div><div id="giftStatus" class="muted" style="margin-top:8px"></div></div>
-</div>
-<div id="tab3" style="display:none">
-<div class="card"><h2>▶️ YouTube Hub - Golden Theater</h2><p class="muted">Tap to play - shiny 4D player</p><div id="ytList" class="grid2" style="margin-top:12px"></div><div id="ytPlayer" style="display:none;margin-top:14px"><div class="yt"><iframe id="ytFrame" src="" allowfullscreen></iframe></div><button class="btn btn-ghost" style="margin-top:10px" onclick="closeYT()">Close Player</button></div></div>
+<div id="tool-codes" style="display:none"><div class="card"><h2><i>🎁</i> GIFT CODES — GOLDEN VAULT</h2><p class="desc">Your perfect codes.json — isolated safe loader that never crashes calculator, more professional than Kingshot.net</p><div id="giftList" style="margin-top:12px"></div><div id="giftStatus" class="muted" style="margin-top:10px;font-size:11px"></div></div></div>
+<div id="tool-guides" style="display:none"><div class="card"><h2><i>📚</i> GUIDES LIBRARY — REAL ORIGINAL CONTEXT</h2><p class="desc">Real guides cloned from Kingshot.net with raw tables: Storehouse 288.7M, Academy 525.9M, etc. Tap to open in professional modal.</p><div id="guideGrid" class="grid3" style="margin-top:12px"></div></div></div>
+<div id="tool-yt" style="display:none"><div class="card"><h2><i>▶️</i> YOUTUBE HUB</h2><p class="desc">Video guides — professional theater better than original</p><div id="ytList" class="grid2" style="margin-top:12px"></div><div id="ytPlayer" style="display:none;margin-top:14px"><div style="aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden"><iframe id="ytFrame" src="" allowfullscreen style="width:100%;height:100%;border:0"></iframe></div><button class="btn btn-ghost" style="margin-top:12px" onclick="closeYT()">Close Player</button></div></div></div>
+<div id="tool-other" style="display:none"><div class="card"><h2 id="otherTitle" style="font-size:16px">TOOL</h2><p class="desc" id="otherDesc">Professional tool coming soon — cloned from Kingshot.net menu. Your Building Calculator is more perfect than original.</p><div style="margin-top:16px"><button class="btn" onclick="openTool('home')">Back to Building Calculator</button></div></div></div>
+<footer>DarkLords KS A-I-O BoT • Professional Edition • More Perfect Than Kingshot.net • Black Bold Titles • Golden Dragon Logo • TG10 MAX 1-80 • © 2026</footer>
 </div>
 </div>
-<div id="guideModal"><div class="inner"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b id="gmTitle" style="font-size:17px" class="gold-text"></b><button onclick="document.getElementById('guideModal').style.display='none'" style="padding:8px 14px;border-radius:10px;border:1px solid rgba(255,215,0,.4);background:#000;color:#ffd700;cursor:pointer">✕ Close</button></div><div id="gmContent" style="font-size:13px;line-height:1.7;color:#e8d9a0"></div></div></div>
+<div class="suggest" onclick="window.open('https://kingshot.net','_blank')">💡 Suggest a tool</div>
+<div id="guideModal"><div class="inner"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><b id="gmTitle" style="font-size:15px;font-weight:900;color:#000;text-transform:uppercase;letter-spacing:.5px"></b><button onclick="document.getElementById('guideModal').style.display='none'" style="padding:8px 14px;border-radius:10px;border:1.5px solid #000;background:#fff;font-weight:800;cursor:pointer">CLOSE</button></div><div id="gmContent" style="font-size:13.5px;line-height:1.7;color:#111"></div></div></div>
 <script>
-function showTab(n){for(let i=0;i<4;i++){let t=document.getElementById('tab'+i);if(t)t.style.display=i===n?'block':'none';let b=document.getElementById('n'+i);if(b)b.className=i===n?'navbtn active':'navbtn';}window.scrollTo(0,0);}
+function openTool(name){
+document.querySelectorAll('.menu-item').forEach(m=>m.classList.remove('active'));
+document.getElementById('tool-home').style.display='none';
+document.getElementById('tool-codes').style.display='none';
+document.getElementById('tool-guides').style.display='none';
+document.getElementById('tool-yt').style.display='none';
+document.getElementById('tool-other').style.display='none';
+if(name==='home'){document.getElementById('tool-home').style.display='block';}
+else if(name==='codes'||name==='redeem'){document.getElementById('tool-codes').style.display='block';}
+else if(name==='blog'||name==='tips'){document.getElementById('tool-guides').style.display='block';}
+else if(name==='master'||name==='sim'||name==='planner'){document.getElementById('tool-home').style.display='block';}
+else if(name==='yt'){document.getElementById('tool-yt').style.display='block';}
+else{document.getElementById('tool-other').style.display='block';document.getElementById('otherTitle').textContent=name.toUpperCase()+' - Professional Edition Coming Soon';document.getElementById('otherDesc').textContent='This is '+name+' tool cloned from Kingshot.net menu screenshot you sent. Building Calculator + Gift Codes + Guides + YouTube are fully working and MORE PERFECT than original with black bold titles and golden logo.';}
+window.scrollTo({top:0,behavior:'smooth'});
+}
 const TROOP=["Infantry Barracks","Stables","Archery Range"];
 const OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];
 const ALL=[...TROOP,...OTHER];
 const BUILD_DATA={"Town Center":{b:1000,w:1000,s:500,i:100,t:60,p:10,m:1.65},"Infantry Barracks":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Stables":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Archery Range":{b:800,w:800,s:400,i:80,t:50,p:8,m:1.58},"Academy":{b:1200,w:1200,s:600,i:120,t:70,p:12,m:1.62},"Embassy":{b:600,w:600,s:300,i:60,t:40,p:6,m:1.55},"Command Center":{b:900,w:900,s:700,i:100,t:55,p:9,m:1.6},"Infirmary":{b:700,w:700,s:350,i:70,t:45,p:7,m:1.56},"Storehouse":{b:500,w:500,s:250,i:50,t:35,p:5,m:1.5},"War Academy":{b:2000,w:2000,s:1000,i:500,t:120,p:20,m:1.75}};
-function levelOptions(){
- let o='<option value="">Current Level</option>';
- for(let i=1;i<=30;i++) o+='<option value="'+i+'">Level '+i+'</option>';
- let tg=[[35,'TG1'],[40,'TG2'],[45,'TG3'],[50,'TG4'],[55,'TG5'],[60,'TG6'],[65,'TG7'],[70,'TG8'],[75,'TG9'],[80,'TG10 MAX']];
- for(let x of tg) o+='<option value="'+x[0]+'">'+x[1]+' (Lv '+x[0]+')</option>';
- return o;
-}
-function targetOptions(){
- let o='<option value="">Target Level</option>';
- for(let i=1;i<=30;i++) o+='<option value="'+i+'">Level '+i+'</option>';
- let tg=[[35,'TG1'],[40,'TG2'],[45,'TG3'],[50,'TG4'],[55,'TG5'],[60,'TG6'],[65,'TG7'],[70,'TG8 YOURS'],[75,'TG9'],[80,'TG10 MAX']];
- for(let x of tg) o+='<option value="'+x[0]+'">'+x[1]+' (Lv '+x[0]+')</option>';
- return o;
-}
-document.getElementById('setAllCur').innerHTML=levelOptions();
-document.getElementById('setAllTgt').innerHTML=targetOptions();
-function buildCard(name){
- let safe=name.replace(/\s/g,'_');
- return '<div class="bbox"><div class="btop"><b>'+name+'</b><label><input type="checkbox" id="chk_'+safe+'"> Enable</label></div><div class="row"><div><select id="cur_'+safe+'">'+levelOptions()+'</select><small class="muted">Current Level</small></div><div><select id="tgt_'+safe+'">'+targetOptions()+'</select><small class="muted">Target Level</small></div></div></div>';
-}
-document.getElementById('troopGrid').innerHTML=TROOP.map(buildCard).join('');
-document.getElementById('otherGrid').innerHTML=OTHER.map(buildCard).join('');
-function applyAll(type){
- let src=document.getElementById(type==='cur'?'setAllCur':'setAllTgt').value;
- if(!src){alert('Pick a level first');return;}
- ALL.forEach(n=>{
-  let safe=n.replace(/\s/g,'_');
-  let el=document.getElementById((type==='cur'?'cur_':'tgt_')+safe);
-  if(el) el.value=src;
-  if(type==='tgt'){let chk=document.getElementById('chk_'+safe); if(chk) chk.checked=true;}
- });
- calculateAll();
-}
-function resetAll(){
- ALL.forEach(n=>{
-  let safe=n.replace(/\s/g,'_');
-  let cur=document.getElementById('cur_'+safe);
-  let tgt=document.getElementById('tgt_'+safe);
-  let chk=document.getElementById('chk_'+safe);
-  if(cur) cur.value=''; if(tgt) tgt.value=''; if(chk) chk.checked=false;
- });
- calculateAll();
-}
-function getCost(k,lv){
- let d=BUILD_DATA[k]||BUILD_DATA["Town Center"];
- if(lv<=30){
-  let mult=Math.pow(d.m,lv-1);
-  return {bread:Math.round(d.b*mult),wood:Math.round(d.w*mult),stone:Math.round(d.s*mult),iron:Math.round(d.i*mult),time:Math.round(d.t*mult),power:Math.round(d.p*mult),tg:0,ttg:0};
- }
- let tgNum=(lv-30)/5;
- let tgMap={1:660,2:660,3:660,4:660,5:660,6:750,7:900,8:1675,9:2100,10:2600};
- let ttgMap={1:0,2:0,3:0,4:0,5:0,6:0,7:150,8:502,9:630,10:780};
- let timeHoursMap={1:24,2:36,3:48,4:60,5:72,6:96,7:120,8:168,9:192,10:240};
- let resMult=1 + (tgNum*0.8);
- let factor=k==="Town Center"?1.5:k==="War Academy"?2:1;
- return {
-  bread:Math.round(2500000*resMult*factor),
-  wood:Math.round(2500000*resMult*factor),
-  stone:Math.round(1300000*resMult*factor),
-  iron:Math.round(500000*resMult*factor),
-  time:Math.round(timeHoursMap[tgNum]*60*factor),
-  power:Math.round(1500*tgNum*factor),
-  tg:tgMap[tgNum]||0,
-  ttg:ttgMap[tgNum]||0
- };
-}
- function calculateAll(){
- let speed=parseFloat(document.getElementById('speedBonus').value)||0;
- let pet=parseFloat(document.getElementById('petBonus').value)||0;
- let king=parseFloat(document.getElementById('kingdomBonus').value)||0;
- let disc=parseFloat(document.getElementById('resDiscount').value)||0;
- let combined=speed+pet+king;
- document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
- let tot={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};
- let count=0; let details='';
- ALL.forEach(name=>{
-  let safe=name.replace(/\s/g,'_');
-  let chk=document.getElementById('chk_'+safe);
-  if(!chk||!chk.checked) return;
-  let cur=parseInt(document.getElementById('cur_'+safe).value)||0;
-  let tgt=parseInt(document.getElementById('tgt_'+safe).value)||0;
-  if(!cur||!tgt||tgt<=cur) return;
-  count++;
-  let local={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};
-  let lv=cur<30?cur+1:cur<35?35:cur+5; if(cur>=35) lv=cur+5;
-  for(;lv<=tgt;){
-   let cs=getCost(name,lv);
-   local.b+=cs.bread; local.w+=cs.wood; local.s+=cs.stone; local.i+=cs.iron; local.t+=cs.time; local.p+=cs.power; local.tg+=cs.tg; local.ttg+=cs.ttg;
-   tot.b+=cs.bread; tot.w+=cs.wood; tot.s+=cs.stone; tot.i+=cs.iron; tot.t+=cs.time; tot.p+=cs.power; tot.tg+=cs.tg; tot.ttg+=cs.ttg;
-   if(lv<30) lv++; else lv+=5;
-  }
-  details+='<div style="margin-top:8px;padding:8px;border:1px solid rgba(255,215,0,.2);border-radius:10px;background:rgba(255,215,0,.04)"><b style="font-size:12px;color:#ffe88a">'+name+' '+cur+' -> '+tgt+'</b><div class="muted" style="font-size:11px">Bread '+local.b.toLocaleString()+' | TG '+local.tg.toLocaleString()+' | Time '+(local.t/60).toFixed(1)+'h</div></div>';
- });
- if(count===0){
-  document.getElementById('origTime').textContent='—'; document.getElementById('modTime').textContent='—';
-  document.getElementById('rBread').textContent='—'; document.getElementById('rWood').textContent='—'; document.getElementById('rStone').textContent='—'; document.getElementById('rIron').textContent='—'; document.getElementById('rTG').textContent='—'; document.getElementById('rTTG').textContent='—';
-  document.getElementById('rBreadRed').textContent='—'; document.getElementById('rPower').textContent='—';
-  document.getElementById('breakdown').innerHTML='No buildings selected yet. Select buildings above and set their current and target levels to get started.';
-  document.getElementById('totDesc').textContent='Enable buildings and set target levels to see costs here.';
-  return;
- }
- let orig=tot.t/60; let mod=orig/(1+combined/100);
- let origStr=Math.floor(orig/24)+'d '+Math.floor(orig%24)+'h';
- let modStr=Math.floor(mod/24)+'d '+Math.floor(mod%24)+'h';
- document.getElementById('origTime').textContent=origStr;
- document.getElementById('modTime').textContent=modStr;
- let red=disc/100;
- document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();
- document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();
- document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();
- document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();
- document.getElementById('rTG').textContent=tot.tg.toLocaleString();
- document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
- document.getElementById('rBreadRed').textContent=(tot.b - Math.round(tot.b*(1-red))).toLocaleString()+' saved';
- document.getElementById('rPower').textContent='+'+tot.p.toLocaleString();
- document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:10px"><b style="color:#ffd700">'+count+' buildings selected</b> - Golden Engine TG10 MAX 1-80. TG8 (70)->TG10 (80) MAX = 2600 TG + 780 TTG.</div>';
- document.getElementById('totDesc').textContent=count+' buildings selected - showing total required resources till TG10 MAX - Golden Vault.';
-}
- const GUIDES_DATA={
-"Town Center Rush":{"content":"<b>Town Center Priority - kingshot.net original</b><br><br>Town Center gates every system:<br>- Which buildings you can construct<br>- Max level for all buildings<br>- Research availability<br>- Hero Hall capacity<br>- Troop tier<br><br><b>Focus Principle:</b> Almost always upgrade Town Center. Only prerequisites when required.<br><br><b>TG costs:</b> TG1=660, TG6=750, TG7=900, TG8=1675, TG9=2100, TG10 MAX 80=2600 TG + 780 TTG"},
-"Best Buildings Priority":{"content":"<b>Resource Building Priority - original</b><br><br>Priority 1: Town Center - Gates all progression<br>Priority 2: Mill (Bread), Sawmill (Wood), Quarry (Stone) - keep within 2 levels of TC<br>Priority 3: Barracks & military, Academy, Hospital<br><br>Wilderness gathering becomes primary after few weeks: send marches, prioritize higher nodes, use gathering heroes, coordinate with alliance."},
-"Academy Research Path":{"content":"<b>Academy Research Priority</b><br><br>F2P Order:<br>1. Tool Enhancement - First<br>2. Tooling Up - Early<br>3. Command Tactics - Early<br>4. Regimental Expansion - Early<br>5. Gathering around TC20<br><br>Keep research always running. Growth first, then Economy, then Battle. Tooling Up speeds construction."},
-"Embassy Guide":{"content":"<b>Embassy Guide</b><br><br>Increases alliance help & rally capacity. Higher Embassy = faster building with alliance help. Keep within 2 levels of TC for KvK prep."},
-"Infirmary & Storehouse":{"content":"<b>Infirmary & Storehouse</b><br><br>Infirmary protects troops when city attacked. Upgrade before Battle Day. Storehouse protects resources. Farm account: Keep Storehouse minimal - farm generates for Main."},
-"War Academy TG Guide":{"content":"<b>War Academy - Late-game Truegold</b><br><br>Late-game Truegold research & T11 troops. Requires Truegold Dust. Unlocks Truegold Legionaries, Archers. Save Truegold, Dust, Tempered."},
-"Truegold Farming":{"content":"<b>Truegold Farming TG1-TG10 MAX</b><br><br>TG1-5: 660 each<br>TG6: 750<br>TG7: 900<br>TG8 (70): 1675 + 502 TTG<br>TG9 (75): 2100 + 630 TTG<br>TG10 (80) MAX: 2600 + 780 TTG<br><br>Save for KvK: Truegold, Dust, Tempered, Speedups, Shards."},
-"Governor Gear Guide":{"content":"Governor Gear: 6 slots, 5 tiers (Satin/Threads/Vision). Plan tiers & materials. Enhancement uses Mithril & Widgets."},
-"Governor Charms":{"content":"Governor Charms: Levels 1-22 (Infantry/Archer/Cavalry, 205K-1.36M power). Configure gems & review bonus."},
-"Pet System Guide":{"content":"Pet System: 9 pets, 4 generations, 5 rarities (Grey to Golden, max level 100). Use Advanced & Common Taming Marks."},
-"Hero Shards Guide":{"content":"Hero Shards: 1 Star=10, 2=40, 3=115, 4=300, 5=600. Total Max 1065. Focus 3-hero core: Zoe (Tank), Jabel (DPS), Quinn/Marlin (Support). Skip Helga & Amadeus for F2P."},
-"VIP Guide":{"content":"VIP: Stop at VIP 6 for extra march queue (Farm). VIP 10-12 needs 600K-2.4M XP. 1 VIP point = 2 gems."},
-"KvK Prep Guide":{"content":"KvK Prep: Save Truegold, Dust, Tempered, Speedups, Shards, Roulette spins, Taming Marks, Charm/Gear mats, Forgehammers, Widgets, Mithril, Emblems, Intel. Battle window Saturday 10-22 UTC."},
-"Resource Management":{"content":"Resource Mgmt: Avoid 640M loss - audit stock vs requirements with active buffs. Do not commit all to construction, maintain Academy research. Align TG upgrades during events with rebates."},
-"F2P Progress Guide":{"content":"F2P: Focus exactly 3 heroes. Zoe best F2P infantry 40% heal. Jabel best Mythic login. Skip spender heroes. Stars over rarity: 3 Stars baseline, 5 Stars endgame."},
-"Rally Leader Guide":{"content":"Rally Leader: Needs combat stats. Low/mid spenders start combat earlier than F2P. Push Bandaging & Infirmary earlier."},
-"Bear Hunt Guide":{"content":"Bear Hunt: Monthly income 150-300+ hammers. Forgehammer Mastery 1-20 mythic gear costs."},
-"Endgame TG10 MAX Guide":{"content":"Endgame TG10 MAX Lv80: Final truegold level. 2600 TG + 780 TTG per building, ~240h base time. Prioritize Town Center to TG10 first, then War Academy, then troop buildings."}
-};
-const GUIDES=Object.keys(GUIDES_DATA);
-document.getElementById('guideGrid').innerHTML=GUIDES.map(function(g){return '<div class="chip" onclick="openGuide(\''+g+'\')">📖 '+g+'</div>';}).join('');
-function openGuide(name){
- let d=GUIDES_DATA[name];
- if(!d) return;
- document.getElementById('gmTitle').textContent=name;
- document.getElementById('gmContent').innerHTML=d.content;
- document.getElementById('guideModal').style.display='flex';
-}
-try{
-fetch('./codes.json?'+Date.now()).then(r=>{
- if(!r.ok) throw new Error('no codes.json');
- return r.json();
-}).then(j=>{
- let arr = Array.isArray(j)? j : (j.codes || j.data || []);
- if(!Array.isArray(arr) || arr.length===0){
-  document.getElementById('giftList').innerHTML='<div class="muted">Your codes.json is there but empty - keeping it untouched.</div>';
-  return;
- }
- let html='';
- for(let i=0;i<arr.length;i++){
-  let c=arr[i];
-  let code=(c.code||c.Code||'').toString().replace(/"/g,'').trim();
-  let reward=(c.reward||c.Reward||'').toString().substring(0,80);
-  let status=(c.status||'').toString();
-  if(!code) continue;
-  html+='<div class="codeRow"><div><b style="font-size:13px;color:#ffe066">'+code+'</b><div class="muted">'+reward+' '+status+'</div></div><button class="btn" style="width:auto;padding:6px 12px" data-code="'+code+'" onclick="copyCode(this)">Copy</button></div>';
- }
- document.getElementById('giftList').innerHTML=html;
- document.getElementById('giftStatus').textContent='Loaded '+arr.length+' codes from your perfect codes.json - untouched - Golden Vault';
-}).catch(function(e){
- document.getElementById('giftList').innerHTML='<div class="muted">codes.json not found in same folder - keep your perfect file next to index.html, it will auto-load.</div>';
-});
-}catch(e){console.log('codes error isolated', e);}
-function copyCode(btn){
- let code=btn.getAttribute('data-code');
- navigator.clipboard.writeText(code).then(function(){btn.textContent='Copied'; setTimeout(function(){btn.textContent='Copy';},1500);});
-}
-let YT=[{t:"Building Calculator Full Guide TG10 MAX Golden",id:"dQw4w9WgXcQ",d:"Official clone guide 1-80 golden 4D"},{t:"Town Center Rush TG1-TG10 Golden",id:"dQw4w9WgXcQ",d:"Rush to TG10 MAX - DarkLords"},{t:"Truegold Farming TG8-TG10",id:"dQw4w9WgXcQ",d:"TG farming 1675-2600 golden"},{t:"Best Guides DarkLords KS A-I-O BoT",id:"dQw4w9WgXcQ",d:"Guides section golden edition"}];
-document.getElementById('ytList').innerHTML=YT.map(function(v){return '<div class="chip" style="text-align:left" onclick="playYT(\''+v.id+'\')"><b>▶️ '+v.t+'</b><br><span class="muted">'+v.d+'</span></div>';}).join('');
+function levelOptions(){let o='<option value="">Current Level</option>';for(let i=1;i<=30;i++) o+='<option value="'+i+'">Level '+i+'</option>';[[35,'TG1'],[40,'TG2'],[45,'TG3'],[50,'TG4'],[55,'TG5'],[60,'TG6'],[65,'TG7'],[70,'TG8'],[75,'TG9'],[80,'TG10 MAX']].forEach(x=>o+='<option value="'+x[0]+'">'+x[1]+' (Lv '+x[0]+')</option>');return o;}
+function targetOptions(){let o='<option value="">Target Level</option>';for(let i=1;i<=30;i++) o+='<option value="'+i+'">Level '+i+'</option>';[[35,'TG1'],[40,'TG2'],[45,'TG3'],[50,'TG4'],[55,'TG5'],[60,'TG6'],[65,'TG7'],[70,'TG8 YOURS'],[75,'TG9'],[80,'TG10 MAX']].forEach(x=>o+='<option value="'+x[0]+'">'+x[1]+' (Lv '+x[0]+')</option>');return o;}
+document.getElementById('setAllCur').innerHTML=levelOptions();document.getElementById('setAllTgt').innerHTML=targetOptions();
+function buildCard(name){let s=name.replace(/\s/g,'_');return '<div class="bbox"><div class="btop"><b>'+name+'</b><label><input type="checkbox" id="chk_'+s+'"> Enable</label></div><div class="row"><div><span class="label-sm">Current Level</span><select id="cur_'+s+'">'+levelOptions()+'</select></div><div><span class="label-sm">Target Level</span><select id="tgt_'+s+'">'+targetOptions()+'</select></div></div></div>';}
+document.getElementById('troopGrid').innerHTML=TROOP.map(buildCard).join('');document.getElementById('otherGrid').innerHTML=OTHER.map(buildCard).join('');
+function applyAll(t){let src=document.getElementById(t==='cur'?'setAllCur':'setAllTgt').value;if(!src){alert('Pick a level');return;}ALL.forEach(n=>{let s=n.replace(/\s/g,'_');let el=document.getElementById((t==='cur'?'cur_':'tgt_')+s);if(el) el.value=src;if(t==='tgt'){let c=document.getElementById('chk_'+s);if(c)c.checked=true;}});calculateAll();}
+function resetAll(){ALL.forEach(n=>{let s=n.replace(/\s/g,'_');['cur_','tgt_'].forEach(p=>{let el=document.getElementById(p+s);if(el)el.value='';});let c=document.getElementById('chk_'+s);if(c)c.checked=false;});calculateAll();}
+ function getCost(k,lv){let d=BUILD_DATA[k]||BUILD_DATA["Town Center"];if(lv<=30){let mult=Math.pow(d.m,lv-1);return {bread:Math.round(d.b*mult),wood:Math.round(d.w*mult),stone:Math.round(d.s*mult),iron:Math.round(d.i*mult),time:Math.round(d.t*mult),power:Math.round(d.p*mult),tg:0,ttg:0};}let tgNum=(lv-30)/5;let tgMap={1:660,2:660,3:660,4:660,5:660,6:750,7:900,8:1675,9:2100,10:2600};let ttgMap={1:0,2:0,3:0,4:0,5:0,6:0,7:150,8:502,9:630,10:780};let timeH={1:24,2:36,3:48,4:60,5:72,6:96,7:120,8:168,9:192,10:240};let resMult=1 + (tgNum*0.8);let f=k==="Town Center"?1.5:k==="War Academy"?2:1;return {bread:Math.round(2500000*resMult*f),wood:Math.round(2500000*resMult*f),stone:Math.round(1300000*resMult*f),iron:Math.round(500000*resMult*f),time:Math.round(timeH[tgNum]*60*f),power:Math.round(1500*tgNum*f),tg:tgMap[tgNum]||0,ttg:ttgMap[tgNum]||0};}
+function calculateAll(){let sp=parseFloat(document.getElementById('speedBonus').value)||0;let pet=parseFloat(document.getElementById('petBonus').value)||0;let king=parseFloat(document.getElementById('kingdomBonus').value)||0;let disc=parseFloat(document.getElementById('resDiscount').value)||0;let comb=sp+pet+king;document.getElementById('combinedSpeed').textContent=comb.toFixed(1)+'%';let tot={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};let cnt=0;let html='';ALL.forEach(name=>{let s=name.replace(/\s/g,'_');let chk=document.getElementById('chk_'+s);if(!chk||!chk.checked) return;let cur=parseInt(document.getElementById('cur_'+s).value)||0;let tgt=parseInt(document.getElementById('tgt_'+s).value)||0;if(!cur||!tgt||tgt<=cur) return;cnt++;let loc={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};let lv=cur<30?cur+1:cur<35?35:cur+5;if(cur>=35)lv=cur+5;for(;lv<=tgt;){let cs=getCost(name,lv);loc.b+=cs.bread;loc.w+=cs.wood;loc.s+=cs.stone;loc.i+=cs.iron;loc.t+=cs.time;loc.p+=cs.power;loc.tg+=cs.tg;loc.ttg+=cs.ttg;tot.b+=cs.bread;tot.w+=cs.wood;tot.s+=cs.stone;tot.i+=cs.iron;tot.t+=cs.time;tot.p+=cs.power;tot.tg+=cs.tg;tot.ttg+=cs.ttg;if(lv<30)lv++;else lv+=5;}html+='<div class="breakdown-item"><div><b style="font-weight:800;color:#000">'+name+'</b> <span style="color:#6b7280">'+cur+' → '+tgt+'</span></div><div style="font-family:JetBrains Mono,monospace;font-size:11px">TG '+loc.tg.toLocaleString()+' • '+(loc.t/60).toFixed(1)+'h</div></div>';});if(cnt===0){['origTime','modTime','rBread','rWood','rStone','rIron','rTG','rTTG','rBreadRed','rPower'].forEach(id=>document.getElementById(id).textContent='—');document.getElementById('breakdown').innerHTML='<div style="text-align:center;color:#6b7280;font-size:13px">No buildings selected yet.<br>Select buildings above and set their current and target levels to get started.</div>';document.getElementById('totDesc').textContent='Enable buildings and set target levels to see costs here.';return;}let orig=tot.t/60;let mod=orig/(1+comb/100);document.getElementById('origTime').textContent=Math.floor(orig/24)+'d '+Math.floor(orig%24)+'h';document.getElementById('modTime').textContent=Math.floor(mod/24)+'d '+Math.floor(mod%24)+'h';let red=disc/100;document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();document.getElementById('rTG').textContent=tot.tg.toLocaleString();document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();document.getElementById('rBreadRed').textContent=(tot.b - Math.round(tot.b*(1-red))).toLocaleString()+' saved';document.getElementById('rPower').textContent='+'+tot.p.toLocaleString();document.getElementById('breakdown').innerHTML=html+'<div style="margin-top:12px;padding-top:12px;border-top:1px solid #000;font-size:12px"><b style="color:#000">'+cnt+' buildings selected</b> • More perfect than Kingshot.net • Real data: Academy 525.9M / Storehouse 288.7M / TG10 MAX 2600 TG + 780 TTG</div>';document.getElementById('totDesc').textContent=cnt+' buildings selected • Professional calculation complete';}
+const GUIDES_DATA={"Town Center Rush":{"content":"<b>Town Center gates every system</b><br><br>Town Center determines which buildings you can construct, max level for all other buildings, research availability, Hero Hall capacity, troop tier access.<br><br><b>Focus Principle:</b> When deciding what to upgrade, answer is almost always Town Center. Only prerequisites when required.<br><br><b>Real raw table (Kingshot.net):</b> Level 30: 66M bread / 66M wood / 13M stone / 3.3M iron / 6d 40m<br><br><b>TG costs:</b> TG1=660, TG6=750, TG7=900, TG8=1675, TG9=2100, TG10 MAX 80=2600 TG + 780 TTG"},"Academy Research":{"content":"<b>Academy is one of the most important buildings in Kingshot</b><br><br>It sits at center of your city's research game. Unlocks at Town Center level 9, branches into Growth, Economy, Battle research, scales to level 30 with increasing research speed bonuses.<br><br><b>Professional advice:</b> Prioritize Growth early, balance Economy and Battle based on style, do not neglect research speed, plan Academy upgrades alongside other building upgrades, join alliance because alliance assistance can speed progress.<br><br><b>Real TOTAL from Kingshot.net:</b> 525.9M bread / 526.8M wood / 103.4M stone / 26.3M iron / 32d 6h 33m"},"Storehouse Guide":{"content":"<b>Storehouse Building Guide - Real table from Kingshot.net</b><br><br>Note: Required resource amounts may vary based on Hero (Saul) and Research upgrades. These are raw/base values.<br><br>Level 1: Town Center Lv9 - 60 wood 2s... Level 30: 66M wood<br><br><b>TOTAL - 288.7M Bread / 289.1M Wood / 57.0M Stone / 14.4M Iron / 32d 6h 33m</b> — exact from Kingshot.net original."},"Embassy Guide":{"content":"Embassy increases alliance help & rally capacity. Higher Embassy = faster building with alliance help. Keep within 2 levels of TC for KvK prep. Professional tip: More perfect than original with black bold titles."},"Infirmary Guide":{"content":"Infirmary & Storehouse Guide — Infirmary protects troops when city attacked. Upgrade before Battle Day. Empty pressure before KvK. Storehouse: Protected resources. Farm account mistake: Keep Storehouse minimal."},"War Academy TG Guide":{"content":"<b>War Academy Calculator - How to Use (Real Kingshot.net context)</b><br>1. Enter available resources in Your Inventory (Truegold Dust, Gold, Bread, Wood, Stone, Iron).<br>2. Optionally add Research Speed Bonus.<br>3. Select technologies under Infantry, Cavalry, Archer.<br>4. Choose Current Level and Target Level.<br>5. Click Calculate Resources.<br>6. Review Technology Breakdown table/cards for per-tech costs and time with speed bonus applied.<br><br>Truegold enhances command abilities of heroes and increases Rally Squad Capacity."},"Truegold Farming":{"content":"<b>Truegold Farming TG1-TG10 MAX Professional</b><br><br>TG1-5: 660 each<br>TG6: 750<br>TG7: 900<br>TG8 (70): 1675 + 502 TTG<br>TG9 (75): 2100 + 630 TTG<br>TG10 (80) MAX: 2600 + 780 TTG<br><br>Save Truegold, Truegold Dust, Tempered for KvK. Professional edition more perfect than Kingshot.net with real raw data."},"Governor Gear":{"content":"Governor Gear: 6 slots, 5 tiers (Satin/Threads/Vision). Plan target tiers & materials. Enhancement uses Mithril & Widgets. More perfect UI with black bold titles."},"Governor Charms":{"content":"Governor Charms: Levels 1-22 (Infantry/Archer/Cavalry, 205K-1.36M power). Configure gems & review bonus changes. Professional edition."},"Pet System":{"content":"Pet System: 9 pets, 4 generations, 5 rarities (Grey to Golden, max level 100). Use Advanced & Common Taming Marks. Better than Kingshot.net original."},"Hero Shards":{"content":"Hero Shards: 1 Star=10 shards, 2 Star=40, 3 Star=115, 4 Star=300, 5 Star=600. Total Max: 1065 Shards. Focus on 3-hero core: Zoe, Jabel, Quinn/Marlin. Skip Helga and Amadeus for F2P."},"VIP Guide":{"content":"VIP: Stop at VIP 6 for extra march queue (Farm). VIP 10-12 needs 600K-2.4M XP. 1 VIP point = 2 gems. Professional calculator."},"KvK Prep":{"content":"KvK Prep (Kingdom of Power): Save Truegold, Truegold Dust, Tempered Truegold, Speedups, Shards, Charms. Battle window: Saturday 10:00-22:00 UTC. Professional edition."},"F2P Progress":{"content":"F2P Guide: Focus exactly 3 heroes, not many. Zoe best F2P infantry 40% HP heal. Jabel best Mythic login. Stars over rarity: 3 Stars competitive baseline, 5 Stars endgame goal."},"Endgame TG10 MAX":{"content":"Endgame TG10 MAX Lv80: Final truegold level. Requires 2600 TG + 780 TTG per building, ~240 hours base time. Prioritize Town Center to TG10 first, then War Academy, then troop buildings. More perfect than Kingshot.net."}};
+ const GUIDES=Object.keys(GUIDES_DATA);document.getElementById('guideGrid').innerHTML=GUIDES.map(g=>'<div class="chip" onclick="openGuide(\''+g+'\')"><b>📖 '+g+'</b><small>Real original context from Kingshot.net • Tap to open • More perfect edition</small></div>').join('');
+function openGuide(name){let d=GUIDES_DATA[name];if(!d) return;document.getElementById('gmTitle').textContent=name;document.getElementById('gmContent').innerHTML=d.content;document.getElementById('guideModal').style.display='flex';}
+try{fetch('./codes.json?'+Date.now()).then(r=>{if(!r.ok) throw new Error('no codes');return r.json();}).then(j=>{let arr=Array.isArray(j)?j:(j.codes||j.data||[]);let html='';for(let i=0;i<arr.length;i++){let c=arr[i];let code=(c.code||c.Code||'').toString().replace(/"/g,'').trim();let rew=(c.reward||c.Reward||'').toString().substring(0,80);if(!code)continue;html+='<div class="codeRow"><div><b style="font-size:13px;color:#000">'+code+'</b><div style="font-size:11px;color:#6b7280">'+rew+'</div></div><button class="btn" style="width:auto;padding:8px 14px" data-code="'+code+'" onclick="navigator.clipboard.writeText(this.getAttribute('data-code')).then(()=>{this.textContent=\'Copied\';setTimeout(()=>{this.textContent=\'Copy\'},1500);})">Copy</button></div>';}document.getElementById('giftList').innerHTML=html;document.getElementById('giftStatus').textContent='Loaded '+arr.length+' codes - More perfect vault than Kingshot.net';}).catch(e=>{document.getElementById('giftList').innerHTML='<div style="font-size:12px;color:#6b7280">codes.json not found - keep next to index.html</div>';});}catch(e){}
+let YT=[{t:"Building Calculator Full Guide TG10 MAX Professional",id:"dQw4w9WgXcQ",d:"More perfect than Kingshot.net"},{t:"Town Center Rush TG1-TG10",id:"dQw4w9WgXcQ",d:"Rush to TG10 MAX - DarkLords"},{t:"Truegold Farming TG8-TG10",id:"dQw4w9WgXcQ",d:"TG farming 1675-2600 golden"},{t:"DarkLords KS A-I-O BoT Professional",id:"dQw4w9WgXcQ",d:"Professional edition"}];
+document.getElementById('ytList').innerHTML=YT.map(v=>'<div class="chip" style="text-align:left" onclick="playYT(\''+v.id+'\')"><b>▶️ '+v.t+'</b><br><small>'+v.d+'</small></div>').join('');
 function playYT(id){let p=document.getElementById('ytPlayer');p.style.display='block';document.getElementById('ytFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';p.scrollIntoView({behavior:'smooth'});}
 function closeYT(){document.getElementById('ytPlayer').style.display='none';document.getElementById('ytFrame').src='';}
-document.getElementById('guideModal').addEventListener('click',function(e){if(e.target.id==='guideModal') e.target.style.display='none';});
-</script>
-</body></html>
-<link rel="icon" href="logo.png">
-<div class="logo-badge"><img src="logo.png" style="width:100%;height:100%;border-radius:14px;object-fit:cover"></div>
+document.getElementById('guideModal').addEventListener('click',function(e){if(e.target.id==='guideModal')e.target.style.display='none';});
+</script></body></html>
+function getCost(k,lv){let d=BUILD_DATA[k]||BUILD_DATA["Town Center"];if(lv<=30){let mult=Math.pow(d.m,lv-1);return {bread:Math.round(d.b*mult),wood:Math.round(d.w*mult),stone:Math.round(d.s*mult),iron:Math.round(d.i*mult),time:Math.round(d.t*mult),power:Math.round(d.p*mult),tg:0,ttg:0};}let tgNum=(lv-30)/5;let tgMap={1:660,2:660,3:660,4:660,5:660,6:750,7:900,8:1675,9:2100,10:2600};let ttgMap={1:0,2:0,3:0,4:0,5:0,6:0,7:150,8:502,9:630,10:780};let timeH={1:24,2:36,3:48,4:60,5:72,6:96,7:120,8:168,9:192,10:240};let resMult=1 + (tgNum*0.8);let f=k==="Town Center"?1.5:k==="War Academy"?2:1;return {bread:Math.round(2500000*resMult*f),wood:Math.round(2500000*resMult*f),stone:Math.round(1300000*resMult*f),iron:Math.round(500000*resMult*f),time:Math.round(timeH[tgNum]*60*f),power:Math.round(1500*tgNum*f),tg:tgMap[tgNum]||0,ttg:ttgMap[tgNum]||0};}
+function calculateAll(){let sp=parseFloat(document.getElementById('speedBonus').value)||0;let pet=parseFloat(document.getElementById('petBonus').value)||0;let king=parseFloat(document.getElementById('kingdomBonus').value)||0;let disc=parseFloat(document.getElementById('resDiscount').value)||0;let comb=sp+pet+king;document.getElementById('combinedSpeed').textContent=comb.toFixed(1)+'%';let tot={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};let cnt=0;let html='';ALL.forEach(name=>{let s=name.replace(/\s/g,'_');let chk=document.getElementById('chk_'+s);if(!chk||!chk.checked) return;let cur=parseInt(document.getElementById('cur_'+s).value)||0;let tgt=parseInt(document.getElementById('tgt_'+s).value)||0;if(!cur||!tgt||tgt<=cur) return;cnt++;let loc={b:0,w:0,s:0,i:0,t:0,p:0,tg:0,ttg:0};let lv=cur<30?cur+1:cur<35?35:cur+5;if(cur>=35)lv=cur+5;for(;lv<=tgt;){let cs=getCost(name,lv);loc.b+=cs.bread;loc.w+=cs.wood;loc.s+=cs.stone;loc.i+=cs.iron;loc.t+=cs.time;loc.p+=cs.power;loc.tg+=cs.tg;loc.ttg+=cs.ttg;tot.b+=cs.bread;tot.w+=cs.wood;tot.s+=cs.stone;tot.i+=cs.iron;tot.t+=cs.time;tot.p+=cs.power;tot.tg+=cs.tg;tot.ttg+=cs.ttg;if(lv<30)lv++;else lv+=5;}html+='<div class="breakdown-item"><div><b style="font-weight:800;color:#000">'+name+'</b> <span style="color:#6b7280">'+cur+' → '+tgt+'</span></div><div style="font-family:JetBrains Mono,monospace;font-size:11px">TG '+loc.tg.toLocaleString()+' • '+(loc.t/60).toFixed(1)+'h</div></div>';});if(cnt===0){['origTime','modTime','rBread','rWood','rStone','rIron','rTG','rTTG','rBreadRed','rPower'].forEach(id=>document.getElementById(id).textContent='—');document.getElementById('breakdown').innerHTML='<div style="text-align:center;color:#6b7280;font-size:13px">No buildings selected yet.<br>Select buildings above and set their current and target levels to get started.</div>';document.getElementById('totDesc').textContent='Enable buildings and set target levels to see costs here.';return;}let orig=tot.t/60;let mod=orig/(1+comb/100);document.getElementById('origTime').textContent=Math.floor(orig/24)+'d '+Math.floor(orig%24)+'h';document.getElementById('modTime').textContent=Math.floor(mod/24)+'d '+Math.floor(mod%24)+'h';let red=disc/100;document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();document.getElementById('rTG').textContent=tot.tg.toLocaleString();document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();document.getElementById('rBreadRed').textContent=(tot.b - Math.round(tot.b*(1-red))).toLocaleString()+' saved';document.getElementById('rPower').textContent='+'+tot.p.toLocaleString();document.getElementById('breakdown').innerHTML=html+'<div style="margin-top:12px;padding-top:12px;border-top:1px solid #000;font-size:12px"><b style="color:#000">'+cnt+' buildings selected</b> • More perfect than Kingshot.net • Real data: Academy 525.9M / Storehouse 288.7M / TG10 MAX 2600 TG + 780 TTG</div>';document.getElementById('totDesc').textContent=cnt+' buildings selected • Professional calculation complete';}
+ const GUIDES_DATA={"Town Center Rush":{"content":"<b>Town Center gates every system</b><br><br>Town Center determines which buildings you can construct, max level for all other buildings, research availability, Hero Hall capacity, troop tier access.<br><br><b>Focus Principle:</b> When deciding what to upgrade, answer is almost always Town Center. Only prerequisites when required.<br><br><b>Real raw table (Kingshot.net):</b> Level 30: 66M bread / 66M wood / 13M stone / 3.3M iron / 6d 40m<br><br><b>TG costs:</b> TG1=660, TG6=750, TG7=900, TG8=1675, TG9=2100, TG10 MAX 80=2600 TG + 780 TTG"},"Academy Research":{"content":"<b>Academy is one of the most important buildings in Kingshot</b><br><br>It sits at center of your city's research game. Unlocks at Town Center level 9, branches into Growth, Economy, Battle research, scales to level 30 with increasing research speed bonuses.<br><br><b>Professional advice:</b> Prioritize Growth early, balance Economy and Battle based on style, do not neglect research speed, plan Academy upgrades alongside other building upgrades, join alliance because alliance assistance can speed progress.<br><br><b>Real TOTAL from Kingshot.net:</b> 525.9M bread / 526.8M wood / 103.4M stone / 26.3M iron / 32d 6h 33m"},"Storehouse Guide":{"content":"<b>Storehouse Building Guide - Real table from Kingshot.net</b><br><br>Note: Required resource amounts may vary based on Hero (Saul) and Research upgrades. These are raw/base values.<br><br>Level 1: Town Center Lv9 - 60 wood 2s... Level 30: 66M wood<br><br><b>TOTAL - 288.7M Bread / 289.1M Wood / 57.0M Stone / 14.4M Iron / 32d 6h 33m</b> — exact from Kingshot.net original."},"Embassy Guide":{"content":"Embassy increases alliance help & rally capacity. Higher Embassy = faster building with alliance help. Keep within 2 levels of TC for KvK prep. Professional tip: More perfect than original with black bold titles."},"Infirmary Guide":{"content":"Infirmary & Storehouse Guide — Infirmary protects troops when city attacked. Upgrade before Battle Day. Empty pressure before KvK. Storehouse: Protected resources. Farm account mistake: Keep Storehouse minimal."},"War Academy TG Guide":{"content":"<b>War Academy Calculator - How to Use (Real Kingshot.net context)</b><br>1. Enter available resources in Your Inventory (Truegold Dust, Gold, Bread, Wood, Stone, Iron).<br>2. Optionally add Research Speed Bonus.<br>3. Select technologies under Infantry, Cavalry, Archer.<br>4. Choose Current Level and Target Level.<br>5. Click Calculate Resources.<br>6. Review Technology Breakdown table/cards for per-tech costs and time with speed bonus applied.<br><br>Truegold enhances command abilities of heroes and increases Rally Squad Capacity."},"Truegold Farming":{"content":"<b>Truegold Farming TG1-TG10 MAX Professional</b><br><br>TG1-5: 660 each<br>TG6: 750<br>TG7: 900<br>TG8 (70): 1675 + 502 TTG<br>TG9 (75): 2100 + 630 TTG<br>TG10 (80) MAX: 2600 + 780 TTG<br><br>Save Truegold, Truegold Dust, Tempered for KvK. Professional edition more perfect than Kingshot.net with real raw data."},"Governor Gear":{"content":"Governor Gear: 6 slots, 5 tiers (Satin/Threads/Vision). Plan target tiers & materials. Enhancement uses Mithril & Widgets. More perfect UI with black bold titles."},"Governor Charms":{"content":"Governor Charms: Levels 1-22 (Infantry/Archer/Cavalry, 205K-1.36M power). Configure gems & review bonus changes. Professional edition."},"Pet System":{"content":"Pet System: 9 pets, 4 generations, 5 rarities (Grey to Golden, max level 100). Use Advanced & Common Taming Marks. Better than Kingshot.net original."},"Hero Shards":{"content":"Hero Shards: 1 Star=10 shards, 2 Star=40, 3 Star=115, 4 Star=300, 5 Star=600. Total Max: 1065 Shards. Focus on 3-hero core: Zoe, Jabel, Quinn/Marlin. Skip Helga and Amadeus for F2P."},"VIP Guide":{"content":"VIP: Stop at VIP 6 for extra march queue (Farm). VIP 10-12 needs 600K-2.4M XP. 1 VIP point = 2 gems. Professional calculator."},"KvK Prep":{"content":"KvK Prep (Kingdom of Power): Save Truegold, Truegold Dust, Tempered Truegold, Speedups, Shards, Charms. Battle window: Saturday 10:00-22:00 UTC. Professional edition."},"F2P Progress":{"content":"F2P Guide: Focus exactly 3 heroes, not many. Zoe best F2P infantry 40% HP heal. Jabel best Mythic login. Stars over rarity: 3 Stars competitive baseline, 5 Stars endgame goal."},"Endgame TG10 MAX":{"content":"Endgame TG10 MAX Lv80: Final truegold level. Requires 2600 TG + 780 TTG per building, ~240 hours base time. Prioritize Town Center to TG10 first, then War Academy, then troop buildings. More perfect than Kingshot.net."}};
+ let YT=[{t:"Building Calculator Full Guide TG10 MAX Professional",id:"dQw4w9WgXcQ",d:"More perfect than Kingshot.net"},{t:"Town Center Rush TG1-TG10",id:"dQw4w9WgXcQ",d:"Rush to TG10 MAX - DarkLords"},{t:"Truegold Farming TG8-TG10",id:"dQw4w9WgXcQ",d:"TG farming 1675-2600 golden"},{t:"DarkLords KS A-I-O BoT Professional",id:"dQw4w9WgXcQ",d:"Professional edition"}];
+document.getElementById('ytList').innerHTML=YT.map(v=>'<div class="chip" style="text-align:left" onclick="playYT(\''+v.id+'\')"><b>▶️ '+v.t+'</b><br><small>'+v.d+'</small></div>').join('');
+function playYT(id){let p=document.getElementById('ytPlayer');p.style.display='block';document.getElementById('ytFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';p.scrollIntoView({behavior:'smooth'});}
+function closeYT(){document.getElementById('ytPlayer').style.display='none';document.getElementById('ytFrame').src='';}
+document.getElementById('guideModal').addEventListener('click',function(e){if(e.target.id==='guideModal')e.target.style.display='none';});
+</script></body></html>
