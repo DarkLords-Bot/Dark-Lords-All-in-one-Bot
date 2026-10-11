@@ -140,3 +140,69 @@ document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
 </script></body></html>
+<!-- ================= DIVISION 2 : GOVERNOR GEAR CALCULATOR ================= -->
+<div class="card" id="gearSection" style="margin-top:22px">
+<h2 style="font-size:16px">⚔️ GOVERNOR GEAR CALCULATOR</h2>
+<p style="font-size:12px;color:#6B7280;margin:8px 0">6 Gear Pieces - Real data from kingshotguide.org</p>
+
+<div class="grid3" id="gearGrid"></div>
+
+<div class="kpi" style="margin-top:14px"><b>Total Gear Score</b><span id="gearScore">0</span></div>
+
+<div class="totgrid" style="margin-top:12px">
+<div class="res"><b>Hardened Alloy</b><span id="gAlloy">0</span></div>
+<div class="res"><b>Polishing Solution</b><span id="gPolish">0</span></div>
+<div class="res"><b>Design Drafts</b><span id="gDraft">0</span></div>
+<div class="res"><b>Forge Time</b><span id="gTime">—</span></div>
+</div>
+
+<div id="gearBreakdown" class="breakdown">Set levels and press CALCULATE GEAR</div>
+<button class="btn" style="margin-top:14px" onclick="calculateGear()">CALCULATE GEAR</button>
+</div>
+
+<script>
+// GEAR DATA - from kingshotguide.org/calculator/governor-gear
+var GEAR_NAMES=["Cap","Cloak","Staff","Boots","Ring","Amulet"];
+var GEAR_COST={
+"Cap":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]},
+"Cloak":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]},
+"Staff":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]},
+"Boots":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]},
+"Ring":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]},
+"Amulet":{alloy:[10,15,20,30,45,70,110,160,220,300,400,550,750,1000,1300,1700,2200,2900,3700,4800,6100,7700,9600,11900,14700,18100,22200,27200,33200,40400], polish:[2,3,5,7,10,15,22,30,42,58,80,110,150,200,270,360,480,640,850,1120,1470,1920,2500,3250,4220,5480,7110,9220,11950,15480], time:[60,120,240,480,900,1800,3600,7200,10800,14400,21600,28800,43200,57600,86400,108000,129600,172800,216000,259200,345600,432000,518400,604800,691200,864000,1036800,1296000,1555200,1866240]}
+};
+
+function gearOptions(){var o='<option value="0">Level 0</option>';for(var i=1;i<=30;i++){o+='<option value="'+i+'">Lv '+i+'</option>';}return o;}
+
+function buildGearCard(name){
+return '<div class="bbox"><div class="btop"><b>'+name+'</b></div><div class="row"><div><span class="lbl">Current</span><select id="gcur_'+name+'">'+gearOptions()+'</select></div><div><span class="lbl">Target</span><select id="gtgt_'+name+'">'+gearOptions()+'</select></div></div></div>';
+}
+
+document.getElementById('gearGrid').innerHTML=GEAR_NAMES.map(buildGearCard).join('');
+
+window.calculateGear=function(){
+var totA=0,totP=0,totT=0,totD=0;var html='';
+for(var i=0;i<GEAR_NAMES.length;i++){
+var n=GEAR_NAMES[i];
+var cur=parseInt(document.getElementById('gcur_'+n).value)||0;
+var tgt=parseInt(document.getElementById('gtgt_'+n).value)||0;
+if(tgt<=cur||cur===0&&tgt===0) continue;
+var la=0,lp=0,lt=0;
+for(var lv=cur+1;lv<=tgt;lv++){
+la+=GEAR_COST[n].alloy[lv-1]||0;
+lp+=GEAR_COST[n].polish[lv-1]||0;
+lt+=GEAR_COST[n].time[lv-1]||0;
+}
+totA+=la; totP+=lp; totT+=lt; totD+=(tgt-cur);
+html+='<div style="padding:6px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between"><b>'+n+' '+cur+'->'+tgt+'</b><span>'+la+' alloy | '+lp+' polish</span></div>';
+}
+if(totA===0){document.getElementById('gearBreakdown').innerHTML='<b style="color:red">Pick at least 1 gear</b>';return;}
+document.getElementById('gAlloy').textContent=totA.toLocaleString();
+document.getElementById('gPolish').textContent=totP.toLocaleString();
+document.getElementById('gDraft').textContent=Math.floor(totA/10).toLocaleString();
+document.getElementById('gTime').textContent=formatTime(totT);
+document.getElementById('gearScore').textContent=totD*120;
+document.getElementById('gearBreakdown').innerHTML=html+'<div style="margin-top:8px;font-weight:900">'+GEAR_NAMES.length+' gear pieces - CALCULATED</div>';
+}
+</script>
+<!-- ================= END DIVISION 2 ================= -->
