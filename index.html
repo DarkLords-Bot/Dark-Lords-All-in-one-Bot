@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DarkLords KS A-I-O BoT</title>
+<title>DIVISION 1A - Building Calculator</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
 header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
@@ -21,14 +21,20 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .res{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.res b{font-size:9px;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:4px}
 .res span{font-size:14px;font-weight:900}.btn{padding:12px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0}
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
+.speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
-<header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
+<header><img src="logo.png"><h1>DarkLords KS A-I-O BoT - DIVISION 1A</h1></header>
 <div class="wrap">
-<h1 class="page-title">Building Calculator</h1>
-<p class="page-sub">Division 1A</p>
+<h1 class="page-title">DIVISION 1A - Building Calculator</h1>
+<p class="page-sub">Real game data - kingshotguide.org + kingshotdata.com - timings fixed + speedups added</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
-<div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div><div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
+<div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div>
+
+<!-- SPEEDUPS ADDED IN 1A -->
+<div id="speedupBox" class="speedBox"><b style="font-size:11px;text-transform:uppercase">⚡ Speedups Required (from Modified Time)</b><div id="speedupList" style="margin-top:10px;display:grid;gap:6px;font-size:12px"></div><div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;display:flex;justify-content:space-between"><span style="color:#6B7280">Total Seconds:</span><b id="totalSec" style="color:#111827">0</b></div></div>
+
+<div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
 </div>
 <script>
 var TROOP=["Barracks","Stables","Range"];
@@ -70,7 +76,6 @@ var REAL_TIMES={
 "Storehouse":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
 "War Academy":[0,0,0,0,0,0,0,0,0,86400,129600,172800,259200,345600,432000]
 };
-
 function getCost(building, lv){
 if(lv<=30){
 var arr=REAL_TIMES[building]||REAL_TIMES["Town Center"];
@@ -86,225 +91,55 @@ if(Array.isArray(val)){tg=val[0]; ttg=val[1];} else {tg=val||0;}
 var timeMap={1:129600,2:187200,3:259200,4:345600,5:432000,6:518400,7:604800,8:864000,9:1036800,10:1296000};
 return {bread:Math.round(2500000*(1+tgNum*0.8)),wood:Math.round(2500000*(1+tgNum*0.8)),stone:Math.round(1300000*(1+tgNum*0.8)),iron:Math.round(500000*(1+tgNum*0.8)),time:timeMap[tgNum]||129600,tg:tg,ttg:ttg};
 }
+function formatTime(sec){if(sec<60) return sec+"s";var d=Math.floor(sec/86400);sec%=86400;var h=Math.floor(sec/3600);sec%=3600;var m=Math.floor(sec/60);if(d>0) return d+"d "+h+"h "+m+"m";if(h>0) return h+"h "+m+"m";return m+"m "+sec+"s";}
+function formatSecToSpeedups(s){var u=[{n:'30d',s:2592000},{n:'7d',s:604800},{n:'3d',s:259200},{n:'1d',s:86400},{n:'8h',s:28800},{n:'3h',s:10800},{n:'1h',s:3600},{n:'15m',s:900},{n:'5m',s:300},{n:'1m',s:60}];var out=[],r=s;for(var i=0;i<u.length;i++){if(r>=u[i].s){var c=Math.floor(r/u[i].s);out.push({name:u[i].n,count:c});r-=c*u[i].s;}}return out;}
 
-function formatTime(sec){
-if(sec<60) return sec+"s";
-var d=Math.floor(sec/86400);sec%=86400;
-var h=Math.floor(sec/3600);sec%=3600;
-var m=Math.floor(sec/60);
-if(d>0) return d+"d "+h+"h "+m+"m";
-if(h>0) return h+"h "+m+"m";
-return m+"m "+sec+"s";
-}
 window.calculateAll=function(){
-var speedEl=document.getElementById('speedBonus');
-var petEl=document.getElementById('petBonus');
-var kingdomEl=document.getElementById('kingdomBonus');
-var discEl=document.getElementById('resDiscount');
-
-var speed=parseFloat((speedEl?speedEl.value:'0').toString().replace(/,/g,''))||0;
-var pet=parseFloat((petEl?petEl.value:'0').toString().replace(/,/g,''))||0;
-var kingdom=parseFloat((kingdomEl?kingdomEl.value:'0').toString().replace(/,/g,''))||0;
-var disc=parseFloat((discEl?discEl.value:'0').toString().replace(/,/g,''))||0;
-
-var groundChk=document.getElementById('chkGround');
-var doubleChk=document.getElementById('chkDouble');
-var groundBonus=groundChk&&groundChk.checked?10:0;
-var combined=speed+pet+kingdom+groundBonus;
-var combEl=document.getElementById('combinedSpeed');
-if(combEl) combEl.textContent=combined.toFixed(1)+'%';
-
+var speed=parseFloat(document.getElementById('speedBonus').value)||0;
+var pet=parseFloat(document.getElementById('petBonus').value)||0;
+var kingdom=parseFloat(document.getElementById('kingdomBonus').value)||0;
+var disc=parseFloat(document.getElementById('resDiscount').value)||0;
+var combined=speed+pet+kingdom;
+document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
 var tot={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};var count=0;var details='';
 for(var idx=0;idx<ALL.length;idx++){
 var name=ALL[idx];var safe=name.replace(/\s/g,'_');
-var curEl=document.getElementById('cur_'+safe);
-var tgtEl=document.getElementById('tgt_'+safe);
-var cur=curEl?parseInt(curEl.value)||0:0;
-var tgt=tgtEl?parseInt(tgtEl.value)||0:0;
+var cur=parseInt(document.getElementById('cur_'+safe).value)||0;
+var tgt=parseInt(document.getElementById('tgt_'+safe).value)||0;
 if(cur===0||tgt===0||tgt<=cur) continue;
 count++;
 var local={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};
-var lv=cur+1;
-if(cur>=30) lv=cur+5;
-if(cur==30) lv=35;
+var lv=cur+1;if(cur>=30) lv=cur+5;if(cur==30) lv=35;
 for(;lv<=tgt;){
 var cs=getCost(name,lv);
 local.b+=cs.bread;local.w+=cs.wood;local.s+=cs.stone;local.i+=cs.iron;local.t+=cs.time;local.tg+=cs.tg;local.ttg+=cs.ttg;
 tot.b+=cs.bread;tot.w+=cs.wood;tot.s+=cs.stone;tot.i+=cs.iron;tot.t+=cs.time;tot.tg+=cs.tg;tot.ttg+=cs.ttg;
 if(lv<30) lv++; else lv+=5;
 }
-details+='<div style="padding:6px 0;border-bottom:1px solid #2A2D35;display:flex;justify-content:space-between"><b style="color:#fff">'+name+' '+cur+'->'+tgt+'</b><span style="color:#9CA3AF">TG '+local.tg+' + '+local.ttg+'T | '+formatTime(local.t)+'</span></div>';
+details+='<div style="padding:6px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between"><b>'+name+' '+cur+'->'+tgt+'</b><span>TG '+local.tg+' + '+local.ttg+'T | '+formatTime(local.t)+'</span></div>';
 }
-if(count===0){
-var ot=document.getElementById('origTime'); if(ot) ot.textContent='Pick levels!';
-var bd=document.getElementById('breakdown'); if(bd) bd.innerHTML='<b style="color:red">Set Current and Target for at least 1 building</b>';
-return;
-}
-
-// Modified time with all buffs
+if(count===0){document.getElementById('origTime').textContent='Pick levels!';document.getElementById('breakdown').innerHTML='<b style="color:red">Set Current and Target for at least 1 building</b>';document.getElementById('speedupBox').style.display='none';return;}
 var modSec=Math.round(tot.t/(1+combined/100));
-if(doubleChk&&doubleChk.checked) modSec=Math.round(modSec*0.8);
-
-var red=disc/100;
-var finalB=Math.round(tot.b*(1-red));
-var finalW=Math.round(tot.w*(1-red));
-var finalS=Math.round(tot.s*(1-red));
-var finalI=Math.round(tot.i*(1-red));
-
 document.getElementById('origTime').textContent=formatTime(tot.t);
 document.getElementById('modTime').textContent=formatTime(modSec);
-document.getElementById('rBread').textContent=finalB.toLocaleString();
-document.getElementById('rWood').textContent=finalW.toLocaleString();
-document.getElementById('rStone').textContent=finalS.toLocaleString();
-document.getElementById('rIron').textContent=finalI.toLocaleString();
+var red=disc/100;
+var fB=Math.round(tot.b*(1-red)),fW=Math.round(tot.w*(1-red)),fS=Math.round(tot.s*(1-red)),fI=Math.round(tot.i*(1-red));
+document.getElementById('rBread').textContent=fB.toLocaleString();
+document.getElementById('rWood').textContent=fW.toLocaleString();
+document.getElementById('rStone').textContent=fS.toLocaleString();
+document.getElementById('rIron').textContent=fI.toLocaleString();
 document.getElementById('rTG').textContent=tot.tg.toLocaleString();
 document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
-document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900;color:#fff">'+count+' buildings - TIMINGS FIXED</div>';
+document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 
-// === GLOBAL FOR 1B & 1C ===
-window.BUILD_TOTAL={bread:finalB,wood:finalW,stone:finalS,iron:finalI,tg:tot.tg,ttg:tot.ttg,time:tot.t,modTime:modSec};
+// SPEEDUPS BOX
+var box=document.getElementById('speedupBox'),list=document.getElementById('speedupList');
+if(modSec>0){box.style.display='block';var ups=formatSecToSpeedups(modSec);var html='';for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';}if(!ups.length)html='<div style="color:#6B7280">Less than 1m - no speedup needed</div>';list.innerHTML=html;document.getElementById('totalSec').textContent=modSec.toLocaleString()+' sec ('+(modSec/3600).toFixed(1)+'h)';}else{box.style.display='none';}
+
+// GLOBAL FOR 1B / 1C
+window.BUILD_TOTAL={bread:fB,wood:fW,stone:fS,iron:fI,tg:tot.tg,ttg:tot.ttg,time:tot.t,modTime:modSec};
 window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
-
-if(window.updateDiv1B) updateDiv1B();
-}
-// === PATCH FOR 1B SPEEDUPS + 1C MINUS ===
-var combined=speed+pet+kingdom;
-var groundChk=document.getElementById('chkGround');
-if(groundChk&&groundChk.checked) combined+=10;
-var modSec=Math.round(tot.t/(1+combined/100));
-var doubleChk=document.getElementById('chkDouble');
-if(doubleChk&&doubleChk.checked) modSec=Math.round(modSec*0.8);
-
-var red=disc/100;
-window.BUILD_TOTAL={
-bread:Math.round(tot.b*(1-red)),
-wood:Math.round(tot.w*(1-red)),
-stone:Math.round(tot.s*(1-red)),
-iron:Math.round(tot.i*(1-red)),
-tg:tot.tg,
-ttg:tot.ttg,
-time:tot.t,
-modTime:modSec
-};
-window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
-if(window.updateDiv1B) updateDiv1B();
-}
-// ==== THIS IS THE BUILD_TOTAL FOR 1B AND 1C ====
-window.BUILD_TOTAL={
-bread:Math.round(tot.b*(1-red)),
-wood:Math.round(tot.w*(1-red)),
-stone:Math.round(tot.s*(1-red)),
-iron:Math.round(tot.i*(1-red)),
-tg:tot.tg,
-ttg:tot.ttg,
-time:tot.t,
-modTime:modSec
-};
-window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
-
-if(window.updateDiv1B) updateDiv1B();
+if(window.updateDiv1B) window.updateDiv1B();
+if(window.calcRemaining1C) window.calcRemaining1C();
 }
 </script></body></html>
-<!-- DIVISION 1B - TOTAL + SPEEDUPS (FOR 1C MINUS) -->
-<div class="card" id="div1B" style="background:#181A20;border:1px solid #2A2D35;border-radius:20px;padding:0;overflow:hidden">
-<div style="padding:20px;border-bottom:1px solid #2A2D35">
-<h2 style="font-size:16px;font-weight:900;color:#fff">📦 DIVISION 1B - Total + Speedups</h2>
-<p style="font-size:12px;color:#8B8E98;margin-top:4px">Auto from 1A - Timings + Speedups for 1C minus</p>
-</div>
-
-<div style="padding:20px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase;display:block">Original Time</b>
-<span id="origTime" style="font-size:14px;font-weight:900;color:#fff">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase;display:block">Modified Time</b>
-<span id="modTime" style="font-size:14px;font-weight:900;color:#2AA6FF">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🍞 Bread</b><span id="rBread" style="float:right;font-weight:900;color:#fff">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🪵 Wood</b><span id="rWood" style="float:right;font-weight:900;color:#fff">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🧱 Stone</b><span id="rStone" style="float:right;font-weight:900;color:#fff">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">⚙️ Iron</b><span id="rIron" style="float:right;font-weight:900;color:#fff">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#FDE047;text-transform:uppercase">Truegold</b><span id="rTG" style="float:right;font-weight:900;color:#FDE047">—</span>
-</div>
-<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
-<b style="font-size:9px;color:#FB923C;text-transform:uppercase">Tempered</b><span id="rTTG" style="float:right;font-weight:900;color:#FB923C">—</span>
-</div>
-</div>
-
-<!-- SPEEDUP BREAKDOWN -->
-<div id="speedupBox1B" style="margin-top:16px;background:#111318;border:1px solid #2A2D35;border-radius:12px;padding:14px;display:none">
-<b style="font-size:11px;color:#fff;text-transform:uppercase;display:block;margin-bottom:10px">⚡ Speedups Required (from Modified Time)</b>
-<div style="display:grid;gap:6px;font-size:12px;color:#D1D5DB" id="speedupList1B"></div>
-<div style="margin-top:10px;padding-top:10px;border-top:1px solid #2A2D35;display:flex;justify-content:space-between">
-<span style="color:#8B8E98">Total Seconds:</span><b id="totalSec1B" style="color:#2AA6FF">0</b>
-</div>
-</div>
-
-<div id="breakdown" class="breakdown" style="margin-top:16px;background:#1E2128;border:1px dashed #2A2D35;color:#9CA3AF">Pick Current and Target above, then press Calculate in 1A.</div>
-
-<!-- Hidden for 1C -->
-<div style="display:none"><span id="bBread1B"></span><span id="bWood1B"></span><span id="bStone1B"></span><span id="bIron1B"></span><span id="bTG1B"></span><span id="bTime1B"></span></div>
-</div>
-</div>
-
-<script>
-window.SPEEDUP_TOTAL={sec:0,orig:0,mod:0};
-
-window.formatSecToSpeedups=function(totalSec){
-var s=totalSec;
-var units=[
-{name:'30d',sec:2592000},
-{name:'7d',sec:604800},
-{name:'3d',sec:259200},
-{name:'1d',sec:86400},
-{name:'8h',sec:28800},
-{name:'3h',sec:10800},
-{name:'1h',sec:3600},
-{name:'15m',sec:900},
-{name:'5m',sec:300},
-{name:'1m',sec:60}
-];
-var out=[]; var remaining=s;
-for(var u of units){
-if(remaining>=u.sec){
-var cnt=Math.floor(remaining/u.sec);
-out.push({name:u.name,sec:u.sec,count:cnt});
-remaining-=cnt*u.sec;
-}
-}
-return out;
-};
-
-window.updateDiv1B=function(){
-var tot=window.BUILD_TOTAL||{bread:0,wood:0,stone:0,iron:0,tg:0,ttg:0,time:0,modTime:0};
-var set=(id,val)=>{var el=document.getElementById(id); if(el) el.textContent=val?val.toLocaleString():'—';};
-set('bBread1B',tot.bread); set('bWood1B',tot.wood); set('bStone1B',tot.stone); set('bIron1B',tot.iron); set('bTG1B',tot.tg);
-
-// speedup box
-var box=document.getElementById('speedupBox1B');
-var list=document.getElementById('speedupList1B');
-var modSec=tot.modTime||tot.time||0;
-if(modSec>0){
-box.style.display='block';
-window.SPEEDUP_TOTAL={sec:modSec,orig:tot.time,mod:modSec,bread:tot.bread,wood:tot.wood,stone:tot.stone,iron:tot.iron,tg:tot.tg,ttg:tot.ttg};
-var ups=formatSecToSpeedups(modSec);
-var html='';
-for(var i=0;i<ups.length;i++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[i].name+' speedup</span><b style="color:#fff">x '+ups[i].count+'</b></div>';}
-if(ups.length===0) html='<div style="color:#6B7280">Less than 1m - no speedup needed</div>';
-list.innerHTML=html;
-document.getElementById('totalSec1B').textContent=modSec.toLocaleString()+' sec ('+(modSec/3600).toFixed(1)+'h)';
-}else{box.style.display='none';}
-if(window.calcRemaining1C) calcRemaining1C();
-};
-</script>
