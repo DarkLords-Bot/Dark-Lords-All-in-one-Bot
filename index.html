@@ -1,80 +1,29 @@
+
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DarkLords Kingshot A-I-O BoT</title>
+<title>DIVISION 1A - Building Calculator</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
-header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:101}
+header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
 header img{width:38px;height:38px;border-radius:10px}header h1{font-size:15px;font-weight:900;color:#fff}
 .wrap{max-width:860px;margin:0 auto;padding:18px}
 .page-title{font-size:22px;font-weight:900;text-transform:uppercase;margin-bottom:4px;color:#000}
+.page-sub{font-size:12px;color:#6B7280;margin-bottom:14px}
 .card{background:#fff;border:1px solid #E5E7EB;border-radius:16px;padding:18px;margin-bottom:16px}
-.bbox{border:1px solid #E5E7EB;border-radius:12px;padding:12px}
+.card h2{font-size:13px;font-weight:900;text-transform:uppercase;margin-bottom:4px;color:#000}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
 .lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#6B7280;margin-bottom:6px;display:block}
-select,input,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600}
-.btn{padding:12px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0}
-.btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}
-.grid3{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:700px){.grid3{grid-template-columns:1fr}}
+select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600}
+.bbox{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.btop{display:flex;justify-content:space-between;margin-bottom:8px}
+.btop b{font-size:13px;font-weight:900}.row{display:flex;gap:10px}.row>div{flex:1}
+.kpi{background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-top:12px}
+.totgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+@media(max-width:700px){.totgrid{grid-template-columns:repeat(2,1fr)}}
+.res{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.res b{font-size:9px;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:4px}
+.res span{font-size:14px;font-weight:900}.btn{padding:12px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0}
+.btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
+.speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
-<header><img src="https://i.imgur.com/8Km9tLL.png"><h1>DarkLords KS A-I-O BoT</h1></header>
-<div class="wrap">
-<h1 class="page-title" id="mainTitle">DIVISION 1 - Building Calculator (1A-1E)</h1>
-
-<!-- ========== DROPDOWN + SIDEWAYS BUTTONS ========== -->
-<div style="position:sticky;top:60px;z-index:100;background:#F8FAFB;padding:10px 0 12px;margin-bottom:10px">
-<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
-<span style="font-size:11px;font-weight:900">SELECT:</span>
-<select id="pageSelect" onchange="showPage(parseInt(this.value))" style="flex:1;padding:12px;border-radius:12px;border:2px solid #111827;font-weight:800;background:#fff">
-<option value="1">🏰 Page 1 - Buildings 1A-1E</option>
-<option value="2">⚔️ Page 2 - Governor Gear 2A-2E</option>
-</select>
-</div>
-<div style="display:flex;gap:0;background:#E5E7EB;border-radius:14px;padding:4px">
-<button id="btnPage1" onclick="showPage(1)" style="flex:1;padding:12px;border-radius:10px;border:0;font-weight:900;font-size:12px;background:#111827;color:#fff">🏰 BUILDINGS<br><span style="font-size:9px">1A-1E</span></button>
-<button id="btnPage2" onclick="showPage(2)" style="flex:1;padding:12px;border-radius:10px;border:0;font-weight:900;font-size:12px;background:transparent;color:#111827">⚔️ GOV GEAR<br><span style="font-size:9px">2A-2E</span></button>
-</div>
-</div>
-
-<!-- ================= PAGE 1 = 1A-1E ================= -->
-<div id="page1">
-<div class="card"><h2>DIVISION 1A - Building Calculator</h2><div id="buildGrid" class="grid3" style="margin-top:12px"></div><button class="btn" style="margin-top:12px">CALCULATE 1A</button></div>
-<div class="card"><h2>DIVISION 1B - Inventory</h2><div class="grid3" style="margin-top:10px"><div><span class="lbl">30d</span><input type="number" value="0"></div><div><span class="lbl">7d</span><input type="number" value="0"></div></div></div>
-<div class="card" style="border:2px solid #111827"><h2>DIVISION 1C - FINAL PLAN & EXPORT</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0"><div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px"><b style="font-size:11px;color:#15803D">✅ TOTAL NEEDED (1A)</b><div>—</div></div><div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px"><b style="font-size:11px;color:#B91C1C">⏳ STILL MISSING</b><div>—</div></div></div><div style="background:#111827;border-radius:12px;padding:14px"><b style="color:#fff;font-size:12px">📋 COPY-PASTE PLAN</b><textarea style="height:120px;background:#1F2937;color:#CBD5E1;margin-top:8px" readonly>Waiting...</textarea></div></div>
-<div class="card" style="border:2px dashed #111827"><h2 style="text-align:center">DIVISION 1D - Building References</h2><a href="https://kingshot.net/database/buildings" target="_blank" style="text-decoration:none"><div style="background:#111827;color:#fff;border-radius:10px;padding:12px;font-weight:900;margin:10px 0;display:flex;justify-content:space-between">🏰 kingshot.net / buildings <span>↗</span></div></a><a href="https://www.kingshotguide.org/buildings" target="_blank" style="text-decoration:none"><div style="background:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;margin-bottom:10px;display:flex;justify-content:space-between">📖 kingshotguide.org / buildings <span>↗</span></div></a></div>
-<div class="card" style="border:2px dashed #DC2626"><h2 style="text-align:center">DIVISION 1E - YouTube Building Guides</h2>
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin:10px 0"><a href="https://www.youtube.com/results?search_query=kingshot+building+upgrade+guide" target="_blank" style="text-decoration:none"><div style="background:#FF0000;color:#fff;border-radius:10px;padding:12px;font-weight:900;display:flex;justify-content:space-between">▶️ Massive Upgrade Guide <span>↗</span></div></a></div>
-<div style="border:2px solid #FF0000;border-radius:12px;padding:12px;background:#FFFBEB"><span style="font-size:10px;font-weight:800;color:#DC2626">🔴 Box 5 - Building Only Search</span><div style="display:flex;gap:8px;margin-top:8px"><input id="ytBuild" type="text" placeholder="e.g. Town Center, Barracks"><button onclick="var q=document.getElementById('ytBuild').value;if(!q)return alert('Type building');window.open('https://www.youtube.com/results?search_query='+encodeURIComponent('kingshot building upgrade '+q),'_blank')" style="padding:12px;background:#FF0000;color:#fff;border:0;border-radius:10px;font-weight:900">Search ▶️</button></div><p style="font-size:10px;color:#6B7280;margin-top:6px">Locked to building upgrades only</p></div>
-</div>
-</div>
-
-<!-- ================= PAGE 2 = 2A-2E ================= -->
-<div id="page2" style="display:none">
-<div class="card"><h2>DIVISION 2A - Governor Gear Calculator</h2><div id="gearGrid" class="grid3" style="margin-top:12px"></div><button class="btn" style="margin-top:12px">CALCULATE 2A</button></div>
-<div class="card"><h2>DIVISION 2B - Gear Inventory</h2><div class="grid3" style="margin-top:10px"><div><span class="lbl">Satin</span><input type="number" value="0"></div><div><span class="lbl">Gilded</span><input type="number" value="0"></div></div></div>
-<div class="card" style="border:2px solid #111827"><h2>DIVISION 2C - FINAL PLAN & EXPORT</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0"><div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px"><b style="font-size:11px;color:#15803D">✅ TOTAL NEEDED (2A)</b><div>—</div></div><div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px"><b style="font-size:11px;color:#B91C1C">⏳ STILL MISSING</b><div>—</div></div></div><div style="background:#111827;border-radius:12px;padding:14px"><b style="color:#fff;font-size:12px">📋 COPY-PASTE GEAR PLAN</b><textarea style="height:120px;background:#1F2937;color:#CBD5E1;margin-top:8px" readonly>Waiting for 2A...</textarea></div></div>
-<div class="card" style="border:2px dashed #7C3AED"><h2 style="text-align:center">DIVISION 2D - Governor Gear References</h2><a href="https://kingshot.net/database/governor-gear" target="_blank" style="text-decoration:none"><div style="background:#7C3AED;color:#fff;border-radius:10px;padding:12px;font-weight:900;margin:10px 0;display:flex;justify-content:space-between">🏰 Governor Gear DB <span>↗</span></div></a></div>
-<div class="card" style="border:2px dashed #7C3AED"><h2 style="text-align:center">DIVISION 2E - YouTube Gear Guides</h2>
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin:10px 0"><a href="https://www.youtube.com/results?search_query=kingshot+governor+gear+upgrade" target="_blank" style="text-decoration:none"><div style="background:#7C3AED;color:#fff;border-radius:10px;padding:12px;font-weight:900;display:flex;justify-content:space-between">▶️ Governor Gear Upgrade Guide <span>↗</span></div></a></div>
-<div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;background:#F5F3FF"><span style="font-size:10px;font-weight:800;color:#7C3AED">🟣 Box 5 - Gear Only Search</span><div style="display:flex;gap:8px;margin-top:8px"><input id="ytGear" type="text" placeholder="e.g. Satin, Head, Vision"><button onclick="var q=document.getElementById('ytGear').value;if(!q)return alert('Type gear');window.open('https://www.youtube.com/results?search_query='+encodeURIComponent('kingshot governor gear upgrade '+q),'_blank')" style="padding:12px;background:#7C3AED;color:#fff;border:0;border-radius:10px;font-weight:900">Search ▶️</button></div><p style="font-size:10px;color:#6B7280;margin-top:6px">Locked to governor gear only</p></div>
-</div>
-</div>
-
-</div>
-<script>
-function showPage(n){
- document.getElementById('page1').style.display=n===1?'block':'none';
- document.getElementById('page2').style.display=n===2?'block':'none';
- document.getElementById('pageSelect').value=n;
- var b1=document.getElementById('btnPage1'),b2=document.getElementById('btnPage2');
- if(n===1){b1.style.background='#111827';b1.style.color='#fff';b2.style.background='transparent';b2.style.color='#111827';}
- else{b2.style.background='#111827';b2.style.color='#fff';b1.style.background='transparent';b1.style.color='#111827';}
- document.getElementById('mainTitle').textContent=n===1?'DIVISION 1 - Building Calculator (1A-1E)':'DIVISION 2 - Governor Gear Calculator (2A-2E)';
- window.scrollTo({top:0,behavior:'smooth'});
-}
-var BLD=["Town Center","Barracks","Stables","Range","Academy","Embassy"];var GEAR=["Head","Armor","Legs","Staff","Ring","Accessory"];
-function mk(name){return '<div class="bbox"><b style="font-size:12px">'+name+'</b><div style="display:flex;gap:8px;margin-top:8px"><select><option>Cur</option></select><select><option>Tgt</option></select></div></div>';}
-document.getElementById('buildGrid').innerHTML=BLD.map(mk).join('');document.getElementById('gearGrid').innerHTML=GEAR.map(mk).join('');
-</script>
-</body></html>
 <header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
 <div class="wrap">
 <h1 class="page-title">DIVISION 1A - Building Calculator</h1>
