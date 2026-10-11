@@ -26,7 +26,7 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 <header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
 <div class="wrap">
 <h1 class="page-title">DIVISION 1A - Building Calculator</h1>
-<p class="page-sub">Real game data - kingshotguide.org + kingshotdata.com - timings fixed + speedups added</p>
+<p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
 <div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div>
@@ -732,7 +732,7 @@ wrap.style.display='none';
 
 <!-- BOX 5 - GOVERNOR GEAR ONLY SEARCH - LOCKED -->
 <div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;margin-bottom:14px;background:#F5F3FF">
-<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">🟣 Box 5 - Governor Gear Only Search</span>
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">>🔴 Box 5 - Governor Gear Only Search</span>
 <div style="display:flex;gap:8px">
 <input id="ytSearchGear" type="text" placeholder="e.g. Satin, Gilded, Head, Ring, Lv 50" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doGearSearch()}">
 <button onclick="doGearSearch()" style="padding:12px 16px;border-radius:10px;background:#7C3AED;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
