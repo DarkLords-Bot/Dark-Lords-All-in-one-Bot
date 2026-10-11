@@ -204,3 +204,37 @@ if(typeof updateDiv2B==='function') updateDiv2B();
 if(typeof updateDiv2C==='function') updateDiv2C();
 };
 </script>
+<!-- DIVISION 2B - LIVE SUMMARY -->
+<div class="card" id="div2B" style="background:#1E293B;color:#fff;border:0">
+<h2 style="color:#fff;font-size:14px">✨ DIVISION 2B - Live Summary</h2>
+<p style="font-size:11px;color:#94A3B8;margin-top:4px">Auto updates from 2A calculation</p>
+
+<div style="margin-top:12px;display:grid;gap:8px">
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🧵 Satin</span><b id="bSatin2B" style="color:#38BDF8;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🪡 Threads</span><b id="bThreads2B" style="color:#A78BFA;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>👁️ Vision</span><b id="bVision2B" style="color:#FB923C;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>⚡ Power Gain</span><b id="bPower2B" style="color:#4ADE80">—</b>
+</div>
+</div>
+</div>
+
+<script>
+window.updateDiv2B=function(){
+var s=(window.G_TOTAL2A&&window.G_TOTAL2A.s)||0;
+var t=(window.G_TOTAL2A&&window.G_TOTAL2A.t)||0;
+var v=(window.G_TOTAL2A&&window.G_TOTAL2A.v)||0;
+document.getElementById('bSatin2B').textContent=s?s.toLocaleString():'—';
+document.getElementById('bThreads2B').textContent=t?t.toLocaleString():'—';
+document.getElementById('bVision2B').textContent=v?v.toLocaleString():'—';
+document.getElementById('bPower2B').textContent=s?Math.round(s/100).toLocaleString()+'k':'—';
+};
+// run once on load
+setTimeout(updateDiv2B,500);
+</script>
