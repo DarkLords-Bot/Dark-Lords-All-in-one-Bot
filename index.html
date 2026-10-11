@@ -327,7 +327,77 @@ setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
 
 <button class="btn" onclick="window.open('https://kingshot.net/database/buildings','_blank');window.open('https://www.kingshotguide.org/buildings','_blank');window.open('https://kingshotdata.com/category/buildings/','_blank');">🚀 Open All 3 at Once</button>
 </div>
-Governer Gear Section-Done
+<!-- ========== DIVISION 1E - BELOW 1D - YOUTUBE BUILDING UPGRADE GUIDES ========== -->
+<div class="card" id="div1E" style="margin-top:16px;border:2px dashed #DC2626">
+<h2 style="text-align:center;margin-bottom:4px">DIVISION 1E - YouTube Building Upgrade Guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">All building upgrade videos — tap to watch</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#DC2626;text-transform:uppercase;display:block;margin-bottom:6px">Video 1 - Massive Upgrade Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+building+upgrade+guide" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Another MASSIVE Upgrade in Kingshot - Full Strategy</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 2 - Priority Order</span>
+<a href="https://www.youtube.com/watch?v=blackted" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ 8 Most Important Upgrades - Correct Priority Order</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 3 - Town Center & Truegold</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+town+center+30+truegold+upgrade" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Town Center 30 to Truegold - What to Upgrade First</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 4 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 4 - F2P Building Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+f2p+building+upgrade+efficiency" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ F2P Building Upgrade Efficiency - Save Resources</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- ========== UPGRADED BOX 5 - LIVE YOUTUBE SEARCH ========== -->
+<div style="border:2px solid #FF0000;border-radius:12px;padding:12px;margin-bottom:14px;background:#FFFBEB">
+<span style="font-size:10px;font-weight:800;color:#DC2626;text-transform:uppercase;display:block;margin-bottom:8px">🔴 Box 5 - Live YouTube Search - Type Anything</span>
+<div style="display:flex;gap:8px">
+<input id="ytSearch" type="text" placeholder="Type anything... e.g. Town Center 30, Truegold, F2P guide" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doYTSearch()}">
+<button onclick="doYTSearch()" style="padding:12px 16px;border-radius:10px;background:#FF0000;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+</div>
+<p style="font-size:10px;color:#6B7280;margin-top:8px">This opens YouTube directly with your search - live YouTube access</p>
+<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
+</div>
+</div>
+
+<script>
+function doYTSearch(){
+ var q = document.getElementById('ytSearch').value.trim();
+ if(!q){ alert('Type something to search on YouTube'); return; }
+ var url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+ window.open(url,'_blank');
+}
+</script>
+</div>
+Governer Gear Section
 <div class="card" id="div2A">
 <h2>⚔️ DIVISION 2A - Governor Gear</h2>
 <p style="font-size:11px;color:#6B7280">59 levels - shows results here itself</p>
