@@ -25,7 +25,7 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 <header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
 <div class="wrap">
 <h1 class="page-title">Building Calculator</h1>
-<p class="page-sub"> Division 1A-Real game data - kingshotguide.org + kingshotdata.com - timings fixed</p>
+<p class="page-sub">Division 1A</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
 <div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div><div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
@@ -97,18 +97,13 @@ if(h>0) return h+"h "+m+"m";
 return m+"m "+sec+"s";
 }
 
-window.CombinedSpeed(){
-var speed=parseFloat(document.getElementById('speedBonus').value.replace(/,/g,''))||0;
-var cost=parseFloat(document.getElementById('resDiscount').value.replace(/,/g,''))||0;
+window.calculateAll=function(){
+var speed=parseFloat(document.getElementById('speedBonus').value)||0;
 var pet=parseFloat(document.getElementById('petBonus').value)||0;
 var kingdom=parseFloat(document.getElementById('kingdomBonus').value)||0;
-var ground=document.getElementById('chkGround').checked?10:0;
-var combined=speed+pet+kingdom+ground;
+var disc=parseFloat(document.getElementById('resDiscount').value)||0;
+var combined=speed+pet+kingdom;
 document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
-// store for calculateAll
-window.EXTRA_BUFFS={ground:ground,double:document.getElementById('chkDouble').checked,costDown:cost};
-}
-// patch your calculateAll to use EXTRA_BUFFS
 var tot={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};var count=0;var details='';
 for(var idx=0;idx<ALL.length;idx++){
 var name=ALL[idx];var safe=name.replace(/\s/g,'_');
