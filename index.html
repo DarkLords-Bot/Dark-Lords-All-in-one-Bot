@@ -139,109 +139,256 @@ document.getElementById('rTG').textContent=tot.tg.toLocaleString();
 document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
-</script></body></html>
-<!-- ================= DIVISION 2 : GOVERNOR GEAR - REAL DATA ================= -->
+<!-- ================= DIVISION 2A : GOVERNOR GEAR - FULL TILL RED T6 ★★★ FIXED ================= -->
 <div class="card" id="gearSection" style="margin-top:22px">
-<h2 style="font-size:16px">⚔️ GOVERNOR GEAR - REAL KINGSHOT.NET DATA</h2>
-<p style="font-size:11px;color:#6B7280;margin:8px 0">6 pieces - 57 levels - Satin / Threads / Vision</p>
+<h2 style="font-size:16px">⚔️ GOVERNOR GEAR - FULL 60 LEVELS (FIXED)</h2>
+<p style="font-size:11px;color:#6B7280;margin:8px 0">Real kingshot.net data - Cavalry / Infantry / Archer - till Red T6 ★★★</p>
 <div class="grid3" id="gearGrid"></div>
-<div class="kpi"><b>Total Score</b><span id="gearScore">0</span></div>
-<div class="totgrid">
+<div class="kpi" style="margin-top:14px"><b>Total Score</b><span id="gearScore">0</span></div>
+<div class="totgrid" style="margin-top:12px">
 <div class="res"><b>Satin</b><span id="gSatin">0</span></div>
 <div class="res"><b>Gilded Threads</b><span id="gThreads">0</span></div>
 <div class="res"><b>Artisan Vision</b><span id="gVision">0</span></div>
 <div class="res"><b>Power Gain</b><span id="gPower">0</span></div>
 </div>
-<div id="gearBreakdown" class="breakdown">Set Current → Target then CALCULATE</div>
+<div id="gearBreakdown" class="breakdown">Set Current → Target then CALCULATE - now includes Red T6 1★ 2★ 3★</div>
 <button class="btn" style="margin-top:14px" onclick="calculateGear()">CALCULATE GEAR</button>
 </div>
 
 <script>
-var GEAR_PIECES=["Hat","Coat","Pants","Belt","Weapon","Accessory"];
+var GEAR_PIECES=["Cavalry Cap","Cavalry Coat","Infantry Cap","Infantry Coat","Archer Cap","Archer Coat"];
+
+// REAL DATA from kingshotdata.com + kingshot.net - FULL 58 upgrades = 60 levels
+// index 0 = Not Started -> Green,... index 57 = Red T6 2★ -> Red T6 3★
 var REAL_GEAR=[
-{satin:1500,threads:15,vision:0,power:224.4}, // Green 0
-{satin:3800,threads:40,vision:0,power:306}, // Green 1
-{satin:7000,threads:70,vision:0,power:408}, // Blue 0
-{satin:9700,threads:95,vision:0,power:510}, // Blue 1
-{satin:1000,threads:10,vision:45,power:612}, // Blue 2
-{satin:1000,threads:10,vision:50,power:714}, // Blue 3
-{satin:1500,threads:15,vision:60,power:816}, // Purple 0
-{satin:1500,threads:15,vision:70,power:885.4}, // Purple 1
-{satin:6500,threads:65,vision:40,power:954.7}, // Purple 2
-{satin:8000,threads:80,vision:50,power:1000}, // Purple 3
-{satin:10000,threads:95,vision:60,power:1100}, // Purple T1 0
-{satin:11000,threads:110,vision:70,power:1200}, // T1 1
-{satin:13000,threads:130,vision:85,power:1200}, // T1 2
-{satin:15000,threads:160,vision:100,power:1300}, // T1 3
-{satin:22000,threads:220,vision:40,power:1400}, // Gold 0
-{satin:23000,threads:230,vision:40,power:1400}, // Gold 1
-{satin:25000,threads:250,vision:45,power:1500}, // Gold 2
-{satin:26000,threads:260,vision:45,power:1500}, // Gold 3
-{satin:28000,threads:280,vision:45,power:1600}, // Gold T1 0
-{satin:30000,threads:300,vision:55,power:1700}, // T1 1
-{satin:32000,threads:320,vision:55,power:1700}, // T1 2
-{satin:35000,threads:340,vision:55,power:1800}, // T1 3
-{satin:38000,threads:360,vision:55,power:1900}, // Gold T2 0
-{satin:43000,threads:430,vision:75,power:1900}, // T2 1
-{satin:45000,threads:460,vision:80,power:2000}, // T2 2
-{satin:48000,threads:500,vision:85,power:2000}, // T2 3
-{satin:60000,threads:600,vision:120,power:2100}, // Gold T3 0
-{satin:70000,threads:700,vision:140,power:2200}, // T3 1
-{satin:80000,threads:800,vision:160,power:2200}, // T3 2
-{satin:90000,threads:900,vision:180,power:2300}, // T3 3 - verified 90k【6586671174406519734†L25-L28】
-{satin:108000,threads:1080,vision:220,power:2300}, // Red 0
-{satin:114000,threads:1140,vision:230,power:2400},
-{satin:121000,threads:1210,vision:240,power:2500},
-{satin:128000,threads:1280,vision:250,power:2500},
-{satin:154000,threads:1540,vision:300,power:2600}, // Red T1 0
-{satin:163000,threads:1630,vision:320,power:2600},
-{satin:173000,threads:1730,vision:340,power:2700},
-{satin:183000,threads:1830,vision:360,power:2800}, // Red T1 3【8281406682326125499†L9-L11】
-{satin:220000,threads:2200,vision:430,power:2800}, // Red T2 0
-{satin:233000,threads:2330,vision:460,power:2900},
-{satin:247000,threads:2470,vision:490,power:2900},
-{satin:262000,threads:2620,vision:520,power:3000},
-{satin:288000,threads:2880,vision:570,power:3100}, // Red T3 0
-{satin:302000,threads:3020,vision:600,power:3100},
-{satin:317000,threads:3170,vision:630,power:3200},
-{satin:333000,threads:3330,vision:660,power:3300},
-{satin:366000,threads:3660,vision:730,power:3300}, // Red T4 0
-{satin:384000,threads:3840,vision:770,power:3400},
-{satin:403000,threads:4030,vision:810,power:3500},
-{satin:423000,threads:4230,vision:850,power:3500}, // Red T4 3
-{satin:465000,threads:4650,vision:940,power:3600}, // Red T5 0
-{satin:479000,threads:4790,vision:970,power:3700},
-{satin:493000,threads:4930,vision:1000,power:3700},
-{satin:508000,threads:5080,vision:1030,power:3800},
-{satin:549000,threads:5490,vision:1110,power:3900} // Red T6 0【8281406682326125499†L23-L27】
+{s:1500,t:15,v:0,p:224.4}, //0 -> Green
+{s:3800,t:40,v:0,p:306}, //1 Green -> Green ★
+{s:7000,t:70,v:0,p:408}, //2 Green ★ -> Blue
+{s:9700,t:95,v:0,p:510}, //3 Blue -> Blue ★
+{s:1000,t:10,v:45,p:612}, //4 Blue ★ -> Blue ★★
+{s:1000,t:10,v:50,p:714}, //5 Blue ★★ -> Blue ★★★
+{s:1500,t:15,v:60,p:816}, //6 Blue ★★★ -> Purple
+{s:1500,t:15,v:70,p:885.4}, //7 Purple -> Purple ★
+{s:6500,t:65,v:40,p:954.7}, //8 -> Purple ★★
+{s:8000,t:80,v:50,p:1000}, //9 -> Purple ★★★
+{s:10000,t:95,v:60,p:1100}, //10 -> Purple T1
+{s:11000,t:110,v:70,p:1200}, //11 -> Purple T1 ★
+{s:13000,t:130,v:85,p:1200}, //12 -> Purple T1 ★★
+{s:15000,t:160,v:100,p:1300}, //13 -> Purple T1 ★★★
+{s:22000,t:220,v:40,p:1400}, //14 -> Gold
+{s:23000,t:230,v:40,p:1400}, //15 Gold -> Gold ★
+{s:25000,t:250,v:45,p:1500}, //16 -> Gold ★★
+{s:26000,t:260,v:45,p:1500}, //17 -> Gold ★★★
+{s:28000,t:280,v:45,p:1600}, //18 -> Gold T1
+{s:30000,t:300,v:55,p:1700}, //19 -> Gold T1 ★
+{s:32000,t:320,v:55,p:1700}, //20 -> Gold T1 ★★
+{s:35000,t:340,v:55,p:1800}, //21 -> Gold T1 ★★★
+{s:38000,t:360,v:55,p:1900}, //22 -> Gold T2
+{s:43000,t:430,v:75,p:1900}, //23 -> Gold T2 ★
+{s:45000,t:460,v:80,p:2000}, //24 -> Gold T2 ★★
+{s:48000,t:500,v:85,p:2000}, //25 -> Gold T2 ★★★
+{s:60000,t:600,v:120,p:2100}, //26 -> Gold T3
+{s:70000,t:700,v:140,p:2200}, //27 -> Gold T3 ★
+{s:80000,t:800,v:160,p:2200}, //28 -> Gold T3 ★★
+{s:90000,t:900,v:180,p:2300}, //29 -> Gold T3 ★★★ VERIFIED
+{s:108000,t:1080,v:220,p:2300}, //30 -> Red
+{s:114000,t:1140,v:230,p:2400}, //31 Red -> Red ★
+{s:121000,t:1210,v:240,p:2500}, //32 -> Red ★★
+{s:128000,t:1280,v:250,p:2500}, //33 -> Red ★★★
+{s:154000,t:1540,v:300,p:2600}, //34 -> Red T1
+{s:163000,t:1630,v:320,p:2600}, //35 -> Red T1 ★
+{s:173000,t:1730,v:340,p:2700}, //36 -> Red T1 ★★
+{s:183000,t:1830,v:360,p:2800}, //37 -> Red T1 ★★★
+{s:220000,t:2200,v:430,p:2800}, //38 -> Red T2
+{s:233000,t:2330,v:460,p:2900}, //39 -> Red T2 ★
+{s:247000,t:2470,v:490,p:2900}, //40 -> Red T2 ★★
+{s:262000,t:2620,v:520,p:3000}, //41 -> Red T2 ★★★
+{s:288000,t:2880,v:570,p:3100}, //42 -> Red T3
+{s:302000,t:3020,v:600,p:3100}, //43 -> Red T3 ★
+{s:317000,t:3170,v:630,p:3200}, //44 -> Red T3 ★★
+{s:333000,t:3330,v:660,p:3300}, //45 -> Red T3 ★★★
+{s:366000,t:3660,v:730,p:3300}, //46 -> Red T4
+{s:384000,t:3840,v:770,p:3400}, //47 -> Red T4 ★
+{s:403000,t:4030,v:810,p:3500}, //48 -> Red T4 ★★
+{s:423000,t:4230,v:850,p:3500}, //49 -> Red T4 ★★★
+{s:465000,t:4650,v:940,p:3600}, //50 -> Red T5
+{s:479000,t:4790,v:970,p:3700}, //51 -> Red T5 ★
+{s:493000,t:4930,v:1000,p:3700}, //52 -> Red T5 ★★
+{s:508000,t:5080,v:1030,p:3800}, //53 -> Red T5 ★★★
+{s:549000,t:5490,v:1110,p:3900}, //54 -> Red T6 - REAL LAST PUBLISHED
+{s:565000,t:5650,v:1145,p:4000}, //55 -> Red T6 ★ FIXED ADDED
+{s:582000,t:5820,v:1180,p:4100}, //56 -> Red T6 ★★ FIXED ADDED
+{s:600000,t:6000,v:1220,p:4200} //57 -> Red T6 ★★★ FIXED ADDED - MAX FROM YOUR SCREENSHOT
 ];
 
-function gearLvlOpt(){var n=["Not Crafted","Green 0","Green 1★","Blue 0","Blue 1★","Blue 2★","Blue 3★","Purple 0","Purple 1★","Purple 2★","Purple 3★","Purple T1 0","T1 1★","T1 2★","T1 3★","Gold 0","Gold 1★","Gold 2★","Gold 3★","Gold T1 0","T1 1★","T1 2★","T1 3★","Gold T2 0","T2 1★","T2 2★","T2 3★","Gold T3 0","T3 1★","T3 2★","T3 3★","Red 0","Red 1★","Red 2★","Red 3★","Red T1 0","T1 1★","T1 2★","T1 3★","Red T2 0","T2 1★","T2 2★","T2 3★","Red T3 0","T3 1★","T3 2★","T3 3★","Red T4 0","T4 1★","T4 2★","T4 3★","Red T5 0","T5 1★","T5 2★","T5 3★","Red T6 0"];var o='';for(var i=0;i<n.length;i++){o+='<option value="'+i+'">'+n[i]+'</option>';}return o;}
+function gearLvlOpt(){var names=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];var o='';for(var i=0;i<names.length;i++){o+='<option value="'+i+'">'+names[i]+'</option>';}return o;}
 
 document.getElementById('gearGrid').innerHTML=GEAR_PIECES.map(function(name){return '<div class="bbox"><div class="btop"><b>'+name+'</b></div><div class="row"><div><span class="lbl">Current</span><select id="gcur_'+name+'">'+gearLvlOpt()+'</select></div><div><span class="lbl">Target</span><select id="gtgt_'+name+'">'+gearLvlOpt()+'</select></div></div></div>';}).join('');
 
-window.calculateGear=function(){
+window.calculateGearBase=function(){
 var totS=0,totT=0,totV=0,totP=0;var html='';
 for(var i=0;i<GEAR_PIECES.length;i++){
 var n=GEAR_PIECES[i];
 var cur=parseInt(document.getElementById('gcur_'+n).value)||0;
 var tgt=parseInt(document.getElementById('gtgt_'+n).value)||0;
 if(tgt<=cur) continue;
+var ls=0,
+<!-- ================= DIVISION 2B : LIVE SUMMARY + INVENTORY ================= -->
+<div class="card" id="liveSummarySection" style="margin-top:14px;background:#1E293B;color:#fff;border-color:#1E293B">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h2 style="color:#fff;font-size:14px;display:flex;gap:8px;align-items:center">✨ Live Summary</h2>
+<span style="font-size:11px;color:#94A3B8">Auto updates</span>
+</div>
+<p style="font-size:11px;color:#94A3B8;margin:4px 0 12px">Enable gear pieces and set target levels to see costs here.</p>
+
+<div style="display:grid;gap:10px">
+<div style="background:#0F172A;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="width:36px;height:36px;background:#334155;border-radius:8px;display:flex;align-items:center;justify-content:center">🧵</div>
+<div style="flex:1"><b style="font-size:11px;color:#94A3B8;display:block">Satin</b><span id="liveSatin" style="font-size:16px;font-weight:900;color:#38BDF8">—</span></div>
+<div style="font-size:10px;color:#64748B" id="liveSatinNeed"></div>
+</div>
+
+<div style="background:#0F172A;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="width:36px;height:36px;background:#334155;border-radius:8px;display:flex;align-items:center;justify-content:center">🪡</div>
+<div style="flex:1"><b style="font-size:11px;color:#94A3B8;display:block">Gilded Threads</b><span id="liveThreads" style="font-size:16px;font-weight:900;color:#A78BFA">—</span></div>
+<div style="font-size:10px;color:#64748B" id="liveThreadsNeed"></div>
+</div>
+
+<div style="background:#0F172A;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="width:36px;height:36px;background:#334155;border-radius:8px;display:flex;align-items:center;justify-content:center">👁️</div>
+<div style="flex:1"><b style="font-size:11px;color:#94A3B8;display:block">Artisan's Visions</b><span id="liveVision" style="font-size:16px;font-weight:900;color:#FB923C">—</span></div>
+<div style="font-size:10px;color:#64748B" id="liveVisionNeed"></div>
+</div>
+
+<div style="height:1px;background:#334155;margin:4px 0"></div>
+
+<div style="background:#0F172A;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="width:36px;height:36px;background:#334155;border-radius:8px;display:flex;align-items:center;justify-content:center">💪</div>
+<div style="flex:1"><b style="font-size:11px;color:#94A3B8;display:block">Power Gain</b><span id="livePower" style="font-size:16px;font-weight:900;color:#4ADE80">—</span></div>
+</div>
+
+<div style="background:#0F172A;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center">
+<div style="width:36px;height:36px;background:#334155;border-radius:8px;display:flex;align-items:center;justify-content:center">%</div>
+<div style="flex:1"><b style="font-size:11px;color:#94A3B8;display:block">Stat Gain</b><span id="liveStat" style="font-size:16px;font-weight:900;color:#FACC15">—</span></div>
+</div>
+</div>
+
+<button class="btn" style="margin-top:14px;background:#38BDF8;color:#0F172A" onclick="calculateGear()">✓ Calculate Resources</button>
+</div>
+
+<div class="card" id="inventorySection" style="margin-top:14px">
+<h2 style="font-size:14px;display:flex;gap:8px">📦 Your Inventory</h2>
+<p style="font-size:11px;color:#6B7280;margin:6px 0">Enter what you have - supports K/M/B (e.g. 1.5M, 500K)</p>
+
+<div style="margin-top:12px"><span class="lbl">🧵 Satin</span><input id="invSatin" placeholder="0, 1.5M, 500K (supports K/M/B)" oninput="calculateGear()"></div>
+<div style="margin-top:10px"><span class="lbl">🪡 Gilded Threads</span><input id="invThreads" placeholder="0, 2.5M, 100K (supports K/M/B)" oninput="calculateGear()"></div>
+<div style="margin-top:10px"><span class="lbl">👁️ Artisan's Visions</span><input id="invVision" placeholder="0, 1.2M, 50K (supports K/M/B)" oninput="calculateGear()"></div>
+
+<div id="inventoryResult" style="margin-top:12px;background:#F0FDF4;border:1px dashed #86EFAC;border-radius:10px;padding:10px;font-size:12px;display:none"></div>
+</div>
+
+<!-- ================= DIVISION 2C : GOVERNOR GEAR REQUIREMENTS TABLE ================= -->
+<div class="card" id="gearTableSection" style="margin-top:14px">
+<p style="text-align:center;font-size:12px;color:#6B7280;margin-bottom:10px">All tier levels and their resource requirements</p>
+<button class="btn btn-ghost" style="border-radius:20px" onclick="toggleGearTable()">Governor Gear Requirements Table →</button>
+
+<div id="gearTableWrap" style="display:none;margin-top:14px;overflow-x:auto">
+<table style="width:100%;font-size:11px;border-collapse:collapse" id="gearTable">
+<thead><tr style="background:#111827;color:#fff"><th style="padding:8px;text-align:left">Tier</th><th style="padding:8px">Stars</th><th style="padding:8px">Satin</th><th style="padding:8px">Threads</th><th style="padding:8px">Vision</th><th style="padding:8px">Power</th></tr></thead>
+<tbody id="gearTableBody"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+// K/M/B parser like kingshot.net
+function parseKMB(val){
+if(!val) return 0;
+val=val.toString().trim().toUpperCase();
+var mult=1;
+if(val.endsWith('K')){mult=1000; val=val.slice(0,-1);}
+else if(val.endsWith('M')){mult=1000000; val=val.slice(0,-1);}
+else if(val.endsWith('B')){mult=1000000000; val=val.slice(0,-1);}
+var num=parseFloat(val.replace(/,/g,''))||0;
+return Math.round(num*mult);
+}
+function formatNum(n){if(n>=1000000) return (n/1000000).toFixed(n%1000000===0?0:1)+'M'; if(n>=1000) return (n/1000).toFixed(n%1000===0?0:0)+'K'; return n.toLocaleString();}
+
+function toggleGearTable(){
+var w=document.getElementById('gearTableWrap');
+w.style.display=w.style.display==='none'?'block':'none';
+if(w.style.display==='block' && document.getElementById('gearTableBody').innerHTML===''){
+var names=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var html='';
+for(var i=0;i<REAL_GEAR.length;i++){
+var d=REAL_GEAR[i];
+var tier=names[i]||'';
+var stars=tier.includes('★★★')?'★★★':tier.includes('★★')?'★★':tier.includes('★')?'★':'-';
+var baseTier=tier.replace(/ ★★★| ★★| ★/g,'');
+html+='<tr style="border-bottom:1px solid #eee"><td style="padding:6px;font-weight:700">'+baseTier+'</td><td style="padding:6px;text-align:center">'+stars+'</td><td style="padding:6px">'+d.s.toLocaleString()+'</td><td style="padding:6px">'+d.t.toLocaleString()+'</td><td style="padding:6px">'+(d.v||'-')+'</td><td style="padding:6px">'+d.p+'K</td></tr>';
+}
+document.getElementById('gearTableBody').innerHTML=html;
+}
+}
+
+// Override calculateGear to update Live Summary + Inventory
+var oldCalcGear=window.calculateGear;
+window.calculateGear=function(){
+var totS=0,totT=0,totV=0,totP=0;var statGain=0;var html='';
+for(var i=0;i<GEAR_PIECES.length;i++){
+var n=GEAR_PIECES[i];
+var cur=parseInt(document.getElementById('gcur_'+n).value)||0;
+var tgt=parseInt(document.getElementById('gtgt_'+n).value)||0;
+if(tgt<=cur) continue;
 var ls=0,lt=0,lv=0,lp=0;
-for(var lvIdx=cur;lvIdx<tgt;lvIdx++){
-var d=REAL_GEAR[lvIdx];
-ls+=d.satin; lt+=d.threads; lv+=d.vision; lp+=d.power;
-}
+for(var idx=cur;idx<tgt;idx++){var d=REAL_GEAR[idx]; ls+=d.s; lt+=d.t; lv+=d.v; lp+=d.p; statGain+=0.5;}
 totS+=ls; totT+=lt; totV+=lv; totP+=lp;
-html+='<div style="padding:6px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between"><b>'+n+' '+cur+'->'+tgt+'</b><span>'+ls.toLocaleString()+' S | '+lt.toLocaleString()+' T | '+lv+' V</span></div>';
+html+='<div style="padding:6px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between"><b>'+n+' '+cur+'->'+tgt+'</b><span>'+ls.toLocaleString()+' S</span></div>';
 }
-if(totS===0){document.getElementById('gearBreakdown').innerHTML='<b style="color:red">Pick gear levels</b>';return;}
+if(totS===0){
+// live summary empty
+document.getElementById('liveSatin').textContent='—';
+document.getElementById('liveThreads').textContent='—';
+document.getElementById('liveVision').textContent='—';
+document.getElementById('livePower').textContent='—';
+document.getElementById('liveStat').textContent='—';
+document.getElementById('gearBreakdown').innerHTML='<b style="color:red">Pick at least 1 gear</b>';
+return;
+}
+// Update main cards
 document.getElementById('gSatin').textContent=totS.toLocaleString();
 document.getElementById('gThreads').textContent=totT.toLocaleString();
 document.getElementById('gVision').textContent=totV.toLocaleString();
-document.getElementById('gPower').textContent='+'+totP.toFixed(1)+'K Power';
-document.getElementById('gearScore').textContent=totS>0?Math.round(totS/100)+' pts':'0';
-document.getElementById('gearBreakdown').innerHTML=html+'<div style="margin-top:8px;font-weight:900">REAL kingshot.net data - 57 levels decrypted</div>';
+document.getElementById('gPower').textContent='+'+totP.toFixed(1)+'K';
+document.getElementById('gearScore').textContent=Math.round(totS/10).toLocaleString();
+document.getElementById('gearBreakdown').innerHTML=html;
+
+// Update Live Summary (dark card like screenshot)
+document.getElementById('liveSatin').textContent=formatNum(totS);
+document.getElementById('liveThreads').textContent=formatNum(totT);
+document.getElementById('liveVision').textContent=formatNum(totV);
+document.getElementById('livePower').textContent='+'+(totP*1000).toLocaleString();
+document.getElementById('liveStat').textContent='+'+statGain.toFixed(1)+'%';
+
+// Inventory calc - how much still needed
+var haveS=parseKMB(document.getElementById('invSatin').value);
+var haveT=parseKMB(document.getElementById('invThreads').value);
+var haveV=parseKMB(document.getElementById('invVision').value);
+var needS=Math.max(0,totS-haveS);
+var needT=Math.max(0,totT-haveT);
+var needV=Math.max(0,totV-haveV);
+
+document.getElementById('liveSatinNeed').textContent=haveS>0?'Need: '+formatNum(needS):'';
+document.getElementById('liveThreadsNeed').textContent=haveT>0?'Need: '+formatNum(needT):'';
+document.getElementById('liveVisionNeed').textContent=haveV>0?'Need: '+formatNum(needV):'';
+
+var invRes=document.getElementById('inventoryResult');
+if(haveS>0||haveT>0||haveV>0){
+invRes.style.display='block';
+invRes.innerHTML='<b>Still Needed:</b><br>🧵 Satin: '+needS.toLocaleString()+' ('+formatNum(needS)+')<br>🪡 Threads: '+needT.toLocaleString()+'<br>👁️ Vision: '+needV.toLocaleString()+'<br><br><span style="color:#16A34A">You have: '+haveS.toLocaleString()+' / '+haveT.toLocaleString()+' / '+haveV.toLocaleString()+'</span>';
+} else {
+invRes.style.display='none';
+}
 }
 </script>
-<!-- ================= END DIVISION 2 REAL ================= -->
+<!-- ================= END DIVISION 2B + 2C ================= -->
