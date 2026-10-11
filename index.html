@@ -131,13 +131,44 @@ return;
 document.getElementById('origTime').textContent=formatTime(tot.t);
 document.getElementById('modTime').textContent=formatTime(Math.round(tot.t/(1+combined/100)));
 var red=disc/100;
+document.getElementById('origTime').textContent=formatTime(tot.t);
+
+// calc modified with new dark inputs
+var modSec = tot.t;
+var combined = speed+pet+kingdom;
+var groundChk = document.getElementById('chkGround');
+if(groundChk && groundChk.checked) combined += 10;
+modSec = Math.round(tot.t/(1+combined/100));
+var doubleChk = document.getElementById('chkDouble');
+if(doubleChk && doubleChk.checked) modSec = Math.round(modSec*0.8);
+
+document.getElementById('modTime').textContent=formatTime(modSec);
+document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
+
+var red=disc/100;
 document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();
 document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();
 document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();
 document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();
 document.getElementById('rTG').textContent=tot.tg.toLocaleString();
 document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
-document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
+document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings - TIMINGS FIXED</div>';
+
+// ==== THIS IS THE BUILD_TOTAL FOR 1B AND 1C ====
+window.BUILD_TOTAL={
+bread:Math.round(tot.b*(1-red)),
+wood:Math.round(tot.w*(1-red)),
+stone:Math.round(tot.s*(1-red)),
+iron:Math.round(tot.i*(1-red)),
+tg:tot.tg,
+ttg:tot.ttg,
+time:tot.t,
+modTime:modSec
+};
+window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
+
+if(window.updateDiv1B) updateDiv1B();
+}
 
 // === PATCH FOR 1B SPEEDUPS + 1C MINUS ===
 var combined=speed+pet+kingdom;
