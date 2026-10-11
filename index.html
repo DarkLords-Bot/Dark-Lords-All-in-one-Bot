@@ -24,9 +24,54 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
 .speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
+<style>.tab{padding:8px 12px;border-radius:10px;border:1px solid #E5E7EB;background:#fff;font-weight:800;font-size:11px;cursor:pointer}.tab.active{background:#111827;color:#fff}</style>
+<script>
+function switchMain(v){
+ document.getElementById('tabs1').style.display=v==1?'flex':'none';
+ document.getElementById('tabs2').style.display=v==2?'flex':'none';
+ document.getElementById('mainHead').textContent=v==1?'DIVISION 1 - BUILDING (1A-1E)':'DIVISION 2 - GOV GEAR (2A-2E)';
+ showDiv(v==1?'1A':'2A');
+}
+function showDiv(id){
+ // hide all div1* and div2* cards
+ ['1A','1B','1C','1D','1E','2A','2B','2C','2D','2E'].forEach(k=>{
+   var el=document.getElementById('div'+k)||document.getElementById('card'+k);
+   if(el){el.style.display='none'; el.classList?.remove('active')}
+ });
+ var target=document.getElementById('div'+id)||document.getElementById('card'+id);
+ if(target){target.style.display='block'; target.classList?.add('active')}
+ // active tab
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ var tb=document.getElementById('t'+id); if(tb) tb.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+// init - show only 1A
+showDiv('1A');
+</script>
 <header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div class="wrap">
-<h1 class="page-title">CALCULATOR/GUIDES/YOUTUBE LINKS</h1>
+<div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+<h2 id="mainHead" style="font-size:13px;font-weight:900">DIVISION 1 - BUILDING</h2>
+<select id="mainSelect" onchange="switchMain(this.value)" style="padding:10px;border-radius:10px;border:2px solid #111827;font-weight:800">
+<option value="1">🏰 Building</option>
+<option value="2">⚔️ Governor Gear</option>
+</select>
+</div>
+
+<div id="tabs1" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px">
+<button class="tab active" id="t1A" onclick="showDiv('1A')">1A</button>
+<button class="tab" id="t1B" onclick="showDiv('1B')">1B</button>
+<button class="tab" id="t1C" onclick="showDiv('1C')">1C</button>
+<button class="tab" id="t1D" onclick="showDiv('1D')">1D</button>
+<button class="tab" id="t1E" onclick="showDiv('1E')">1E YT</button>
+</div>
+<div id="tabs2" style="display:none;gap:6px;overflow-x:auto;padding-bottom:10px">
+<button class="tab active" id="t2A" onclick="showDiv('2A')">2A</button>
+<button class="tab" id="t2B" onclick="showDiv('2B')">2B</button>
+<button class="tab" id="t2C" onclick="showDiv('2C')">2C</button>
+<button class="tab" id="t2D" onclick="showDiv('2D')">2D</button>
+<button class="tab" id="t2E" onclick="showDiv('2E')">2E YT</button>
+</div>
 <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
