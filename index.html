@@ -299,3 +299,43 @@ if(oldCalc2A) oldCalc2A.apply(this, arguments);
 setTimeout(window.calcRemaining2C,100);
 };
 </script>
+<!-- DIVISION 2D - FULL TABLE -->
+<div class="card" id="div2D">
+<h2>📋 DIVISION 2D - Governor Gear Requirements Table</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Full 59 levels till Red T6 ★★★ — real data</p>
+
+<button class="btn btn-ghost" style="margin-top:10px" onclick="toggleTable2D()">Show / Hide Table</button>
+
+<div id="tableWrap2D" style="display:none;margin-top:12px;max-height:500px;overflow:auto;border:1px solid #E5E7EB;border-radius:10px">
+<table style="width:100%;font-size:11px;border-collapse:collapse">
+<thead style="position:sticky;top:0;z-index:2"><tr style="background:#111827;color:#fff"><th style="padding:8px;text-align:left;position:sticky;left:0;background:#111827">Tier / Upgrade</th><th style="padding:8px">Satin</th><th style="padding:8px">Threads</th><th style="padding:8px">Vision</th><th style="padding:8px">Cumulative Satin</th></tr></thead>
+<tbody id="tableBody2D"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+window.toggleTable2D=function(){
+var wrap=document.getElementById('tableWrap2D');
+var body=document.getElementById('tableBody2D');
+if(wrap.style.display==='none'){
+wrap.style.display='block';
+// build only once
+if(body.innerHTML.trim()===''){
+var levels=window.LEVELS2A||["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var costs=window.COSTS2A||[{s:1500,t:15,v:0}];
+var cumS=0; var html='';
+for(var i=0;i<costs.length;i++){
+cumS+=costs[i].s;
+var isRed=levels[i+1]&&levels[i+1].includes('Red');
+var rowStyle=isRed?'background:#FFF1F2':'';
+if(levels[i+1]&&levels[i+1].includes('T6')) rowStyle='background:#FEF3C7;font-weight:800';
+html+='<tr style="'+rowStyle+';border-bottom:1px solid #eee"><td style="padding:7px;text-align:left;position:sticky;left:0;background:inherit;font-weight:600">'+levels[i+1]+'</td><td style="padding:7px;text-align:center">'+costs[i].s.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+costs[i].t.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+costs[i].v+'</td><td style="padding:7px;text-align:center;color:#6B7280">'+cumS.toLocaleString()+'</td></tr>';
+}
+body.innerHTML=html;
+}
+}else{
+wrap.style.display='none';
+}
+};
+</script>
