@@ -97,13 +97,18 @@ if(h>0) return h+"h "+m+"m";
 return m+"m "+sec+"s";
 }
 
-window.calculateAll=function(){
-var speed=parseFloat(document.getElementById('speedBonus').value)||0;
+function updateCombinedSpeed(){
+var speed=parseFloat(document.getElementById('speedBonus').value.replace(/,/g,''))||0;
+var cost=parseFloat(document.getElementById('resDiscount').value.replace(/,/g,''))||0;
 var pet=parseFloat(document.getElementById('petBonus').value)||0;
 var kingdom=parseFloat(document.getElementById('kingdomBonus').value)||0;
-var disc=parseFloat(document.getElementById('resDiscount').value)||0;
-var combined=speed+pet+kingdom;
+var ground=document.getElementById('chkGround').checked?10:0;
+var combined=speed+pet+kingdom+ground;
 document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
+// store for calculateAll
+window.EXTRA_BUFFS={ground:ground,double:document.getElementById('chkDouble').checked,costDown:cost};
+}
+// patch your calculateAll to use EXTRA_BUFFS
 var tot={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};var count=0;var details='';
 for(var idx=0;idx<ALL.length;idx++){
 var name=ALL[idx];var safe=name.replace(/\s/g,'_');
