@@ -140,6 +140,102 @@ document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
 </script></body></html>
+<!-- ========== BUILDING 1B,1C,1D ========== -->
+
+<!-- DIVISION 1B - BUILDING LIVE SUMMARY -->
+<div class="card" id="div1B" style="background:#1E293B;color:#fff;border:0">
+<h2 style="color:#fff;font-size:14px">🏰 DIVISION 1B - Building Live Summary</h2>
+<p style="font-size:11px;color:#94A3B8;margin-top:4px">Auto from Building calculation</p>
+<div style="margin-top:12px;display:grid;gap:8px">
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between"><span>🪵 Lumber</span><b id="bLumber1B" style="color:#FBBF24">—</b></div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between"><span>🧱 Brick</span><b id="bBrick1B" style="color:#FB7185">—</b></div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between"><span>⚙️ Steel</span><b id="bSteel1B" style="color:#94A3B8">—</b></div>
+</div>
+</div>
+
+<!-- DIVISION 1C - BUILDING INVENTORY -->
+<div class="card" id="div1C">
+<h2>📦 DIVISION 1C - Building Inventory (K/M/B)</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Type K/M/B → shows Remaining Needed</p>
+<div style="margin-top:12px;display:grid;gap:10px">
+<div><span class="lbl">Lumber in Bag</span><input id="invLumber1C" placeholder="e.g. 2M, 500K" oninput="calcRemaining1C()"></div>
+<div><span class="lbl">Brick in Bag</span><input id="invBrick1C" placeholder="e.g. 1M" oninput="calcRemaining1C()"></div>
+<div><span class="lbl">Steel in Bag</span><input id="invSteel1C" placeholder="e.g. 300K" oninput="calcRemaining1C()"></div>
+</div>
+<div id="needBox1C" class="breakdown" style="display:none;margin-top:12px;background:#F0FDF4;border-color:#BBF7D0"></div>
+</div>
+
+<!-- DIVISION 1D - BUILDING TABLE -->
+<div class="card" id="div1D">
+<h2>📋 DIVISION 1D - Building Requirements Table</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Town Hall / Walls / etc costs per level</p>
+<button class="btn btn-ghost" style="margin-top:10px" onclick="toggleTable1D()">Show / Hide Table</button>
+<div id="tableWrap1D" style="display:none;margin-top:12px;max-height:500px;overflow:auto;border:1px solid #E5E7EB;border-radius:10px">
+<table style="width:100%;font-size:11px;border-collapse:collapse">
+<thead style="position:sticky;top:0;z-index:2"><tr style="background:#111827;color:#fff"><th style="padding:8px;text-align:left;position:sticky;left:0;background:#111827">Level</th><th style="padding:8px">Lumber</th><th style="padding:8px">Brick</th><th style="padding:8px">Steel</th></tr></thead>
+<tbody id="tableBody1D"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+// GLOBALS FOR BUILDING
+window.BUILD_TOTAL={l:0,b:0,s:0};
+
+function parseKMB_1C(v){if(!v)return 0;v=v.toUpperCase().trim().replace(/,/g,'');var m=1;if(v.endsWith('K')){m=1e3;v=v.slice(0,-1);}else if(v.endsWith('M')){m=1e6;v=v.slice(0,-1);}else if(v.endsWith('B')){m=1e9;v=v.slice(0,-1);}var n=parseFloat(v);return isNaN(n)?0:Math.round(n*m);}
+
+// Call this from your Building CALCULATE function at end:
+// window.BUILD_TOTAL={l: totalLumber, b: totalBrick, s: totalSteel}; updateDiv1B();
+window.updateDiv1B=function(){
+document.getElementById('bLumber1B').textContent=window.BUILD_TOTAL.l?window.BUILD_TOTAL.l.toLocaleString():'—';
+document.getElementById('bBrick1B').textContent=window.BUILD_TOTAL.b?window.BUILD_TOTAL.b.toLocaleString():'—';
+document.getElementById('bSteel1B').textContent=window.BUILD_TOTAL.s?window.BUILD_TOTAL.s.toLocaleString():'—';
+calcRemaining1C();
+};
+
+window.calcRemaining1C=function(){
+var box=document.getElementById('needBox1C');
+var totalL=window.BUILD_TOTAL.l||0;
+var totalB=window.BUILD_TOTAL.b||0;
+var totalS=window.BUILD_TOTAL.s||0;
+if(totalL===0){box.style.display='block';box.innerHTML='<b style="color:#6B7280">Calculate Buildings first</b>';return;}
+var haveL=parseKMB_1C(document.getElementById('invLumber1C').value);
+var haveB=parseKMB_1C(document.getElementById('invBrick1C').value);
+var haveS=parseKMB_1C(document.getElementById('invSteel1C').value);
+var needL=Math.max(0,totalL-haveL);
+var needB=Math.max(0,totalB-haveB);
+var needS=Math.max(0,totalS-haveS);
+box.style.display='block';
+box.innerHTML='<b>✅ Remaining Needed (Total - Inventory):</b><br><br>'+
+'🪵 Lumber: '+totalL.toLocaleString()+' - '+haveL.toLocaleString()+' = <b style="color:'+(needL===0?'green':'red')+'">'+needL.toLocaleString()+'</b><br>'+
+'🧱 Brick: '+totalB.toLocaleString()+' - '+haveB.toLocaleString()+' = <b style="color:'+(needB===0?'green':'red')+'">'+needB.toLocaleString()+'</b><br>'+
+'⚙️ Steel: '+totalS.toLocaleString()+' - '+haveS.toLocaleString()+' = <b style="color:'+(needS===0?'green':'red')+'">'+needS.toLocaleString()+'</b>';
+};
+
+window.toggleTable1D=function(){
+var wrap=document.getElementById('tableWrap1D');
+var body=document.getElementById('tableBody1D');
+if(wrap.style.display==='none'){
+wrap.style.display='block';
+if(body.innerHTML.trim()===''){
+// Example table - replace with your real building costs if you have array
+var html='';
+for(var i=1;i<=30;i++){
+var lumber=i*10000 + Math.pow(i,2)*500;
+var brick=i*8000 + Math.pow(i,2)*400;
+var steel=i*5000 + Math.pow(i,2)*300;
+html+='<tr style="border-bottom:1px solid #eee"><td style="padding:7px;text-align:left;font-weight:600">Lv '+i+' → '+(i+1)+'</td><td style="padding:7px;text-align:center">'+lumber.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+brick.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+steel.toLocaleString()+'</td></tr>';
+}
+body.innerHTML=html;
+}
+}else{wrap.style.display='none';}
+};
+
+// HOOK - try to auto capture from existing Building calculator if it uses B_TOTAL etc
+setInterval(function(){
+if(window.B_TOTAL && !window.BUILD_TOTAL.l){window.BUILD_TOTAL=window.B_TOTAL;updateDiv1B();}
+},1000);
+</script>
 <div class="card" id="div2A">
 <h2>⚔️ DIVISION 2A - Governor Gear</h2>
 <p style="font-size:11px;color:#6B7280">59 levels - shows results here itself</p>
