@@ -167,7 +167,6 @@ window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
 if(window.updateDiv1B) window.updateDiv1B();
 if(window.calcRemaining1C) window.calcRemaining1C();
 }
-</script></body></html>
 <!-- ========== DIVISION 1B - INVENTORY MINUS ========== -->
 <div class="card" id="div1B" style="margin-top:16px">
 <h2> Self Backpack Inventory & Remaining</h2>
@@ -478,11 +477,10 @@ async function load1F(){
 }
 load1F();
 </script>
-</div>
-
+</div> <!-- CLOSE BUILDING CONTENT - THIS WAS MISSING -->
 <div id="gearContent" style="display:none">
 <div class="card" id="div2A">
-<h2>⚔️ GOVERNER GEAR </h2>
+<h2>⚔️GOVERNER GEAR</h2>
 <p style="font-size:11px;color:#6B7280">59 levels - shows results here itself</p>
 <div id="gearGrid2A" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"></div>
 
@@ -945,3 +943,5 @@ document.addEventListener('click',function(e){
  }
 });
 </script>
+</body>
+</html>
