@@ -478,7 +478,7 @@ async function load1F(){
 }
 load1F();
 </script>
-
+</div>
 <div id="gearContent" style="display:none">
 <div class="card" id="div2A">
 <h2>⚔️ GOVERNER GEAR </h2>
@@ -906,39 +906,6 @@ async function load2F(){
 }
 load2F();
 </script>
-<div class="card" style="border:2px solid #7C3AED;border-radius:16px;padding:16px;margin-top:14px;background:#fff">
-<h2 style="font-size:14px;font-weight:900">DIVISION 2 - Governor Gear Calculator</h2>
-<p style="font-size:11px;color:#6B7280;margin:8px 0">Real game data</p>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px">
-<b style="font-size:12px">Headgear</b>
-<div style="display:flex;gap:8px;margin-top:8px">
-<select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Current Level</option><option>1</option><option>10</option><option>50</option></select>
-<select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Target Level</option></select>
-</div>
-</div>
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px">
-<b style="font-size:12px">Armor</b>
-<div style="display:flex;gap:8px;margin-top:8px">
-<select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Current</option></select>
-<select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Target</option></select>
-</div>
-</div>
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px"><b style="font-size:12px">Legs</b><div style="display:flex;gap:8px;margin-top:8px"><select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Current</option></select><select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Target</option></select></div></div>
-<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px"><b style="font-size:12px">Staff</b><div style="display:flex;gap:8px;margin-top:8px"><select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Current</option></select><select style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><option>Target</option></select></div></div>
-</div>
-
-<button style="width:100%;margin-top:12px;padding:12px;border-radius:12px;background:#7C3AED;color:#fff;font-weight:900;border:0">CALCULATE GEAR 2A</button>
-</div>
-
-<!-- 2B, 2C, 2D, 2E INSIDE SAME TAB -->
-<div class="card" style="border:1px solid #E5E7EB;border-radius:16px;padding:16px;margin-top:12px"><h3>DIVISION 2B - Inventory</h3><div style="display:flex;gap:10px;margin-top:10px"><div style="flex:1"><span style="font-size:10px;font-weight:800">SATIN</span><input type="number" style="width:100%;padding:10px;border-radius:10px;border:1px solid #E5E7EB;margin-top:4px"></div><div style="flex:1"><span style="font-size:10px;font-weight:800">GILDED</span><input type="number" style="width:100%;padding:10px;border-radius:10px;border:1px solid #E5E7EB;margin-top:4px"></div></div></div>
-
-<div class="card" style="border:2px solid #111827;border-radius:16px;padding:16px"><h3>DIVISION 2C - FINAL PLAN & EXPORT</h3><div style="background:#111827;border-radius:12px;padding:14px;margin-top:10px"><b style="color:#fff;font-size:12px">📋 COPY-PASTE GEAR PLAN</b><textarea style="width:100%;height:100px;background:#1F2937;color:#CBD5E1;margin-top:8px;border-radius:10px;border:0;padding:10px" readonly>Waiting for 2A...</textarea></div></div>
-
-<div class="card" style="border:2px dashed #7C3AED;border-radius:16px;padding:16px"><h3 style="text-align:center">DIVISION 2E - YouTube Gear (Locked to Gear Only)</h3><div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;background:#F5F3FF;margin-top:10px"><b style="font-size:10px;color:#7C3AED">🟣 GEAR ONLY SEARCH</b><div style="display:flex;gap:6px;margin-top:6px"><input id="ytGearTab" placeholder="Satin, Head, Vision" style="flex:1;padding:10px;border-radius:10px;border:1px solid #E5E7EB"><button onclick="var q=document.getElementById('ytGearTab').value;if(!q)return alert('Type gear');window.open('https://www.youtube.com/results?search_query='+encodeURIComponent('kingshot governor gear upgrade '+q),'_blank')" style="padding:10px;background:#7C3AED;color:#fff;border:0;border-radius:10px;font-weight:900">Search</button></div></div></div>
-</div>
 
 <script>
 function toggleDrop(){
