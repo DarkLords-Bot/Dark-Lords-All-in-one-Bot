@@ -1,4 +1,5 @@
  <!-- ===== HEADER WITH BLACK DROPDOWN - EXACT LIKE YOUR SCREENSHOT ===== -->
+<header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div style="border:2px solid #111827;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff;position:relative">
 <b style="font-size:15px;line-height:1.2">CHOOSE CATEGORY -<br>BUILDING</b>
 <button id="mainDropBtn" onclick="toggleDrop()" style="border:2px solid #111827;border-radius:14px;padding:10px 16px;background:#F3F4F6;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer">
@@ -44,14 +45,8 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
 .speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
-<header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-<h2 id="mainHead" style="font-size:13px;font-weight:900">DIVISION 1 - BUILDING</h2>
-<select id="mainSelect" onchange="switchMain(this.value)" style="padding:10px;border-radius:10px;border:2px solid #111827;font-weight:800">
-<option value="1">🏰 Building</option>
-<option value="2">⚔️ Governor Gear</option>
-</select>
 </div>
  <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
