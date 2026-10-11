@@ -24,30 +24,6 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
 .speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
-<style>.tab{padding:8px 12px;border-radius:10px;border:1px solid #E5E7EB;background:#fff;font-weight:800;font-size:11px;cursor:pointer}.tab.active{background:#111827;color:#fff}</style>
-<script>
-function switchMain(v){
- document.getElementById('tabs1').style.display=v==1?'flex':'none';
- document.getElementById('tabs2').style.display=v==2?'flex':'none';
- document.getElementById('mainHead').textContent=v==1?'DIVISION 1 - BUILDING (1A-1E)':'DIVISION 2 - GOV GEAR (2A-2E)';
- showDiv(v==1?'1A':'2A');
-}
-function showDiv(id){
- // hide all div1* and div2* cards
- ['1A','1B','1C','1D','1E','2A','2B','2C','2D','2E'].forEach(k=>{
-   var el=document.getElementById('div'+k)||document.getElementById('card'+k);
-   if(el){el.style.display='none'; el.classList?.remove('active')}
- });
- var target=document.getElementById('div'+id)||document.getElementById('card'+id);
- if(target){target.style.display='block'; target.classList?.add('active')}
- // active tab
- document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
- var tb=document.getElementById('t'+id); if(tb) tb.classList.add('active');
- window.scrollTo({top:0,behavior:'smooth'});
-}
-// init - show only 1A
-showDiv('1A');
-</script>
 <header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
