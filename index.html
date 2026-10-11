@@ -143,3 +143,73 @@ if(window.updateDiv1B) window.updateDiv1B();
 if(window.calcRemaining1C) window.calcRemaining1C();
 }
 </script></body></html>
+<!-- ========== DIVISION 1B - INVENTORY MINUS ========== -->
+<div class="card" id="div1B" style="margin-top:16px">
+<h2>DIVISION 1B - Inventory & Remaining</h2>
+<p style="font-size:11px;color:#6B7280;margin-bottom:12px">Auto takes Modified Time + Resources from 1A — enter your inventory to see what's left</p>
+
+<div style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
+<div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#6B7280;margin-top:4px">—</div></div>
+<div style="text-align:right"><b style="font-size:10px;color:#6B7280;display:block">REMAINING</b><span id="remainTime1B" style="font-weight:900;color:#DC2626">—</span><div id="remainRes1B" style="font-size:11px;color:#DC2626;margin-top:4px">—</div></div>
+</div>
+
+<h2 style="margin-bottom:8px">⏱ Speedup Inventory (how many you HAVE)</h2>
+<div class="grid2">
+<div><span class="lbl">30d Speedups</span><input id="inv_30d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">7d Speedups</span><input id="inv_7d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3d Speedups</span><input id="inv_3d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1d Speedups</span><input id="inv_1d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">8h Speedups</span><input id="inv_8h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3h Speedups</span><input id="inv_3h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1h Speedups</span><input id="inv_1h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">15m Speedups</span><input id="inv_15m" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<h2 style="margin-top:16px;margin-bottom:8px">📦 Resource Inventory (K/M/B supported)</h2>
+<div class="grid2">
+<div><span class="lbl">Bread you have</span><input id="inv_bread" placeholder="e.g. 10M, 2.5B" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Wood you have</span><input id="inv_wood" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Stone you have</span><input id="inv_stone" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Iron you have</span><input id="inv_iron" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Truegold you have</span><input id="inv_tg" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Tempered you have</span><input id="inv_ttg" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<div id="remainBox1B" style="margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#FFFBEB;display:none">
+<b style="font-size:11px">⚡ Remaining Speedups Needed After Using Inventory</b>
+<div id="remainList1B" style="margin-top:10px;display:grid;gap:6px;font-size:12px"></div>
+<div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;display:flex;justify-content:space-between"><span>Remaining Seconds:</span><b id="remainSec1B">0</b></div>
+</div>
+
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="resetInv1B()">Reset Inventory</button><button class="btn" onclick="calcRemaining1B()">RE-CALCULATE REMAINING</button></div>
+</div>
+
+<script>
+function parseKM(s){if(!s)return 0;s=s.toString().trim().toUpperCase();var m=1;if(s.endsWith('K')){m=1e3;s=s.slice(0,-1);}else if(s.endsWith('M')){m=1e6;s=s.slice(0,-1);}else if(s.endsWith('B')){m=1e9;s=s.slice(0,-1);}var n=parseFloat(s.replace(/,/g,''))||0;return Math.round(n*m);}
+
+window.calcRemaining1B=function(){
+var need=window.BUILD_TOTAL; if(!need){document.getElementById('needTime1B').textContent='Calculate 1A first';return;}
+var modSec=need.modTime||need.time||0;
+document.getElementById('needTime1B').textContent=formatTime(modSec)+' ('+modSec.toLocaleString()+'s)';
+document.getElementById('needRes1B').textContent='Bread '+need.bread.toLocaleString()+' | Wood '+need.wood.toLocaleString()+' | Stone '+need.stone.toLocaleString()+' | Iron '+need.iron.toLocaleString()+' | TG '+need.tg+' | TTG '+need.ttg;
+
+var invSec=(parseInt(document.getElementById('inv_30d').value)||0)*2592000 + (parseInt(document.getElementById('inv_7d').value)||0)*604800 + (parseInt(document.getElementById('inv_3d').value)||0)*259200 + (parseInt(document.getElementById('inv_1d').value)||0)*86400 + (parseInt(document.getElementById('inv_8h').value)||0)*28800 + (parseInt(document.getElementById('inv_3h').value)||0)*10800 + (parseInt(document.getElementById('inv_1h').value)||0)*3600 + (parseInt(document.getElementById('inv_15m').value)||0)*900;
+
+var remainSec=Math.max(0,modSec-invSec);
+document.getElementById('remainTime1B').textContent=remainSec===0?'DONE - No time left!':formatTime(remainSec)+' ('+remainSec.toLocaleString()+'s)';
+
+var invB=parseKM(document.getElementById('inv_bread').value), invW=parseKM(document.getElementById('inv_wood').value), invS=parseKM(document.getElementById('inv_stone').value), invI=parseKM(document.getElementById('inv_iron').value), invTG=parseInt(document.getElementById('inv_tg').value)||0, invTTG=parseInt(document.getElementById('inv_ttg').value)||0;
+
+var rB=Math.max(0,need.bread-invB), rW=Math.max(0,need.wood-invW), rS=Math.max(0,need.stone-invS), rI=Math.max(0,need.iron-invI), rTG=Math.max(0,need.tg-invTG), rTTG=Math.max(0,need.ttg-invTTG);
+document.getElementById('remainRes1B').textContent='Bread '+rB.toLocaleString()+' | Wood '+rW.toLocaleString()+' | Stone '+rS.toLocaleString()+' | Iron '+rI.toLocaleString()+' | TG '+rTG+' | TTG '+rTTG;
+
+var box=document.getElementById('remainBox1B'), list=document.getElementById('remainList1B');
+if(remainSec>0){box.style.display='block'; var ups=formatSecToSpeedups(remainSec); var html=''; for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';} if(!ups.length) html='<div style="color:#6B7280">Less than 1m</div>'; list.innerHTML=html; document.getElementById('remainSec1B').textContent=remainSec.toLocaleString()+' sec ('+(remainSec/3600).toFixed(1)+'h)';} else {box.style.display='block'; list.innerHTML='<b style="color:green">✅ You have enough speedups!</b>'; document.getElementById('remainSec1B').textContent='0 sec';}
+};
+
+window.updateDiv1B=function(){calcRemaining1B();};
+window.resetInv1B=function(){['inv_30d','inv_7d','inv_3d','inv_1d','inv_8h','inv_3h','inv_1h','inv_15m','inv_tg','inv_ttg'].forEach(function(id){document.getElementById(id).value=0;});['inv_bread','inv_wood','inv_stone','inv_iron'].forEach(function(id){document.getElementById(id).value='';});calcRemaining1B();};
+
+// auto try on load
+setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
+  </script>
