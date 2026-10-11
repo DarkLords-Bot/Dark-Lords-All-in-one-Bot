@@ -1,87 +1,47 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DarkLords KINGSHOTS A-I-O BoT</title>
+<title>DarkLords KS A-I-O BoT</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
-header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:20}
+header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
 header img{width:38px;height:38px;border-radius:10px}header h1{font-size:15px;font-weight:900;color:#fff}
-.wrap{max-width:1300px;margin:0 auto;padding:16px}
-.sideways{display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;align-items:start}
-@media(max-width:1000px){.sideways{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid #E5E7EB;border-radius:16px;padding:16px;margin-bottom:16px}
-.card h2{font-size:13px;font-weight:900;text-transform:uppercase;color:#000}
-.lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#6B7280;margin-bottom:4px;display:block}
-select,input{width:100%;padding:10px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600;font-size:12px}
-.bbox{border:1px solid #E5E7EB;border-radius:12px;padding:10px}.btop{display:flex;justify-content:space-between;margin-bottom:6px}.btop b{font-size:11px}
-.row{display:flex;gap:8px}.row>div{flex:1}
-.grid3{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.grid3{grid-template-columns:1fr}}
-.totgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}@media(max-width:700px){.totgrid{grid-template-columns:repeat(2,1fr)}}
-.res{border:1px solid #E5E7EB;border-radius:12px;padding:10px}.res b{font-size:9px;color:#6B7280;display:block}.res span{font-size:13px;font-weight:900}
-.btn{padding:11px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0;font-size:12px}
-.btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}
-.kpi{background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:10px;display:flex;justify-content:space-between;margin-top:10px}
-.breakdown{margin-top:10px;border:1px dashed #E5E7EB;border-radius:12px;padding:10px;background:#FCFCFD;font-size:11px;max-height:220px;overflow:auto}
-.sticky{position:sticky;top:76px}@media(max-width:1000px){.sticky{position:static}}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
+.page-title{font-size:22px;font-weight:900;text-transform:uppercase;margin-bottom:4px;color:#000}
+.page-sub{font-size:12px;color:#6B7280;margin-bottom:14px}
+.card{background:#fff;border:1px solid #E5E7EB;border-radius:16px;padding:18px;margin-bottom:16px}
+.card h2{font-size:13px;font-weight:900;text-transform:uppercase;margin-bottom:4px;color:#000}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid2,.grid3{grid-template-columns:1fr}}
+.lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#6B7280;margin-bottom:6px;display:block}
+select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600}
+.bbox{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.btop{display:flex;justify-content:space-between;margin-bottom:8px}
+.btop b{font-size:13px;font-weight:900}.row{display:flex;gap:10px}.row>div{flex:1}
+.kpi{background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-top:12px}
+.totgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+@media(max-width:700px){.totgrid{grid-template-columns:repeat(2,1fr)}}
+.res{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.res b{font-size:9px;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:4px}
+.res span{font-size:14px;font-weight:900}.btn{padding:12px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0}
+.btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
 </style></head><body>
-<header><img src="logo.png"><h1>DarkLords KS A-I-O BoT - SIDEWAYS FINAL</h1></header>
-
-<div class="wrap"><div class="sideways">
-
-<!-- LEFT - BUILDING PERFECT -->
-<div>
-<div class="card"><h2>🏰 Building Calculator</h2><p style="font-size:11px;color:#6B7280;margin:6px 0">Real kingshotguide.org - Fixed timings</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div>
-<div class="row" style="margin-top:10px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Cur All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Tgt All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div>
+<header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
+<div class="wrap">
+<h1 class="page-title">Building Calculator</h1>
+<p class="page-sub">Real game data - kingshotguide.org + kingshotdata.com - timings fixed</p>
+<div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
+<div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
+<div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div><div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
 </div>
-
-<div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:14px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
-
-<div class="card"><h2>Time & Resources</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div><span class="lbl">Construction %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Discount %</span><input id="resDiscount" type="number" value="0"></div></div>
-<div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div>
-<h2 style="margin-top:12px">Total Required</h2>
-<div class="totgrid"><div class="res"><b>Orig Time</b><span id="origTime">—</span></div><div class="res"><b>Mod Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div>
-<div id="breakdown" class="breakdown">Pick levels → CALCULATE</div>
-<button class="btn" style="margin-top:12px" onclick="calculateAll()">CALCULATE BUILDING</button>
-</div>
-</div>
-
-<!-- RIGHT - GOVERNOR GEAR FIXED TILL RED T6 ★★★ -->
-<div class="sticky">
-<div class="card" id="gearSection"><h2>⚔️ Governor Gear - Fixed Till Red T6 ★★★</h2><p style="font-size:11px;color:#6B7280;margin-top:4px">59 levels - Real kingshot.net decrypted</p>
-<div id="gearGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"></div>
-
-<div class="totgrid" style="grid-template-columns:repeat(2,1fr)"><div class="res"><b>Satin</b><span id="gSatin">0</span></div><div class="res"><b>Threads</b><span id="gThreads">0</span></div><div class="res"><b>Vision</b><span id="gVision">0</span></div><div class="res"><b>Power</b><span id="gPower">0</span></div></div>
-
-<div id="gearBreakdown" class="breakdown">Current → Target includes Red T6 ★★★ now</div>
-<button class="btn" style="margin-top:10px" onclick="doGearCalc()">CALCULATE GEAR</button>
-
-<div style="margin-top:12px;background:#1E293B;border-radius:12px;padding:12px;color:#fff">
-<b style="font-size:12px">✨ Live Summary</b>
-<div style="margin-top:8px;display:grid;gap:6px;font-size:11px">
-<div style="display:flex;justify-content:space-between;background:#0F172A;padding:8px;border-radius:8px"><span>🧵 Satin</span><span id="liveSatin" style="color:#38BDF8">—</span></div>
-<div style="display:flex;justify-content:space-between;background:#0F172A;padding:8px;border-radius:8px"><span>🪡 Threads</span><span id="liveThreads" style="color:#A78BFA">—</span></div>
-<div style="display:flex;justify-content:space-between;background:#0F172A;padding:8px;border-radius:8px"><span>👁️ Vision</span><span id="liveVision" style="color:#FB923C">—</span></div>
-</div>
-<div style="margin-top:10px"><span class="lbl" style="color:#94A3B8">Your Inventory K/M/B</span>
-<input id="invSatin" placeholder="Satin 1.5M / 500K" style="margin-bottom:6px" oninput="doGearCalc()">
-<input id="invThreads" placeholder="Threads" style="margin-bottom:6px" oninput="doGearCalc()">
-<input id="invVision" placeholder="Vision" oninput="doGearCalc()">
-</div>
-<div id="needBox" style="margin-top:8px;background:#0F172A;padding:8px;border-radius:8px;font-size:11px;display:none"></div>
-<button class="btn btn-ghost" style="margin-top:10px;background:#0F172A;color:#fff;border:0" onclick="toggleGearTable()">📋 Governor Gear Requirements Table →</button>
-<div id="gearTableWrap" style="display:none;margin-top:10px;max-height:300px;overflow:auto"><table style="width:100%;font-size:10px;border-collapse:collapse"><thead><tr style="background:#111827;color:#fff;position:sticky;top:0"><th style="padding:6px;text-align:left">Tier</th><th>Satin</th><th>Th</th><th>Vi</th></tr></thead><tbody id="gearTableBody"></tbody></table></div>
-</div>
-</div>
-</div>
-
-</div></div>
-
 <script>
-// BUILDING LOGIC - PERFECT
-var TROOP=["Barracks","Stables","Range"];var OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];var ALL=TROOP.concat(OTHER);
-function levelOptions(ph){var o='<option value="0">'+ph+'</option>';for(var i=1;i<=30;i++)o+='<option value="'+i+'">Level '+i+'</option>';var tg=[35,40,45,50,55,60,65,70,75,80];var names=["TG1","TG2","TG3","TG4","TG5","TG6","TG7","TG8","TG9","TG10 MAX"];for(var j=0;j<tg.length;j++)o+='<option value="'+tg[j]+'">'+names[j]+' (Lv '+tg[j]+')</option>';return o;}
-document.getElementById('setAllCur').innerHTML=levelOptions('Current Level');document.getElementById('setAllTgt').innerHTML=levelOptions('Target Level');
-function buildCard(name){var s=name.replace(/\s/g,'_');return '<div class="bbox"><div class="btop"><b>'+name+'</b></div><div class="row"><div><span class="lbl">Current</span><select id="cur_'+s+'">'+levelOptions('Current Level')+'</select></div><div><span class="lbl">Target</span><select id
+var TROOP=["Barracks","Stables","Range"];
+var OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];
+var ALL=TROOP.concat(OTHER);
+function levelOptions(ph){var o='<option value="0">'+ph+'</option>';for(var i=1;i<=30;i++){o+='<option value="'+i+'">Level '+i+'</option>';}var tg=[35,40,45,50,55,60,65,70,75,80];var names=["TG1","TG2","TG3","TG4","TG5","TG6","TG7","TG8","TG9","TG10 MAX"];for(var j=0;j<tg.length;j++){o+='<option value="'+tg[j]+'">'+names[j]+' (Lv '+tg[j]+')</option>';}return o;}
+document.getElementById('setAllCur').innerHTML=levelOptions('Current Level');
+document.getElementById('setAllTgt').innerHTML=levelOptions('Target Level');
+function buildCard(name){var s=name.replace(/\s/g,'_');return '<div class="bbox"><div class="btop"><b>'+name+'</b></div><div class="row"><div><span class="lbl">Current</span><select id="cur_'+s+'">'+levelOptions('Current Level')+'</select></div><div><span class="lbl">Target</span><select id="tgt_'+s+'">'+levelOptions('Target Level')+'</select></div></div></div>';}
+document.getElementById('troopGrid').innerHTML=TROOP.map(buildCard).join('');
+document.getElementById('otherGrid').innerHTML=OTHER.map(buildCard).join('');
+function applyAll(type){var src=document.getElementById(type==='cur'?'setAllCur':'setAllTgt').value;if(src==="0"){alert('Pick a level');return;}for(var k=0;k<ALL.length;k++){var s=ALL[k].replace(/\s/g,'_');var el=document.getElementById((type==='cur'?'cur_':'tgt_')+s);if(el) el.value=src;}}
+function resetAll(){for(var k=0;k<ALL.length;k++){var s=ALL[k].replace(/\s/g,'_');var c=document.getElementById('cur_'+s);var t=document.getElementById('tgt_'+s);if(c)c.value="0";if(t)t.value="0";} calculateAll();}
 
 // REAL DECRYPTED TRUEGOLD DATA FROM kingshotguide.org/calculator/building-calculator
 var TG_DATA={
@@ -180,3 +140,18 @@ document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
 </script></body></html>
+<div class="card" id="div2A">
+<h2>⚔️ DIVISION 2A - Governor Gear Selector [FIXED]</h2>
+<div id="gearGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"></div>
+<button class="btn" style="margin-top:12px" onclick="calc2A()">CALCULATE</button>
+<div id="gearBreakdown" class="breakdown">Pick Current → Target</div>
+</div>
+<script>
+var GEAR_PIECES=["Cav Cap","Cav Coat","Inf Cap","Inf Coat","Arc Cap","Arc Coat"];
+var LEVELS=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var COSTS=[{s:1500,t:15,v:0},{s:3800,t:40,v:0},{s:7000,t:70,v:0},{s:9700,t:95,v:0},{s:1000,t:10,v:45},{s:1000,t:10,v:50},{s:1500,t:15,v:60},{s:1500,t:15,v:70},{s:6500,t:65,v:40},{s:8000,t:80,v:50},{s:10000,t:95,v:60},{s:11000,t:110,v:70},{s:13000,t:130,v:85},{s:15000,t:160,v:100},{s:22000,t:220,v:40},{s:23000,t:230,v:40},{s:25000,t:250,v:45},{s:26000,t:260,v:45},{s:28000,t:280,v:45},{s:30000,t:300,v:55},{s:32000,t:320,v:55},{s:35000,t:340,v:55},{s:38000,t:360,v:55},{s:43000,t:430,v:75},{s:45000,t:460,v:80},{s:48000,t:500,v:85},{s:60000,t:600,v:120},{s:70000,t:700,v:140},{s:80000,t:800,v:160},{s:90000,t:900,v:180},{s:108000,t:1080,v:220},{s:114000,t:1140,v:230},{s:121000,t:1210,v:240},{s:128000,t:1280,v:250},{s:154000,t:1540,v:300},{s:163000,t:1630,v:320},{s:173000,t:1730,v:340},{s:183000,t:1830,v:360},{s:220000,t:2200,v:430},{s:233000,t:2330,v:460},{s:247000,t:2470,v:490},{s:262000,t:2620,v:520},{s:288000,t:2880,v:570},{s:302000,t:3020,v:600},{s:317000,t:3170,v:630},{s:333000,t:3330,v:660},{s:366000,t:3660,v:730},{s:384000,t:3840,v:770},{s:403000,t:4030,v:810},{s:423000,t:4230,v:850},{s:465000,t:4650,v:940},{s:479000,t:4790,v:970},{s:493000,t:4930,v:1000},{s:508000,t:5080,v:1030},{s:549000,t:5490,v:1110},{s:565000,t:5650,v:1145},{s:582000,t:5820,v:1180},{s:600000,t:6000,v:1220}];
+function lvlOpt(){var o='';for(var i=0;i<LEVELS.length;i++)o+='<option value="'+i+'">'+LEVELS[i]+'</option>';return o;}
+document.getElementById('gearGrid').innerHTML=GEAR_PIECES.map(function(n){return '<div class="bbox"><b>'+n+'</b><div><span class="lbl">Current</span><select id="gcur_'+n+'">'+lvlOpt()+'</select></div><div><span class="lbl">Target</span><select id="gtgt_'+n+'">'+lvlOpt()+'</select></div></div>';}).join('');
+var G_TOTAL={s:0,t:0,v:0};
+function calc2A(){var ts=0,tt=0,tv=0,h='';for(var p=0;p<GEAR_PIECES.length;p++){var nm=GEAR_PIECES[p];var cur=parseInt(document.getElementById('gcur_'+nm).value)||0;var tgt=parseInt(document.getElementById('gtgt_'+nm).value)||0;if(tgt<=cur)continue;var ls=0,lt=0,lv=0;for(var i=cur;i<tgt;i++){ls+=COSTS[i].s;lt+=COSTS[i].t;lv+=COSTS[i].v}ts+=ls;tt+=lt;tv+=lv;h+='<div>'+nm+' '+LEVELS[cur]+'→'+LEVELS[tgt]+' = '+ls.toLocaleString()+' S</div>';}G_TOTAL={s:ts,t:tt,v:tv};document.getElementById('gearBreakdown').innerHTML=h||'Pick gear';updateDiv2B();updateDiv2C();}
+</script>
