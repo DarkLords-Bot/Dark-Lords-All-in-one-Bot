@@ -167,6 +167,28 @@ window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
 
 if(window.updateDiv1B) updateDiv1B();
 }
+// === PATCH FOR 1B SPEEDUPS + 1C MINUS ===
+var combined=speed+pet+kingdom;
+var groundChk=document.getElementById('chkGround');
+if(groundChk&&groundChk.checked) combined+=10;
+var modSec=Math.round(tot.t/(1+combined/100));
+var doubleChk=document.getElementById('chkDouble');
+if(doubleChk&&doubleChk.checked) modSec=Math.round(modSec*0.8);
+
+var red=disc/100;
+window.BUILD_TOTAL={
+bread:Math.round(tot.b*(1-red)),
+wood:Math.round(tot.w*(1-red)),
+stone:Math.round(tot.s*(1-red)),
+iron:Math.round(tot.i*(1-red)),
+tg:tot.tg,
+ttg:tot.ttg,
+time:tot.t,
+modTime:modSec
+};
+window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
+if(window.updateDiv1B) updateDiv1B();
+}
 // ==== THIS IS THE BUILD_TOTAL FOR 1B AND 1C ====
 window.BUILD_TOTAL={
 bread:Math.round(tot.b*(1-red)),
@@ -182,6 +204,7 @@ window.SPEEDUP_TOTAL={sec:modSec,orig:tot.t,mod:modSec};
 
 if(window.updateDiv1B) updateDiv1B();
 }
+</script></body></html>
 <!-- DIVISION 1B - TOTAL + SPEEDUPS (FOR 1C MINUS) -->
 <div class="card" id="div1B" style="background:#181A20;border:1px solid #2A2D35;border-radius:20px;padding:0;overflow:hidden">
 <div style="padding:20px;border-bottom:1px solid #2A2D35">
