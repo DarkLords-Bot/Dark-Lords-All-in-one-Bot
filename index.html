@@ -1,24 +1,3 @@
-<!-- ===== HEADER WITH BLACK DROPDOWN - EXACT LIKE YOUR SCREENSHOT ===== -->
-<div style="border:2px solid #111827;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff;position:relative">
-<b style="font-size:15px;line-height:1.2">CHOOSE CATEGORY -<br>BUILDING</b>
-<button id="mainDropBtn" onclick="toggleDrop()" style="border:2px solid #111827;border-radius:14px;padding:10px 16px;background:#F3F4F6;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer">
-<span id="dropLabel">🏰 Building</span> <span>⌄</span>
-</button>
-
-<!-- BLACK DROPDOWN POPUP - LIKE YOUR SCREENSHOT -->
-<div id="dropMenu" style="display:none;position:absolute;top:70px;right:12px;left:12px;background:#1A1D24;border-radius:22px;padding:8px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,0.3)">
-<button onclick="selectMain('building')" id="optBuilding" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
-<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>
-</button>
-<div style="height:1px;background:#2A2E39;margin:4px 0"></div>
-<button onclick="selectMain('gear')" id="optGear" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:transparent;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
-<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>
-</button>
-</div>
-</div>
-
-<!-- ===== CONTENT WRAPPER ===== -->
-<div id="buildingContent">
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CALCULATORS/GUIDES/YOUTUBE LINKS</title>
 <style>
@@ -47,6 +26,27 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 <header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+ <!-- ===== HEADER WITH BLACK DROPDOWN - EXACT LIKE YOUR SCREENSHOT ===== -->
+<div style="border:2px solid #111827;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff;position:relative">
+<b style="font-size:15px;line-height:1.2">CHOOSE CATEGORY -<br>BUILDING</b>
+<button id="mainDropBtn" onclick="toggleDrop()" style="border:2px solid #111827;border-radius:14px;padding:10px 16px;background:#F3F4F6;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer">
+<span id="dropLabel">🏰 Building</span> <span>⌄</span>
+</button>
+
+<!-- BLACK DROPDOWN POPUP - LIKE YOUR SCREENSHOT -->
+<div id="dropMenu" style="display:none;position:absolute;top:70px;right:12px;left:12px;background:#1A1D24;border-radius:22px;padding:8px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,0.3)">
+<button onclick="selectMain('building')" id="optBuilding" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
+<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>
+</button>
+<div style="height:1px;background:#2A2E39;margin:4px 0"></div>
+<button onclick="selectMain('gear')" id="optGear" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:transparent;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
+<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>
+</button>
+</div>
+</div>
+
+<!-- ===== CONTENT WRAPPER ===== -->
+<div id="buildingContent">
 <h2 id="mainHead" style="font-size:13px;font-weight:900">DIVISION 1 - BUILDING</h2>
 <select id="mainSelect" onchange="switchMain(this.value)" style="padding:10px;border-radius:10px;border:2px solid #111827;font-weight:800">
 <option value="1">🏰 Building</option>
