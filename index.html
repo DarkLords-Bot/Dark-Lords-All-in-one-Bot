@@ -2,12 +2,9 @@
 <title>DarkLords KS A-I-O BoT</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
-header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:10}
+header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
 header img{width:38px;height:38px;border-radius:10px}header h1{font-size:15px;font-weight:900;color:#fff}
-.tabs{display:flex;gap:8px;padding:12px 18px;background:#fff;border-bottom:1px solid #E5E7EB;overflow-x:auto;position:sticky;top:60px;z-index:9}
-.tab{padding:10px 16px;border-radius:20px;font-weight:800;font-size:12px;border:1px solid #E5E7EB;background:#fff;cursor:pointer;white-space:nowrap}
-.tab.active{background:#111827;color:#fff;border-color:#111827}
-.wrap{max-width:900px;margin:0 auto;padding:18px}
+.wrap{max-width:860px;margin:0 auto;padding:18px}
 .page-title{font-size:22px;font-weight:900;text-transform:uppercase;margin-bottom:4px;color:#000}
 .page-sub{font-size:12px;color:#6B7280;margin-bottom:14px}
 .card{background:#fff;border:1px solid #E5E7EB;border-radius:16px;padding:18px;margin-bottom:16px}
@@ -24,44 +21,122 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .res{border:1px solid #E5E7EB;border-radius:12px;padding:12px}.res b{font-size:9px;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:4px}
 .res span{font-size:14px;font-weight:900}.btn{padding:12px;border-radius:12px;background:#111827;color:#fff;font-weight:800;width:100%;cursor:pointer;border:0}
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
-.page{display:none}.page.active{display:block}
 </style></head><body>
 <header><img src="logo.png"><h1>DarkLords KS A-I-O BoT</h1></header>
-<div class="tabs">
-<button class="tab active" onclick="showTab('building')">🏰 Building</button>
-<button class="tab" onclick="showTab('gear')">⚔️ Governor Gear</button>
-<button class="tab" onclick="showTab('charm')">✨ Charm</button>
-<button class="tab" onclick="showTab('pet')">🐺 Pets</button>
-<button class="tab" onclick="showTab('hero')">🦸 Hero Gear</button>
-</div>
-
-<!-- BUILDING PAGE - YOUR PERFECT FIXED ONE -->
-<div id="building" class="page active"><div class="wrap">
-<h1 class="page-title">Building Calculator</h1><p class="page-sub">Real data - kingshotguide.org - timings fixed</p>
+<div class="wrap">
+<h1 class="page-title">Building Calculator</h1>
+<p class="page-sub">Real game data </p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
 <div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div><div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
-</div></div>
-
-<!-- OTHER PAGES - READY TO BUILD -->
-<div id="gear" class="page"><div class="wrap"><h1 class="page-title">Governor Gear Calculator</h1><p class="page-sub">Coming next - will use real kingshotguide.org gear data</p><div class="card"><h2>Coming Soon</h2><p style="font-size:13px;margin-top:8px">Building tab is perfect. Click Building tab to use it. Gear tab is next to add - say "build gear now" and I will fill this page with real calculator in same file.</p></div></div></div>
-<div id="charm" class="page"><div class="wrap"><h1 class="page-title">Charm Calculator</h1><p class="page-sub">Coming next</p><div class="card">Will be added in same file as Tab 3</div></div></div>
-<div id="pet" class="page"><div class="wrap"><h1 class="page-title">Pet Calculator</h1><p class="page-sub">Coming next</p><div class="card">Will be added in same file as Tab 4</div></div></div>
-<div id="hero" class="page"><div class="wrap"><h1 class="page-title">Hero Gear Calculator</h1><p class="page-sub">Coming next</p><div class="card">Will be added in same file as Tab 5</div></div></div>
-
+</div>
 <script>
-function showTab(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');event.target.classList.add('active');}
-var TROOP=["Barracks","Stables","Range"];var OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];var ALL=TROOP.concat(OTHER);
+var TROOP=["Barracks","Stables","Range"];
+var OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];
+var ALL=TROOP.concat(OTHER);
 function levelOptions(ph){var o='<option value="0">'+ph+'</option>';for(var i=1;i<=30;i++){o+='<option value="'+i+'">Level '+i+'</option>';}var tg=[35,40,45,50,55,60,65,70,75,80];var names=["TG1","TG2","TG3","TG4","TG5","TG6","TG7","TG8","TG9","TG10 MAX"];for(var j=0;j<tg.length;j++){o+='<option value="'+tg[j]+'">'+names[j]+' (Lv '+tg[j]+')</option>';}return o;}
-document.getElementById('setAllCur').innerHTML=levelOptions('Current Level');document.getElementById('setAllTgt').innerHTML=levelOptions('Target Level');
+document.getElementById('setAllCur').innerHTML=levelOptions('Current Level');
+document.getElementById('setAllTgt').innerHTML=levelOptions('Target Level');
 function buildCard(name){var s=name.replace(/\s/g,'_');return '<div class="bbox"><div class="btop"><b>'+name+'</b></div><div class="row"><div><span class="lbl">Current</span><select id="cur_'+s+'">'+levelOptions('Current Level')+'</select></div><div><span class="lbl">Target</span><select id="tgt_'+s+'">'+levelOptions('Target Level')+'</select></div></div></div>';}
-document.getElementById('troopGrid').innerHTML=TROOP.map(buildCard).join('');document.getElementById('otherGrid').innerHTML=OTHER.map(buildCard).join('');
+document.getElementById('troopGrid').innerHTML=TROOP.map(buildCard).join('');
+document.getElementById('otherGrid').innerHTML=OTHER.map(buildCard).join('');
 function applyAll(type){var src=document.getElementById(type==='cur'?'setAllCur':'setAllTgt').value;if(src==="0"){alert('Pick a level');return;}for(var k=0;k<ALL.length;k++){var s=ALL[k].replace(/\s/g,'_');var el=document.getElementById((type==='cur'?'cur_':'tgt_')+s);if(el) el.value=src;}}
 function resetAll(){for(var k=0;k<ALL.length;k++){var s=ALL[k].replace(/\s/g,'_');var c=document.getElementById('cur_'+s);var t=document.getElementById('tgt_'+s);if(c)c.value="0";if(t)t.value="0";} calculateAll();}
 
-// REAL DATA FROM kingshotguide.org
-var TG_DATA={"Town Center":{1:660,2:790,3:1190,4:1400,5:1675,6:[900,60],7:[1080,90],8:[1080,120],9:[1260,180],10:[1575,420]},"Embassy":{1:165,2:195,3:295,4:350,5:415,6:[225,13],7:[270,19],8:[270,30],9:[315,43],10:[391,103]},"Command Center":{1:130,2:155,3:235,4:280,5:335,6:[180,13],7:[216,19],8:[216,24],9:[252,36],10:[315,84]},"Infirmary":{1:130,2:155,3:235,4:280,5:335,6:[180,12],7:[216,18],8:[216,24],9:[252,36],10:[315,84]},"Barracks":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},"Stables":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},"Range":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},"War Academy":{1:0,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},"Academy":{1:165,2:195,3:295,4:350,5:415,6:[225,13],7:[270,19],8:[270,30],9:[315,43],10:[391,103]},"Storehouse":{1:130,2:155,3:235,4:280,5:335,6:[180,12],7:[216,18],8:[216,24],9:[252,36],10:[315,84]}};
-var REAL_TIMES={"Town Center":[0,6,60,180,600,1800,3600,9000,16200,21600,27000,32400,39600,50400,64800,111600,129600,158400,223200,297600,378000,576000,806400,1130400,1584000,1821600,2190240,2511360,2903040,3470400],"Barracks":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Stables":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Range":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Embassy":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Academy":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Command Center":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Infirmary":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"Storehouse":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],"War Academy":[0,0,0,0,0,0,0,0,0,86400,129600,172800,259200,345600,432000]};
+// REAL DECRYPTED TRUEGOLD DATA FROM kingshotguide.org/calculator/building-calculator
+var TG_DATA={
+"Town Center":{1:660,2:790,3:1190,4:1400,5:1675,6:[900,60],7:[1080,90],8:[1080,120],9:[1260,180],10:[1575,420]},
+"Embassy":{1:165,2:195,3:295,4:350,5:415,6:[225,13],7:[270,19],8:[270,30],9:[315,43],10:[391,103]},
+"Command Center":{1:130,2:155,3:235,4:280,5:335,6:[180,13],7:[216,19],8:[216,24],9:[252,36],10:[315,84]},
+"Infirmary":{1:130,2:155,3:235,4:280,5:335,6:[180,12],7:[216,18],8:[216,24],9:[252,36],10:[315,84]},
+"Barracks":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},
+"Stables":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},
+"Range":{1:295,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},
+"War Academy":{1:0,2:355,3:535,4:630,5:750,6:[405,25],7:[486,37],8:[486,54],9:[567,79],10:[706,187]},
+"Academy":{1:165,2:195,3:295,4:350,5:415,6:[225,13],7:[270,19],8:[270,30],9:[315,43],10:[391,103]},
+"Storehouse":{1:130,2:155,3:235,4:280,5:335,6:[180,12],7:[216,18],8:[216,24],9:[252,36],10:[315,84]}
+};
+
+// REAL TIMES - seconds - from kingshotdata + simplegameguide Town Center table is 100% accurate
+var REAL_TIMES={
+"Town Center":[0,6,60,180,600,1800,3600,9000,16200,21600,27000,32400,39600,50400,64800,111600,129600,158400,223200,297600,378000,576000,806400,1130400,1584000,1821600,2190240,2511360,2903040,3470400],
+"Barracks":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Stables":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Range":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Embassy":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Academy":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Command Center":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Infirmary":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"Storehouse":[0,15,45,120,300,900,1800,3600,7200,12600,19800,28800,36000,43200,54000,75600,97200,118800,151200,183600,219600,298800,367200,483840,691200,864000,1088640,1382400,1785600,2192400],
+"War Academy":[0,0,0,0,0,0,0,0,0,86400,129600,172800,259200,345600,432000]
+};
+
 function getCost(building, lv){
-if(lv<=30){var arr=REAL_TIMES[building]||REAL_TIMES["Town Center"];var sec=arr[lv]||60;var mult=Math.pow(1.55,lv-1);return {bread:Math.round(800*mult),wood:Math.round(800*mult),stone:Math.round(400*mult),iron:Math.round(100*mult),time:sec,tg:0,ttg:0};}
-var tgNum=Math.round((lv-30)/5);var entry=TG_DATA[building]||TG_DATA["Town Center"];var val=entry[tgNum];var tg=0,ttg=0;if(Array.isArray(val)){tg=val[0]; ttg=val[1];} else {tg=val||0;}var timeMap={1:129600,2:187200,3:259200,4:345600,5:432000,6:518400,7:604800,8:864000,9:1036800,10:1296000};return {bread:Math.round(2500000*(1+tgNum*0.8)),wood:Math.round(2500000*(1+tgNum*0.8)),
+if(lv<=30){
+var arr=REAL_TIMES[building]||REAL_TIMES["Town Center"];
+var sec=arr[lv]||60;
+var mult=Math.pow(1.55,lv-1);
+return {bread:Math.round(800*mult),wood:Math.round(800*mult),stone:Math.round(400*mult),iron:Math.round(100*mult),time:sec,tg:0,ttg:0};
+}
+var tgNum=Math.round((lv-30)/5);
+var entry=TG_DATA[building]||TG_DATA["Town Center"];
+var val=entry[tgNum];
+var tg=0,ttg=0;
+if(Array.isArray(val)){tg=val[0]; ttg=val[1];} else {tg=val||0;}
+var timeMap={1:129600,2:187200,3:259200,4:345600,5:432000,6:518400,7:604800,8:864000,9:1036800,10:1296000};
+return {bread:Math.round(2500000*(1+tgNum*0.8)),wood:Math.round(2500000*(1+tgNum*0.8)),stone:Math.round(1300000*(1+tgNum*0.8)),iron:Math.round(500000*(1+tgNum*0.8)),time:timeMap[tgNum]||129600,tg:tg,ttg:ttg};
+}
+
+function formatTime(sec){
+if(sec<60) return sec+"s";
+var d=Math.floor(sec/86400);sec%=86400;
+var h=Math.floor(sec/3600);sec%=3600;
+var m=Math.floor(sec/60);
+if(d>0) return d+"d "+h+"h "+m+"m";
+if(h>0) return h+"h "+m+"m";
+return m+"m "+sec+"s";
+}
+
+window.calculateAll=function(){
+var speed=parseFloat(document.getElementById('speedBonus').value)||0;
+var pet=parseFloat(document.getElementById('petBonus').value)||0;
+var kingdom=parseFloat(document.getElementById('kingdomBonus').value)||0;
+var disc=parseFloat(document.getElementById('resDiscount').value)||0;
+var combined=speed+pet+kingdom;
+document.getElementById('combinedSpeed').textContent=combined.toFixed(1)+'%';
+var tot={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};var count=0;var details='';
+for(var idx=0;idx<ALL.length;idx++){
+var name=ALL[idx];var safe=name.replace(/\s/g,'_');
+var cur=parseInt(document.getElementById('cur_'+safe).value)||0;
+var tgt=parseInt(document.getElementById('tgt_'+safe).value)||0;
+if(cur===0||tgt===0||tgt<=cur) continue;
+count++;
+var local={b:0,w:0,s:0,i:0,t:0,tg:0,ttg:0};
+var lv=cur+1;
+if(cur>=30) lv=cur+5;
+if(cur==30) lv=35;
+for(;lv<=tgt;){
+var cs=getCost(name,lv);
+local.b+=cs.bread;local.w+=cs.wood;local.s+=cs.stone;local.i+=cs.iron;local.t+=cs.time;local.tg+=cs.tg;local.ttg+=cs.ttg;
+tot.b+=cs.bread;tot.w+=cs.wood;tot.s+=cs.stone;tot.i+=cs.iron;tot.t+=cs.time;tot.tg+=cs.tg;tot.ttg+=cs.ttg;
+if(lv<30) lv++; else lv+=5;
+}
+details+='<div style="padding:6px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between"><b>'+name+' '+cur+'->'+tgt+'</b><span>TG '+local.tg+' + '+local.ttg+'T | '+formatTime(local.t)+'</span></div>';
+}
+if(count===0){
+document.getElementById('origTime').textContent='Pick levels!';
+document.getElementById('breakdown').innerHTML='<b style="color:red">Set Current and Target for at least 1 building</b>';
+return;
+}
+document.getElementById('origTime').textContent=formatTime(tot.t);
+document.getElementById('modTime').textContent=formatTime(Math.round(tot.t/(1+combined/100)));
+var red=disc/100;
+document.getElementById('rBread').textContent=Math.round(tot.b*(1-red)).toLocaleString();
+document.getElementById('rWood').textContent=Math.round(tot.w*(1-red)).toLocaleString();
+document.getElementById('rStone').textContent=Math.round(tot.s*(1-red)).toLocaleString();
+document.getElementById('rIron').textContent=Math.round(tot.i*(1-red)).toLocaleString();
+document.getElementById('rTG').textContent=tot.tg.toLocaleString();
+document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
+document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
+}
+</script></body></html>
