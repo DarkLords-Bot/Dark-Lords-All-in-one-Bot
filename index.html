@@ -1,4 +1,25 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <!-- ===== HEADER WITH BLACK DROPDOWN - EXACT LIKE YOUR SCREENSHOT ===== -->
+<div style="border:2px solid #111827;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff;position:relative">
+<b style="font-size:15px;line-height:1.2">CHOOSE CATEGORY -<br>BUILDING</b>
+<button id="mainDropBtn" onclick="toggleDrop()" style="border:2px solid #111827;border-radius:14px;padding:10px 16px;background:#F3F4F6;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer">
+<span id="dropLabel">🏰 Building</span> <span>⌄</span>
+</button>
+
+<!-- BLACK DROPDOWN POPUP - LIKE YOUR SCREENSHOT -->
+<div id="dropMenu" style="display:none;position:absolute;top:70px;right:12px;left:12px;background:#1A1D24;border-radius:22px;padding:8px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,0.3)">
+<button onclick="selectMain('building')" id="optBuilding" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
+<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>
+</button>
+<div style="height:1px;background:#2A2E39;margin:4px 0"></div>
+<button onclick="selectMain('gear')" id="optGear" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:transparent;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
+<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>
+</button>
+</div>
+</div>
+
+<!-- ===== CONTENT WRAPPER ===== -->
+<div id="buildingContent">
+ <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CALCULATORS/GUIDES/YOUTUBE LINKS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
@@ -26,26 +47,12 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 <header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
- <!-- ===== HEADER WITH BLACK DROPDOWN - EXACT LIKE YOUR SCREENSHOT ===== -->
-<div style="border:2px solid #111827;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#fff;position:relative">
-<b style="font-size:15px;line-height:1.2">CHOOSE CATEGORY -<br>BUILDING</b>
-<button id="mainDropBtn" onclick="toggleDrop()" style="border:2px solid #111827;border-radius:14px;padding:10px 16px;background:#F3F4F6;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer">
-<span id="dropLabel">🏰 Building</span> <span>⌄</span>
-</button>
-
-<!-- BLACK DROPDOWN POPUP - LIKE YOUR SCREENSHOT -->
-<div id="dropMenu" style="display:none;position:absolute;top:70px;right:12px;left:12px;background:#1A1D24;border-radius:22px;padding:8px;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,0.3)">
-<button onclick="selectMain('building')" id="optBuilding" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:#111827;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
-<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>
-</button>
-<div style="height:1px;background:#2A2E39;margin:4px 0"></div>
-<button onclick="selectMain('gear')" id="optGear" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border:0;border-radius:16px;background:transparent;color:#fff;font-weight:900;font-size:18px;cursor:pointer;text-align:left">
-<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>
-</button>
+<h2 id="mainHead" style="font-size:13px;font-weight:900">DIVISION 1 - BUILDING</h2>
+<select id="mainSelect" onchange="switchMain(this.value)" style="padding:10px;border-radius:10px;border:2px solid #111827;font-weight:800">
+<option value="1">🏰 Building</option>
+<option value="2">⚔️ Governor Gear</option>
+</select>
 </div>
-
-<!-- ===== CONTENT WRAPPER ===== -->
-<div id="buildingContent">
  <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
@@ -232,7 +239,7 @@ window.resetInv1B=function(){['inv_30d','inv_7d','inv_3d','inv_1d','inv_8h','inv
 
 // auto try on load
 setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
- </script>
+</script>
 <!-- ========== DIVISION 1C - FINAL SUMMARY ========== -->
 <div class="card" id="div1C" style="margin-top:16px;border:2px solid #111827">
 <h2>Final Plan & Export</h2>
@@ -286,7 +293,8 @@ document.getElementById('cDetails').innerHTML=
 '💰 Truegold: '+(rTG===0?'<span style="color:green">DONE</span>':rTG.toLocaleString())+'<br>'+
 '🔥 Tempered: '+(rTTG===0?'<span style="color:green">DONE</span>':rTTG.toLocaleString());
 
-var exportStr='DarkLords KS - BUILDING PLAN\n'+'NEED FROM 1A:\n'+
+var exportStr='DarkLords KS - BUILDING PLAN\n'+
+'NEED FROM 1A:\n'+
 'Time: '+formatTime(modSec)+' ('+modSec.toLocaleString()+'s) - Orig '+formatTime(need.time)+'\n'+
 'Bread: '+need.bread.toLocaleString()+' | Wood: '+need.wood.toLocaleString()+' | Stone: '+need.stone.toLocaleString()+' | Iron: '+need.iron.toLocaleString()+'\n'+
 'Truegold: '+need.tg.toLocaleString()+' | Tempered: '+need.ttg.toLocaleString()+'\n\n'+
@@ -345,6 +353,7 @@ setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
 
 <button class="btn" onclick="window.open('https://kingshot.net/database/buildings','_blank');window.open('https://www.kingshotguide.org/buildings','_blank');window.open('https://kingshotdata.com/category/buildings/','_blank');">🚀 Open All 3 at Once</button>
 </div>
+
 <!-- ========== DIVISION 1E - BELOW 1D - YOUTUBE BUILDING UPGRADE GUIDES ========== -->
 <div class="card" id="div1E" style="margin-top:16px;border:2px dashed #DC2626">
 <h2 style="text-align:center;margin-bottom:4px">YouTube Links To Building Upgrade Guides</h2>
