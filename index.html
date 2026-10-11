@@ -140,3 +140,106 @@ document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
 </script></body></html>
+<!-- DIVISION 1B - TOTAL + SPEEDUPS (FOR 1C MINUS) -->
+<div class="card" id="div1B" style="background:#181A20;border:1px solid #2A2D35;border-radius:20px;padding:0;overflow:hidden">
+<div style="padding:20px;border-bottom:1px solid #2A2D35">
+<h2 style="font-size:16px;font-weight:900;color:#fff">📦 DIVISION 1B - Total + Speedups</h2>
+<p style="font-size:12px;color:#8B8E98;margin-top:4px">Auto from 1A - Timings + Speedups for 1C minus</p>
+</div>
+
+<div style="padding:20px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase;display:block">Original Time</b>
+<span id="origTime" style="font-size:14px;font-weight:900;color:#fff">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase;display:block">Modified Time</b>
+<span id="modTime" style="font-size:14px;font-weight:900;color:#2AA6FF">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🍞 Bread</b><span id="rBread" style="float:right;font-weight:900;color:#fff">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🪵 Wood</b><span id="rWood" style="float:right;font-weight:900;color:#fff">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">🧱 Stone</b><span id="rStone" style="float:right;font-weight:900;color:#fff">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#8B8E98;text-transform:uppercase">⚙️ Iron</b><span id="rIron" style="float:right;font-weight:900;color:#fff">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#FDE047;text-transform:uppercase">Truegold</b><span id="rTG" style="float:right;font-weight:900;color:#FDE047">—</span>
+</div>
+<div style="background:#1E2128;border:1px solid #2A2D35;border-radius:12px;padding:12px">
+<b style="font-size:9px;color:#FB923C;text-transform:uppercase">Tempered</b><span id="rTTG" style="float:right;font-weight:900;color:#FB923C">—</span>
+</div>
+</div>
+
+<!-- SPEEDUP BREAKDOWN -->
+<div id="speedupBox1B" style="margin-top:16px;background:#111318;border:1px solid #2A2D35;border-radius:12px;padding:14px;display:none">
+<b style="font-size:11px;color:#fff;text-transform:uppercase;display:block;margin-bottom:10px">⚡ Speedups Required (from Modified Time)</b>
+<div style="display:grid;gap:6px;font-size:12px;color:#D1D5DB" id="speedupList1B"></div>
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid #2A2D35;display:flex;justify-content:space-between">
+<span style="color:#8B8E98">Total Seconds:</span><b id="totalSec1B" style="color:#2AA6FF">0</b>
+</div>
+</div>
+
+<div id="breakdown" class="breakdown" style="margin-top:16px;background:#1E2128;border:1px dashed #2A2D35;color:#9CA3AF">Pick Current and Target above, then press Calculate in 1A.</div>
+
+<!-- Hidden for 1C -->
+<div style="display:none"><span id="bBread1B"></span><span id="bWood1B"></span><span id="bStone1B"></span><span id="bIron1B"></span><span id="bTG1B"></span><span id="bTime1B"></span></div>
+</div>
+</div>
+
+<script>
+window.SPEEDUP_TOTAL={sec:0,orig:0,mod:0};
+
+window.formatSecToSpeedups=function(totalSec){
+var s=totalSec;
+var units=[
+{name:'30d',sec:2592000},
+{name:'7d',sec:604800},
+{name:'3d',sec:259200},
+{name:'1d',sec:86400},
+{name:'8h',sec:28800},
+{name:'3h',sec:10800},
+{name:'1h',sec:3600},
+{name:'15m',sec:900},
+{name:'5m',sec:300},
+{name:'1m',sec:60}
+];
+var out=[]; var remaining=s;
+for(var u of units){
+if(remaining>=u.sec){
+var cnt=Math.floor(remaining/u.sec);
+out.push({name:u.name,sec:u.sec,count:cnt});
+remaining-=cnt*u.sec;
+}
+}
+return out;
+};
+
+window.updateDiv1B=function(){
+var tot=window.BUILD_TOTAL||{bread:0,wood:0,stone:0,iron:0,tg:0,ttg:0,time:0,modTime:0};
+var set=(id,val)=>{var el=document.getElementById(id); if(el) el.textContent=val?val.toLocaleString():'—';};
+set('bBread1B',tot.bread); set('bWood1B',tot.wood); set('bStone1B',tot.stone); set('bIron1B',tot.iron); set('bTG1B',tot.tg);
+
+// speedup box
+var box=document.getElementById('speedupBox1B');
+var list=document.getElementById('speedupList1B');
+var modSec=tot.modTime||tot.time||0;
+if(modSec>0){
+box.style.display='block';
+window.SPEEDUP_TOTAL={sec:modSec,orig:tot.time,mod:modSec,bread:tot.bread,wood:tot.wood,stone:tot.stone,iron:tot.iron,tg:tot.tg,ttg:tot.ttg};
+var ups=formatSecToSpeedups(modSec);
+var html='';
+for(var i=0;i<ups.length;i++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[i].name+' speedup</span><b style="color:#fff">x '+ups[i].count+'</b></div>';}
+if(ups.length===0) html='<div style="color:#6B7280">Less than 1m - no speedup needed</div>';
+list.innerHTML=html;
+document.getElementById('totalSec1B').textContent=modSec.toLocaleString()+' sec ('+(modSec/3600).toFixed(1)+'h)';
+}else{box.style.display='none';}
+if(window.calcRemaining1C) calcRemaining1C();
+};
+</script>
