@@ -23,7 +23,6 @@
 <!-- ===== CONTENT WRAPPER ===== -->
 <div id="buildingContent">
  <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CALCULATORS/GUIDES/YOUTUBE LINKS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
 header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
@@ -47,14 +46,9 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 .btn-ghost{background:#fff;color:#111827;border:1px solid #E5E7EB}.breakdown{margin-top:12px;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;background:#FCFCFD;font-size:12px}
 .speedBox{margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#F9FAFB;display:none}
 </style></head><body>
-<header><img src="logo.png"><h1>DarkLords KINGSHOT AIO BOT</h1></header>
+<header><h1>CALCULATORS/GUIDES/YOUTUBE LINKS</h1></header>
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-<h2 id="mainHead" style="font-size:13px;font-weight:900">DIVISION 1 - BUILDING</h2>
-<select id="mainSelect" onchange="switchMain(this.value)" style="padding:10px;border-radius:10px;border:2px solid #111827;font-weight:800">
-<option value="1">🏰 Building</option>
-<option value="2">⚔️ Governor Gear</option>
-</select>
 </div>
 <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
@@ -911,41 +905,31 @@ load2F();
 </script>
 
 <script>
-function toggleDrop(){
-  var m=document.getElementById('dropMenu');
-  m.style.display = m.style.display==='none' || m.style.display==='' ? 'block' : 'none';
+<script>
+function toggleDrop(e){
+ e.stopPropagation();
+ var m=document.getElementById('dropMenu');
+ m.style.display = (m.style.display==='block') ? 'none' : 'block';
 }
-
 function selectMain(type){
-  var label=document.getElementById('dropLabel');
-  // Find building div - try both IDs
-  var bContent=document.getElementById('buildingContent') || document.getElementById('bContent') || document.getElementById('building');
-  // Find gear div - try ALL possible IDs
-  var gContent=document.getElementById('gearContent') || document.getElementById('governorGearContent') || document.getElementById('gContent') || document.getElementById('governor');
-  
-  var bOpt=document.getElementById('optBuilding');
-  var gOpt=document.getElementById('optGear');
-  document.getElementById('dropMenu').style.display='none';
-  
-  console.log('type:',type,'b:',bContent,'g:',gContent); // check in F12 console
-  
-  if(type==='building'){
-    if(label) label.textContent='🏰 Building';
-    if(bContent) bContent.style.display='block';
-    if(gContent) gContent.style.display='none';
-    if(bOpt) bOpt.style.background='#111827';
-    if(gOpt) gOpt.style.background='transparent';
-  }else{
-    if(label) label.textContent='⚔️ Governor Gear';
-    if(bContent) bContent.style.display='none';
-    if(gContent) gContent.style.display='block';
-    if(gOpt) gOpt.style.background='#111827';
-    if(bOpt) bOpt.style.background='transparent';
-  }
-  
-  // ALSO HIDE the inventory divs that are outside (div1B, div1C...)
-  var inv1B = document.getElementById('div1B');
-  var inv1C = document.getElementById('div1C');
-  if(inv1B) inv1B.style.display = (type==='building') ? 'block' : 'none';
-  if(inv1C) inv1C.style.display = (type==='building') ? 'block' : 'none';
+ var m=document.getElementById('dropMenu');
+ m.style.display='none';
+ var label=document.getElementById('dropLabel');
+ var b=document.getElementById('buildingContent');
+ var g=document.getElementById('gearContent');
+ if(type==='building'){
+   label.textContent='🏰 Building';
+   b.style.display='block'; g.style.display='none';
+ }else{
+   label.textContent='⚔️ Governor Gear';
+   b.style.display='none'; g.style.display='block';
+ }
 }
+document.addEventListener('click',function(e){
+ var menu=document.getElementById('dropMenu');
+ var btn=document.getElementById('mainDropBtn');
+ if(!btn.contains(e.target) && !menu.contains(e.target)){
+   menu.style.display='none';
+ }
+});
+</script>
