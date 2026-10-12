@@ -629,80 +629,36 @@ load1F();
 </script>
   </div>
 
-<!-- GOVERNOR = 2A-2E -->
+<!-- GOVERNOR TAB = 2A-2E -->
 <div id="gearContent" style="display:none">
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#F59E0B,#D97706)">⚒️</span> 2A - GOVERNOR GEAR CRAFT</h2>
-<div class="card" id="div2A">
-<h2>⚔️ GOVERNER GEAR </h2>
-<p style="font-size:11px;color:#6B7280">59 levels - shows results here itself</p>
-<div id="gearGrid2A" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"></div>
 
-<div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-<div class="res"><b>Satin</b><span id="rSatin">0</span></div>
-<div class="res"><b>Threads</b><span id="rThreads">0</span></div>
-<div class="res"><b>Vision</b><span id="rVision">0</span></div>
+<div class="card"><h2><span class="icon" style="background:#F59E0B">⚒️</span> 2A - GOVERNOR GEAR CRAFT</h2>
+<select><option>Select Gear - Hat</option><option>Coat</option><option>Pants</option><option>Weapon</option><option>Ring</option><option>Necklace</option></select>
+<div style="margin-top:12px"><label class="lbl">Current Level</label><input type="number" placeholder="0"></div>
 </div>
 
-<div id="gearBreakdown2A" class="breakdown" style="margin-top:10px">Pick Current → Target (Red T6 ★★★ exists) → CALCULATE</div>
-<button class="btn" style="margin-top:10px" onclick="calc2A()">CALCULATE</button>
+<div class="card"><h2><span class="icon" style="background:#A8A29E">🧵</span> 2B - GEAR MATERIALS - SATIN / THREADS</h2>
+<div class="grid2"><div><label class="lbl">Satin You Have</label><input type="number" placeholder="0"></div><div><label class="lbl">Gilded Threads</label><input type="number" placeholder="0"></div></div>
 </div>
 
-<script>
-var GEAR_PIECES2A=["Cav Cap","Cav Coat","Inf Cap","Inf Coat","Arc Cap","Arc Coat"];
-var LEVELS2A=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
-var COSTS2A=[{s:1500,t:15,v:0},{s:3800,t:40,v:0},{s:7000,t:70,v:0},{s:9700,t:95,v:0},{s:1000,t:10,v:45},{s:1000,t:10,v:50},{s:1500,t:15,v:60},{s:1500,t:15,v:70},{s:6500,t:65,v:40},{s:8000,t:80,v:50},{s:10000,t:95,v:60},{s:11000,t:110,v:70},{s:13000,t:130,v:85},{s:15000,t:160,v:100},{s:22000,t:220,v:40},{s:23000,t:230,v:40},{s:25000,t:250,v:45},{s:26000,t:260,v:45},{s:28000,t:280,v:45},{s:30000,t:300,v:55},{s:32000,t:320,v:55},{s:35000,t:340,v:55},{s:38000,t:360,v:55},{s:43000,t:430,v:75},{s:45000,t:460,v:80},{s:48000,t:500,v:85},{s:60000,t:600,v:120},{s:70000,t:700,v:140},{s:80000,t:800,v:160},{s:90000,t:900,v:180},{s:108000,t:1080,v:220},{s:114000,t:1140,v:230},{s:121000,t:1210,v:240},{s:128000,t:1280,v:250},{s:154000,t:1540,v:300},{s:163000,t:1630,v:320},{s:173000,t:1730,v:340},{s:183000,t:1830,v:360},{s:220000,t:2200,v:430},{s:233000,t:2330,v:460},{s:247000,t:2470,v:490},{s:262000,t:2620,v:520},{s:288000,t:2880,v:570},{s:302000,t:3020,v:600},{s:317000,t:3170,v:630},{s:333000,t:3330,v:660},{s:366000,t:3660,v:730},{s:384000,t:3840,v:770},{s:403000,t:4030,v:810},{s:423000,t:4230,v:850},{s:465000,t:4650,v:940},{s:479000,t:4790,v:970},{s:493000,t:4930,v:1000},{s:508000,t:5080,v:1030},{s:549000,t:5490,v:1110},{s:565000,t:5650,v:1145},{s:582000,t:5820,v:1180},{s:600000,t:6000,v:1220}];
-
-function lvlOpt2A(){var o='';for(var i=0;i<LEVELS2A.length;i++){o+='<option value="'+i+'">'+LEVELS2A[i]+'</option>';}return o;}
-
-(function(){
-var grid=document.getElementById('gearGrid2A');
-if(!grid){return;}
-grid.innerHTML=GEAR_PIECES2A.map(function(n){
-var safe=n.replace(/\s/g,'_');
-return '<div class="bbox"><div class="btop"><b>'+n+'</b></div><div><span class="lbl">Current</span><select id="cur_'+safe+'">'+lvlOpt2A()+'</select></div><div style="margin-top:4px"><span class="lbl">Target</span><select id="tgt_'+safe+'">'+lvlOpt2A()+'</select></div></div>';
-}).join('');
-})();
-
-var G_TOTAL2A={s:0,t:0,v:0};
-
-window.calc2A=function(){
-var ts=0,tt=0,tv=0;
-var html='';
-for(var p=0;p<GEAR_PIECES2A.length;p++){
-var name=GEAR_PIECES2A[p];
-var safe=name.replace(/\s/g,'_');
-var curEl=document.getElementById('cur_'+safe);
-var tgtEl=document.getElementById('tgt_'+safe);
-if(!curEl||!tgtEl) continue;
-var cur=parseInt(curEl.value)||0;
-var tgt=parseInt(tgtEl.value)||0;
-if(tgt<=cur) continue;
-var ls=0,lt=0,lv=0;
-for(var i=cur;i<tgt;i++){ls+=COSTS2A[i].s; lt+=COSTS2A[i].t; lv+=COSTS2A[i].v;}
-ts+=ls; tt+=lt; tv+=lv;
-html+='<div style="padding:5px 0;border-bottom:1px solid #eee"><b>'+name+'</b> '+LEVELS2A[cur]+' → '+LEVELS2A[tgt]+'<br><span style="font-size:11px">'+ls.toLocaleString()+' Satin | '+lt.toLocaleString()+' Threads | '+lv+' Vision</span></div>';
-}
-G_TOTAL2A={s:ts,t:tt,v:tv};
-document.getElementById('rSatin').textContent=ts.toLocaleString();
-document.getElementById('rThreads').textContent=tt.toLocaleString();
-document.getElementById('rVision').textContent=tv.toLocaleString();
-if(ts===0){
-document.getElementById('gearBreakdown2A').innerHTML='<b style="color:red">Select at least 1 gear - Target must be > Current. Dropdown now has 59 levels till Red T6 ★★★</b>';
-}else{
-document.getElementById('gearBreakdown2A').innerHTML=html+'<div style="margin-top:8px;color:green;font-weight:900">✓ Total: '+ts.toLocaleString()+' Satin | '+tt.toLocaleString()+' Threads | '+tv.toLocaleString()+' Vision | '+LEVELS2A.length+' levels loaded FIXED</div>';
-}
-// if 2B exists, update it
-if(typeof updateDiv2B==='function') updateDiv2B();
-if(typeof updateDiv2C==='function') updateDiv2C();
-};
-</script>
- </div>
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#A8A29E,#57534E)">🧵</span> 2B - GEAR MATERIALS - SATIN / THREADS</h2><!-- paste 2B --></div>
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#8B5CF6,#4C1D95)">✨</span> 2C - ENCHANTMENT</h2><!-- paste 2C --></div>
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#FACC15,#A16207)">⭐</span> 2D - STARS & SET BONUS</h2><!-- paste 2D --></div>
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#FF0000,#990000)">▶️</span> 2E - YOUTUBE & GUIDES</h2><!-- paste 2E --></div>
+<div class="card"><h2><span class="icon" style="background:#8B5CF6">✨</span> 2C - ENCHANTMENT</h2>
+<label class="lbl">Artisan's Vision</label><input type="number" placeholder="0">
 </div>
 
+<div class="card"><h2><span class="icon" style="background:#FACC15">⭐</span> 2D - STARS & SET BONUS</h2>
+<div class="totgrid">
+<div class="res"><b>Green</b><span>0</span></div>
+<div class="res"><b>Blue</b><span>0</span></div>
+<div class="res"><b>Purple</b><span>0</span></div>
+<div class="res"><b>Gold</b><span>0</span></div>
+</div>
+</div>
+
+<div class="card"><h2><span class="icon" style="background:#FF0000">▶️</span> 2E - YOUTUBE & GUIDES</h2>
+<button class="btn">WATCH TUTORIAL</button>
+</div>
+
+</div>
 <script>
 function showTab(type){
   const building = document.getElementById('buildingContent');
