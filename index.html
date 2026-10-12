@@ -897,25 +897,38 @@ load2F();
 
 <script>
 function selectMain(type){
-  var b = document.getElementById('buildingContent');
-  var g = document.getElementById('gearContent') || document.getElementById('governorGearContent');
+  // find BUILDING div - no matter what ID you used
+  var b = document.getElementById('buildingContent') 
+       || document.querySelector('[id*="building"]');
+  
+  // find GEAR div - no matter what ID you used  
+  var g = document.getElementById('gearContent') 
+       || document.getElementById('governorGearContent')
+       || document.querySelector('[id*="gear"]')
+       || document.querySelector('[id*="governor"]');
+
+  console.log('CLICKED:', type, ' BUILDING:', b, ' GEAR:', g);
+
   if(!b || !g){
-    console.log('IDs not found! b:',b,' g:',g);
+    alert('ID NOT FOUND! Check: building=' + b + ' gear=' + g);
     return;
   }
+
   if(type==='building'){
     b.style.display='block';
+    b.style.removeProperty('display');
     g.style.display='none';
   }else{
     b.style.display='none';
     g.style.display='block';
+    g.style.removeProperty('display');
   }
 }
-// init on load
-window.addEventListener('load', function(){
-  var sel = document.getElementById('mainSelect');
-  if(sel) selectMain(sel.value);
-});
+
+// force show building on load
+window.onload = function(){
+  selectMain('building');
+};
 </script>
 </body>
 </html>
