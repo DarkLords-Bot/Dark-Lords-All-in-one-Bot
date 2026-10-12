@@ -3,17 +3,7 @@
 <img src="https://i.postimg.cc/7YkvJgMy/IMG-20261012-WA0711.jpg" style="width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid #D4AF37">
 <b style="color:#D4AF37;font-size:14px">DÂRKLØRDS KÎÑGSHØT Å-Î-Ø BÂČKPÂČK</b>
 </div>
-<div style="padding:12px 16px">
-  <label style="font-weight:900;font-size:14px;display:block;margin-bottom:8px">CHOOSE CATEGORY - SELECT OPTIONS HERE</label>
-  <select id="mainSelect" onchange="selectMain(this.value)" style="width:100%;max-width:300px;padding:12px 16px;border:2px solid #111827;border-radius:999px;font-weight:900;font-size:16px;background:#fff">
-    <option value="building">🏰 Building</option>
-    <option value="governor">⚔️ Governor Gear</option>
-  </select>
-</div>
-
-<!-- BUILDING SECTION -->
-<div id="buildingContent">
- <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F8FAFB;color:#111827;font-family:Inter,sans-serif}
 header{height:60px;background:#0B0B0E;display:flex;align-items:center;gap:12px;padding:0 18px}
@@ -41,6 +31,17 @@ select,input{width:100%;padding:11px;border-radius:10px;border:1px solid #E5E7EB
 <div class="wrap">
 <div style="background:#fff;border:2px solid #111827;border-radius:16px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px">
 </div>
+<div style="padding:12px 16px">
+  <label style="font-weight:900;font-size:14px;display:block;margin-bottom:8px">CHOOSE CATEGORY - SELECT OPTIONS HERE</label>
+  <select id="mainSelect" onchange="selectMain(this.value)" style="width:100%;max-width:300px;padding:12px 16px;border:2px solid #111827;border-radius:999px;font-weight:900;font-size:16px;background:#fff">
+    <option value="building">🏰 Building</option>
+    <option value="governor">⚔️ Governor Gear</option>
+  </select>
+</div>
+
+<!-- BUILDING SECTION -->
+<div id="buildingContent">
+ 
 <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
