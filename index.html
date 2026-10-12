@@ -625,7 +625,7 @@ load1F();
   </div>
 
 <!-- GOVERNOR = 2A-2E -->
-<div id="gearContent" style="display:block">
+<div id="gearContent" style="display:none">
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#F59E0B,#D97706)">⚒️</span> 2A - GOVERNOR GEAR CRAFT</h2>
 <div class="card" id="div2A">
 <h2>⚔️ GOVERNER GEAR </h2>
@@ -699,18 +699,21 @@ if(typeof updateDiv2C==='function') updateDiv2C();
 </div>
 
 <script>
-function selectMain(type){
+function showTab(type){
   const b=document.getElementById('buildingContent');
   const g=document.getElementById('gearContent');
   const btnB=document.getElementById('btnBuilding');
   const btnG=document.getElementById('btnGear');
   if(type==='building'){
     b.style.display='block'; g.style.display='none';
-    btnB.classList.add('active','building'); btnG.classList.remove('active');
+    btnB.classList.add('active'); btnG.classList.remove('active2');
+    btnB.style.color='#fff'; btnG.style.color='#000';
   }else{
     b.style.display='none'; g.style.display='block';
-    btnG.classList.add('active','gear'); btnB.classList.remove('active');
+    btnG.classList.add('active2'); btnB.classList.remove('active');
   }
-  window.scrollTo({top:0,behavior:'smooth'});
 }
+showTab('building'); // default show building
 </script>
+</body>
+</html>
