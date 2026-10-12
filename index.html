@@ -912,40 +912,40 @@ load2F();
 
 <script>
 function toggleDrop(){
- var m=document.getElementById('dropMenu');
- m.style.display = m.style.display==='none'||m.style.display==='' ? 'block':'none';
+  var m=document.getElementById('dropMenu');
+  m.style.display = m.style.display==='none' || m.style.display==='' ? 'block' : 'none';
 }
+
 function selectMain(type){
- var label=document.getElementById('dropLabel');
- var bContent=document.getElementById('buildingContent');
- var gContent=document.getElementById('gearContent');
- var bOpt=document.getElementById('optBuilding');
- var gOpt=document.getElementById('optGear');
- document.getElementById('dropMenu').style.display='none';
- if(type==='building'){
-   label.textContent='🏰 Building';
-   bContent.style.display='block';
-   gContent.style.display='none';
-   bOpt.style.background='#111827';
-   bOpt.innerHTML='<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>';
-   gOpt.style.background='transparent';
-   gOpt.innerHTML='<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>';
- }else{
-   label.textContent='⚔️ Governor Gear';
-   bContent.style.display='none';
-   gContent.style.display='block';
-   gOpt.style.background='#111827';
-   gOpt.innerHTML='<span>⚔️ Governor Gear</span><span style="width:28px;height:28px;border-radius:50%;border:3px solid #93C5FD;display:flex;align-items:center;justify-content:center"><span style="width:14px;height:14px;background:#93C5FD;border-radius:50%;display:block"></span></span>';
-   bOpt.style.background='transparent';
-   bOpt.innerHTML='<span>🏰 Building</span><span style="width:28px;height:28px;border-radius:50%;border:2px solid #fff;display:block"></span>';
- }
+  var label=document.getElementById('dropLabel');
+  // Find building div - try both IDs
+  var bContent=document.getElementById('buildingContent') || document.getElementById('bContent') || document.getElementById('building');
+  // Find gear div - try ALL possible IDs
+  var gContent=document.getElementById('gearContent') || document.getElementById('governorGearContent') || document.getElementById('gContent') || document.getElementById('governor');
+  
+  var bOpt=document.getElementById('optBuilding');
+  var gOpt=document.getElementById('optGear');
+  document.getElementById('dropMenu').style.display='none';
+  
+  console.log('type:',type,'b:',bContent,'g:',gContent); // check in F12 console
+  
+  if(type==='building'){
+    if(label) label.textContent='🏰 Building';
+    if(bContent) bContent.style.display='block';
+    if(gContent) gContent.style.display='none';
+    if(bOpt) bOpt.style.background='#111827';
+    if(gOpt) gOpt.style.background='transparent';
+  }else{
+    if(label) label.textContent='⚔️ Governor Gear';
+    if(bContent) bContent.style.display='none';
+    if(gContent) gContent.style.display='block';
+    if(gOpt) gOpt.style.background='#111827';
+    if(bOpt) bOpt.style.background='transparent';
+  }
+  
+  // ALSO HIDE the inventory divs that are outside (div1B, div1C...)
+  var inv1B = document.getElementById('div1B');
+  var inv1C = document.getElementById('div1C');
+  if(inv1B) inv1B.style.display = (type==='building') ? 'block' : 'none';
+  if(inv1C) inv1C.style.display = (type==='building') ? 'block' : 'none';
 }
-// close dropdown when clicking outside
-document.addEventListener('click',function(e){
- if(!e.target.closest('#mainDropBtn') && !e.target.closest('#dropMenu')){
-   document.getElementById('dropMenu').style.display='none';
- }
-});
-</script>
-</body>
-</html>
