@@ -184,10 +184,15 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 </style>
 
 <div class="sticky-tabs">
-  <div class="tab-row">
-    <button id="btnBuilding" class="tab-btn active building" onclick="selectMain('building')">🏰 BUILDING </button>
-    <button id="btnGear" class="tab-btn gear" onclick="selectMain('governor')">⚔️ GOVERNOR GEAR </button>
-  </div>
+<div class="tab-row">
+<button id="btnBuilding" class="tab-btn" 
+onclick="document.getElementById('buildingContent').style.display='block';document.getElementById('gearContent').style.display='none';this.style.background='linear-gradient(180deg,#3B82F6,#1D4ED8)';this.style.color='#fff';document.getElementById('btnGear').style.background='linear-gradient(180deg,#2A344E,#1E293B)';document.getElementById('btnGear').style.color='#94A3B8';"
+style="background:linear-gradient(180deg,#3B82F6,#1D4ED8);color:#fff;box-shadow:0 5px 0 #1E3A8A,0 12px 24px rgba(59,130,246,0.4)">🏰 BUILDING</button>
+
+<button id="btnGear" class="tab-btn"
+onclick="document.getElementById('buildingContent').style.display='none';document.getElementById('gearContent').style.display='block';this.style.background='linear-gradient(180deg,#F59E0B,#D97706)';this.style.color='#000';document.getElementById('btnBuilding').style.background='linear-gradient(180deg,#2A344E,#1E293B)';document.getElementById('btnBuilding').style.color='#94A3B8';window.scrollTo(0,0);"
+style="background:linear-gradient(180deg,#2A344E,#1E293B);color:#94A3B8;box-shadow:0 5px 0 #0B101E;">⚔️ GOVERNOR GEAR</button>
+</div>
 </div>
 
 <!-- BUILDING = 1A-1F -->
