@@ -196,12 +196,11 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 <!-- BUILDING = 1A-1F -->
 <div id="buildingContent">
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#3B82F6,#1E40AF)">⏱️</span> 1A - BUILDING TIME CALCULATOR</h2> <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<h1 class="page-title">Building Calculator</h1>
+<h1 class="page-title">CALCULATE</h1>
 <p class="page-sub">REAL GAME DATA</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
 <div class="card"><h2>Time & Resources</h2><div class="grid2" style="margin-top:12px"><div><span class="lbl">Construction Speed %</span><input id="speedBonus" type="number" value="0"></div><div><span class="lbl">Pet Bonus %</span><input id="petBonus" type="number" value="0"></div><div><span class="lbl">Kingdom %</span><input id="kingdomBonus" type="number" value="0"></div><div><span class="lbl">Resource Discount %</span><input id="resDiscount" type="number" value="0"></div></div><div class="kpi"><b>Combined Speed</b><span id="combinedSpeed">0.0%</span></div><h2 style="margin-top:16px">Total Required</h2><div class="totgrid"><div class="res"><b>Original Time</b><span id="origTime">—</span></div><div class="res"><b>Modified Time</b><span id="modTime">—</span></div><div class="res"><b>Bread</b><span id="rBread">—</span></div><div class="res"><b>Wood</b><span id="rWood">—</span></div><div class="res"><b>Stone</b><span id="rStone">—</span></div><div class="res"><b>Iron</b><span id="rIron">—</span></div><div class="res"><b>Truegold</b><span id="rTG">—</span></div><div class="res"><b>Tempered</b><span id="rTTG">—</span></div></div><div id="breakdown" class="breakdown">Pick Current and Target above, then press Calculate.</div><button class="btn" style="margin-top:14px" onclick="calculateAll()">CALCULATE</button></div>
-</div>
 <script>
 var TROOP=["Barracks","Stables","Range"];
 var OTHER=["Town Center","Academy","Embassy","Command Center","Infirmary","Storehouse","War Academy"];
@@ -311,13 +310,82 @@ document.getElementById('rTG').textContent=tot.tg.toLocaleString();
 document.getElementById('rTTG').textContent=tot.ttg.toLocaleString();
 document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8px;font-weight:900">'+count+' buildings calculated - TIMINGS FIXED</div>';
 }
-</script></body></html> </div>
-  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#8B5CF6,#5B21B6)">🎒</span> 1B - SELF BACKPACK + SPEEDUP INVENTORY</h2><!-- paste 1B --></div>
+</script>
+  <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#8B5CF6,#5B21B6)">🎒</span> 1B - SELF BACKPACK + SPEEDUP INVENTORY</h2>
+<!-- ========== DIVISION 1B - INVENTORY MINUS ========== -->
+<div class="card" id="div1B" style="margin-top:16px">
+<h2> Self Backpack Inventory & Remaining</h2>
+<p style="font-size:11px;color:#6B7280;margin-bottom:12px">Auto takes Modified Time + Resources from 1A — enter your inventory to see what's left</p>
+
+<div style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
+<div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#6B7280;margin-top:4px">—</div></div>
+<div style="text-align:right"><b style="font-size:10px;color:#6B7280;display:block">REMAINING</b><span id="remainTime1B" style="font-weight:900;color:#DC2626">—</span><div id="remainRes1B" style="font-size:11px;color:#DC2626;margin-top:4px">—</div></div>
+</div>
+
+<h2 style="margin-bottom:8px">⏱ Speedup Inventory (how many you HAVE)</h2>
+<div class="grid2">
+<div><span class="lbl">30d Speedups</span><input id="inv_30d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">7d Speedups</span><input id="inv_7d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3d Speedups</span><input id="inv_3d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1d Speedups</span><input id="inv_1d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">8h Speedups</span><input id="inv_8h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3h Speedups</span><input id="inv_3h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1h Speedups</span><input id="inv_1h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">15m Speedups</span><input id="inv_15m" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<h2 style="margin-top:16px;margin-bottom:8px">📦 Resource Inventory (K/M/B supported)</h2>
+<div class="grid2">
+<div><span class="lbl">Bread you have</span><input id="inv_bread" placeholder="e.g. 10M, 2.5B" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Wood you have</span><input id="inv_wood" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Stone you have</span><input id="inv_stone" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Iron you have</span><input id="inv_iron" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Truegold you have</span><input id="inv_tg" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Tempered you have</span><input id="inv_ttg" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<div id="remainBox1B" style="margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#FFFBEB;display:none">
+<b style="font-size:11px">⚡ Remaining Speedups Needed After Using Inventory</b>
+<div id="remainList1B" style="margin-top:10px;display:grid;gap:6px;font-size:12px"></div>
+<div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;display:flex;justify-content:space-between"><span>Remaining Seconds:</span><b id="remainSec1B">0</b></div>
+</div>
+
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="resetInv1B()">Reset Inventory</button><button class="btn" onclick="calcRemaining1B()">RE-CALCULATE REMAINING</button></div>
+</div>
+
+<script>
+function parseKM(s){if(!s)return 0;s=s.toString().trim().toUpperCase();var m=1;if(s.endsWith('K')){m=1e3;s=s.slice(0,-1);}else if(s.endsWith('M')){m=1e6;s=s.slice(0,-1);}else if(s.endsWith('B')){m=1e9;s=s.slice(0,-1);}var n=parseFloat(s.replace(/,/g,''))||0;return Math.round(n*m);}
+
+window.calcRemaining1B=function(){
+var need=window.BUILD_TOTAL; if(!need){document.getElementById('needTime1B').textContent='Calculate 1A first';return;}
+var modSec=need.modTime||need.time||0;
+document.getElementById('needTime1B').textContent=formatTime(modSec)+' ('+modSec.toLocaleString()+'s)';
+document.getElementById('needRes1B').textContent='Bread '+need.bread.toLocaleString()+' | Wood '+need.wood.toLocaleString()+' | Stone '+need.stone.toLocaleString()+' | Iron '+need.iron.toLocaleString()+' | TG '+need.tg+' | TTG '+need.ttg;
+
+var invSec=(parseInt(document.getElementById('inv_30d').value)||0)*2592000 + (parseInt(document.getElementById('inv_7d').value)||0)*604800 + (parseInt(document.getElementById('inv_3d').value)||0)*259200 + (parseInt(document.getElementById('inv_1d').value)||0)*86400 + (parseInt(document.getElementById('inv_8h').value)||0)*28800 + (parseInt(document.getElementById('inv_3h').value)||0)*10800 + (parseInt(document.getElementById('inv_1h').value)||0)*3600 + (parseInt(document.getElementById('inv_15m').value)||0)*900;
+
+var remainSec=Math.max(0,modSec-invSec);
+document.getElementById('remainTime1B').textContent=remainSec===0?'DONE - No time left!':formatTime(remainSec)+' ('+remainSec.toLocaleString()+'s)';
+
+var invB=parseKM(document.getElementById('inv_bread').value), invW=parseKM(document.getElementById('inv_wood').value), invS=parseKM(document.getElementById('inv_stone').value), invI=parseKM(document.getElementById('inv_iron').value), invTG=parseInt(document.getElementById('inv_tg').value)||0, invTTG=parseInt(document.getElementById('inv_ttg').value)||0;
+
+var rB=Math.max(0,need.bread-invB), rW=Math.max(0,need.wood-invW), rS=Math.max(0,need.stone-invS), rI=Math.max(0,need.iron-invI), rTG=Math.max(0,need.tg-invTG), rTTG=Math.max(0,need.ttg-invTTG);
+document.getElementById('remainRes1B').textContent='Bread '+rB.toLocaleString()+' | Wood '+rW.toLocaleString()+' | Stone '+rS.toLocaleString()+' | Iron '+rI.toLocaleString()+' | TG '+rTG+' | TTG '+rTTG;
+
+var box=document.getElementById('remainBox1B'), list=document.getElementById('remainList1B');
+if(remainSec>0){box.style.display='block'; var ups=formatSecToSpeedups(remainSec); var html=''; for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';} if(!ups.length) html='<div style="color:#6B7280">Less than 1m</div>'; list.innerHTML=html; document.getElementById('remainSec1B').textContent=remainSec.toLocaleString()+' sec ('+(remainSec/3600).toFixed(1)+'h)';} else {box.style.display='block'; list.innerHTML='<b style="color:green">✅ You have enough speedups!</b>'; document.getElementById('remainSec1B').textContent='0 sec';}
+};
+
+window.updateDiv1B=function(){calcRemaining1B();};
+window.resetInv1B=function(){['inv_30d','inv_7d','inv_3d','inv_1d','inv_8h','inv_3h','inv_1h','inv_15m','inv_tg','inv_ttg'].forEach(function(id){document.getElementById(id).value=0;});['inv_bread','inv_wood','inv_stone','inv_iron'].forEach(function(id){document.getElementById(id).value='';});calcRemaining1B();};
+
+// auto try on load
+setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
+ </script></div>
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#10B981,#065F46)">🪵</span> 1C - RESOURCE INVENTORY</h2><!-- paste 1C --></div>
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#F59E0B,#92400E)">📋</span> 1D - BUILDING REQUIREMENTS</h2><!-- paste 1D --></div>
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#EF4444,#7F1D1D)">⚡</span> 1E - SPEEDUP CALCULATION</h2><!-- paste 1E --></div>
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#FF0000,#990000)">▶️</span> 1F - YOUTUBE & GUIDES</h2><!-- paste 1F --></div>
-</div>
 
 <!-- GOVERNOR = 2A-2E -->
 <div id="gearContent" style="display:none">
