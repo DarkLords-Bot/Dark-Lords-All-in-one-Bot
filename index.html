@@ -189,19 +189,33 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 .custom-select{width:100%;background:linear-gradient(180deg,#1C253B,#151D30);color:#fff;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:14px 16px;font-weight:900;font-size:14px;outline:none;appearance:none;background-image:linear-gradient(45deg, transparent 50%, #F59E0B 50%),linear-gradient(135deg, #F59E0B 50%, transparent 50%);background-position:calc(100% - 20px) calc(1em + 2px),calc(100% - 15px) calc(1em + 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 .custom-select:focus{border-color:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,0.2)}
 </style>
-<!DOCTYPE html>
-<html>
-<body>
-  <div class="wrap">
-    <select dropdown>
-<select id="mainDropdown" class="custom-select" onchange="switchTab(this.value)" style="background:#1C253B;color:#fff">
-<option value="building">🏰 BUILDING CALCULATOR</option>
-<option value="governor">⚔️ GOVERNOR GEAR CALCULATOR</option>
-</select>
-    </select>
-</body>
-</html>
+<style>
+.myDrop{position:relative;width:100%;margin-top:10px}
+.myDropBtn{width:100%;background:linear-gradient(180deg,#1C253B,#151D30);color:#fff;border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:16px;font-weight:900;font-size:14px;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.myDropList{position:absolute;top:100%;left:0;right:0;margin-top:8px;background:#151D30;border:1px solid rgba(255,255,255,0.15);border-radius:14px;overflow:hidden;z-index:9999;display:none;box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+.myDropList div{padding:14px 16px;color:#fff;font-weight:800;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06)}
+.myDropList div:last-child{border-bottom:0}
+.myDropList div:hover{background:#1C253B;color:#F59E0B}
+</style>
+
+<div class="myDrop">
+  <button class="myDropBtn" onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
+    <span id="dropLabel">🏰 BUILDING CALCULATOR</span>
+    <span>▼</span>
+  </button>
+  <div id="dropList" class="myDropList">
+    <div onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
+    <div onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
+  </div>
 </div>
+
+<script>
+function selectCat(val,label){
+  document.getElementById('dropLabel').textContent = label;
+  document.getElementById('dropList').style.display='none';
+  switchTab(val);
+}
+</script>
 
 
 <!-- BUILDING = 1A-1F -->
