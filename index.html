@@ -817,6 +817,15 @@ var oldCalc2A=window.calc2A;
 window.calc2A=function(){
 if(oldCalc2A) oldCalc2A.apply(this, arguments);
 setTimeout(window.calcRemaining2C,100);
+ // ADD THIS - 4 lines - BEFORE the } that closes calc2A
+  window.GEAR_TOTAL = {
+    modTime: modSec,
+    origTime: origSec || modSec,
+    satin: totalSatin,
+    gilded: totalGilded,
+    time: modSec
+  };
+} // <- this is your original closing brace of calc2A
 };
 </script>
  <!-- ========== DIVISION 2C - FINAL PLAN & EXPORT - SAME AS 1C SCREENSHOT ========== -->
@@ -850,25 +859,22 @@ setTimeout(window.calcRemaining2C,100);
 <button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('exportText2').value='';document.getElementById('cDetails2').innerHTML='Calculate 2A first...';document.getElementById('cNeed2').textContent='—';document.getElementById('cMissing2').textContent='—';">Clear</button>
 <button class="btn" style="flex:1;background:#10B981" onclick="var w=window.open('','','width=800,height=900');w.document.write('<pre>'+document.getElementById('exportText2').value+'</pre>');w.document.close();w.print();">🖨️ Print / Save PDF</button>
 </div>
+</div>
+ <script>
+// keep 2C in sync when 2A recalculated
+var oldCalc2A = window.calc2A || window.calculate2A;
+window.calc2A = function(){
+  if(oldCalc2A) oldCalc2A.apply(this, arguments);
+  setTimeout(function(){ 
+    if(window.calc2C) calc2C(); 
+    if(window.calcRemaining2C) calcRemaining2C();
+  }, 100);
+};
 
-<script>
-// Hook for 2C - call this from your 2A calculate
-window.calc2C = function(){
- var need = window.GEAR_TOTAL; // set this in your 2A CALCULATE
- if(!need){ document.getElementById('cDetails2').innerHTML = 'Calculate 2A first...'; return; }
- // Example - adapt to your 2A variables
- var modSec = need.modTime||0;
- var invSec = 0; // calculate from 2B inventory same as 1B
- try{
-   invSec = (parseInt(document.getElementById('inv_30d_2')?.value)||0)*2592000 + (parseInt(document.getElementById('inv_7d_2')?.value)||0)*604800 + (parseInt(document.getElementById('inv_3d_2')?.value)||0)*259200 + (parseInt(document.getElementById('inv_1d_2')?.value)||0)*86400;
- }catch(e){}
- var remainSec = Math.max(0, modSec - invSec);
- document.getElementById('cNeed2').textContent = need.text || (need.satin+' Satin / '+need.gilded+' Gilded');
- document.getElementById('cMissing2').textContent = remainSec===0 ? '0 - DONE ✅' : remainSec+'s Still Needed';
- document.getElementById('cDetails2').innerHTML = '<b>Time:</b> Need '+modSec+'s - Have '+invSec+'s = <b style="color:'+(remainSec===0?'green':'red')+'">Remaining '+remainSec+'s</b><br><br><b>Materials Missing:</b><br>'+(need.satin||0)+' Satin, '+(need.gilded||0)+' Gilded';
- document.getElementById('exportText2').value = 'DarkLords KS - GOV GEAR PLAN\nNEED: '+(need.text||JSON.stringify(need))+'\nHAVE: '+invSec+'s\nREMAINING: '+remainSec+'s';
-}
+// also keep old name
+window.calculate2A = window.calc2A;
 </script>
+
  <!-- DIVISION 2D - FULL TABLE -->
 <div class="card" id="div2D">
 <h2>📋 Governor Gear Requirements Table</h2>
@@ -892,7 +898,74 @@ if(wrap.style.display==='none'){
 wrap.style.display='block';
 // build only once
 if(body.innerHTML.trim()===''){
-var levels=window.LEVELS2A||["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var levels=window.LEVELS2A||["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T<script>
+window.calc2C = function(){
+  var need = window.GEAR_TOTAL; // must be set in 2A: {modTime, satin, gilded, balm, thread...}
+  if(!need || (!need.modTime && !need.satin)){
+    document.getElementById('cDetails2').innerHTML = 'Calculate 2A first...';
+    document.getElementById('cNeed2').textContent = '—';
+    document.getElementById('cMissing2').textContent = '—';
+    document.getElementById('exportText2').value = 'Waiting for 2A CALCULATE...';
+    return;
+  }
+
+  // --- TIME INVENTORY from 2B (all speedups) ---
+  var invSec = 0;
+  try{
+    invSec = (parseInt(document.getElementById('inv_30d_2')?.value)||0)*2592000
+           + (parseInt(document.getElementById('inv_7d_2')?.value)||0)*604800
+           + (parseInt(document.getElementById('inv_3d_2')?.value)||0)*259200
+           + (parseInt(document.getElementById('inv_1d_2')?.value)||0)*86400
+           + (parseInt(document.getElementById('inv_8h_2')?.value)||0)*28800
+           + (parseInt(document.getElementById('inv_3h_2')?.value)||0)*10800
+           + (parseInt(document.getElementById('inv_1h_2')?.value)||0)*3600
+           + (parseInt(document.getElementById('inv_15m_2')?.value)||0)*900;
+  }catch(e){}
+
+  var modSec = need.modTime || need.time || 0;
+  var remainSec = Math.max(0, modSec - invSec);
+
+  // --- MATERIAL INVENTORY from 2B ---
+  var invSatin = parseInt(document.getElementById('inv_satin')?.value || document.getElementById('inv_2_satin')?.value || 0);
+  var invGilded = parseInt(document.getElementById('inv_gilded')?.value || document.getElementById('inv_2_gilded')?.value || 0);
+
+  var missSatin = Math.max(0, (need.satin||0) - invSatin);
+  var missGilded = Math.max(0, (need.gilded||0) - invGilded);
+
+  // --- UPDATE CARDS ---
+  document.getElementById('cNeed2').textContent = (need.satin||0)+' Satin / '+(need.gilded||0)+' Gilded / '+modSec+'s';
+  document.getElementById('cMissing2').textContent = missSatin+' Satin / '+missGilded+' Gilded / '+remainSec+'s';
+  
+  document.getElementById('cDetails2').innerHTML = 
+    '<div style="display:flex;justify-content:space-between"><span>Original Time:</span><b>'+ (need.origTime? formatTime(need.origTime) : modSec+'s') +'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>Modified Time:</span><b>'+ formatTime(modSec) +'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>Have Time:</span><b>'+ formatTime(invSec) +'</b></div>'+
+    '<div style="display:flex;justify-content:space-between;color:'+(remainSec==0?'#16A34A':'#DC2626')+'"><span>Remaining Time:</span><b>'+ (remainSec==0?'DONE ✅':formatTime(remainSec)) +'</b></div>'+
+    '<hr style="margin:10px 0;border:none;border-top:1px dashed #E5E7EB">'+
+    '<div>Satin: Total '+(need.satin||0)+' - Have '+invSatin+' = <b style="color:'+(missSatin>0?'#DC2626':'#16A34A')+'">'+missSatin+' still needed</b></div>'+
+    '<div>Gilded: Total '+(need.gilded||0)+' - Have '+invGilded+' = <b style="color:'+(missGilded>0?'#DC2626':'#16A34A')+'">'+missGilded+' still needed</b></div>';
+
+  document.getElementById('exportText2').value = 
+`DarkLords - GOV GEAR FINAL PLAN
+NEED: ${(need.satin||0)} Satin / ${(need.gilded||0)} Gilded
+TIME NEED: ${formatTime(modSec)} (${modSec}s)
+HAVE: ${formatTime(invSec)} (${invSec}s) + ${invSatin} Satin / ${invGilded} Gilded
+REMAINING: ${formatTime(remainSec)} (${remainSec}s) + ${missSatin} Satin / ${missGilded} Gilded
+${remainSec==0 && missSatin==0 && missGilded==0 ? 'STATUS: READY TO UPGRADE ✅' : 'STATUS: FARM MORE ⚠️'}`;
+
+  console.log('2C updated', need, 'remain', remainSec);
+};
+
+function formatTime(s){
+  if(!s) return '0s';
+  var d=Math.floor(s/86400); s%=86400;
+  var h=Math.floor(s/3600); s%=3600;
+  var m=Math.floor(s/60); s%=60;
+  return (d?d+'d ':'')+(h?h+'h ':'')+(m?m+'m ':'')+s+'s';
+}
+</script>
+<script>
+ 1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
 var costs=window.COSTS2A||[{s:1500,t:15,v:0}];
 var cumS=0; var html='';
 for(var i=0;i<costs.length;i++){
