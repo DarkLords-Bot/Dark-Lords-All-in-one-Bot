@@ -184,15 +184,28 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 </style>
 
 <div class="sticky-tabs">
-<div class="tab-row">
-<button id="btnBuilding" class="tab-btn" 
-onclick="document.getElementById('buildingContent').style.display='block';document.getElementById('buildingContent').style.display='none';this.style.background='linear-gradient(180deg,#3B82F6,#1D4ED8)';this.style.color='#fff';document.getElementById('btnbuilding').style.background='linear-gradient(180deg,#2A344E,#1E293B)';document.getElementById('btnbuilding').style.color='#94A3B8';"
-style="background:linear-gradient(180deg,#3B82F6,#1D4ED8);color:#fff;box-shadow:0 5px 0 #1E3A8A,0 12px 24px rgba(59,130,246,0.4)">🏰 BUILDING</button>
+<style>
+.dropdown-wrap{position:sticky;top:60px;z-index:20;background:#080C16;padding:10px 0}
+.custom-select{width:100%;background:linear-gradient(180deg,#1C253B,#151D30);color:#fff;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:14px 16px;font-weight:900;font-size:14px;outline:none;appearance:none;background-image:linear-gradient(45deg, transparent 50%, #F59E0B 50%),linear-gradient(135deg, #F59E0B 50%, transparent 50%);background-position:calc(100% - 20px) calc(1em + 2px),calc(100% - 15px) calc(1em + 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.custom-select:focus{border-color:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,0.2)}
+</style>
 
-<button id="btnGear" class="tab-btn"
-onclick="document.getElementById('gearContent').style.display='none';document.getElementById('gearContent').style.display='block';this.style.background='linear-gradient(180deg,#F59E0B,#D97706)';this.style.color='#000';document.getElementById('btngear').style.background='linear-gradient(180deg,#2A344E,#1E293B)';document.getElementById('btnGear').style.color='#94A3B8';window.scrollTo(0,0);"
-style="background:linear-gradient(180deg,#2A344E,#1E293B);color:#94A3B8;box-shadow:0 5px 0 #0B101E;">⚔️ GOVERNOR GEAR</button>
+<div class="dropdown-wrap">
+<select id="mainDropdown" class="custom-select" onchange="switchTab(this.value)">
+<option value="building">🏰 BUILDING CALCULATOR</option>
+<option value="governor">⚔️ GOVERNOR GEAR CALCULATOR</option>
+</select>
 </div>
+
+<script>
+function switchTab(val){
+  const b=document.getElementById('buildingContent');
+  const g=document.getElementById('gearContent');
+  if(val==='building'){b.style.display='block';g.style.display='none';}
+  else{b.style.display='none';g.style.display='block';}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 </div>
 
 <!-- BUILDING = 1A-1F -->
