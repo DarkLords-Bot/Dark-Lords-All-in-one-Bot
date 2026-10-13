@@ -846,27 +846,25 @@ setTimeout(window.calcRemaining2C,100);
 };
 </script>
  <!-- ========== DIVISION 2C - FINAL PLAN & EXPORT - SAME AS 1C SCREENSHOT ========== -->
-<div id="finalPlan2C" class="card">
-<div style="background:#FFFFFF;padding:14px;border-radius:16px;border:1px solid #111;margin-top:12px">
+<div class="card" id="FinalPlan2C">
+<div style="background:#FFFFFF;padding:14px;border-radius:16px;border:1px solid #000;margin-top:12px">
 <h3 style="margin:0;color:#000000">⚡ FINAL PLAN & EXPORT</h3>
 <p style="font-size:12px;color:#000000;margin:4px 0 10px 0">Auto from 2A Need minus 2B Inventory = What you still need</p>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div style="background:#FFFFFF;border:1px solid #111;padding:10px;border-radius:12px">
+<div style="background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:12px">
 <b style="color:#000000">✅ TOTAL NEEDED (2A)</b><br>
 <span id="cNeed2" style="color:#000000;font-weight:900">0 Satin / 0 Threads / 0 Vision</span>
 </div>
-<div style="background:#FFFFFF;border:1px solid #111;padding:10px;border-radius:12px">
+<div style="background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:12px">
 <b style="color:#000000">⏳ STILL MISSING (After 2B)</b><br>
 <span id="cMissing2" style="color:#000000;font-weight:900">0 / 0 / 0 Still Missing</span>
 </div>
 </div>
 
-<div id="cDetails2" style="margin-top:10px;background:#FFFFFF;border:1px solid #111;padding:10px;border-radius:10px;color:#000000;font-size:13px;font-weight:600">Calculate 2A first...</div>
+<div id="cDetails2" style="margin-top:10px;background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:10px;color:#000000;font-size:13px">Calculate 2A first...</div>
 
-<div style="margin-top:12px">
-<b style="color:#000000">📋 COPY PLAN FOR ALLIANCE NOTES</b>
-<textarea id="exportText2" style="width:100%;height:180px;margin-top:6px;background:#FFFFFF;color:#000000;border:1px solid #111;border-radius:12px;padding:10px;font-family:monospace;font-size:12px;font-weight:600">Calculate 2A first...</textarea>
+<textarea id="exportText2" style="width:100%;height:180px;margin-top:10px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;padding:10px;font-family:monospace;font-size:12px;font-weight:600">Calculate 2A first...</textarea>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
 <button onclick="copyFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">📋 COPY TEXT</button>
@@ -876,6 +874,7 @@ setTimeout(window.calcRemaining2C,100);
 <button onclick="clearFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🧹 CLEAR</button>
 <button onclick="printPDF2C()" style="padding:14px;background:#000000;color:#FFFFFF;border:none;border-radius:12px;font-weight:900">🖨️ PRINT / SAVE PDF</button>
 </div>
+
 </div>
 </div>
 
@@ -885,35 +884,10 @@ function parseKM_2C(v){ if(!v) return 0; v=(''+v).toLowerCase().trim().replace(/
 window.calc2C = function(){
  // MATCH 2A VARIABLES
  var ts = (window.G_TOTAL2A && window.G_TOTAL2A.s)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.satin)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.s)?? 0;
- var tt = (window.G_TOTAL2A && window.G_TOTAL2A.t)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.thread)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.t)?? 0;
-<div style="background:#FFFFFF;padding:14px;border-radius:16px;border:1px solid #000;margin-top:12px">
-<h3 style="margin:0;color:#000">⚡ FINAL PLAN & EXPORT</h3>
-<p style="font-size:12px;color:#000;margin:4px 0 10px 0">Auto from 2A Need minus 2C Inventory</p>
+ var tt = (window.G_TOTAL2A && window.G_TOTAL2A.t)?? (window.GEAR_TOTAL && window.GEAR<div class="card" id="FinalPlan2C">
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div style="background:#FFF;border:1px solid #000;padding:10px;border-radius:12px">
-<b style="color:#000">✅ TOTAL NEEDED (2A)</b><br>
-<span id="cNeed2" style="color:#000;font-weight:900">0 Satin / 0 Threads / 0 Vision</span>
-</div>
-<div style="background:#FFF;border:1px solid #000;padding:10px;border-radius:12px">
-<b style="color:#000">⏳ STILL MISSING</b><br>
-<span id="cMissing2" style="color:#000;font-weight:900">0 / 0 / 0 Still Missing</span>
-</div>
-</div>
-
-<div id="cDetails2" style="margin-top:10px;background:#FFF;border:1px solid #000;padding:10px;border-radius:10px;color:#000;font-size:13px">Calculate 2A first...</div>
-
-<textarea id="exportText2" style="width:100%;height:180px;margin-top:10px;background:#FFF;color:#000;border:1px solid #000;border-radius:12px;padding:10px;font-family:monospace;font-size:12px;font-weight:600">Calculate 2A first...</textarea>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<button onclick="copyFinal2C()" style="padding:14px;background:#FFF;color:#000;border:1px solid #000;border-radius:12px;font-weight:900">📋 COPY TEXT</button>
-<button onclick="calc2C()" style="padding:14px;background:#FFF;color:#000;border:1px solid #000;border-radius:12px;font-weight:900">🔄 REFRESH FINAL</button>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<button onclick="clearFinal2C()" style="padding:14px;background:#FFF;color:#000;border:1px solid #000;border-radius:12px;font-weight:900">🧹 CLEAR</button>
-<button onclick="printPDF2C()" style="padding:14px;background:#000;color:#FFF;border:none;border-radius:12px;font-weight:900">🖨️ PRINT / SAVE PDF</button>
-</div>
-</div>
+TOTAL.thread)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.t)?? 0;
+</script>
 
 <script>
 function parseKM(v){
