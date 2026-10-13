@@ -735,16 +735,45 @@ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded
 
 <script>
 window.updateDiv2B=function(){
-var s=(window.G_TOTAL2A&&window.G_TOTAL2A.s)||0;
-var t=(window.G_TOTAL2A&&window.G_TOTAL2A.t)||0;
-var v=(window.G_TOTAL2A&&window.G_TOTAL2A.v)||0;
-document.getElementById('bSatin2B').textContent=s?s.toLocaleString():'—';
-document.getElementById('bThreads2B').textContent=t?t.toLocaleString():'—';
-document.getElementById('bVision2B').textContent=v?v.toLocaleString():'—';
-document.getElementById('bPower2B').textContent=s?Math.round(s/100).toLocaleString()+'k':'—';
+ var s=(window.G_TOTAL2A && window.G_TOTAL2A.s) || (window.GEAR_TOTAL && window.GEAR_TOTAL.satin) || (window.GEAR_TOTAL && window.GEAR_TOTAL.s) || 0;
+ var t=(window.G_TOTAL2A && window.G_TOTAL2A.t) || (window.GEAR_TOTAL && window.GEAR_TOTAL.thread) || (window.GEAR_TOTAL && window.GEAR_TOTAL.t) || 0;
+ var v=(window.G_TOTAL2A && window.G_TOTAL2A.v) || (window.GEAR_TOTAL && window.GEAR_TOTAL.vision) || (window.GEAR_TOTAL && window.GEAR_TOTAL.v) || 0;
+ 
+ var set = function(id, val, isPower){
+   var el=document.getElementById(id);
+   if(!el) return;
+   if(isPower){
+     el.textContent = val ? Math.round(val/100).toLocaleString()+'k' : '—';
+   } else {
+     el.textContent = val ? val.toLocaleString() : '—';
+   }
+ };
+
+ set('bSatin2B', s, false);
+ set('bThreads2B', t, false);
+ set('bVision2B', v, false);
+ set('bPower2B', s, true);
+
+ // console for debug
+ console.log('LIVE SUMMARY linked ->', s, t, v);
 };
+
 // run once on load
-setTimeout(updateDiv2B,500);
+setTimeout(window.updateDiv2B,500);
+
+// AUTO-LINK: Hook into calc2A so Live Summary updates every time you press CALCULATE in 2A
+(function(){
+ var originalCalc2A = window.calc2A;
+ if(!originalCalc2A) return;
+ window.calc2A = function(){
+   var result = originalCalc2A.apply(this, arguments);
+   // After 2A calculates, update live summary
+   setTimeout(window.updateDiv2B, 10);
+   if(typeof window.updateDiv2C==='function') setTimeout(window.updateDiv2C, 20);
+   if(window.calc2C) setTimeout(window.calc2C, 30);
+   return result;
+ };
+})();
 </script>
 <!-- DIVISION 2C - INVENTORY (AUTO MINUS FROM 2B) -->
 <div class="card" id="div2C">
