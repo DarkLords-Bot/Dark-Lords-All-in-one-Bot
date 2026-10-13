@@ -700,37 +700,16 @@ if(typeof updateDiv2C==='function') updateDiv2C();
 </script>
 </div>
 <script>
-function switchTab(val){
-  const building = document.getElementById('buildingContent');
-  const gear = document.getElementById('gearContent');
-  const btnB = document.getElementById('btnBuilding');
-  const btnG = document.getElementById('btnGear');
-  
-  if(!building || !gear){ console.log("IDs missing"); return; }
-
-  if(type === 'building'){
-    building.style.display = 'block';
-    gear.style.display = 'none';
-    btnB.style.background = 'linear-gradient(180deg,#3B82F6,#1D4ED8)';
-    btnB.style.color = '#fff';
-    btnB.style.boxShadow = '0 5px 0 #1E3A8A,0 12px 24px rgba(59,130,246,0.4)';
-    btnG.style.background = 'linear-gradient(180deg,#2A344E,#1E293B)';
-    btnG.style.color = '#94A3B8';
-    btnG.style.boxShadow = '0 5px 0 #0B101E';
-  }else{
-    building.style.display = 'none';
-    gear.style.display = 'block';
-    btnG.style.background = 'linear-gradient(180deg,#F59E0B,#D97706)';
-    btnG.style.color = '#000';
-    btnG.style.boxShadow = '0 5px 0 #92400E,0 12px 24px rgba(245,158,11,0.4)';
-    btnB.style.background = 'linear-gradient(180deg,#2A344E,#1E293B)';
-    btnB.style.color = '#94A3B8';
-    btnB.style.boxShadow = '0 5px 0 #0B101E';
+setTimeout(()=>{
+  const b = document.getElementById('buildingContent');
+  const g = document.getElementById('gearContent');
+  console.log("Building:", b);
+  console.log("Governor:", g);
+  console.log("Is gear inside building?", b.contains(g));
+  if(b.contains(g)){
+    alert("❌ ERROR: gearContent is INSIDE buildingContent! You have missing </div> before gear. Fix it!");
+  } else {
+    alert("✅ Structure OK! b and g are separate");
   }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
-<script>
-// force open building on load
-document.addEventListener('DOMContentLoaded', ()=> showTab('building'));
+}, 1000);
 </script>
