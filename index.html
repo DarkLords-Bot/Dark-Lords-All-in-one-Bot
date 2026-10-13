@@ -683,6 +683,7 @@ return '<div class="bbox"><div class="btop"><b>'+n+'</b></div><div><span class="
 var G_TOTAL2A={s:0,t:0,v:0};
 
 window.calc2A=function(){
+window.calc2A=function(){
 var ts=0,tt=0,tv=0;
 var html='';
 for(var p=0;p<GEAR_PIECES2A.length;p++){
@@ -708,12 +709,19 @@ document.getElementById('gearBreakdown2A').innerHTML='<b style="color:red">Selec
 }else{
 document.getElementById('gearBreakdown2A').innerHTML=html+'<div style="margin-top:8px;color:green;font-weight:900">✓ Total: '+ts.toLocaleString()+' Satin | '+tt.toLocaleString()+' Threads | '+tv.toLocaleString()+' Vision | '+LEVELS2A.length+' levels loaded FIXED</div>';
 }
-// if 2B exists, update it
+
+// --- FIX: SAVE FOR 2C ---
+window.GEAR_TOTAL = { satin: ts, thread: tt, gilded: tv, vision: tv, s: ts, t: tt, v: tv, raw: G_TOTAL2A };
+window._lastSatin = ts; window._lastThread = tt; window._lastGilded = tv;
+console.log('2A -> GEAR_TOTAL SET', window.GEAR_TOTAL);
+
+// --- FIX: CALL ALL POSSIBLE 2C NAMES ---
 if(typeof updateDiv2B==='function') updateDiv2B();
 if(typeof updateDiv2C==='function') updateDiv2C();
-};
-                                                                                      </script>
-
+if(window.calc2C) window.calc2C();
+if(window.calcRemaining2C) window.calcRemaining2C();
+if(window.calc2CRef) window.calc2CRef();
+};                                                                                    </script
 <script>
 function doGearSearch(){
  var q = document.getElementById('ytSearchGear').value.trim();
@@ -861,20 +869,42 @@ setTimeout(window.calcRemaining2C,100);
 </div>
 </div>
  <script>
-// keep 2C in sync when 2A recalculated
-var oldCalc2A = window.calc2A || window.calculate2A;
-window.calc2A = function(){
-  if(oldCalc2A) oldCalc2A.apply(this, arguments);
-  setTimeout(function(){ 
-    if(window.calc2C) calc2C(); 
-    if(window.calcRemaining2C) calcRemaining2C();
-  }, 100);
+window.calc2C = window.updateDiv2C = function(){
+ var need = window.GEAR_TOTAL || G_TOTAL2A;
+ if(!need || (need.satin===0 && need.s===0 && need.raw?.s===0)){
+   document.getElementById('cDetails2').innerHTML = 'Calculate 2A first...';
+   return;
+ }
+ var ts = need.satin || need.s || need.raw?.s || 0;
+ var tt = need.thread || need.t || need.raw?.t || 0;
+ var tv = need.vision || need.gilded || need.v || need.raw?.v || 0;
+
+ var get = (id)=> parseInt(document.getElementById(id)?.value)||0;
+ var invS = get('inv_satin') || get('inv_2_satin') || get('satin_have') || 0;
+ var invT = get('inv_threads') || get('inv_thread') || get('inv_2_thread') || 0;
+ var invV = get('inv_vision') || get('inv_2_vision') || get('vision_have') || 0;
+
+ var missS = Math.max(0, ts - invS);
+ var missT = Math.max(0, tt - invT);
+ var missV = Math.max(0, tv - invV);
+
+ document.getElementById('cNeed2').textContent = ts.toLocaleString()+' Satin / '+tt.toLocaleString()+' Threads / '+tv+' Vision';
+ document.getElementById('cMissing2').textContent = missS.toLocaleString()+' / '+missT.toLocaleString()+' / '+missV+' Still Missing';
+
+ document.getElementById('cDetails2').innerHTML =
+   'Satin: Total '+ts.toLocaleString()+' - Have '+invS.toLocaleString()+' = <b style="color:'+(missS>0?'#DC2626':'#16A34A')+'">'+missS.toLocaleString()+' still needed</b><br>'+
+   'Threads: Total '+tt.toLocaleString()+' - Have '+invT.toLocaleString()+' = <b style="color:'+(missT>0?'#DC2626':'#16A34A')+'">'+missT.toLocaleString()+' still needed</b><br>'+
+   'Vision: Total '+tv.toLocaleString()+' - Have '+invV.toLocaleString()+' = <b style="color:'+(missV>0?'#DC2626':'#16A34A')+'">'+missV.toLocaleString()+' still needed</b>';
+
+ document.getElementById('exportText2').value =
+'DarkLords - GOV GEAR FINAL PLAN\n'+
+'NEED: '+ts.toLocaleString()+' Satin / '+tt.toLocaleString()+' Threads / '+tv+' Vision\n'+
+'HAVE: '+invS.toLocaleString()+' / '+invT.toLocaleString()+' / '+invV+'\n'+
+'REMAINING: '+missS.toLocaleString()+' / '+missT.toLocaleString()+' / '+missV+'\n'+
+(missS==0 && missT==0 && missV==0? 'READY ✅' : 'FARM MORE ⚠️');
 };
-
-// also keep old name
-window.calculate2A = window.calc2A;
+window.calcRemaining2C = window.calc2C;
 </script>
-
  <!-- DIVISION 2D - FULL TABLE -->
 <div class="card" id="div2D">
 <h2>📋 Governor Gear Requirements Table</h2>
