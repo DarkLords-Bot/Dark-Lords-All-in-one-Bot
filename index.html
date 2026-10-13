@@ -419,12 +419,12 @@ setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
 <div id="cDetails" style="background:#6B7280;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;font-size:12px;line-height:1.6">Calculate 1A first...</div>
 
 <div style="margin-top:14px;background:#FFFFFF;border-radius:12px;padding:14px">
-<b style="color:#6B7280;font-size:11px;text-transform:uppercase;display:block;margin-bottom:8px">📋 Copy-Paste Plan For Alliance / Notes</b>
+<b style="color:#fff;font-size:11px;text-transform:uppercase;display:block;margin-bottom:8px">📋 Copy-Paste Plan For Alliance / Notes</b>
 <textarea id="exportText" style="width:100%;height:180px;background:#1F2937;color:#E5E7EB;border:1px solid #374151;border-radius:8px;padding:10px;font-family:monospace;font-size:11px;white-space:pre-wrap" readonly>Waiting for 1A CALCULATE...</textarea>
-<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost" style="background:#fff" onclick="copyExport1C()">📋 Copy Text</button><button class="btn" onclick="calc1C()">🔄 Refresh Final</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style onclick="background:#fff" onclick="copyExport1C()">📋 Copy Text</button><button class="btn" style onclick="calc1C()">🔄 Refresh Final</button></div>
 </div>
 
-<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="document.getElementById('exportText').value='';">Clear</button><button class="btn" style="background:#10B981" onclick="window.print()">🖨️ Print / Save PDF</button></div>
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn" style onclick="document.getElementById('exportText').value='';">Clear</button><button class="btn" style="background:#10B981" onclick="window.print()">🖨️ Print / Save PDF</button></div>
 </div>
 
 <script>
@@ -564,18 +564,18 @@ setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
 </div>
 
 <!-- ========== UPGRADED BOX 5 - LIVE YOUTUBE SEARCH ========== -->
-<div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;margin-bottom:14px;background:#F5F3FF">
-<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">>🔴 Box 5 - Governor Gear Only Search</span>
+<div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;margin-bottom:14px;background:#6B7280">
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">>🔴 Box 5 - Buildings Only Search</span>
 <div style="display:flex;gap:8px">
 <input id="ytSearch" type="text" placeholder="Type anything... e.g. Town Center 30, Truegold, F2P guide" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doYTSearch()}">
-<button class="btn" style onclick="doYTSearch()" style="padding:12px 16px;border-radius:10px;background:#FF0000;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+<button onclick="doGearSearch()" style="padding:12px 16px;border-radius:10px;background:#6B7280;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
 </div>
-<p style="font-size:10px;color:#6B7280;margin-top:8px">This opens YouTube directly with your search - live YouTube access</p>
+<p style="font-size:10px;color:#fff;margin-top:8px">This opens YouTube directly with your search - live YouTube access</p>
 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
-<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
-<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
-<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
+<button class="btn" style onclick="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
+<button class="btn" style onclick="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
+<button class="btn" style onclick="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
+<button class="btn" style onclick="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
 </div>
 </div>
 
@@ -1079,7 +1079,7 @@ window.toggleTable2D=function(){
 <div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
 <span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 2 - Guide + Calculator</span>
 <a href="https://www.kingshotguide.org/guides/governor-gear-and-charms" target="_blank" style="display:block;text-decoration:none">
-<div style="background:#FF000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
 <span>📖 kingshotguide.org / governor-gear-and-charms</span><span>↗</span>
 </div>
 </a>
