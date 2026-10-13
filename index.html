@@ -990,36 +990,126 @@ window.calc2C = window.updateDiv2C = function(){
 
 function copyExport2(){
   var el=document.getElementById('exportText2');
-  el.select(); el.setSelectionRange(0,99999);
-  navigator.clipboard? navigator.clipboard.writeText(el.value) : document.execCommand('copy');
-  var btn=document.querySelector('button');
-  alert('Copied to clipboard!');
+<script>
+// ===== FINAL FIX - PUT THIS AT VERY BOTTOM =====
+
+function parseKM(v){
+  if(!v) return 0;
+  v=(''+v).toLowerCase().trim().replace(/,/g,'');
+  var m=1;
+  if(v.endsWith('k')){m=1000;v=v.slice(0,-1);}
+  else if(v.endsWith('m')){m=1000000;v=v.slice(0,-1);}
+  else if(v.endsWith('b')){m=1000000000;v=v.slice(0,-1);}
+  var n=parseFloat(v);
+  return isNaN(n)?0:Math.floor(n*m);
+}
+
+// ENSURE G_TOTAL2A EXISTS
+window.G_TOTAL2A = window.G_TOTAL2A || {s:0,t:0,v:0};
+window.GEAR_TOTAL = window.GEAR_TOTAL || window.G_TOTAL2A;
+
+// OVERWRITE calc2A ONE LAST TIME - CORRECT VERSION
+window.calc2A = function(){
+  var ts=0,tt=0,tv=0, html='';
+  for(var p=0;p<GEAR_PIECES2A.length;p++){
+    var name=GEAR_PIECES2A[p]; var safe=name.replace(/\s/g,'_');
+    var curEl=document.getElementById('cur_'+safe); var tgtEl=document.getElementById('tgt_'+safe);
+    if(!curEl||!tgtEl) continue;
+    var cur=parseInt(curEl.value)||0; var tgt=parseInt(tgtEl.value)||0;
+    if(tgt<=cur) continue;
+    var ls=0,lt=0,lv=0; for(var i=cur;i<tgt;i++){ls+=COSTS2A[i].s; lt+=COSTS2A[i].t; lv+=COSTS2A[i].v;}
+    ts+=ls; tt+=lt; tv+=lv;
+    html+='<div style="padding:5px 0;border-bottom:1px solid #eee"><b>'+name+'</b> '+LEVELS2A[cur]+' → '+LEVELS2A[tgt]+'<br><span style="font-size:11px">'+ls.toLocaleString()+' Satin | '+lt.toLocaleString()+' Threads | '+lv+' Vision</span></div>';
+  }
+  window.G_TOTAL2A={s:ts,t:tt,v:tv,raw:{s:ts,t:tt,v:tv}};
+  window.GEAR_TOTAL={satin:ts,thread:tt,vision:tv,gilded:tv,s:ts,t:tt,v:tv,raw:{s:ts,t:tt,v:tv}};
+
+  // 2A results
+  var rs=document.getElementById('rSatin'); if(rs) rs.textContent=ts.toLocaleString();
+  var rt=document.getElementById('rThreads'); if(rt) rt.textContent=tt.toLocaleString();
+  var rv=document.getElementById('rVision'); if(rv) rv.textContent=tv.toLocaleString();
+  var gb=document.getElementById('gearBreakdown2A'); if(gb) gb.innerHTML= ts===0? '<b style="color:red">Select gear</b>' : html+'<div style="margin-top:8px;color:green;font-weight:900">✓ Total: '+ts.toLocaleString()+' Satin | '+tt.toLocaleString()+' Threads | '+tv.toLocaleString()+' Vision</div>';
+
+  // Update 2B LIVE SUMMARY
+  if(window.updateDiv2B) window.updateDiv2B();
+  // Update 2C FINAL
+  if(window.calc2C) window.calc2C();
+};
+
+window.updateDiv2B = function(){
+  var s=window.G_TOTAL2A?.s||0, t=window.G_TOTAL2A?.t||0, v=window.G_TOTAL2A?.v||0;
+  var set=(id,val,isP)=>{
+    var el=document.getElementById(id); if(!el) return;
+    el.textContent = val? (isP? Math.round(val/100).toLocaleString()+'k' : val.toLocaleString()) : '—';
+    el.style.color='#111'; el.style.fontWeight='900';
+  };
+  set('bSatin2B',s,false); set('bThreads2B',t,false); set('bVision2B',v,false); set('bPower2B',s,true);
+};
+
+window.calc2C = window.updateDiv2C = function(){
+  var ts=window.G_TOTAL2A?.s||0, tt=window.G_TOTAL2A?.t||0, tv=window.G_TOTAL2A?.v||0;
+  if(ts===0){
+    document.getElementById('cNeed2').textContent='0 Satin / 0 Threads / 0 Vision';
+    document.getElementById('cNeed2').style.color='#111';
+    return;
+  }
+  var inputs=document.querySelectorAll('input');
+  var backpack=[];
+  for(var i=0;i<inputs.length;i++){
+    var txt=(inputs[i].closest('div')?.parentElement?.textContent||'').toUpperCase();
+    if(txt.includes('BACKPACK')||txt.includes('IN BAG')) backpack.push(inputs[i]);
+  }
+  if(backpack.length<3) backpack=Array.from(inputs).slice(-3);
+  var invS=parseKM(backpack[0]?.value), invT=parseKM(backpack[1]?.value), invV=parseKM(backpack[2]?.value);
+  var missS=Math.max(0,ts-invS), missT=Math.max(0,tt-invT), missV=Math.max(0,tv-invV);
+
+  var n1=document.getElementById('cNeed2'); if(n1){ n1.textContent=ts.toLocaleString()+' Satin / '+tt.toLocaleString()+' Threads / '+tv.toLocaleString()+' Vision'; n1.style.color='#065F46'; }
+  var n2=document.getElementById('cMissing2'); if(n2){ n2.textContent=missS.toLocaleString()+' / '+missT.toLocaleString()+' / '+missV.toLocaleString()+' Still Missing'; n2.style.color='#DC2626'; }
+  var d=document.getElementById('cDetails2'); if(d){ d.style.color='#111'; d.innerHTML=
+    'Satin: Total '+ts.toLocaleString()+' - Have '+invS.toLocaleString()+' = <b style="color:'+(missS>0?'#DC2626':'#16A34A')+'">'+missS.toLocaleString()+' still needed</b><br>'+
+    'Threads: Total '+tt.toLocaleString()+' - Have '+invT.toLocaleString()+' = <b style="color:'+(missT>0?'#DC2626':'#16A34A')+'">'+missT.toLocaleString()+' still needed</b><br>'+
+    'Vision: Total '+tv.toLocaleString()+' - Have '+invV.toLocaleString()+' = <b style="color:'+(missV>0?'#DC2626':'#16A34A')+'">'+missV.toLocaleString()+' still needed</b>'; }
+
+  var ex=document.getElementById('exportText2');
+  if(ex){
+    ex.value=
+'Governor Gear Upgrade:\n'+
+'Satin: '+ts.toLocaleString()+' | Threads: '+tt.toLocaleString()+' | Vision: '+tv.toLocaleString()+'\n\n'+
+'REMAINING MISSING:\n'+
+'Satin: '+missS.toLocaleString()+' | Threads: '+missT.toLocaleString()+' | Vision: '+missV.toLocaleString()+'\n'+
+'Satin: Total '+ts.toLocaleString()+' - Have '+invS.toLocaleString()+' = '+missS.toLocaleString()+' still needed\n'+
+'Threads: Total '+tt.toLocaleString()+' - Have '+invT.toLocaleString()+' = '+missT.toLocaleString()+' still needed\n'+
+'Vision: Total '+tv.toLocaleString()+' - Have '+invV.toLocaleString()+' = '+missV.toLocaleString()+' still needed\n\n'+
+'Generated by DarkLords KS A-I-O BoT - Division 2A/2B/2C';
+    ex.style.color='#E2E8F0';
+  }
+};
+
+function copyExport2(){
+  var el=document.getElementById('exportText2'); el.select();
+  navigator.clipboard.writeText(el.value); alert('Copied!');
 }
 function clear2C(){
   var inputs=document.querySelectorAll('input');
   var backpack=[];
   for(var i=0;i<inputs.length;i++){
-    var p=(inputs[i].closest('div')?.parentElement?.textContent||'').toUpperCase();
-    if(p.includes('BACKPACK')||p.includes('IN BAG')) backpack.push(inputs[i]);
+    var txt=(inputs[i].closest('div')?.parentElement?.textContent||'').toUpperCase();
+    if(txt.includes('BACKPACK')||txt.includes('IN BAG')) backpack.push(inputs[i]);
   }
-  backpack.forEach(function(inp){ inp.value=''; });
-  document.getElementById('exportText2').value='Cleared - Calculate 2A again';
-  if(window.calc2C) window.calc2C();
+  backpack.forEach(i=>i.value=''); calc2C();
 }
 function print2C(){
   var txt=document.getElementById('exportText2').value;
-  var w=window.open('','','width=800,height=600');
-  w.document.write('<pre style="font-family:monospace;padding:20px">'+txt+'</pre>');
-  w.document.close(); w.print();
+  var w=window.open('','','width=800,height=600'); w.document.write('<pre style="padding:20px;font-family:monospace">'+txt+'</pre>'); w.document.close(); w.print();
 }
 
-// auto update when typing in 2B
-document.addEventListener('input',function(e){
-  if(e.target.tagName==='INPUT'){
-    var t=(e.target.parentElement?.parentElement?.textContent||'').toUpperCase();
-    if(t.includes('BACKPACK')||t.includes('BAG')) setTimeout(window.calc2C,100);
-  }
-});
+// FIX WHITE TEXT - make badges readable
+setTimeout(()=>{
+  var a=document.getElementById('cNeed2'); if(a){a.style.color='#065F46'; a.style.fontWeight='900';}
+  var b=document.getElementById('cMissing2'); if(b){b.style.color='#DC2626'; b.style.fontWeight='900';}
+  var c=document.getElementById('cDetails2'); if(c){c.style.color='#111';}
+  var d=document.getElementById('gearBreakdown2A'); if(d){d.style.color='#111';}
+},300);
 </script>
  <!-- DIVISION 2D - FULL TABLE -->
 <div class="card" id="div2D">
