@@ -344,7 +344,6 @@ if(window.calcRemaining1C) window.calcRemaining1C();
 <div class="card" id="div1B" style="margin-top:16px">
 <h2> Self Backpack Inventory & Remaining</h2>
 <p style="font-size:11px;color:#6B7280;margin-bottom:12px">Auto takes Modified Time + Resources from 1A — enter your inventory to see what's left</p>
-
 <div style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
 <div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#6B7280;margin-top:4px">—</div></div>
 <div style="text-align:right"><b style="font-size:10px;color:#6B7280;display:block">REMAINING</b><span id="remainTime1B" style="font-weight:900;color:#DC2626">—</span><div id="remainRes1B" style="font-size:11px;color:#DC2626;margin-top:4px">—</div></div>
@@ -409,7 +408,7 @@ window.resetInv1B=function(){['inv_30d','inv_7d','inv_3d','inv_1d','inv_8h','inv
 
 // auto try on load
 setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
- </script></div>
+</script>
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#10B981,#065F46)">🪵</span> 1C - FINAL SUMMARY</h2>
  <!-- ========== DIVISION 1C - FINAL SUMMARY ========== -->
 <div class="card" id="div1C" style="margin-top:16px;border:2px solid #111827">
