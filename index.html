@@ -199,13 +199,13 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 </style>
 
 <div class="myDrop">
-  <button class="myDropBtn" onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
+  <button class="btn" style onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
     <span id="dropLabel">🏰 BUILDING CALCULATOR</span>
     <span>▼</span>
   </button>
   <div id="dropList" class="myDropList">
-    <div onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
-    <div onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
+    <div button class="btn btn-ghost" onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
+    <div button class="btn btn-ghost" onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
   </div>
 </div>
 
@@ -327,7 +327,7 @@ document.getElementById('breakdown').innerHTML=details+'<div style="margin-top:8
 
 // SPEEDUPS BOX
 var box=document.getElementById('speedupBox'),list=document.getElementById('speedupList');
-if(modSec>0){box.style.display='block';var ups=formatSecToSpeedups(modSec);var html='';for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';}if(!ups.length)html='<div style="color:#FFFFFF">Less than 1m - no speedup needed</div>';list.innerHTML=html;document.getElementById('totalSec').textContent=modSec.toLocaleString()+' sec ('+(modSec/3600).toFixed(1)+'h)';}else{box.style.display='none';}
+if(modSec>0){box.style.display='block';var ups=formatSecToSpeedups(modSec);var html='';for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';}if(!ups.length)html='<div style="color:#6B7280">Less than 1m - no speedup needed</div>';list.innerHTML=html;document.getElementById('totalSec').textContent=modSec.toLocaleString()+' sec ('+(modSec/3600).toFixed(1)+'h)';}else{box.style.display='none';}
 
 // GLOBAL FOR 1B / 1C
 window.BUILD_TOTAL={bread:fB,wood:fW,stone:fS,iron:fI,tg:tot.tg,ttg:tot.ttg,time:tot.t,modTime:modSec};
@@ -341,8 +341,8 @@ if(window.calcRemaining1C) window.calcRemaining1C();
 <h2> Self Backpack Inventory & Remaining</h2>
 <p style="font-size:11px;color:#FFFFFF;margin-bottom:12px">Auto takes Modified Time + Resources from 1A — enter your inventory to see what's left</p>
 
-<div style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
-<div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#6B7280;margin-top:4px">—</div></div>
+<div style="background:#6B7280;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
+<div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#FFFFFF;margin-top:4px">—</div></div>
 <div style="text-align:right"><b style="font-size:10px;color:#6B7280;display:block">REMAINING</b><span id="remainTime1B" style="font-weight:900;color:#DC2626">—</span><div id="remainRes1B" style="font-size:11px;color:#DC2626;margin-top:4px">—</div></div>
 </div>
 
@@ -418,8 +418,8 @@ setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
 
 <div id="cDetails" style="background:#6B7280;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;font-size:12px;line-height:1.6">Calculate 1A first...</div>
 
-<div style="margin-top:14px;background:#1F2937;border-radius:12px;padding:14px">
-<b style="color:#fff;font-size:11px;text-transform:uppercase;display:block;margin-bottom:8px">📋 Copy-Paste Plan For Alliance / Notes</b>
+<div style="margin-top:14px;background:#FFFFFF;border-radius:12px;padding:14px">
+<b style="color:#6B7280;font-size:11px;text-transform:uppercase;display:block;margin-bottom:8px">📋 Copy-Paste Plan For Alliance / Notes</b>
 <textarea id="exportText" style="width:100%;height:180px;background:#1F2937;color:#E5E7EB;border:1px solid #374151;border-radius:8px;padding:10px;font-family:monospace;font-size:11px;white-space:pre-wrap" readonly>Waiting for 1A CALCULATE...</textarea>
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost" style="background:#fff" onclick="copyExport1C()">📋 Copy Text</button><button class="btn" onclick="calc1C()">🔄 Refresh Final</button></div>
 </div>
