@@ -357,7 +357,7 @@ if(window.calcRemaining1C) window.calcRemaining1C();
 </div>
 
 <script>
-var GEAR_PIECES2A=["Cav Cap","Cav Coat","Inf Cap","Inf Coat","Arc Cap","Arc Coat"];
+var GEAR_PIECES2A=["Cav Hat","Cav Necklace","Inf Coat","Inf Pants","Arc Ring","Arc Staff"];
 var LEVELS2A=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
 var COSTS2A=[{s:1500,t:15,v:0},{s:3800,t:40,v:0},{s:7000,t:70,v:0},{s:9700,t:95,v:0},{s:1000,t:10,v:45},{s:1000,t:10,v:50},{s:1500,t:15,v:60},{s:1500,t:15,v:70},{s:6500,t:65,v:40},{s:8000,t:80,v:50},{s:10000,t:95,v:60},{s:11000,t:110,v:70},{s:13000,t:130,v:85},{s:15000,t:160,v:100},{s:22000,t:220,v:40},{s:23000,t:230,v:40},{s:25000,t:250,v:45},{s:26000,t:260,v:45},{s:28000,t:280,v:45},{s:30000,t:300,v:55},{s:32000,t:320,v:55},{s:35000,t:340,v:55},{s:38000,t:360,v:55},{s:43000,t:430,v:75},{s:45000,t:460,v:80},{s:48000,t:500,v:85},{s:60000,t:600,v:120},{s:70000,t:700,v:140},{s:80000,t:800,v:160},{s:90000,t:900,v:180},{s:108000,t:1080,v:220},{s:114000,t:1140,v:230},{s:121000,t:1210,v:240},{s:128000,t:1280,v:250},{s:154000,t:1540,v:300},{s:163000,t:1630,v:320},{s:173000,t:1730,v:340},{s:183000,t:1830,v:360},{s:220000,t:2200,v:430},{s:233000,t:2330,v:460},{s:247000,t:2470,v:490},{s:262000,t:2620,v:520},{s:288000,t:2880,v:570},{s:302000,t:3020,v:600},{s:317000,t:3170,v:630},{s:333000,t:3330,v:660},{s:366000,t:3660,v:730},{s:384000,t:3840,v:770},{s:403000,t:4030,v:810},{s:423000,t:4230,v:850},{s:465000,t:4650,v:940},{s:479000,t:4790,v:970},{s:493000,t:4930,v:1000},{s:508000,t:5080,v:1030},{s:549000,t:5490,v:1110},{s:565000,t:5650,v:1145},{s:582000,t:5820,v:1180},{s:600000,t:6000,v:1220}];
 
@@ -416,7 +416,101 @@ function doGearSearch(){
  window.open(url,'_blank');
 }
 </script>
- 
+ <!-- DIVISION 2B - LIVE SUMMARY -->
+<div class="card" id="div2B" style="background:#1E293B;color:#fff;border:0">
+<h2 style="color:#fff;font-size:14px">✨ Live Summary</h2>
+<p style="font-size:11px;color:#94A3B8;margin-top:4px">Auto updates from 2A calculation</p>
+
+<div style="margin-top:12px;display:grid;gap:8px">
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🧵 Satin</span><b id="bSatin2B" style="color:#38BDF8;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🪡 Threads</span><b id="bThreads2B" style="color:#A78BFA;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>👁️ Vision</span><b id="bVision2B" style="color:#FB923C;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>⚡ Power Gain</span><b id="bPower2B" style="color:#4ADE80">—</b>
+</div>
+</div>
+</div>
+
+<script>
+window.updateDiv2B=function(){
+var s=(window.G_TOTAL2A&&window.G_TOTAL2A.s)||0;
+var t=(window.G_TOTAL2A&&window.G_TOTAL2A.t)||0;
+var v=(window.G_TOTAL2A&&window.G_TOTAL2A.v)||0;
+document.getElementById('bSatin2B').textContent=s?s.toLocaleString():'—';
+document.getElementById('bThreads2B').textContent=t?t.toLocaleString():'—';
+document.getElementById('bVision2B').textContent=v?v.toLocaleString():'—';
+document.getElementById('bPower2B').textContent=s?Math.round(s/100).toLocaleString()+'k':'—';
+};
+// run once on load
+setTimeout(updateDiv2B,500);
+</script>
+<!-- DIVISION 2C - INVENTORY (AUTO MINUS FROM 2B) -->
+<div class="card" id="div2C">
+<h2>📦 Self Backpack Inventory (Auto Minus from 2B)</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Type K/M/B → shows Remaining Needed from 2B totals</p>
+
+<div style="margin-top:12px;display:grid;gap:10px">
+<div><span class="lbl">Satin in Bag</span><input id="invSatin2C" placeholder="e.g. 1.5M, 500K" oninput="calcRemaining2C()"></div>
+<div><span class="lbl">Threads in Bag</span><input id="invThreads2C" placeholder="e.g. 800K" oninput="calcRemaining2C()"></div>
+<div><span class="lbl">Vision in Bag</span><input id="invVision2C" placeholder="e.g. 2K" oninput="calcRemaining2C()"></div>
+</div>
+
+<div id="needBox2C" class="breakdown" style="display:none;margin-top:12px;background:#F0FDF4;border-color:#BBF7D0"></div>
+</div>
+
+<script>
+function parseKMB_2C(v){
+if(!v) return 0;
+v=v.toUpperCase().trim().replace(/,/g,'');
+var m=1;
+if(v.endsWith('K')){m=1e3;v=v.slice(0,-1);}
+else if(v.endsWith('M')){m=1e6;v=v.slice(0,-1);}
+else if(v.endsWith('B')){m=1e9;v=v.slice(0,-1);}
+var n=parseFloat(v);
+return isNaN(n)?0:Math.round(n*m);
+}
+
+window.calcRemaining2C=function(){
+var box=document.getElementById('needBox2C');
+var totalS=(window.G_TOTAL2A&&window.G_TOTAL2A.s)||0;
+var totalT=(window.G_TOTAL2A&&window.G_TOTAL2A.t)||0;
+var totalV=(window.G_TOTAL2A&&window.G_TOTAL2A.v)||0;
+
+if(totalS===0){
+box.style.display='block';
+box.innerHTML='<b style="color:#6B7280">First CALCULATE in 2A — then enter inventory here</b>';
+return;
+}
+
+var haveS=parseKMB_2C(document.getElementById('invSatin2C').value);
+var haveT=parseKMB_2C(document.getElementById('invThreads2C').value);
+var haveV=parseKMB_2C(document.getElementById('invVision2C').value);
+
+var needS=Math.max(0,totalS-haveS);
+var needT=Math.max(0,totalT-haveT);
+var needV=Math.max(0,totalV-haveV);
+
+box.style.display='block';
+box.innerHTML=
+'<b>✅ Remaining Needed (2B Total - Your Inventory):</b><br><br>'+
+'🧵 Satin: Total '+totalS.toLocaleString()+' - Have '+haveS.toLocaleString()+' = <b style="color:'+(needS===0?'green':'red')+'">'+needS.toLocaleString()+' still needed</b><br>'+
+'🪡 Threads: Total '+totalT.toLocaleString()+' - Have '+haveT.toLocaleString()+' = <b style="color:'+(needT===0?'green':'red')+'">'+needT.toLocaleString()+' still needed</b><br>'+
+'👁️ Vision: Total '+totalV.toLocaleString()+' - Have '+haveV.toLocaleString()+' = <b style="color:'+(needV===0?'green':'red')+'">'+needV.toLocaleString()+' still needed</b>';
+};
+
+// keep in sync when 2A recalculated
+var oldCalc2A=window.calc2A;
+window.calc2A=function(){
+if(oldCalc2A) oldCalc2A.apply(this, arguments);
+setTimeout(window.calcRemaining2C,100);
+};
+</script>
 <script>
 function switchTab(val){
   const b = document.getElementById('buildingContent');
