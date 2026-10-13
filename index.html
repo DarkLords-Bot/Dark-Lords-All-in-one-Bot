@@ -205,7 +205,7 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 
 
 <!-- BUILDING = 1A-1F -->
-<div id="buildingContent">
+<div id="buildingContent" style="display:block;">
   <div class="card"><h2><span class="section-icon" style="background:linear-gradient(180deg,#3B82F6,#1E40AF)">⏱️</span> 1A - BUILDING CALCULATOR</h2> <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <h1 class="page-title">CALCULATE</h1>
 <p class="page-sub">REAL GAME DATA</p>
@@ -639,7 +639,7 @@ load1F();
   </div>
   </div>
 <!-- GOVERNOR TAB = 2A-2E -->
-<div id="gearContent">
+<div id="gearContent" style="display:none;">
 <div class="card" id="div2A">
 <h2>⚔️ GOVERNER GEAR </h2>
 <p style="font-size:11px;color:#6B7280">59 levels - shows results here itself</p>
@@ -705,17 +705,18 @@ if(typeof updateDiv2C==='function') updateDiv2C();
 };
 </script>
 </div>
+
 <script>
-setTimeout(()=>{
+function switchTab(val){
   const b = document.getElementById('buildingContent');
   const g = document.getElementById('gearContent');
-  console.log("Building:", b);
-  console.log("Governor:", g);
-  console.log("Is gear inside building?", b.contains(g));
-  if(b.contains(g)){
-    alert("❌ ERROR: gearContent is INSIDE buildingContent! You have missing </div> before gear. Fix it!");
-  } else {
-    alert("✅ Structure OK! b and g are separate");
+  if(val==='building'){
+    b.style.display='block';
+    g.style.display='none';
+  }else{
+    b.style.display='none';
+    g.style.display='block';
   }
-}, 1000);
+}
 </script>
+</html>
