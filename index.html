@@ -204,8 +204,8 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
     <span>▼</span>
   </button>
   <div id="dropList" class="myDropList">
-    <div button class="btn btn-ghost" onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
-    <div button class="btn btn-ghost" onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
+    <div button class="btn"blue onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
+    <div button class="btn" blue onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
   </div>
 </div>
 
@@ -374,7 +374,7 @@ if(window.calcRemaining1C) window.calcRemaining1C();
 <div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;display:flex;justify-content:space-between"><span>Remaining Seconds:</span><b id="remainSec1B">0</b></div>
 </div>
 
-<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="resetInv1B()">Reset Inventory</button><button class="btn" onclick="calcRemaining1B()">RE-CALCULATE REMAINING</button></div>
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn" blue onclick="resetInv1B()">Reset Inventory</button><button class="btn" blue onclick="calcRemaining1B()">RE-CALCULATE REMAINING</button></div>
 </div>
 
 <script>
@@ -516,7 +516,7 @@ setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
 </a>
 </div>
 
-<button class="btn" onclick="window.open('https://kingshot.net/database/buildings','_blank');window.open('https://www.kingshotguide.org/buildings','_blank');window.open('https://kingshotdata.com/category/buildings/','_blank');">🚀 Open All 3 at Once</button>
+<button class="btn" style onclick="window.open('https://kingshot.net/database/buildings','_blank');window.open('https://www.kingshotguide.org/buildings','_blank');window.open('https://kingshotdata.com/category/buildings/','_blank');">🚀 Open All 3 at Once</button>
 </div>
  <!-- ========== DIVISION 1E - BELOW 1D - YOUTUBE BUILDING UPGRADE GUIDES ========== -->
 <div class="card" id="div1E" style="margin-top:16px;border:2px dashed #DC2626">
@@ -568,14 +568,14 @@ setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
 <span style="font-size:10px;font-weight:800;color:#DC2626;text-transform:uppercase;display:block;margin-bottom:8px">🔴 Box 5 - Live YouTube Building Upgrade Search - Type Anything</span>
 <div style="display:flex;gap:8px">
 <input id="ytSearch" type="text" placeholder="Type anything... e.g. Town Center 30, Truegold, F2P guide" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doYTSearch()}">
-<button onclick="doYTSearch()" style="padding:12px 16px;border-radius:10px;background:#FF0000;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+<button class="btn" style onclick="doYTSearch()" style="padding:12px 16px;border-radius:10px;background:#FF0000;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
 </div>
 <p style="font-size:10px;color:#6B7280;margin-top:8px">This opens YouTube directly with your search - live YouTube access</p>
 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
 </div>
 </div>
 
@@ -661,7 +661,7 @@ load1F();
 </div>
 
 <div id="gearBreakdown2A" class="breakdown" style="margin-top:10px">Pick Current → Target (Red T6 ★★★ exists) → CALCULATE</div>
-<button class="btn" style="margin-top:10px" onclick="calc2A()">CALCULATE</button>
+<button class="btn" blue style="margin-top:10px" onclick="calc2A()">CALCULATE</button>
 </div>
 <script>
 var GEAR_PIECES2A=["Cav Hat","Cav Necklace","Inf Coat","Inf Pants","Arc Ring","Arc Staff"];
@@ -867,12 +867,12 @@ setTimeout(window.calcRemaining2C,100);
 <textarea id="exportText2" style="width:100%;height:180px;margin-top:10px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;padding:10px;font-family:monospace;font-size:12px;font-weight:600">Calculate 2A first...</textarea>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<button onclick="copyFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">📋 COPY TEXT</button>
-<button onclick="calc2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🔄 REFRESH FINAL</button>
+<button class="btn" style onclick="copyFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">📋 COPY TEXT</button>
+<button class="btn" style onclick="calc2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🔄 REFRESH FINAL</button>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<button onclick="clearFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🧹 CLEAR</button>
-<button onclick="printPDF2C()" style="padding:14px;background:#000000;color:#FFFFFF;border:none;border-radius:12px;font-weight:900">🖨️ PRINT / SAVE PDF</button>
+<button class="btn" style onclick="clearFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🧹 CLEAR</button>
+<button class="btn" style onclick="printPDF2C()" style="padding:14px;background:#000000;color:#FFFFFF;border:none;border-radius:12px;font-weight:900">🖨️ PRINT / SAVE PDF</button>
 </div>
 
 </div>
@@ -956,7 +956,7 @@ function printPDF2C(){ var txt=document.getElementById('exportText2').value; var
 <h2 style="margin:0;color:#000">📋 Governor Gear - Official Table </h2>
 <p style="font-size:11px;color:#000;margin-top:4px">REAL GAME DATA</p>
 
-<button style="margin-top:10px;padding:12px;width:100%;background:#000;color:#FFF;border:none;border-radius:10px;font-weight:900" onclick="toggleTable2D()">Show / Hide Full Table</button>
+<button class="btn" blue onclick="margin-top:10px;padding:12px;width:100%;background:#000;color:#FFF;border:none;border-radius:10px;font-weight:900" onclick="toggleTable2D()">Show / Hide Full Table</button>
 
 <div id="tableWrap2D" style="display:block;margin-top:12px;max-height:600px;overflow:auto;border:1px solid #000;border-radius:10px">
 <table style="width:100%;font-size:11px;border-collapse:collapse;background:#FFF;color:#000">
@@ -1095,7 +1095,7 @@ window.toggleTable2D=function(){
 </a>
 </div>
 
-<button class="btn" onclick="window.open('https://kingshot.net/database/governor-gear','_blank');window.open('https://www.kingshotguide.org/guides/governor-gear-and-charms','_blank');window.open('https://kingshotdata.com/database/governor-gear/','_blank');">🚀 Open All 3 Gear DB at Once</button>
+<button class="btn" style onclick="window.open('https://kingshot.net/database/governor-gear','_blank');window.open('https://www.kingshotguide.org/guides/governor-gear-and-charms','_blank');window.open('https://kingshotdata.com/database/governor-gear/','_blank');">🚀 Open All 3 Gear DB at Once</button>
 </div>
  <!-- ========== DIVISION 2E - YOUTUBE GOVERNOR GEAR GUIDES ========== -->
 <div class="card" id="div2E" style="margin-top:16px;border:2px dashed #7C3AED">
@@ -1151,10 +1151,10 @@ window.toggleTable2D=function(){
 </div>
 <p style="font-size:10px;color:#6B7280;margin-top:8px">Only governor gear videos will show - other topics blocked</p>
 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Satin Gilded farm';doGearSearch()">Satin Farm</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Head Armor priority';doGearSearch()">Priority</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Vision Lenses';doGearSearch()">Vision</button>
-<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='F2P';doGearSearch()">F2P</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Satin Gilded farm';doGearSearch()">Satin Farm</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Head Armor priority';doGearSearch()">Priority</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Vision Lenses';doGearSearch()">Vision</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='F2P';doGearSearch()">F2P</button>
 </div>
 </div>
 
@@ -1172,7 +1172,7 @@ function doGearSearch(){
 }
 </script>
  <!-- ===== 2F - GOVERNOR GEAR AUTO - SAME LIKE 1E ===== -->
-<div class="card" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#fff">
+<div class="card" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#6B7280">
 <div style="display:flex;justify-content:space-between;align-items:center">
 <b style="font-size:10px">2F - LATEST GOVERNOR GEAR (AUTO)</b>
 <span id="gTime" style="font-size:8px;color:#6B7280">Updating...</span>
