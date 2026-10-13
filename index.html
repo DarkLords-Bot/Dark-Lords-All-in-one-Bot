@@ -511,6 +511,273 @@ if(oldCalc2A) oldCalc2A.apply(this, arguments);
 setTimeout(window.calcRemaining2C,100);
 };
 </script>
+ <!-- ========== DIVISION 2C - FINAL PLAN & EXPORT - SAME AS 1C SCREENSHOT ========== -->
+<div class="card" id="div2C" style="margin-top:16px;border:2px solid #111827;border-radius:16px;padding:18px;background:#fff">
+<h2 style="font-size:15px;font-weight:900;text-transform:uppercase;color:#000">FINAL PLAN & EXPORT</h2>
+<p style="font-size:12px;color:#6B7280;margin:6px 0 14px">Auto from 2A Need minus 2B Inventory = What you still need</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px">
+<b style="font-size:11px;color:#15803D;display:block">✅ TOTAL NEEDED (2A)</b>
+<span id="cNeed2" style="font-size:13px;font-weight:900;color:#000">—</span>
+</div>
+<div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px">
+<b style="font-size:11px;color:#B91C1C;display:block">⏳ STILL MISSING (After 2B)</b>
+<span id="cMissing2" style="font-size:13px;font-weight:900;color:#DC2626">—</span>
+</div>
+</div>
+
+<div id="cDetails2" style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;font-size:13px;color:#111827">Calculate 2A first...</div>
+
+<div style="margin-top:14px;background:#111827;border-radius:12px;padding:14px">
+<b style="color:#fff;font-size:12px;display:block;margin-bottom:10px">📋 COPY-PASTE PLAN FOR ALLIANCE / NOTES</b>
+<textarea id="exportText2" style="width:100%;height:220px;background:#1F2937;color:#CBD5E1;border:1px solid #374151;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;resize:vertical" readonly>Waiting for 2A CALCULATE...</textarea>
+<div style="display:flex;gap:8px;margin-top:12px">
+<button class="btn btn-ghost" style="background:#fff;flex:1;display:flex;align-items:center;justify-content:center;gap:6px" onclick="var t=document.getElementById('exportText2');t.select();document.execCommand('copy');this.innerHTML='✅ Copied!';setTimeout(()=>this.innerHTML='📋 Copy Text',1500)">📋 Copy Text</button>
+<button class="btn" style="flex:1;background:#1F2937;border:1px solid #374151;display:flex;align-items:center;justify-content:center;gap:6px" onclick="if(window.calc2C) calc2C(); else alert('Calculate 2A first')">🔄 Refresh Final</button>
+</div>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px">
+<button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('exportText2').value='';document.getElementById('cDetails2').innerHTML='Calculate 2A first...';document.getElementById('cNeed2').textContent='—';document.getElementById('cMissing2').textContent='—';">Clear</button>
+<button class="btn" style="flex:1;background:#10B981" onclick="var w=window.open('','','width=800,height=900');w.document.write('<pre>'+document.getElementById('exportText2').value+'</pre>');w.document.close();w.print();">🖨️ Print / Save PDF</button>
+</div>
+</div>
+
+<script>
+// Hook for 2C - call this from your 2A calculate
+window.calc2C = function(){
+ var need = window.GEAR_TOTAL; // set this in your 2A CALCULATE
+ if(!need){ document.getElementById('cDetails2').innerHTML = 'Calculate 2A first...'; return; }
+ // Example - adapt to your 2A variables
+ var modSec = need.modTime||0;
+ var invSec = 0; // calculate from 2B inventory same as 1B
+ try{
+   invSec = (parseInt(document.getElementById('inv_30d_2')?.value)||0)*2592000 + (parseInt(document.getElementById('inv_7d_2')?.value)||0)*604800 + (parseInt(document.getElementById('inv_3d_2')?.value)||0)*259200 + (parseInt(document.getElementById('inv_1d_2')?.value)||0)*86400;
+ }catch(e){}
+ var remainSec = Math.max(0, modSec - invSec);
+ document.getElementById('cNeed2').textContent = need.text || (need.satin+' Satin / '+need.gilded+' Gilded');
+ document.getElementById('cMissing2').textContent = remainSec===0 ? '0 - DONE ✅' : remainSec+'s Still Needed';
+ document.getElementById('cDetails2').innerHTML = '<b>Time:</b> Need '+modSec+'s - Have '+invSec+'s = <b style="color:'+(remainSec===0?'green':'red')+'">Remaining '+remainSec+'s</b><br><br><b>Materials Missing:</b><br>'+(need.satin||0)+' Satin, '+(need.gilded||0)+' Gilded';
+ document.getElementById('exportText2').value = 'DarkLords KS - GOV GEAR PLAN\nNEED: '+(need.text||JSON.stringify(need))+'\nHAVE: '+invSec+'s\nREMAINING: '+remainSec+'s';
+}
+</script>
+ <!-- DIVISION 2D - FULL TABLE -->
+<div class="card" id="div2D">
+<h2>📋 Governor Gear Requirements Table</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Full 59 levels till Red T6 ★★★ — real data</p>
+
+<button class="btn btn-ghost" style="margin-top:10px" onclick="toggleTable2D()">Show / Hide Table</button>
+
+<div id="tableWrap2D" style="display:none;margin-top:12px;max-height:500px;overflow:auto;border:1px solid #E5E7EB;border-radius:10px">
+<table style="width:100%;font-size:11px;border-collapse:collapse">
+<thead style="position:sticky;top:0;z-index:2"><tr style="background:#111827;color:#fff"><th style="padding:8px;text-align:left;position:sticky;left:0;background:#111827">Tier / Upgrade</th><th style="padding:8px">Satin</th><th style="padding:8px">Threads</th><th style="padding:8px">Vision</th><th style="padding:8px">Cumulative Satin</th></tr></thead>
+<tbody id="tableBody2D"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+window.toggleTable2D=function(){
+var wrap=document.getElementById('tableWrap2D');
+var body=document.getElementById('tableBody2D');
+if(wrap.style.display==='none'){
+wrap.style.display='block';
+// build only once
+if(body.innerHTML.trim()===''){
+var levels=window.LEVELS2A||["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var costs=window.COSTS2A||[{s:1500,t:15,v:0}];
+var cumS=0; var html='';
+for(var i=0;i<costs.length;i++){
+cumS+=costs[i].s;
+var isRed=levels[i+1]&&levels[i+1].includes('Red');
+var rowStyle=isRed?'background:#FFF1F2':'';
+if(levels[i+1]&&levels[i+1].includes('T6')) rowStyle='background:#FEF3C7;font-weight:800';
+html+='<tr style="'+rowStyle+';border-bottom:1px solid #eee"><td style="padding:7px;text-align:left;position:sticky;left:0;background:inherit;font-weight:600">'+levels[i+1]+'</td><td style="padding:7px;text-align:center">'+costs[i].s.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+costs[i].t.toLocaleString()+'</td><td style="padding:7px;text-align:center">'+costs[i].v+'</td><td style="padding:7px;text-align:center;color:#6B7280">'+cumS.toLocaleString()+'</td></tr>';
+}
+body.innerHTML=html;
+}
+}else{
+wrap.style.display='none';
+}
+};
+</script>
+<!-- ========== DIVISION 2D - BELOW 2C - GOVERNOR GEAR - 3 SEPARATE BOXES IN 1 CARD ========== -->
+<div class="card" id="div2D" style="margin-top:16px;border:2px dashed #111827">
+<h2 style="text-align:center;margin-bottom:4px">Governor Gear Reference guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">Tap any box to open — all inside one card</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 1 - Official DB</span>
+<a href="https://kingshot.net/database/governor-gear" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#111827;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>🏰 kingshot.net / database / governor-gear</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 2 - Guide + Calculator</span>
+<a href="https://www.kingshotguide.org/guides/governor-gear-and-charms" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📖 kingshotguide.org / governor-gear-and-charms</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:14px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 3 - Data & Costs</span>
+<a href="https://kingshotdata.com/database/governor-gear/" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📊 kingshotdata.com / database / governor-gear</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<button class="btn" onclick="window.open('https://kingshot.net/database/governor-gear','_blank');window.open('https://www.kingshotguide.org/guides/governor-gear-and-charms','_blank');window.open('https://kingshotdata.com/database/governor-gear/','_blank');">🚀 Open All 3 Gear DB at Once</button>
+</div>
+ <!-- ========== DIVISION 2E - YOUTUBE GOVERNOR GEAR GUIDES ========== -->
+<div class="card" id="div2E" style="margin-top:16px;border:2px dashed #7C3AED">
+<h2 style="text-align:center;margin-bottom:4px">YouTube Links to Governor Gear Guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">All governor gear upgrade videos — tap to watch</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:6px">Video 1 - Gear Upgrade Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+governor+gear+upgrade+guide" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#7C3AED;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Governor Gear Upgrade Guide - Full Breakdown</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 2 - Satin & Gilded</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+satin+gilded+thread+gear+farm" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Satin & Gilded Thread - How to Farm Fast</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 3 - F2P Gear Priority</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+f2p+governor+gear+priority+which+piece+first" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ F2P Gear Priority - Which Piece to Upgrade First</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 4 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 4 - Vision Lenses & Charms</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+vision+lenses+governor+gear+57" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Lv 57 Gear - Vision Lenses & Charm Guide</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 5 - GOVERNOR GEAR ONLY SEARCH - LOCKED -->
+<div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;margin-bottom:14px;background:#F5F3FF">
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">>🔴 Box 5 - Governor Gear Only Search</span>
+<div style="display:flex;gap:8px">
+<input id="ytSearchGear" type="text" placeholder="e.g. Satin, Gilded, Head, Ring, Lv 50" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doGearSearch()}">
+<button onclick="doGearSearch()" style="padding:12px 16px;border-radius:10px;background:#7C3AED;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+</div>
+<p style="font-size:10px;color:#6B7280;margin-top:8px">Only governor gear videos will show - other topics blocked</p>
+<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Satin Gilded farm';doGearSearch()">Satin Farm</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Head Armor priority';doGearSearch()">Priority</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Vision Lenses';doGearSearch()">Vision</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='F2P';doGearSearch()">F2P</button>
+</div>
+</div>
+
+<button class="btn" style="background:#7C3AED" onclick="window.open('https://www.youtube.com/results?search_query=kingshot+governor+gear+upgrade','_blank');window.open('https://www.youtube.com/results?search_query=kingshot+satin+gilded+thread+farm','_blank');window.open('https://www.youtube.com/results?search_query=kingshot+governor+gear+priority','_blank');">🚀 Open All Gear Guides</button>
+</div>
+
+<script>
+function doGearSearch(){
+ var q = document.getElementById('ytSearchGear').value.trim();
+ if(!q){ alert('Type gear piece - e.g. Head, Satin, Vision'); return; }
+ // Force governor gear context - locked
+ var fixedQuery = 'kingshot governor gear upgrade ' + q;
+ var url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(fixedQuery);
+ window.open(url,'_blank');
+}
+</script>
+ <!-- ===== 2F - GOVERNOR GEAR AUTO - SAME LIKE 1E ===== -->
+<div class="card" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<b style="font-size:10px">2F - LATEST GOVERNOR GEAR (AUTO)</b>
+<span id="gTime" style="font-size:8px;color:#6B7280">Updating...</span>
+</div>
+
+<b style="font-size:9px;display:block;margin-top:6px">⚔️ Latest 4 YouTube - Gov Gear</b>
+<div id="gYt" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#999;padding:10px;text-align:center">Loading videos...</div>
+</div>
+
+<b style="font-size:9px;display:block;margin-top:8px;border-top:1px solid #E5E7EB;padding-top:6px">📖 Latest 4 Fandom - Governor Gear</b>
+<div id="gFandom" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#999;padding:10px;text-align:center">Loading Fandom...</div>
+</div>
+</div>
+
+<script>
+async function load2F(){
+ const yDiv=document.getElementById('gYt');
+ const fDiv=document.getElementById('gFandom');
+ const t=document.getElementById('gTime');
+ try{
+   // 1. YOUTUBE AUTO - Governor Gear
+   const yRes=await fetch('https://yt.lemnoslife.com/noKey/search?part=snippet&q=kingshot%20governor%20gear%20guide&maxResults=4&type=video&order=date');
+   const yJson=await yRes.json();
+   const vids=(yJson.items||[]).slice(0,4);
+   if(vids.length){
+     yDiv.innerHTML=vids.map(v=>`
+       <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;display:block;background:#000">
+         <img src="${v.snippet.thumbnails.medium.url}" style="width:100%;height:68px;object-fit:cover;display:block">
+         <div style="padding:4px;background:#fff"><div style="font-size:8px;font-weight:800;color:#111827;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${v.snippet.title.substring(0,55)}</div></div>
+       </a>`).join('');
+   }
+ }catch(e){
+   yDiv.innerHTML=`<a href="https://www.youtube.com/results?search_query=kingshot+governor+gear" target="_blank" style="font-size:9px">Open Latest Gov Gear Videos →</a>`;
+ }
+
+ try{
+   // 2. FANDOM AUTO - Governor Gear
+   const fRes=await fetch('https://kingshot.fandom.com/api.php?action=query&list=search&srsearch=governor%20gear&srlimit=4&format=json&origin=*');
+   const fJson=await fRes.json();
+   const pages=fJson.query?.search||[];
+   if(pages.length){
+     fDiv.innerHTML=pages.map(p=>`
+       <a href="https://kingshot.fandom.com/wiki/${encodeURIComponent(p.title.replace(/ /g,'_'))}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;padding:6px;background:#F9FAFB;display:block">
+         <span style="font-size:7px;background:#DC2626;color:#fff;padding:2px 4px;border-radius:4px;font-weight:800">FANDOM</span>
+         <div style="font-size:9px;font-weight:700;color:#111827;margin-top:3px;line-height:1.2">${p.title}</div>
+         <div style="font-size:7px;color:#6B7280;margin-top:2px">${(p.snippet||'').replace(/<[^>]*>/g,'').substring(0,45)}...</div>
+       </a>`).join('');
+   }else throw 'empty';
+ }catch(e){
+   // Fallback direct wiki links
+   fDiv.innerHTML=`
+     <a href="https://kingshot.fandom.com/wiki/Governor_Gear" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Governor Gear - Wiki</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Governor_Gear_Set" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Gear Set Bonus</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Forge" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Forge Guide</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Category:Equipment" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">All Equipment</b></a>
+   `;
+ }
+ t.textContent='Auto: '+new Date().toLocaleDateString();
+}
+load2F();
+</script>
 <script>
 function switchTab(val){
   const b = document.getElementById('buildingContent');
