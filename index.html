@@ -197,16 +197,6 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 </select>
 </div>
 
-<script>
-function switchTab(val){
-  const b=document.getElementById('buildingContent');
-  const g=document.getElementById('gearContent');
-  if(val==='building'){b.style.display='block';g.style.display='none';}
-  else{b.style.display='none';g.style.display='block';}
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
-</div>
 
 <!-- BUILDING = 1A-1F -->
 <div id="buildingContent" style="display:block">
@@ -672,7 +662,7 @@ load1F();
 </div>
 </div>
 <script>
-function showTab(type){
+function switchTab(val){
   const building = document.getElementById('buildingContent');
   const gear = document.getElementById('gearContent');
   const btnB = document.getElementById('btnBuilding');
@@ -701,7 +691,8 @@ function showTab(type){
   }
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
+</script>
+<script>
 // force open building on load
 document.addEventListener('DOMContentLoaded', ()=> showTab('building'));
 </script>
