@@ -336,57 +336,315 @@ if(window.updateDiv1B) window.updateDiv1B();
 if(window.calcRemaining1C) window.calcRemaining1C();
 }
 </script>
- <!-- ========== DIVISION 2C - FINAL PLAN & EXPORT - SAME AS 1C SCREENSHOT ========== -->
-<div class="card" id="div2C" style="margin-top:16px;border:2px solid #111827;border-radius:16px;padding:18px;background:#fff">
-<h2 style="font-size:15px;font-weight:900;text-transform:uppercase;color:#000">FINAL PLAN & EXPORT</h2>
-<p style="font-size:12px;color:#6B7280;margin:6px 0 14px">Auto from 2A Need minus 2B Inventory = What you still need</p>
+ <!-- ========== DIVISION 1B - INVENTORY MINUS ========== -->
+<div class="card" id="div1B" style="margin-top:16px">
+<h2> Self Backpack Inventory & Remaining</h2>
+<p style="font-size:11px;color:#6B7280;margin-bottom:12px">Auto takes Modified Time + Resources from 1A — enter your inventory to see what's left</p>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px">
-<b style="font-size:11px;color:#15803D;display:block">✅ TOTAL NEEDED (2A)</b>
-<span id="cNeed2" style="font-size:13px;font-weight:900;color:#000">—</span>
-</div>
-<div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px">
-<b style="font-size:11px;color:#B91C1C;display:block">⏳ STILL MISSING (After 2B)</b>
-<span id="cMissing2" style="font-size:13px;font-weight:900;color:#DC2626">—</span>
-</div>
+<div style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:12px;display:flex;justify-content:space-between;margin-bottom:14px">
+<div><b style="font-size:10px;color:#6B7280;display:block">NEED FROM 1A</b><span id="needTime1B" style="font-weight:900">—</span><div id="needRes1B" style="font-size:11px;color:#6B7280;margin-top:4px">—</div></div>
+<div style="text-align:right"><b style="font-size:10px;color:#6B7280;display:block">REMAINING</b><span id="remainTime1B" style="font-weight:900;color:#DC2626">—</span><div id="remainRes1B" style="font-size:11px;color:#DC2626;margin-top:4px">—</div></div>
 </div>
 
-<div id="cDetails2" style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;font-size:13px;color:#111827">Calculate 2A first...</div>
+<h2 style="margin-bottom:8px">⏱ Speedup Inventory (how many you HAVE)</h2>
+<div class="grid2">
+<div><span class="lbl">30d Speedups</span><input id="inv_30d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">7d Speedups</span><input id="inv_7d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3d Speedups</span><input id="inv_3d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1d Speedups</span><input id="inv_1d" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">8h Speedups</span><input id="inv_8h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">3h Speedups</span><input id="inv_3h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">1h Speedups</span><input id="inv_1h" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">15m Speedups</span><input id="inv_15m" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<h2 style="margin-top:16px;margin-bottom:8px">📦 Resource Inventory (K/M/B supported)</h2>
+<div class="grid2">
+<div><span class="lbl">Bread you have</span><input id="inv_bread" placeholder="e.g. 10M, 2.5B" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Wood you have</span><input id="inv_wood" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Stone you have</span><input id="inv_stone" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Iron you have</span><input id="inv_iron" placeholder="e.g. 10M" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Truegold you have</span><input id="inv_tg" type="number" value="0" oninput="calcRemaining1B()"></div>
+<div><span class="lbl">Tempered you have</span><input id="inv_ttg" type="number" value="0" oninput="calcRemaining1B()"></div>
+</div>
+
+<div id="remainBox1B" style="margin-top:14px;border:1px solid #E5E7EB;border-radius:12px;padding:14px;background:#FFFBEB;display:none">
+<b style="font-size:11px">⚡ Remaining Speedups Needed After Using Inventory</b>
+<div id="remainList1B" style="margin-top:10px;display:grid;gap:6px;font-size:12px"></div>
+<div style="margin-top:10px;border-top:1px solid #E5E7EB;padding-top:10px;display:flex;justify-content:space-between"><span>Remaining Seconds:</span><b id="remainSec1B">0</b></div>
+</div>
+
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="resetInv1B()">Reset Inventory</button><button class="btn" onclick="calcRemaining1B()">RE-CALCULATE REMAINING</button></div>
+</div>
+
+<script>
+function parseKM(s){if(!s)return 0;s=s.toString().trim().toUpperCase();var m=1;if(s.endsWith('K')){m=1e3;s=s.slice(0,-1);}else if(s.endsWith('M')){m=1e6;s=s.slice(0,-1);}else if(s.endsWith('B')){m=1e9;s=s.slice(0,-1);}var n=parseFloat(s.replace(/,/g,''))||0;return Math.round(n*m);}
+
+window.calcRemaining1B=function(){
+var need=window.BUILD_TOTAL; if(!need){document.getElementById('needTime1B').textContent='Calculate 1A first';return;}
+var modSec=need.modTime||need.time||0;
+document.getElementById('needTime1B').textContent=formatTime(modSec)+' ('+modSec.toLocaleString()+'s)';
+document.getElementById('needRes1B').textContent='Bread '+need.bread.toLocaleString()+' | Wood '+need.wood.toLocaleString()+' | Stone '+need.stone.toLocaleString()+' | Iron '+need.iron.toLocaleString()+' | TG '+need.tg+' | TTG '+need.ttg;
+
+var invSec=(parseInt(document.getElementById('inv_30d').value)||0)*2592000 + (parseInt(document.getElementById('inv_7d').value)||0)*604800 + (parseInt(document.getElementById('inv_3d').value)||0)*259200 + (parseInt(document.getElementById('inv_1d').value)||0)*86400 + (parseInt(document.getElementById('inv_8h').value)||0)*28800 + (parseInt(document.getElementById('inv_3h').value)||0)*10800 + (parseInt(document.getElementById('inv_1h').value)||0)*3600 + (parseInt(document.getElementById('inv_15m').value)||0)*900;
+
+var remainSec=Math.max(0,modSec-invSec);
+document.getElementById('remainTime1B').textContent=remainSec===0?'DONE - No time left!':formatTime(remainSec)+' ('+remainSec.toLocaleString()+'s)';
+
+var invB=parseKM(document.getElementById('inv_bread').value), invW=parseKM(document.getElementById('inv_wood').value), invS=parseKM(document.getElementById('inv_stone').value), invI=parseKM(document.getElementById('inv_iron').value), invTG=parseInt(document.getElementById('inv_tg').value)||0, invTTG=parseInt(document.getElementById('inv_ttg').value)||0;
+
+var rB=Math.max(0,need.bread-invB), rW=Math.max(0,need.wood-invW), rS=Math.max(0,need.stone-invS), rI=Math.max(0,need.iron-invI), rTG=Math.max(0,need.tg-invTG), rTTG=Math.max(0,need.ttg-invTTG);
+document.getElementById('remainRes1B').textContent='Bread '+rB.toLocaleString()+' | Wood '+rW.toLocaleString()+' | Stone '+rS.toLocaleString()+' | Iron '+rI.toLocaleString()+' | TG '+rTG+' | TTG '+rTTG;
+
+var box=document.getElementById('remainBox1B'), list=document.getElementById('remainList1B');
+if(remainSec>0){box.style.display='block'; var ups=formatSecToSpeedups(remainSec); var html=''; for(var k=0;k<ups.length;k++){html+='<div style="display:flex;justify-content:space-between"><span>'+ups[k].name+' speedup</span><b>x '+ups[k].count+'</b></div>';} if(!ups.length) html='<div style="color:#6B7280">Less than 1m</div>'; list.innerHTML=html; document.getElementById('remainSec1B').textContent=remainSec.toLocaleString()+' sec ('+(remainSec/3600).toFixed(1)+'h)';} else {box.style.display='block'; list.innerHTML='<b style="color:green">✅ You have enough speedups!</b>'; document.getElementById('remainSec1B').textContent='0 sec';}
+};
+
+window.updateDiv1B=function(){calcRemaining1B();};
+window.resetInv1B=function(){['inv_30d','inv_7d','inv_3d','inv_1d','inv_8h','inv_3h','inv_1h','inv_15m','inv_tg','inv_ttg'].forEach(function(id){document.getElementById(id).value=0;});['inv_bread','inv_wood','inv_stone','inv_iron'].forEach(function(id){document.getElementById(id).value='';});calcRemaining1B();};
+
+// auto try on load
+setTimeout(function(){if(window.BUILD_TOTAL) calcRemaining1B();},500);
+</script>
+ <!-- ========== DIVISION 1C - FINAL SUMMARY ========== -->
+<div class="card" id="div1C" style="margin-top:16px;border:2px solid #111827">
+<h2>Final Plan & Export</h2>
+<p style="font-size:11px;color:#6B7280;margin-bottom:12px">Auto from 1A Need minus 1B Inventory = What you still need</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:12px"><b style="font-size:9px;color:#15803D;display:block">✅ TOTAL NEEDED (1A)</b><span id="cNeed" style="font-size:13px;font-weight:900">—</span></div>
+<div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px"><b style="font-size:9px;color:#B91C1C;display:block">⏳ STILL MISSING (After 1B)</b><span id="cMissing" style="font-size:13px;font-weight:900;color:#DC2626">—</span></div>
+</div>
+
+<div id="cDetails" style="background:#F9FAFB;border:1px dashed #E5E7EB;border-radius:12px;padding:14px;font-size:12px;line-height:1.6">Calculate 1A first...</div>
 
 <div style="margin-top:14px;background:#111827;border-radius:12px;padding:14px">
-<b style="color:#fff;font-size:12px;display:block;margin-bottom:10px">📋 COPY-PASTE PLAN FOR ALLIANCE / NOTES</b>
-<textarea id="exportText2" style="width:100%;height:220px;background:#1F2937;color:#CBD5E1;border:1px solid #374151;border-radius:8px;padding:12px;font-family:monospace;font-size:12px;resize:vertical" readonly>Waiting for 2A CALCULATE...</textarea>
-<div style="display:flex;gap:8px;margin-top:12px">
-<button class="btn btn-ghost" style="background:#fff;flex:1;display:flex;align-items:center;justify-content:center;gap:6px" onclick="var t=document.getElementById('exportText2');t.select();document.execCommand('copy');this.innerHTML='✅ Copied!';setTimeout(()=>this.innerHTML='📋 Copy Text',1500)">📋 Copy Text</button>
-<button class="btn" style="flex:1;background:#1F2937;border:1px solid #374151;display:flex;align-items:center;justify-content:center;gap:6px" onclick="if(window.calc2C) calc2C(); else alert('Calculate 2A first')">🔄 Refresh Final</button>
-</div>
+<b style="color:#fff;font-size:11px;text-transform:uppercase;display:block;margin-bottom:8px">📋 Copy-Paste Plan For Alliance / Notes</b>
+<textarea id="exportText" style="width:100%;height:180px;background:#1F2937;color:#E5E7EB;border:1px solid #374151;border-radius:8px;padding:10px;font-family:monospace;font-size:11px;white-space:pre-wrap" readonly>Waiting for 1A CALCULATE...</textarea>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost" style="background:#fff" onclick="copyExport1C()">📋 Copy Text</button><button class="btn" onclick="calc1C()">🔄 Refresh Final</button></div>
 </div>
 
-<div style="display:flex;gap:8px;margin-top:12px">
-<button class="btn btn-ghost" style="flex:1" onclick="document.getElementById('exportText2').value='';document.getElementById('cDetails2').innerHTML='Calculate 2A first...';document.getElementById('cNeed2').textContent='—';document.getElementById('cMissing2').textContent='—';">Clear</button>
-<button class="btn" style="flex:1;background:#10B981" onclick="var w=window.open('','','width=800,height=900');w.document.write('<pre>'+document.getElementById('exportText2').value+'</pre>');w.document.close();w.print();">🖨️ Print / Save PDF</button>
+<div style="margin-top:12px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="document.getElementById('exportText').value='';">Clear</button><button class="btn" style="background:#10B981" onclick="window.print()">🖨️ Print / Save PDF</button></div>
+</div>
+
+<script>
+window.calc1C=function(){
+var need=window.BUILD_TOTAL; if(!need){document.getElementById('cDetails').innerHTML='<b style="color:red">Calculate 1A first</b>';return;}
+
+var modSec=need.modTime||0;
+var invSec=(parseInt(document.getElementById('inv_30d')?.value)||0)*2592000 + (parseInt(document.getElementById('inv_7d')?.value)||0)*604800 + (parseInt(document.getElementById('inv_3d')?.value)||0)*259200 + (parseInt(document.getElementById('inv_1d')?.value)||0)*86400 + (parseInt(document.getElementById('inv_8h')?.value)||0)*28800 + (parseInt(document.getElementById('inv_3h')?.value)||0)*10800 + (parseInt(document.getElementById('inv_1h')?.value)||0)*3600 + (parseInt(document.getElementById('inv_15m')?.value)||0)*900;
+var remainSec=Math.max(0,modSec-invSec);
+
+function parseKM2(s){if(!s)return 0;s=s.toString().trim().toUpperCase();var m=1;if(s.endsWith('K')){m=1e3;s=s.slice(0,-1);}else if(s.endsWith('M')){m=1e6;s=s.slice(0,-1);}else if(s.endsWith('B')){m=1e9;s=s.slice(0,-1);}var n=parseFloat(s.replace(/,/g,''))||0;return Math.round(n*m);}
+
+var invB=parseKM2(document.getElementById('inv_bread')?.value), invW=parseKM2(document.getElementById('inv_wood')?.value), invS=parseKM2(document.getElementById('inv_stone')?.value), invI=parseKM2(document.getElementById('inv_iron')?.value), invTG=parseInt(document.getElementById('inv_tg')?.value)||0, invTTG=parseInt(document.getElementById('inv_ttg')?.value)||0;
+
+var rB=Math.max(0,need.bread-invB), rW=Math.max(0,need.wood-invW), rS=Math.max(0,need.stone-invS), rI=Math.max(0,need.iron-invI), rTG=Math.max(0,need.tg-invTG), rTTG=Math.max(0,need.ttg-invTTG);
+
+document.getElementById('cNeed').innerHTML=formatTime(modSec)+' | TG '+need.tg+'/'+need.ttg;
+document.getElementById('cMissing').innerHTML=(remainSec===0?'0s ✅':formatTime(remainSec)+' ❌')+' | TG '+rTG+'/'+rTTG;
+
+var ups=formatSecToSpeedups(remainSec);
+var upsText=ups.length? ups.map(u=>u.name+' x'+u.count).join(', ') : (remainSec===0?'None - Enough speedups':'<1m');
+
+document.getElementById('cDetails').innerHTML=
+'<b>Buildings:</b> '+(document.getElementById('breakdown')?.innerText.slice(0,200)||'—')+'<br><br>'+
+'<b>⏱ Time:</b> Need '+formatTime(modSec)+' ('+modSec.toLocaleString()+'s) - Have '+formatTime(invSec)+' = <b style="color:'+(remainSec===0?'green':'red')+'">Remaining '+formatTime(remainSec)+'</b><br>'+
+'<b>⚡ Remaining Speedups Needed:</b> '+upsText+'<br><br>'+
+'<b>📦 Resources Still Missing:</b><br>'+
+'🍞 Bread: '+(rB===0?'<span style="color:green">DONE</span>':rB.toLocaleString())+'<br>'+
+'🪵 Wood: '+(rW===0?'<span style="color:green">DONE</span>':rW.toLocaleString())+'<br>'+
+'🧱 Stone: '+(rS===0?'<span style="color:green">DONE</span>':rS.toLocaleString())+'<br>'+
+'⚙️ Iron: '+(rI===0?'<span style="color:green">DONE</span>':rI.toLocaleString())+'<br>'+
+'💰 Truegold: '+(rTG===0?'<span style="color:green">DONE</span>':rTG.toLocaleString())+'<br>'+
+'🔥 Tempered: '+(rTTG===0?'<span style="color:green">DONE</span>':rTTG.toLocaleString());
+
+var exportStr='DarkLords KS - BUILDING PLAN\n'+'NEED FROM 1A:\n'+
+'Time: '+formatTime(modSec)+' ('+modSec.toLocaleString()+'s) - Orig '+formatTime(need.time)+'\n'+
+'Bread: '+need.bread.toLocaleString()+' | Wood: '+need.wood.toLocaleString()+' | Stone: '+need.stone.toLocaleString()+' | Iron: '+need.iron.toLocaleString()+'\n'+
+'Truegold: '+need.tg.toLocaleString()+' | Tempered: '+need.ttg.toLocaleString()+'\n\n'+
+'HAVE (1B Inventory):\n'+
+'Speedups: '+invSec.toLocaleString()+'s ('+formatTime(invSec)+')\n'+
+'Bread: '+invB.toLocaleString()+' | Wood: '+invW.toLocaleString()+' | Stone: '+invS.toLocaleString()+' | Iron: '+invI.toLocaleString()+' | TG:'+invTG+' TTG:'+invTTG+'\n\n'+
+'REMAINING MISSING:\n'+
+'Time: '+formatTime(remainSec)+' ('+remainSec.toLocaleString()+'s)\n'+
+'Speedups Needed: '+upsText+'\n'+
+'Bread: '+rB.toLocaleString()+' | Wood: '+rW.toLocaleString()+' | Stone: '+rS.toLocaleString()+' | Iron: '+rI.toLocaleString()+'\n'+
+'Truegold: '+rTG.toLocaleString()+' | Tempered: '+rTTG.toLocaleString()+'\n\n'+
+'Generated by DarkLords KS A-I-O BoT - Division 1A/1B/1C';
+
+document.getElementById('exportText').value=exportStr;
+};
+
+window.calcRemaining1C=calc1C;
+window.copyExport1C=function(){var ta=document.getElementById('exportText');ta.select();document.execCommand('copy');alert('Copied!');};
+
+setInterval(function(){if(window.BUILD_TOTAL) calc1C();},2000);
+</script>
+<!-- ========== DIVISION 1D - BELOW 1C - 3 SEPARATE BOXES IN 1 CARD ========== -->
+<div class="card" id="div1D" style="margin-top:16px;border:2px dashed #111827">
+<h2 style="text-align:center;margin-bottom:4px">Official Building Reference guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">Tap any box to open — all inside one card</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 1 - Official DB</span>
+<a href="https://kingshot.net/database/buildings" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#111827;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>🏰 kingshot.net / database / buildings</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 2 - Guide</span>
+<a href="https://www.kingshotguide.org/buildings" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📖 kingshotguide.org / buildings</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:14px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 3 - Data</span>
+<a href="https://kingshotdata.com/category/buildings/" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📊 kingshotdata.com / category / buildings</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<button class="btn" onclick="window.open('https://kingshot.net/database/buildings','_blank');window.open('https://www.kingshotguide.org/buildings','_blank');window.open('https://kingshotdata.com/category/buildings/','_blank');">🚀 Open All 3 at Once</button>
+</div>
+ <!-- ========== DIVISION 1E - BELOW 1D - YOUTUBE BUILDING UPGRADE GUIDES ========== -->
+<div class="card" id="div1E" style="margin-top:16px;border:2px dashed #DC2626">
+<h2 style="text-align:center;margin-bottom:4px">YouTube Links To Building Upgrade Guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">All building upgrade videos — tap to watch</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#DC2626;text-transform:uppercase;display:block;margin-bottom:6px">Video 1 - Massive Upgrade Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+building+upgrade+guide" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Another MASSIVE Upgrade in Kingshot - Full Strategy</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 2 - Priority Order</span>
+<a href="https://www.youtube.com/watch?v=blackted" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ 8 Most Important Upgrades - Correct Priority Order</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 3 - Town Center & Truegold</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+town+center+30+truegold+upgrade" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Town Center 30 to Truegold - What to Upgrade First</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 4 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 4 - F2P Building Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+f2p+building+upgrade+efficiency" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#fff;color:#111827;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ F2P Building Upgrade Efficiency - Save Resources</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- ========== UPGRADED BOX 5 - LIVE YOUTUBE SEARCH ========== -->
+<div style="border:2px solid #FF0000;border-radius:12px;padding:12px;margin-bottom:14px;background:#FFFBEB">
+<span style="font-size:10px;font-weight:800;color:#DC2626;text-transform:uppercase;display:block;margin-bottom:8px">🔴 Box 5 - Live YouTube Building Upgrade Search - Type Anything</span>
+<div style="display:flex;gap:8px">
+<input id="ytSearch" type="text" placeholder="Type anything... e.g. Town Center 30, Truegold, F2P guide" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doYTSearch()}">
+<button onclick="doYTSearch()" style="padding:12px 16px;border-radius:10px;background:#FF0000;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+</div>
+<p style="font-size:10px;color:#6B7280;margin-top:8px">This opens YouTube directly with your search - live YouTube access</p>
+<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot building upgrade guide';doYTSearch()">Building Guide</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot truegold upgrade';doYTSearch()">Truegold</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot f2p tips';doYTSearch()">F2P Tips</button>
+<button class="btn btn-ghost" style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearch').value='kingshot town center 30';doYTSearch()">TC 30</button>
 </div>
 </div>
 
 <script>
-// Hook for 2C - call this from your 2A calculate
-window.calc2C = function(){
- var need = window.GEAR_TOTAL; // set this in your 2A CALCULATE
- if(!need){ document.getElementById('cDetails2').innerHTML = 'Calculate 2A first...'; return; }
- // Example - adapt to your 2A variables
- var modSec = need.modTime||0;
- var invSec = 0; // calculate from 2B inventory same as 1B
- try{
-   invSec = (parseInt(document.getElementById('inv_30d_2')?.value)||0)*2592000 + (parseInt(document.getElementById('inv_7d_2')?.value)||0)*604800 + (parseInt(document.getElementById('inv_3d_2')?.value)||0)*259200 + (parseInt(document.getElementById('inv_1d_2')?.value)||0)*86400;
- }catch(e){}
- var remainSec = Math.max(0, modSec - invSec);
- document.getElementById('cNeed2').textContent = need.text || (need.satin+' Satin / '+need.gilded+' Gilded');
- document.getElementById('cMissing2').textContent = remainSec===0 ? '0 - DONE ✅' : remainSec+'s Still Needed';
- document.getElementById('cDetails2').innerHTML = '<b>Time:</b> Need '+modSec+'s - Have '+invSec+'s = <b style="color:'+(remainSec===0?'green':'red')+'">Remaining '+remainSec+'s</b><br><br><b>Materials Missing:</b><br>'+(need.satin||0)+' Satin, '+(need.gilded||0)+' Gilded';
- document.getElementById('exportText2').value = 'DarkLords KS - GOV GEAR PLAN\nNEED: '+(need.text||JSON.stringify(need))+'\nHAVE: '+invSec+'s\nREMAINING: '+remainSec+'s';
+function doYTSearch(){
+ var q = document.getElementById('ytSearch').value.trim();
+ if(!q){ alert('Type something to search on YouTube'); return; }
+ var url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+ window.open(url,'_blank');
 }
 </script>
+</div>
+ <!-- 1F - AUTO FANDOM + YOUTUBE -->
+<div class="card" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#fff">
+<div style="display:flex;justify-content:space-between"><b style="font-size:10px">1F - LATEST BUILDING (AUTO)</b><span id="fTime" style="font-size:8px;color:#999">loading...</span></div>
+
+<div style="margin-top:6px"><b style="font-size:9px">📚 Latest 4 Fandom - Building</b><div id="fFandom" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px"><div style="font-size:9px;color:#999">Fetching Fandom...</div></div></div>
+
+<div style="margin-top:8px;border-top:1px solid #eee;padding-top:6px"><b style="font-size:9px">🎥 Latest 4 YouTube - Building</b><div id="fYt" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px"><div style="font-size:9px;color:#999">Fetching YouTube...</div></div></div>
+</div>
+
+<script>
+async function load1F(){
+ const fDiv=document.getElementById('fFandom');
+ const yDiv=document.getElementById('fYt');
+ const t=document.getElementById('fTime');
+ try{
+   // FANDOM API - latest building pages
+   const fRes=await fetch('https://kingshot.fandom.com/api.php?action=query&list=search&srsearch=building%20upgrade&srlimit=4&format=json&origin=*');
+   const fJson=await fRes.json();
+   const pages=fJson.query?.search||[];
+   if(pages.length){
+     fDiv.innerHTML=pages.slice(0,4).map(p=>`
+       <a href="https://kingshot.fandom.com/wiki/${encodeURIComponent(p.title.replace(/ /g,'_'))}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;padding:6px;background:#F9FAFB;display:block">
+         <span style="font-size:7px;background:#111827;color:#fff;padding:2px 4px;border-radius:4px">FANDOM</span>
+         <div style="font-size:9px;font-weight:800;color:#111827;margin-top:3px;line-height:1.2">${p.title}</div>
+         <div style="font-size:8px;color:#6B7280;margin-top:2px">${(p.snippet||'').replace(/<[^>]*>/g,'').substring(0,50)}...</div>
+       </a>
+     `).join('');
+   } else {
+     fDiv.innerHTML=`<a href="https://kingshot.fandom.com/wiki/Upgrade_Requirements" target="_blank" style="font-size:9px">Open Upgrade Requirements Wiki</a>`;
+   }
+ }catch(e){
+   fDiv.innerHTML=`
+     <a href="https://kingshot.fandom.com/wiki/Town_Center" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none"><b style="font-size:9px;color:#111">Town Center - Wiki</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Upgrade_Requirements" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none"><b style="font-size:9px;color:#111">Upgrade Requirements</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Category:Buildings" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none"><b style="font-size:9px;color:#111">All Buildings List</b></a>
+     <a href="https://kingshot.fandom.com/" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none"><b style="font-size:9px;color:#111">Kingshot Wiki Home</b></a>
+   `;
+ }
+
+ try{
+   const yRes=await fetch('https://yt.lemnoslife.com/noKey/search?part=snippet&q=kingshot%20building%20upgrade&type=video&order=date&maxResults=4');
+   const yJson=await yRes.json();
+   const vids=(yJson.items||[]).slice(0,4);
+   yDiv.innerHTML=vids.map(v=>`
+     <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;display:block">
+       <img src="${v.snippet.thumbnails.medium.url}" style="width:100%;height:58px;object-fit:cover">
+       <div style="padding:4px"><div style="font-size:8px;font-weight:700;line-height:1.2;color:#111">${v.snippet.title.substring(0,48)}</div></div>
+     </a>
+   `).join('');
+ }catch(e){
+   yDiv.innerHTML=`<a href="https://www.youtube.com/results?search_query=kingshot+building+upgrade" target="_blank" style="font-size:9px">Open Latest Building Videos on YouTube</a>`;
+ }
+ t.textContent='Updated: '+new Date().toLocaleDateString();
+}
+load1F();
+</script>
+
 </div>
 
 <!-- GOVERNOR TAB = 2A-2F -->
