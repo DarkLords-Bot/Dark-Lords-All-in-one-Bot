@@ -209,7 +209,7 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
   </button>
   <div id="dropList" class="myDropList">
   <div button class="btn" blue onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
-    <div button class="btn" blue onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
+    <div button class="btn" blue onclick="selectCat('2A','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('governor_charm','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
   </div>
 </div>
@@ -653,7 +653,7 @@ load1F();
 </div>
 
 <!-- GOVERNOR TAB = 2A-2F -->
-<div id="gearContent" style="display:none;">
+<div id="tab-2A" style="display:none;">
 <div class="card" id="div2A">
 <h2>⚔️ GOVERNER GEAR </h2>
 <p style="font-size:11px;color:#6B7280">REAL GAME DATA</p>
@@ -1245,17 +1245,21 @@ load2F();
 </div>
 </div>
 
-<script>
+ <script>
 function switchTab(val){
-  const b = document.getElementById('tab-'+t);
-  const g = document.getElementById('gearContent');
-  if(val==='building'){
-    b.style.display='block';
-    g.style.display='none';
-  }else{
-    b.style.display='none';
-    g.style.display='block';
-  }
+  // LIST ALL TABS HERE - just add '4A', '5A' when you make them
+  const allTabs = ['1A','2A','3A'];
+
+  allTabs.forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if(el) el.style.display = 'none';
+  });
+
+  const show = document.getElementById('tab-' + val);
+  if(show) show.style.display = 'block';
+
+  // Init charm when opening 3A
+  if(val === '3A' && window.initGrid3A) initGrid3A();
 }
-</script>
+ </script>
 </div>
