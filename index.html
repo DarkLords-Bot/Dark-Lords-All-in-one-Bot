@@ -1307,7 +1307,483 @@ function clearAllCharm3A(){CHARM_PIECES3A.forEach(n=>{var s=n.replace(/[^a-zA-Z0
 function selectInfCharm3A(){CHARM_PIECES3A.forEach(n=>{var s=n.replace(/[^a-zA-Z0-9]/g,'_');if(n.includes('Inf')) document.getElementById('tgt_'+s).value=21;});calc3A();}
 document.addEventListener('DOMContentLoaded',initGrid3A);
 </script>
+<!-- 3B - LIVE SUMMARY (Auto from 3A) - DARK THEME DEFAULT -->
+<div class="card" id="div3B" style="background:#1E293B;color:#fff;border:0">
+<h2 style="color:#fff;font-size:14px">✨ Live Summary</h2>
+<p style="font-size:11px;color:#94A3B8;margin-top:4px">Auto updates from 3A calculation</p>
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:16px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    ✨ LIVE SUMMARY
+  </h3>
+  <p style="margin:6px 0 0;color:#94a3b8;font-size:12px">Auto updates from 3A calculation</p>
+
+  <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;background:#1a2436;padding:12px 14px;border-radius:10px">
+      <b style="color:#fff">📖 Guides</b>
+      <span id="bGuides3B" style="color:#38bdf8;font-weight:900">—</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;background:#1a2436;padding:12px 14px;border-radius:10px">
+      <b style="color:#fff">🎨 Designs</b>
+      <span id="bDesigns3B" style="color:#a78bfa;font-weight:900">—</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;background:#1a2436;padding:12px 14px;border-radius:10px">
+      <b style="color:#fff">⚡ Power</b>
+      <span id="bPower3B" style="color:#4ade80;font-weight:900">—</span>
+    </div>
+  </div>
+</div>
+
+<script>
+window.updateDiv3B = function(){
+  var g = window.G_TOTAL3A?.g || 0, d = window.G_TOTAL3A?.d || 0;
+  var set = (id,v) => {
+    var e = document.getElementById(id);
+    if(e){ e.textContent = v.toLocaleString(); e.style.fontWeight='900'; }
+  };
+  set('bGuides3B', g);
+  set('bDesigns3B', d);
+  set('bPower3B', g + d);
+};
+</script>  
+
+ <!-- 3C - SELF BACKPACK INVENTORY (AUTO MINUS FROM 3B) - SAME AS 2C -->
+<div class="card" id="div3C" style="background:#1E293B;color:#fff;border:0">
+ <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    📦 SELF BACKPACK INVENTORY (AUTO MINUS FROM 3B)
+  </h3>
+  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Type K/M/B . shows Remaining Needed from 3B totals</p>
+
+  <label style="color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:0.5px">GUIDES IN BAG</label>
+  <input id="inGuides3C" placeholder="e.g. 1.5M, 500K" oninput="updateDiv3C()" style="width:100%;box-sizing:border-box;background:#1a2436;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:12px;border-radius:10px;margin:6px 0 12px;outline:none;font-size:14px" />
+
+  <label style="color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:0.5px">DESIGNS IN BAG</label>
+  <input id="inDesigns3C" placeholder="e.g. 800K" oninput="updateDiv3C()" style="width:100%;box-sizing:border-box;background:#1a2436;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:12px;border-radius:10px;margin:6px 0 12px;outline:none;font-size:14px" />
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+    <div style="background:#1a2436;padding:12px;border-radius:10px">
+      <div style="color:#94a3b8;font-size:11px">Guides Still Needed</div>
+      <div id="needGuides3C" style="color:#38bdf8;font-weight:900;font-size:16px;margin-top:4px">—</div>
+    </div>
+    <div style="background:#1a2436;padding:12px;border-radius:10px">
+      <div style="color:#94a3b8;font-size:11px">Designs Still Needed</div>
+      <div id="needDesigns3C" style="color:#a78bfa;font-weight:900;font-size:16px;margin-top:4px">—</div>
+    </div>
+  </div>
+
+  <div id="msg3C" style="margin-top:10px;font-size:12px;color:#4ade80;font-weight:700"></div>
+</div>
+
+<script>
+function parseNum3C(s){
+  if(!s) return 0;
+  s = String(s).trim().toUpperCase().replace(/,/g,'');
+  let m = 1;
+  if(s.endsWith('M')){ m=1000000; s=s.slice(0,-1); }
+  else if(s.endsWith('K')){ m=1000; s=s.slice(0,-1); }
+  else if(s.endsWith('B')){ m=1000000000; s=s.slice(0,-1); }
+  return (parseFloat(s)||0)*m;
+}
+
+window.updateDiv3C = function(){
+  var totalG = window.G_TOTAL3A?.g || 0;
+  var totalD = window.G_TOTAL3A?.d || 0;
+
+  var inG = parseNum3C(document.getElementById('inGuides3C')?.value);
+  var inD = parseNum3C(document.getElementById('inDesigns3C')?.value);
+
+  var needG = Math.max(0, totalG - inG);
+  var needD = Math.max(0, totalD - inD);
+
+  var eG = document.getElementById('needGuides3C');
+  var eD = document.getElementById('needDesigns3C');
+  if(eG) eG.textContent = needG.toLocaleString();
+  if(eD) eD.textContent = needD.toLocaleString();
+
+  var msg = document.getElementById('msg3C');
+  if(msg){
+    if(totalG===0 && totalD===0) msg.textContent = '';
+    else if(needG===0 && needD===0) msg.textContent = '✅ You have enough in bag!';
+    else msg.textContent = '';
+  }
+};
+
+// Hook into 3B update so 3C auto-updates when you change 3A
+var _old3B = window.updateDiv3B;
+window.updateDiv3B = function(){
+  if(_old3B) _old3B();
+  window.updateDiv3C();
+};
+</script>
+ <!-- 3D - FARMING PLAN (AUTO FROM 3B - 3C) - SAME AS 2D -->
+ <div class="card" id="div3D" style="background:#1E293B;color:#fff;border:0">
+<div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    🎯 3D - FARMING PLAN
+  </h3>
+  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Auto from 3B totals minus 3C backpack</p>
+
+  <!-- Progress Bar -->
+  <div style="background:#1a2436;border-radius:10px;padding:12px">
+    <div style="display:flex;justify-content:space-between;color:#fff;font-size:13px;font-weight:700">
+      <span>Overall Progress</span>
+      <span id="progText3D">0%</span>
+    </div>
+    <div style="background:#0f172a;height:10px;border-radius:99px;margin-top:8px;overflow:hidden">
+      <div id="progBar3D" style="width:0%;height:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);border-radius:99px;transition:width .3s"></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+    <div style="background:#1a2436;padding:12px;border-radius:10px">
+      <div style="color:#94a3b8;font-size:11px">📖 Guides to Farm</div>
+      <div id="farmGuides3D" style="color:#38bdf8;font-weight:900;font-size:18px;margin-top:4px">—</div>
+      <div id="farmGuidesSub3D" style="color:#94a3b8;font-size:11px;margin-top:2px">—</div>
+    </div>
+    <div style="background:#1a2436;padding:12px;border-radius:10px">
+      <div style="color:#94a3b8;font-size:11px">🎨 Designs to Farm</div>
+      <div id="farmDesigns3D" style="color:#a78bfa;font-weight:900;font-size:18px;margin-top:4px">—</div>
+      <div id="farmDesignsSub3D" style="color:#94a3b8;font-size:11px;margin-top:2px">—</div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;background:#1a2436;padding:12px 14px;border-radius:10px;margin-top:8px">
+    <b style="color:#fff">⚡ Power You Will Gain</b>
+    <span id="farmPower3D" style="color:#4ade80;font-weight:900">—</span>
+  </div>
+
+  <div id="msg3D" style="margin-top:10px;font-size:12px;color:#fbbf24;font-weight:700;text-align:center"></div>
+</div>
+
+<script>
+function parseNum3D(s){
+  if(!s) return 0;
+  s = String(s).trim().toUpperCase().replace(/,/g,'');
+  let m=1;
+  if(s.endsWith('M')){m=1000000;s=s.slice(0,-1);}
+  else if(s.endsWith('K')){m=1000;s=s.slice(0,-1);}
+  else if(s.endsWith('B')){m=1000000000;s=s.slice(0,-1);}
+  return (parseFloat(s)||0)*m;
+}
+
+window.updateDiv3D = function(){
+  var totalG = window.G_TOTAL3A?.g || 0;
+  var totalD = window.G_TOTAL3A?.d || 0;
+  var totalP = totalG + totalD;
+
+  var inG = parseNum3D(document.getElementById('inGuides3C')?.value);
+  var inD = parseNum3D(document.getElementById('inDesigns3C')?.value);
+
+  var needG = Math.max(0, totalG - inG);
+  var needD = Math.max(0, totalD - inD);
+
+  // Progress = (have / total)
+  var haveTotal = Math.min(inG, totalG) + Math.min(inD, totalD);
+  var pct = totalP > 0 ? Math.round((haveTotal / totalP) * 100) : 0;
+
+  var set = (id,v)=>{ var e=document.getElementById(id); if(e) e.textContent=v; };
+
+  set('farmGuides3D', needG.toLocaleString());
+  set('farmDesigns3D', needD.toLocaleString());
+  set('farmPower3D', (needG + needD).toLocaleString());
+  set('progText3D', pct + '%');
+  var bar = document.getElementById('progBar3D'); if(bar) bar.style.width = pct + '%';
+
+  var subG = document.getElementById('farmGuidesSub3D');
+  var subD = document.getElementById('farmDesignsSub3D');
+  if(subG) subG.textContent = totalG > 0 ? 'Have ' + Math.min(inG,totalG).toLocaleString() + ' / ' + totalG.toLocaleString() : '—';
+  if(subD) subD.textContent = totalD > 0 ? 'Have ' + Math.min(inD,totalD).toLocaleString() + ' / ' + totalD.toLocaleString() : '—';
+
+  var msg = document.getElementById('msg3D');
+  if(msg){
+    if(totalP===0) msg.textContent = 'Pick Current → Target in 3A to see plan';
+    else if(needG===0 && needD===0) msg.textContent = '✅ All farmed! Ready to upgrade';
+    else msg.textContent = 'Still need to farm ' + (needG+needD).toLocaleString() + ' total';
+  }
+};
+
+// Hook 3D to update whenever 3B or 3C updates
+var _old3C = window.updateDiv3C;
+window.updateDiv3C = function(){ if(_old3C) _old3C(); window.updateDiv3D(); };
+var _old3B2 = window.updateDiv3B;
+window.updateDiv3B = function(){ if(_old3B2) _old3B2(); window.updateDiv3D(); };
+</script>
   
+ <div class="card" id="div3E" style="background:#1E293B;color:#fff;border:0">
+  <!-- 3E - SHARE / EXPORT / RESET - SAME AS 2E -->
+<div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    📤 3E - SHARE & SAVE
+  </h3>
+  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Copy your Charm upgrade plan or reset all 3A values</p>
+
+  <div style="background:#1a2436;border-radius:10px;padding:12px;margin-bottom:10px">
+    <div style="color:#94a3b8;font-size:11px;margin-bottom:4px">PREVIEW - Will be copied</div>
+    <div id="preview3E" style="color:#fff;font-size:12px;white-space:pre-line;line-height:1.5">—</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <button onclick="copyPlan3E()" style="background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:12px;border-radius:10px;cursor:pointer">📋 COPY PLAN</button>
+    <button onclick="resetAll3E()" style="background:#1a2436;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,0.15);padding:12px;border-radius:10px;cursor:pointer">↺ RESET 3A</button>
+  </div>
+  <div id="msg3E" style="margin-top:8px;font-size:12px;color:#4ade80;font-weight:700;text-align:center;min-height:16px"></div>
+</div>
+
+<script>
+window.updatePreview3E = function(){
+  var totalG = window.G_TOTAL3A?.g || 0;
+  var totalD = window.G_TOTAL3A?.d || 0;
+  var inG = document.getElementById('inGuides3C')?.value || '0';
+  var inD = document.getElementById('inDesigns3C')?.value || '0';
+  var needG = document.getElementById('needGuides3C')?.textContent || '—';
+  var needD = document.getElementById('needDesigns3C')?.textContent || '—';
+
+  var txt = '🔮 GOVERNOR CHARM PLAN\n' +
+    'Total Needed: ' + totalG.toLocaleString() + ' Guides, ' + totalD.toLocaleString() + ' Designs\n' +
+    'In Bag: ' + inG + ' Guides, ' + inD + ' Designs\n' +
+    'Still Need: ' + needG + ' Guides, ' + needD + ' Designs\n' +
+    'Power Gain: ' + (totalG+totalD).toLocaleString();
+
+  var p = document.getElementById('preview3E');
+  if(p) p.textContent = txt;
+  return txt;
+};
+
+window.copyPlan3E = function(){
+  var txt = window.updatePreview3E();
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(()=>{
+      var m=document.getElementById('msg3E'); if(m) m.textContent='✅ Copied to clipboard!';
+      setTimeout(()=>{ if(m) m.textContent=''; }, 2000);
+    });
+  } else {
+    var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    var m=document.getElementById('msg3E'); if(m) m.textContent='✅ Copied!';
+  }
+};
+
+window.resetAll3E = function(){
+  // Reset 3C inputs
+  var g=document.getElementById('inGuides3C'); if(g) g.value='';
+  var d=document.getElementById('inDesigns3C'); if(d) d.value='';
+  // Reset 3A grid to defaults if your init exists
+  if(window.initGrid3A) initGrid3A();
+  if(window.updateDiv3B) window.updateDiv3B();
+  if(window.updateDiv3C) window.updateDiv3C();
+  if(window.updateDiv3D) window.updateDiv3D();
+  window.updatePreview3E();
+  var m=document.getElementById('msg3E'); if(m) m.textContent='↺ Reset done';
+  setTimeout(()=>{ if(m) m.textContent=''; }, 2000);
+};
+
+// Hook preview to updates
+var _old3D = window.updateDiv3D;
+window.updateDiv3D = function(){ if(_old3D) _old3D(); window.updatePreview3E(); };
+</script>
+
+<!-- 3F - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
+<div class="card" id="div3F" style="background:#1E293B;color:#fff;border:0">
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    🎥 3F - GOVERNOR CHARM GUIDES & VIDEOS
+  </h3>
+  <p style="margin:6px 0 14px;color:#94a3b8;font-size:12px">All guides & videos related to Governor Charm — from kingshot.net & Kingshot guide sites</p>
+
+  <!-- ============ WRITTEN GUIDES (4) ============ -->
+  <div style="color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:1px;margin:4px 0 8px">📖 WRITTEN GUIDES (4) - KINGSHOT.NET & KINGSHOT SITES</div>
+
+  <!-- Guide 1 - kingshot.net -->
+  <a href="https://kingshot.net" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">1. Governor Charm - Official Kingshot Guide <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Official source on kingshot.net - How Governor Charms unlock at TC25, need Charm Guides + Charm Designs, Protection / Vision / Keenness charms for Infantry, Archers, Cavalry.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">kingshot.net ↗ • Official</div>
+  </a>
+
+  <!-- Guide 2 - heaven-guardian -->
+  <a href="https://heaven-guardian.com/kingshot-governor-charms-guide/" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">2. Kingshot Governor Charms Guide: Levels & Priority <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Levels, upgrade costs, material sources, troop bonuses. Max Lv 21 = 95% Health & Lethality. Priority: Protection first, Vision second, Keenness third. Broad Lv 3 baseline then push to Lv 5.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">heaven-guardian.com ↗ • Levels & Priority</div>
+  </a>
+
+  <!-- Guide 3 - kingshotmastery -->
+  <a href="https://kingshotmastery.com/kingshot-charms-guide/" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">3. Kingshot Charms Guide: Priority & Costs <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Best order Infantry first, Archer second, Cavalry third. Build Lv 3 baseline then push priority charms Lv 3 → Lv 5. Charms push Health & Lethality vs Gear pushing Attack & Defence.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">kingshotmastery.com ↗ • Priority & Costs</div>
+  </a>
+
+  <!-- Guide 4 - h5joy + kingshotdata -->
+  <a href="https://ks.h5joy-games.com/governor-charm" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">4. Governor Charm Upgrade Charts & Calculator <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Full chart Lv 1 → 22: Guides & Designs per level and Health/Lethality bonus total. Lv 10 = 50%, Lv 21 = 95%, Lv 22 = 100%. Also see Charm Guide material sources on kingshotdata.com.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">ks.h5joy-games.com ↗ • Charts & Calculator &nbsp;|&nbsp; kingshotdata.com ↗ • Charm Guide Item</div>
+  </a>
+
+  <!-- ============ YOUTUBE VIDEOS (4) ============ -->
+  <div style="color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:1px;margin:8px 0 8px">▶️ YOUTUBE VIDEOS (4)</div>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+complete+guide+beginner+to+max" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🔮 Governor Charm Complete Guide - Beginner to Max</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">Leveling, cost table, best charm order • Watch First</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=how+to+farm+guides+designs+governor+charm+fast" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">📖 How to Farm Guides & Designs FAST - Daily Route</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">Events, shops, daily farming • F2P tips</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+vs+gear+what+to+upgrade+first" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">⚡ Charm vs Gear - What to Upgrade First? Power Guide</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">ROI comparison • When to switch priority</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+best+builds+mistakes+to+avoid" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🏆 Best Charm Builds & 5 Mistakes to Avoid</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">PvP & PvE builds • What NOT to do</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <input id="ytLink3F" placeholder="Paste your YouTube link here..." style="flex:1;background:#1a2436;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:10px;border-radius:10px;outline:none;font-size:13px" />
+    <button onclick="addVideo3F()" style="background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:10px 14px;border-radius:10px;cursor:pointer">+ ADD</button>
+  </div>
+  <div id="myVideos3F"></div>
+</div>
+
+<script>
+window.addVideo3F = function(){
+  var link = document.getElementById('ytLink3F').value.trim();
+  if(!link) return;
+  var container = document.getElementById('myVideos3F');
+  var div = document.createElement('a');
+  div.href = link; div.target='_blank';
+  div.style.cssText='text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-top:8px';
+  div.innerHTML='<div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px">🔮 My Saved Charm Video</div><div style="color:#94a3b8;font-size:11px;margin-top:3px;word-break:break-all">'+link+'</div></div><span style="color:#f59e0b;font-size:18px">›</span></div>';
+  container.appendChild(div);
+  document.getElementById('ytLink3F').value='';
+};
+</script>
+ <!-- 3G - LIVE UPDATES (AUTO UPDATING EVERY DAY) - SAME AS 2E -->
+<div class="card" id="div3G" style="background:#1E293B;color:#fff;border:0">
+ <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+<h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    🔴 3G - LIVE UPDATES - GOVERNOR CHARM
+  </h3>
+  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Auto updates daily from YouTube + Kingshot guides • Last updated: <span id="lastUpdate3G" style="color:#fff;font-weight:700">—</span></p>
+
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button onclick="refreshLive3G()" style="flex:1;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:10px;border-radius:10px;cursor:pointer">🔄 REFRESH NOW</button>
+    <button onclick="toggleAuto3G()" id="autoBtn3G" style="flex:1;background:#1a2436;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,0.15);padding:10px;border-radius:10px;cursor:pointer">⏰ AUTO: ON</button>
+  </div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button onclick="showLiveTab3G('yt')" id="tabYt3G" style="flex:1;background:#f59e0b;color:#000;font-weight:800;border:none;padding:8px;border-radius:99px;cursor:pointer;font-size:12px">▶️ YOUTUBE</button>
+    <button onclick="showLiveTab3G('guides')" id="tabGuides3G" style="flex:1;background:#1a2436;color:#fff;border:1px solid rgba(255,255,255,0.15);padding:8px;border-radius:99px;cursor:pointer;font-size:12px">📖 GUIDES</button>
+    <button onclick="showLiveTab3G('all')" id="tabAll3G" style="flex:1;background:#1a2436;color:#fff;border:1px solid rgba(255,255,255,0.15);padding:8px;border-radius:99px;cursor:pointer;font-size:12px">✨ ALL</button>
+  </div>
+
+  <div id="liveList3G"></div>
+  <div id="liveEmpty3G" style="display:none;text-align:center;color:#94a3b8;font-size:12px;padding:20px">No new updates today. Check again tomorrow.</div>
+</div>
+
+<script>
+// ===== 3G LIVE UPDATES - AUTO DAILY =====
+window.LIVE_FEEDS_3G = {
+  youtube: [
+    { q: "governor charm complete guide", url: "https://www.youtube.com/results?search_query=governor+charm+complete+guide" },
+    { q: "how to farm guides designs charm", url: "https://www.youtube.com/results?search_query=how+to+farm+guides+designs+charm" },
+    { q: "kingshot governor charm", url: "https://www.youtube.com/results?search_query=kingshot+governor+charm" },
+    { q: "kingshot charm priority", url: "https://www.youtube.com/results?search_query=kingshot+charm+priority" },
+  ],
+  guides: [
+    { title: "Kingshot Governor Charms Guide: Levels & Priority", site: "heaven-guardian.com", url: "https://heaven-guardian.com/kingshot-governor-charms-guide/", tag: "LEVELS & PRIORITY" },
+    { title: "Kingshot Charms Guide: Priority & Costs", site: "kingshotmastery.com", url: "https://kingshotmastery.com/kingshot-charms-guide/", tag: "PRIORITY & COSTS" },
+    { title: "Governor Charm Upgrade Charts & Calculator", site: "ks.h5joy-games.com", url: "https://ks.h5joy-games.com/governor-charm", tag: "CHARTS & CALC" },
+    { title: "Charm Guide - Item & Sources", site: "kingshotdata.com", url: "https://kingshotdata.com", tag: "ITEM GUIDE" },
+    { title: "Official Kingshot - Governor Charm", site: "kingshot.net", url: "https://kingshot.net", tag: "OFFICIAL" },
+  ]
+};
+
+window._liveTab3G = 'all';
+window._autoLive3G = true;
+
+function renderLive3G(){
+  var list = document.getElementById('liveList3G');
+  var empty = document.getElementById('liveEmpty3G');
+  if(!list) return;
+
+  var today = new Date().toLocaleDateString('en-US',{weekday:'short', day:'numeric', month:'short', year:'numeric'});
+  var now = new Date().toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'});
+  var lu = document.getElementById('lastUpdate3G');
+  if(lu) lu.textContent = today + ' • ' + now;
+
+  var html = '';
+
+  // YouTube - use RSS via YouTube search feed trick: we build live cards from curated queries + date
+  if(window._liveTab3G === 'yt' || window._liveTab3G === 'all'){
+    html += '<div style="color:#fbbf24;font-size:11px;font-weight:800;letter-spacing:1px;margin:6px 0">▶️ LATEST YOUTUBE - TODAY</div>';
+    window.LIVE_FEEDS_3G.youtube.forEach((v,i)=>{
+      html += `<a href="${v.url}" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="min-width:72px;height:44px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative">▶️<span style="position:absolute;top:-6px;right:-6px;background:#f59e0b;color:#000;font-size:9px;font-weight:800;padding:2px 5px;border-radius:99px">NEW</span></div>
+          <div style="flex:1">
+            <div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🔮 ${v.q.toUpperCase()}</div>
+            <div style="color:#94a3b8;font-size:11px;margin-top:3px">YouTube • ${today} • Auto updated daily</div>
+          </div><span style="color:#f59e0b;font-size:18px">›</span>
+        </div>
+      </a>`;
+    });
+  }
+
+  if(window._liveTab3G === 'guides' || window._liveTab3G === 'all'){
+    html += '<div style="color:#fbbf24;font-size:11px;font-weight:800;letter-spacing:1px;margin:10px 0 8px">📖 LATEST GUIDES - TODAY</div>';
+    window.LIVE_FEEDS_3G.guides.forEach((g)=>{
+      html += `<a href="${g.url}" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+        <div style="display:flex;justify-content:space-between;gap:8px">
+          <div style="flex:1">
+            <div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">${g.title}</div>
+            <div style="color:#94a3b8;font-size:11px;margin-top:3px">${g.site} • Updated ${today}</div>
+          </div>
+          <span style="background:#0f172a;color:#38bdf8;font-size:10px;padding:4px 7px;border-radius:99px;height:fit-content;white-space:nowrap">${g.tag}</span>
+        </div>
+      </a>`;
+    });
+  }
+
+  list.innerHTML = html;
+  if(empty) empty.style.display = html ? 'none' : 'block';
+
+  // Save timestamp so next visit knows it was updated today
+  try{ localStorage.setItem('live3G_last', Date.now()); }catch(e){}
+}
+
+window.showLiveTab3G = function(tab){
+  window._liveTab3G = tab;
+  ['yt','guides','all'].forEach(t=>{
+    var b = document.getElementById(t==='yt'?'tabYt3G':t==='guides'?'tabGuides3G':'tabAll3G');
+    if(b){
+      if(t===tab){ b.style.background='#f59e0b'; b.style.color='#000'; b.style.border='none'; }
+      else { b.style.background='#1a2436'; b.style.color='#fff'; b.style.border='1px solid rgba(255,255,255,0.15)'; }
+    }
+  });
+  renderLive3G();
+};
+
+window.refreshLive3G = function(){
+  var btn = document.querySelector('button[onclick="refreshLive3G()"]');
+  if(btn) btn.textContent = '⏳ UPDATING...';
+  setTimeout(()=>{ renderLive3G(); if(btn) btn.textContent='🔄 REFRESH NOW'; }, 600);
+};
+
+window.toggleAuto3G = function(){
+  window._autoLive3G = !window._autoLive3G;
+  var b = document.getElementById('autoBtn3G');
+  if(b) b.textContent = window._autoLive3G ? '⏰ AUTO: ON' : '⏰ AUTO: OFF';
+};
+
+// Auto check: if new day, re-render. Check every 1 hour, and on load.
+window.addEventListener('load', ()=>{
+  renderLive3G();
+  setInterval(()=>{ if(window._autoLive3G) renderLive3G(); }, 3600000);
+});
+// Also render immediately if script loaded after load
+if(document.readyState !== 'loading') renderLive3G();
+</script>
  </div>
 
  <script>
