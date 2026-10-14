@@ -1245,112 +1245,99 @@ load2F();
 </div>
 </div>
 </div>
- <!-- TAB-3A - CATEGORIES LIKE KINGSHOTDATA.COM - NO HEAD -->
-<div id="tab-3A" class="tab-content" style="width:100%;max-width:480px;margin:0 auto;box-sizing:border-box">
-<!-- TAB-3A - FINAL - SELECT ALL INSIDE BOX + INDIVIDUAL CATEGORY -->
+<!-- TAB-3A - CORRECT - LIKE SCREENSHOTS - NO HEAD -->
 <div id="tab-3A" style="width:100%;max-width:480px;margin:0 auto;box-sizing:border-box;background:#0b0f14;padding:10px">
-
 <style>
-.ks-card{background:#1a1d23;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:0;margin-bottom:10px;overflow:hidden}
-.ks-pill{background:#252a33;color:#9aa3b2;border:1px solid rgba(255,255,255,0.08);padding:8px 12px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
-.ks-pill.active{background:#2a3441;color:#fff;border-color:#f59e0b;color:#fbbf24}
-.ks-pill-gold{background:#27201a;color:#fbbf24;border:1px solid rgba(251,191,36,0.25)}
-.ks-select{background:#11151c;color:#e2e8f0;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;border-radius:10px;font-weight:700;font-size:13px;width:100%}
-.gear-head{background:#231d1d;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ks-box{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:10px;margin-bottom:10px}
+.ks-gear{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;margin-bottom:12px}
+.ks-gear-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px}
+.ks-pill{border:1px solid rgba(255,255,255,0.08);background:#2a2e38;color:#9aa3b2;padding:7px 12px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
+.ks-pill.active{background:#323845;color:#fff;border-color:rgba(255,255,255,0.15)}
+.ks-pill-gold{background:#2a2520;color:#fbbf24;border-color:rgba(251,191,36,0.2)}
+.ks-select{background:#2a2e38;color:#e2e8f0;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;border-radius:10px;font-weight:700;font-size:13px;width:100%}
 </style>
 
-<div style="font-weight:900;color:#fff;font-size:16px;margin:6px 0 10px;display:flex;align-items:center;gap:8px">📦 Select Charm by Troop Type</div>
+<div style="color:#fff;font-weight:900;font-size:16px;display:flex;align-items:center;gap:8px;margin:4px 0 10px">📦 Select Charm by Troop Type</div>
 
-<!-- MAIN BOX - EVERYTHING INSIDE -->
-<div class="ks-card" style="padding:12px">
+<!-- BUTTONS LIKE SCREENSHOT -->
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+  <button onclick="selAll(true)" class="ks-pill ks-pill-gold">☑ Select All</button>
+  <button onclick="selAllTroop('inf')" class="ks-pill ks-pill-gold">☑ Select All (Infantry)</button>
+  <button onclick="setMax()" class="ks-pill">↗ Set All to Max</button>
+  <button onclick="selAll(false)" class="ks-pill">☐ Clear All</button>
+</div>
 
-  <!-- SELECT ALL BUTTONS INSIDE BOX -->
-  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
-    <button onclick="ksSelAll(true)" class="ks-pill ks-pill-gold">☑ Select All</button>
-    <button onclick="ksSelTroop('inf')" class="ks-pill ks-pill-gold">☑ Select All (Infantry)</button>
-    <button onclick="ksSelTroop('cav')" class="ks-pill ks-pill-gold">☑ Select All (Cavalry)</button>
-    <button onclick="ksSelTroop('arc')" class="ks-pill ks-pill-gold">☑ Select All (Archer)</button>
-    <button onclick="ksSetMax()" class="ks-pill">↗ Set All to Max</button>
-    <button onclick="ksSelAll(false)" class="ks-pill">☐ Clear All</button>
+<!-- TROOP TABS - Cavalry / Infantry / Archer - INSIDE BOX -->
+<div class="ks-box" style="padding:8px">
+  <div style="display:flex;gap:8px;background:#111318;border-radius:24px;padding:5px">
+    <button id="tCav" onclick="switchT('cav')" class="ks-pill" style="flex:1">🛡️ Cavalry</button>
+    <button id="tInf" onclick="switchT('inf')" class="ks-pill active" style="flex:1">🛡️ Infantry</button>
+    <button id="tArc" onclick="switchT('arc')" class="ks-pill" style="flex:1">🏹 Archer</button>
   </div>
 
-  <!-- TROOP TYPE TABS INSIDE BOX -->
-  <div style="display:flex;gap:6px;background:#11151c;border-radius:24px;padding:5px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
-    <button id="kCav" onclick="ksSwitch('cav')" class="ks-pill" style="flex:1">🐴 Cavalry</button>
-    <button id="kInf" onclick="ksSwitch('inf')" class="ks-pill active" style="flex:1">🛡️ Infantry</button>
-    <button id="kArc" onclick="ksSwitch('arc')" class="ks-pill" style="flex:1">🏹 Archer</button>
+  <!-- INDIVIDUAL CATEGORY CHOOSER - Cap/Watch/Coat/Pants/Belt/Weapon -->
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Cap" checked onchange="renderGears()"> Cap</label>
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Watch" checked onchange="renderGears()"> Watch</label>
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Coat" checked onchange="renderGears()"> Coat</label>
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Pants" checked onchange="renderGears()"> Pants</label>
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Belt" checked onchange="renderGears()"> Belt</label>
+    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Weapon" checked onchange="renderGears()"> Weapon</label>
   </div>
+</div>
 
-  <!-- INDIVIDUAL CATEGORY TO CHOOSE - COAT/PANTS/HAT etc CHECKBOXES -->
-  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catCoat" checked onchange="ksRender()"> Coat</label>
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catPants" checked onchange="ksRender()"> Pants</label>
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catHat" checked onchange="ksRender()"> Hat</label>
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catNecklace" checked onchange="ksRender()"> Necklace</label>
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catRing" checked onchange="ksRender()"> Ring</label>
-    <label style="display:flex;align-items:center;gap:6px;background:#11151c;padding:6px 10px;border-radius:20px;color:#fff;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.08)"><input type="checkbox" id="catStaff" checked onchange="ksRender()"> Staff</label>
-  </div>
+<div id="gearsWrap"></div>
 
-  <!-- GEARS WILL RENDER HERE -->
-  <div id="ksGears"></div>
-
-  <!-- TOTALS INSIDE SAME BOX -->
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:12px;background:#11151c;border-radius:12px;padding:10px;border:1px solid rgba(255,255,255,0.05)">
-    <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">GUIDES</div><div id="ksG" style="color:#fbbf24;font-weight:900">0</div></div>
-    <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">DESIGNS</div><div id="ksD" style="color:#fbbf24;font-weight:900">0</div></div>
-    <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">POWER</div><div id="ksP" style="color:#4ade80;font-weight:900">0</div></div>
-    <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">SCORE</div><div id="ksS" style="color:#60a5fa;font-weight:900">0</div></div>
-  </div>
-
+<!-- TOTALS -->
+<div class="ks-box" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:10px">
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">GUIDES</div><div id="kG" style="color:#fbbf24;font-weight:900">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">DESIGNS</div><div id="kD" style="color:#fbbf24;font-weight:900">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">POWER</div><div id="kP" style="color:#4ade80;font-weight:900">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">SCORE</div><div id="kS" style="color:#60a5fa;font-weight:900">0</div></div>
 </div>
 
 <script>
 const CH={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},3:{g:60,d:40,p:370000,s:3125},4:{g:80,d:100,p:452000,s:8750},5:{g:100,d:200,p:576000,s:11250},6:{g:120,d:300,p:700000,s:12500},7:{g:140,d:400,p:824000,s:12500},8:{g:200,d:400,p:948000,s:13000},9:{g:300,d:400,p:1072000,s:14000},10:{g:420,d:420,p:1196000,s:15000},11:{g:560,d:420,p:1320000,s:16000},12:{g:580,d:600,p:1444000,s:17000},13:{g:610,d:780,p:1568000,s:18000},14:{g:645,d:960,p:1692000,s:19000},15:{g:685,d:1140,p:1816000,s:20000},16:{g:730,d:1320,p:1940000,s:21000},17:{g:780,d:1500,p:2064000,s:22000},18:{g:835,d:1680,p:2188000,s:23000},19:{g:895,d:1860,p:2312000,s:24000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
 function cum(l){let g=0,d=0;for(let i=1;i<=l;i++){g+=CH[i].g; d+=CH[i].d;} return {cg:g,cd:d,p:CH[l]?.p||0,s:CH[l]?.s||0};}
 let troop='inf';
-function ksSwitch(t){
- troop=t;
- document.getElementById('kCav').classList.remove('active'); document.getElementById('kInf').classList.remove('active'); document.getElementById('kArc').classList.remove('active');
- document.getElementById('k'+(t==='cav'?'Cav':t==='inf'?'Inf':'Arc')).classList.add('active');
- ksRender();
-}
-function ksRender(){
- let gears=[]; if(document.getElementById('catCoat').checked) gears.push('Coat'); if(document.getElementById('catPants').checked) gears.push('Pants'); if(document.getElementById('catHat').checked) gears.push('Hat'); if(document.getElementById('catNecklace').checked) gears.push('Necklace'); if(document.getElementById('catRing').checked) gears.push('Ring'); if(document.getElementById('catStaff').checked) gears.push('Staff');
+function switchT(t){ troop=t; document.getElementById('tCav').classList.remove('active'); document.getElementById('tInf').classList.remove('active'); document.getElementById('tArc').classList.remove('active'); document.getElementById('t'+(t==='cav'?'Cav':t==='inf'?'Inf':'Arc')).classList.add('active'); renderGears(); }
+function getGears(){ return Array.from(document.querySelectorAll('.gcat')).filter(c=>c.checked).map(c=>c.value); }
+function renderGears(){
+ let gears=getGears(); if(gears.length===0) gears=['Coat','Pants','Cap','Watch','Belt','Weapon'];
  let h='';
  gears.forEach(gear=>{
+  let col=troop==='inf'?'#ef4444':troop==='cav'?'#facc15':'#22d3ee';
   let icon=troop==='inf'?'🛡️':troop==='cav'?'🐴':'🏹';
-  let col=troop==='inf'?'#ef4444':troop==='cav'?'#22c55e':'#3b82f6';
-  h+=`<div class="ks-card"><div class="gear-head"><div style="color:${col};font-weight:900;display:flex;gap:6px;align-items:center"><span>${icon}</span> ${gear} - ${troop.toUpperCase()} <span style="color:#64748b;font-size:11px;margin-left:6px">[${troop==='inf'?'Protection':troop==='cav'?'Keenness':'Vision'}]</span></div><div style="display:flex;gap:6px"><select id="${gear}_lvl" class="ks-select" style="width:auto;padding:6px 8px;font-size:11px"><option value="">Level</option><option value="5">Lv5</option><option value="10">Lv10</option><option value="21">Lv21</option><option value="22">Lv22</option></select><button onclick="ksSetGear('${gear}')" class="ks-pill" style="font-size:11px;padding:6px 10px">Set All</button></div></div>`;
+  h+=`<div class="ks-gear"><div class="ks-gear-head" style="background:${troop==='inf'?'#2a1a1a':troop==='cav'?'#2a2410':'#102a2a'}"><div style="color:${col};font-weight:900;display:flex;gap:6px;align-items:center"><span>${icon}</span> ${gear}</div><div style="display:flex;gap:6px"><select id="${gear}_lvl" class="ks-select" style="width:auto;padding:6px 10px;font-size:11px"><option value="">Level</option><option value="5">Lv5</option><option value="10">Lv10</option><option value="21">Lv21</option><option value="22">Lv22</option></select><button onclick="setGear('${gear}')" class="ks-pill" style="font-size:11px">Set All</button></div></div>`;
   for(let i=1;i<=3;i++){
    let id=`${troop}_${gear}_${i}`;
-   h+=`<div style="padding:12px;display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,0.05)"><input type="checkbox" id="${id}_chk" onchange="ksCalc()" style="width:18px;height:18px"><div style="width:32px;height:32px;background:#1e2f1e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px">🟢</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px">Charm ${i}</div><div style="display:grid;grid-template-columns:1fr 12px 1fr;gap:6px;align-items:center;margin-top:4px"><div><div style="color:#64748b;font-size:9px">Current Level</div><select id="${id}_cur" onchange="ksCalc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:8px"><option value="0">Not Started</option><option value="1">Level 1</option><option value="2">Level 2</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21">Level 21</option></select></div><div style="color:#64748b;margin-top:14px;text-align:center">›</div><div><div style="color:#64748b;font-size:9px">Target Level</div><select id="${id}_targ" onchange="ksCalc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:8px"><option value="1">Level 1</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21" selected>Level 21</option><option value="22">Level 22</option></select></div></div></div></div>`;
+   h+=`<div style="padding:12px;display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,0.05)"><input type="checkbox" id="${id}_chk" onchange="calc()" style="width:18px;height:18px"><div style="width:34px;height:34px;background:#1e2e1e;border-radius:50%;display:flex;align-items:center;justify-content:center">🟢</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:14px">Charm ${i}</div><div style="display:grid;grid-template-columns:1fr 12px 1fr;gap:8px;align-items:center;margin-top:6px"><div><div style="color:#64748b;font-size:10px">Current Level</div><select id="${id}_cur" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px"><option value="0">Not Started</option><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21">Level 21</option></select></div><div style="color:#64748b;margin-top:18px;text-align:center">›</div><div><div style="color:#64748b;font-size:10px">Target Level</div><select id="${id}_targ" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px"><option value="1">Level 1</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21" selected>Level 21</option><option value="22">Level 22</option></select></div></div></div></div>`;
   }
   h+=`</div>`;
  });
- document.getElementById('ksGears').innerHTML=h;
- ksCalc();
+ document.getElementById('gearsWrap').innerHTML=h;
+ calc();
 }
-function ksSetGear(gear){ let lvl=document.getElementById(gear+'_lvl').value; if(!lvl) return; for(let i=1;i<=3;i++){ let el=document.getElementById(`${troop}_${gear}_${i}_targ`); if(el) el.value=lvl; } ksCalc(); }
-function ksSelAll(v){ document.querySelectorAll('[id$=_chk]').forEach(c=>c.checked=v); ksCalc(); }
-function ksSelTroop(t){ ksSwitch(t); setTimeout(()=>ksSelAll(true),50); }
-function ksSetMax(){ document.querySelectorAll('[id$=_targ]').forEach(s=>s.value='22'); ksCalc(); }
-function ksCalc(){
+function setGear(g){ let lvl=document.getElementById(g+'_lvl').value; if(!lvl) return; for(let i=1;i<=3;i++){ let el=document.getElementById(`${troop}_${g}_${i}_targ`); if(el) el.value=lvl; } calc(); }
+function selAll(v){ document.querySelectorAll('[id$=_chk]').forEach(c=>c.checked=v); calc(); }
+function selAllTroop(t){ switchT(t); setTimeout(()=>selAll(true),60); }
+function setMax(){ document.querySelectorAll('[id$=_targ]').forEach(s=>s.value='22'); calc(); }
+function calc(){
  let G=0,D=0,P=0,S=0;
  document.querySelectorAll('[id$=_chk]').forEach(chk=>{
   if(!chk.checked) return;
-  let base=chk.id.replace('_chk','');
-  let cur=parseInt(document.getElementById(base+'_cur').value||0);
-  let targ=parseInt(document.getElementById(base+'_targ').value||0);
+  let b=chk.id.replace('_chk','');
+  let cur=parseInt(document.getElementById(b+'_cur').value||0);
+  let targ=parseInt(document.getElementById(b+'_targ').value||0);
   if(targ>cur){ let cf=cum(cur), ct=cum(targ); G+=ct.cg-cf.cg; D+=ct.cd-cf.cd; P+=ct.p-cf.p; S+=ct.s-cf.s; }
  });
- document.getElementById('ksG').textContent=G.toLocaleString();
- document.getElementById('ksD').textContent=D.toLocaleString();
- document.getElementById('ksP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
- document.getElementById('ksS').textContent=S.toLocaleString();
+ document.getElementById('kG').textContent=G.toLocaleString();
+ document.getElementById('kD').textContent=D.toLocaleString();
+ document.getElementById('kP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
+ document.getElementById('kS').textContent=S.toLocaleString();
 }
-ksRender();
+renderGears();
 </script>
-</div>
 <!-- 3B - LIVE SUMMARY (Auto from 3A) - DARK THEME DEFAULT -->
 <div class="card" id="div3B" style="background:#1E293B;color:#fff;border:0">
 <h2 style="color:#fff;font-size:14px">✨ Live Summary</h2>
