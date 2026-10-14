@@ -218,8 +218,7 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 function selectCat(val,label){
   document.getElementById('dropLabel').textContent = label;
   document.getElementById('dropList').style.display='none';
-  document.getElementById('dropList').style.display = cat==='governor_charm' ? 'block' : 'none';
-  document.getElementById('pageTitle').textContent = title;
+  document.getElementById('dropList').style.display ='governor_charm';
   if(cat==='governor_charm' && window.initGrid3A) initGrid3A();
  }
   switchTab(val);
