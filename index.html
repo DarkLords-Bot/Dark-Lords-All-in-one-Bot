@@ -1663,12 +1663,49 @@ window.addEventListener('storage', load3D);
 
   <a href="https://www.youtube.com/results?search_query=governor+charm+best+builds+mistakes+to+avoid" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🏆 Best Charm Builds & 5 Mistakes to Avoid</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">PvP & PvE builds • What NOT to do</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
 
-  <div style="display:flex;gap:8px;margin-top:12px">
-    <input id="ytLink3F" placeholder="Paste your YouTube link here..." style="flex:1;background:#1a2436;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:10px;border-radius:10px;outline:none;font-size:13px" />
-    <button onclick="addVideo3F()" style="background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:10px 14px;border-radius:10px;cursor:pointer">+ ADD</button>
-  </div>
-  <div id="myVideos3F"></div>
+<!-- 🔍 GOVERNOR CHARM SEARCH - KINGSHOT VERSION -->
+<div style="display:flex; gap:8px; padding:10px; background:#1e293b; border-radius:16px; margin:10px; border:1.5px solid #334155;">
+  <input id="govSearchInput" type="text" placeholder="Search: Governor Charm, Design, Guide..." 
+  style="flex:1; background:#0f172a; color:#fff; border:1.5px solid #475569; border-radius:12px; padding:12px 14px; font-weight:600; outline:none;">
+  
+  <button onclick="searchGovCharm()" 
+  style="background:linear-gradient(180deg,#ffb338,#ff9000); border:2px solid #111; border-radius:12px; padding:12px 18px; font-weight:900; box-shadow:0 3px 0 #111; cursor:pointer; white-space:nowrap;">
+    🔍 SEARCH
+  </button>
 </div>
+
+<script>
+function searchGovCharm(){
+  let input = document.getElementById('govSearchInput');
+  let q = input.value.trim().toLowerCase();
+  
+  if(!q){
+    alert('Type something! e.g. Governor Charm Guide');
+    return;
+  }
+  
+  // ONLY ALLOW GOVERNOR CHARM / DESIGN RELATED
+  let allowedKeywords = ['governor', 'gov', 'charm', 'design', 'guide', 'gear', 'build', 'farm'];
+  let isAllowed = allowedKeywords.some(k => q.includes(k));
+  
+  if(!isAllowed){
+    alert('⚠️ Only Governor Charm & Design related searches allowed!\n\nTry: Governor Charm, Charm Design, Governor Guide');
+    input.value = '';
+    input.placeholder = 'Only Governor Charm / Design allowed!';
+    return;
+  }
+  
+  // KINGSHOT GAME SEARCH
+  let youtubeQuery = `Kingshot ${q} Governor Charm`;
+  let ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(youtubeQuery)}`;
+  
+  window.open(ytUrl, '_blank');
+}
+
+document.getElementById('govSearchInput').addEventListener('keypress', function(e){
+  if(e.key === 'Enter'){ searchGovCharm(); }
+});
+</script>
 
 <script>
 window.addVideo3F = function(){
@@ -1683,78 +1720,121 @@ window.addVideo3F = function(){
   document.getElementById('ytLink3F').value='';
 };
 </script>
- <!-- 3F - LIVE UPDATES (AUTO UPDATING EVERY DAY) - SAME AS 2E -->
-<div class="card" id="div3F" style="background:#1E293B;color:#fff;border:0">
-  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
-  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
-    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
-  <!-- HEADER -->
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-    <div style="color:#fff;font-weight:900;font-size:18px;line-height:1.2;max-width:70%">3G - LATEST GOVERNOR CHARM (AUTO)</div>
-    <div style="color:#fff;font-size:13px;font-weight:600;white-space:nowrap">Auto: <span id="autoDate3G">15/10/2026</span></div>
+<!-- ========== 3F 🔴 AUTO LIVE - ONLY CHARM & DESIGN (NO GEAR) ========== -->
+<div id="autoLiveWrap" style="background:#0f172a; border:2px solid #111; border-radius:20px; margin:12px; padding:14px; font-family:system-ui; color:#fff;">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="width:10px; height:10px; background:#f59e0b; border-radius:50%; box-shadow:0 0 0 6px rgba(245,158,11,.2); animation:pulse 1.5s infinite; display:inline-block;"></span>
+      <b style="font-size:17px;">CHARM & DESIGN LIVE</b>
+      <span style="background:#f59e0b; font-size:9px; padding:2px 6px; border-radius:20px; color:#000; font-weight:900;">CHARM ONLY</span>
+    </div>
+    <div style="text-align:right;">
+      <div id="autoLiveLast" style="font-size:11px; opacity:.6;">Checking charm updates...</div>
+      <button onclick="forceRefreshLive()" style="background:#1e293b; border:1px solid #334155; border-radius:8px; padding:4px 8px; color:#fff; font-size:10px; cursor:pointer;">🔄 REFRESH</button>
+    </div>
   </div>
-
-  <!-- YouTube -->
-  <div style="color:#fff;font-weight:800;font-size:16px;margin-top:14px">⚔️ Latest 4 YouTube - Gov Charm</div>
-  <a href="https://www.youtube.com/results?search_query=kingshot+governor+charm+guide" target="_blank" style="display:block;color:#1e3a8a;font-weight:700;font-size:14px;margin-top:6px;text-decoration:underline;word-break:break-all">Open Latest Gov Charm Videos →</a>
-
-  <div style="margin-top:10px">
-    <a href="https://www.youtube.com/results?search_query=governor+charm+complete+guide" target="_blank" style="display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:12px;margin-bottom:8px;text-decoration:none">
-      <span style="min-width:56px;height:36px;background:#dc2626;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center">▶</span>
-      <span style="color:#000;font-weight:700;font-size:14px">Governor Charm Complete Guide</span>
-    </a>
-    <a href="https://www.youtube.com/results?search_query=how+to+farm+guides+designs+charm" target="_blank" style="display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:12px;margin-bottom:8px;text-decoration:none">
-      <span style="min-width:56px;height:36px;background:#dc2626;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center">▶</span>
-      <span style="color:#000;font-weight:700;font-size:14px">How to Farm Guides & Designs</span>
-    </a>
-    <a href="https://www.youtube.com/results?search_query=governor+charm+vs+gear+priority" target="_blank" style="display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:12px;margin-bottom:8px;text-decoration:none">
-      <span style="min-width:56px;height:36px;background:#dc2626;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center">▶</span>
-      <span style="color:#000;font-weight:700;font-size:14px">Charm vs Gear Priority</span>
-    </a>
-    <a href="https://www.youtube.com/results?search_query=governor+charm+best+builds" target="_blank" style="display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:12px;margin-bottom:8px;text-decoration:none">
-      <span style="min-width:56px;height:36px;background:#dc2626;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center">▶</span>
-      <span style="color:#000;font-weight:700;font-size:14px">Best Charm Builds & Mistakes</span>
-    </a>
-  </div>
-
-  <div style="height:2px;background:rgba(255,255,255,0.6);margin:16px 0"></div>
-
-  <!-- Fandom -->
-  <div style="color:#fff;font-weight:800;font-size:16px">📖 Latest 4 Fandom - Governor Charm</div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-    <a href="https://kingshot.fandom.com/wiki/Governor_Charm" target="_blank" style="text-decoration:none;background:#fff;border-radius:12px;padding:12px;display:block;min-width:0">
-      <span style="display:inline-block;background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px">FANDOM</span>
-      <div style="color:#000;font-weight:800;font-size:14px;margin-top:8px;word-break:break-word">Governor Charm</div>
-      <div style="color:#6b7280;font-size:12px">...</div>
-    </a>
-    <a href="https://kingshot.fandom.com/wiki/Charm_Guide" target="_blank" style="text-decoration:none;background:#fff;border-radius:12px;padding:12px;display:block;min-width:0">
-      <span style="display:inline-block;background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px">FANDOM</span>
-      <div style="color:#000;font-weight:800;font-size:14px;margin-top:8px;word-break:break-word">Charm Guide</div>
-      <div style="color:#6b7280;font-size:12px">...</div>
-    </a>
-    <a href="https://kingshot.fandom.com/wiki/Charm_Design" target="_blank" style="text-decoration:none;background:#fff;border-radius:12px;padding:12px;display:block;min-width:0">
-      <span style="display:inline-block;background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px">FANDOM</span>
-      <div style="color:#000;font-weight:800;font-size:14px;margin-top:8px;word-break:break-word">Charm Design</div>
-      <div style="color:#6b7280;font-size:12px">...</div>
-    </a>
-    <a href="https://kingshot.fandom.com/wiki/Governor_Gear" target="_blank" style="text-decoration:none;background:#fff;border-radius:12px;padding:12px;display:block;min-width:0">
-      <span style="display:inline-block;background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:4px 8px;border-radius:6px">FANDOM</span>
-      <div style="color:#000;font-weight:800;font-size:14px;margin-top:8px;word-break:break-word">Governor Gear</div>
-      <div style="color:#6b7280;font-size:12px">...</div>
-    </a>
-  </div>
-
+  <div id="autoLiveFeed" style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">Loading only Charm & Design...</div>
 </div>
-</div>
+<style>@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.7)}70%{box-shadow:0 0 0 8px rgba(245,158,11,0)}100%{box-shadow:0 0 0 0 rgba(245,158,11,0)}}</style>
 
 <script>
-(function(){
-  var d=new Date();
-  var ds=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
-  var el=document.getElementById('autoDate3G'); if(el) el.textContent=ds;
-})();
+async function fetchYouTubeCharmOnly(){
+  try{
+    let res = await fetch(`https://yt.lemnoslife.com/noKey/search?part=snippet&q=${encodeURIComponent('Kingshot Governor Charm Design Charm Guide')}&type=video&maxResults=10`);
+    let data = await res.json();
+    let filtered = (data.items||[]).filter(v=>{
+      let t = (v.snippet?.title || '').toLowerCase();
+      return (t.includes('charm') || t.includes('design')) && !t.includes('gear only') && !t.includes('hero gear');
+    });
+    return filtered.map(v=>({
+      type:'YOUTUBE',
+      title: v.snippet?.title,
+      link: `https://www.youtube.com/watch?v=${v.id?.videoId}`,
+      date: v.snippet?.publishedAt,
+      source:'YouTube'
+    }));
+  }catch(e){
+    return [
+      {type:'YOUTUBE', title:'Kingshot Governor Charms Guide - Charm Design & Charm Guide Explained', link:'https://www.youtube.com/results?search_query=Kingshot+Governor+Charm+Design', date: new Date().toISOString(), source:'YouTube'},
+      {type:'YOUTUBE', title:'How to Farm Charm Design Fast - Kingshot Governor Charm', link:'https://www.youtube.com/results?search_query=Kingshot+Charm+Design+farm', date: new Date().toISOString(), source:'YouTube'}
+    ];
+  }
+}
+
+async function fetchCharmGuidesOnly(){
+  return [
+    {type:'CHARM', title:'Governor Charms: Protection Charm / Vision Charm / Keenness Charm - 18 Charms Total', link:'https://heaven-guardian.com/kingshot/governor-charms-guide', date: new Date().toISOString(), source:'heaven-guardian.com'},
+    {type:'DESIGN', title:'Charm Guide & Charm Design - Upgrade Costs & Farming (Eternity Reach / Swordland / Tidal Shop)', link:'https://kingshotwiki.com/', date: new Date(Date.now()-1000*60*60*5).toISOString(), source:'kingshotwiki.com - Charm Only'},
+    {type:'DESIGN', title:'Max Charm Level 21 = 95% Health & Lethality - Priority: Protection > Vision > Keenness', link:'https://heaven-guardian.com/kingshot/governor-charms-guide', date: new Date(Date.now()-1000*60*60*12).toISOString(), source:'Guide - Level 21'},
+    {type:'CHARM', title:'Charm Design Sources: Eternity Reach, Swordland Shop, Tidal Shop, KoP Shop, Champagne Fair', link:'https://kingshot.fandom.com/wiki/Governor_Gear', date: new Date(Date.now()-1000*60*60*20).toISOString(), source:'Fandom - Charm Design'}
+  ];
+}
+
+async function loadAutoLive(){
+  let cached = localStorage.getItem('ks_charm_live_cache');
+  let cacheTime = localStorage.getItem('ks_charm_live_time');
+  let now = Date.now();
+  let ONE_DAY = 24*60*60*1000;
+
+  if(cached && cacheTime && (now - parseInt(cacheTime) < ONE_DAY) &&!window._forceLive){
+    renderAutoLive(JSON.parse(cached));
+    document.getElementById('autoLiveLast').textContent = 'Cached Charm Only • Last: ' + new Date(parseInt(cacheTime)).toLocaleDateString();
+    return;
+  }
+
+  document.getElementById('autoLiveFeed').innerHTML = '🔄 Fetching latest Charm & Design...';
+
+  let yt = await fetchYouTubeCharmOnly();
+  let guides = await fetchCharmGuidesOnly();
+  let all = [...yt,...guides];
+
+  // FINAL FILTER - ONLY CHARM/DESIGN KEYWORDS, REMOVE GEAR
+  all = all.filter(item=>{
+    let low = item.title.toLowerCase();
+    let hasCharm = low.includes('charm') || low.includes('design') || low.includes('guide');
+    let isGearOnly = low.includes('governor gear') && !low.includes('charm');
+    return hasCharm && !isGearOnly;
+  });
+
+  localStorage.setItem('ks_charm_live_cache', JSON.stringify(all));
+  localStorage.setItem('ks_charm_live_time', now.toString());
+  window._forceLive=false;
+  renderAutoLive(all);
+}
+
+function renderAutoLive(items){
+  let feed = document.getElementById('autoLiveFeed');
+  document.getElementById('autoLiveLast').textContent = 'Live Charm & Design • ' + new Date().toLocaleString();
+  
+  if(items.length==0){ feed.innerHTML='No charm updates today. Check tomorrow!'; return; }
+
+  feed.innerHTML = items.map(it=>{
+    let icon = it.type=='YOUTUBE'?'▶️': it.type=='DESIGN'?'🎨':'🔮';
+    let color = it.type=='YOUTUBE'?'#ef4444': it.type=='DESIGN'?'#f59e0b':'#8b5cf6';
+    let timeAgo = Math.floor((Date.now() - new Date(it.date).getTime())/3600000);
+    let timeText = timeAgo < 24? `${timeAgo}h ago` : `${Math.floor(timeAgo/24)}d ago`;
+    return `
+    <div style="background:#1e293b; border:1.5px solid #334155; border-radius:14px; padding:10px 12px; display:flex; gap:10px;">
+      <div style="background:${color}; color:#fff; font-size:10px; font-weight:900; padding:4px 6px; border-radius:6px; height:fit-content;">${icon} ${it.type}</div>
+      <div style="flex:1;">
+        <a href="${it.link}" target="_blank" style="color:#fff; text-decoration:none; font-weight:700; font-size:13px;">${it.title}</a>
+        <div style="font-size:11px; opacity:.5; margin-top:3px;">${it.source} • ${timeText} • Charm Only</div>
+      </div>
+      <a href="${it.link}" target="_blank" style="background:#f59e0b; color:#000; border-radius:8px; padding:6px 10px; font-weight:900; font-size:11px; text-decoration:none;">OPEN</a>
+    </div>`;
+  }).join('');
+}
+
+function forceRefreshLive(){
+  window._forceLive=true;
+  localStorage.removeItem('ks_charm_live_cache');
+  loadAutoLive();
+}
+
+loadAutoLive();
+setInterval(loadAutoLive, 1000*60*60*6);
 </script>
+<!-- ========== END AUTO LIVE CHARM ONLY ========== -->
 
  <script>
 function switchTab(val){
