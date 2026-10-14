@@ -1657,19 +1657,22 @@ window.addVideo3F = function(){
 };
 </script>
  <!-- 3G - LIVE UPDATES (AUTO UPDATING EVERY DAY) - SAME AS 2E -->
-<div class="card" id="div3G" style="background:#1E293B;color:#fff;border:0">
- <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
-<h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
-    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
-    🔴 3G - LIVE UPDATES - GOVERNOR CHARM
-  </h3>
-  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Auto updates daily from YouTube + Kingshot guides • Last updated: <span id="lastUpdate3G" style="color:#fff;font-weight:700">—</span></p>
+<div class="card" id="div3G" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#6B7280">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<b style="font-size:10px">3G - LATEST GOVERNOR CHARM (AUTO)</b>
+<span id="gTime" style="font-size:8px;color:#fff">Updating...</span>
+</div>
 
-  <div style="display:flex;gap:8px;margin-bottom:12px">
-    <button onclick="refreshLive3G()" style="flex:1;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:10px;border-radius:10px;cursor:pointer">🔄 REFRESH NOW</button>
-    <button onclick="toggleAuto3G()" id="autoBtn3G" style="flex:1;background:#1a2436;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,0.15);padding:10px;border-radius:10px;cursor:pointer">⏰ AUTO: ON</button>
-  </div>
+<b style="font-size:9px;display:block;margin-top:6px">⚔️ Latest 4 YouTube - Gov Charm</b>
+<div id="gYt" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#fff;padding:10px;text-align:center">Loading videos...</div>
+</div>
 
+<b style="font-size:9px;display:block;margin-top:8px;border-top:1px solid #E5E7EB;padding-top:6px">📖 Latest 4 Fandom - Governor Charm</b>
+<div id="gFandom" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#fff;padding:10px;text-align:center">Loading Fandom...</div>
+</div>
+</div>
   <!-- Tabs -->
   <div style="display:flex;gap:8px;margin-bottom:12px">
     <button onclick="showLiveTab3G('yt')" id="tabYt3G" style="flex:1;background:#f59e0b;color:#000;font-weight:800;border:none;padding:8px;border-radius:99px;cursor:pointer;font-size:12px">▶️ YOUTUBE</button>
