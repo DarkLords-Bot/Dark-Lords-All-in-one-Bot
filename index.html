@@ -1354,8 +1354,32 @@ render();
 
 <script>
 let curG=0,curD=0;
-function parseK(v){if(!v) return 0; v=v.toString().toUpperCase().trim(); let m=1; if(v.endsWith('K')){m=1000; v=v.slice(0,-1);} else if(v.endsWith('M')){m=1000000; v=v.slice(0,-1);} else if(v.endsWith('B')){m=1000000000; v=v.slice(0,-1);} return (parseFloat(v)||0)*m;}
-function calcNeed(){ let myG=parseK(document.getElementById('myGuides').value); let myD=parseK(document.getElementById('myDesigns').value); document.getElementById('needG').textContent=Math.max(0,curG-myG).toLocaleString(); document.getElementById('needD').textContent=Math.max(0,curD-myD).toLocaleString(); }
+
+function parseK(v){
+  if(!v) return 0; 
+  v=v.toString().toUpperCase().trim(); 
+  let m=1; 
+  if(v.endsWith('K')){m=1000; v=v.slice(0,-1);} 
+  else if(v.endsWith('M')){m=1000000; v=v.slice(0,-1);} 
+  else if(v.endsWith('B')){m=1000000000; v=v.slice(0,-1);} 
+  return (parseFloat(v)||0)*m;
+}
+
+function calcNeed(){ 
+  let rawG = document.getElementById('myGuides').value;
+  let rawD = document.getElementById('myDesigns').value;
+  let myG = parseK(rawG); 
+  let myD = parseK(rawD); 
+  
+  // SAVE FOR 3C - THIS WAS THE MISSING PART
+  localStorage.setItem('ks_3B_haveG', myG);
+  localStorage.setItem('ks_3B_haveD', myD);
+  localStorage.setItem('ks_3B_rawG', rawG);
+  localStorage.setItem('ks_3B_rawD', rawD);
+
+  document.getElementById('needG').textContent = Math.max(0, curG-myG).toLocaleString(); 
+  document.getElementById('needD').textContent = Math.max(0, curD-myD).toLocaleString(); 
+}
 
 function loadFrom3A(){
   let G=parseInt(localStorage.getItem('ks_3A_G')||0);
@@ -1368,43 +1392,22 @@ function loadFrom3A(){
     document.getElementById('liveD').textContent=D.toLocaleString();
     document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
     document.getElementById('liveS').textContent=S.toLocaleString();
-   function calcNeed(){ 
-  let myG=parseK(document.getElementById('myGuides').value); 
-  function parseK(v){
-  if(!v) return 0; 
-  v=v.toString().toUpperCase().trim(); 
-  let m=1; 
-  if(v.endsWith('K')){m=1000; v=v.slice(0,-1);} 
-  else if(v.endsWith('M')){m=1000000; v=v.slice(0,-1);} 
-  else if(v.endsWith('B')){m=1000000000; v=v.slice(0,-1);} 
-  return (parseFloat(v)||0)*m;
-}
-function calcNeed(){ 
-  let rawG = document.getElementById('myGuides').value;
-  let rawD = document.getElementById('myDesigns').value;
-  let myG = parseK(rawG); 
-  let myD = parseK(rawD); 
-  
-  // THIS WAS MISSING — SAVE FOR 3C
-  localStorage.setItem('ks_3B_haveG', myG);
-  localStorage.setItem('ks_3B_haveD', myD);
-  localStorage.setItem('ks_3B_rawG', rawG);
-  localStorage.setItem('ks_3B_rawD', rawD);
-
-  document.getElementById('needG').textContent=Math.max(0,curG-myG).toLocaleString(); 
-  document.getElementById('needD').textContent=Math.max(0,curD-myD).toLocaleString(); 
-}
+    calcNeed(); // update need after loading totals
   }
 }
 
-// 1. Load immediately
 loadFrom3A();
-// 2. Listen to storage event (when 3A updates in another tab)
 window.addEventListener('storage', loadFrom3A);
-// 3. Poll every 500ms (works even in same browser, different div)
 setInterval(loadFrom3A, 500);
-// 4. Also support direct call from 3A if same window
-window.updateLiveSummary = function(G,D,P,S){ curG=G; curD=D; document.getElementById('liveG').textContent=G.toLocaleString(); document.getElementById('liveD').textContent=D.toLocaleString(); document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); document.getElementById('liveS').textContent=S.toLocaleString(); calcNeed(); }
+
+window.updateLiveSummary = function(G,D,P,S){ 
+  curG=G; curD=D; 
+  document.getElementById('liveG').textContent=G.toLocaleString(); 
+  document.getElementById('liveD').textContent=D.toLocaleString(); 
+  document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); 
+  document.getElementById('liveS').textContent=S.toLocaleString(); 
+  calcNeed(); 
+}
 </script>
 
 <!-- ==================== TAB-3C - INVENTORY RESULTS - NO INPUT ==================== -->
