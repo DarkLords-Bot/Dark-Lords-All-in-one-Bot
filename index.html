@@ -1245,50 +1245,38 @@ load2F();
 </div>
 </div>
 </div>
-<!-- TAB-3A - CORRECT - LIKE SCREENSHOTS - NO HEAD -->
+<!-- TAB-3A - FIXED - 2 CATS PER TROOP + SKIPPED LEVELS -->
 <div id="tab-3A" style="width:100%;max-width:480px;margin:0 auto;box-sizing:border-box;background:#0b0f14;padding:10px">
 <style>
 .ks-box{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:10px;margin-bottom:10px}
 .ks-gear{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;margin-bottom:12px}
-.ks-gear-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px}
 .ks-pill{border:1px solid rgba(255,255,255,0.08);background:#2a2e38;color:#9aa3b2;padding:7px 12px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
-.ks-pill.active{background:#323845;color:#fff;border-color:rgba(255,255,255,0.15)}
-.ks-pill-gold{background:#2a2520;color:#fbbf24;border-color:rgba(251,191,36,0.2)}
+.ks-pill.active{background:#323845;color:#fff;border-color:#f59e0b}
+.ks-pill-gold{background:#2a2520;color:#fbbf24;border-color:rgba(251,191,36,0.25)}
 .ks-select{background:#2a2e38;color:#e2e8f0;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;border-radius:10px;font-weight:700;font-size:13px;width:100%}
 </style>
 
-<div style="color:#fff;font-weight:900;font-size:16px;display:flex;align-items:center;gap:8px;margin:4px 0 10px">📦 Select Charm by Troop Type</div>
+<div style="color:#fff;font-weight:900;font-size:16px;display:flex;gap:8px;margin:4px 0 10px">📦 Select Charm by Troop Type</div>
 
-<!-- BUTTONS LIKE SCREENSHOT -->
 <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
   <button onclick="selAll(true)" class="ks-pill ks-pill-gold">☑ Select All</button>
-  <button onclick="selAllTroop('inf')" class="ks-pill ks-pill-gold">☑ Select All (Infantry)</button>
+  <button onclick="selTroop('inf')" class="ks-pill ks-pill-gold">☑ Select All (Infantry)</button>
+  <button onclick="selTroop('cav')" class="ks-pill ks-pill-gold">☑ Select All (Cavalry)</button>
+  <button onclick="selTroop('arc')" class="ks-pill ks-pill-gold">☑ Select All (Archer)</button>
   <button onclick="setMax()" class="ks-pill">↗ Set All to Max</button>
   <button onclick="selAll(false)" class="ks-pill">☐ Clear All</button>
 </div>
 
-<!-- TROOP TABS - Cavalry / Infantry / Archer - INSIDE BOX -->
 <div class="ks-box" style="padding:8px">
   <div style="display:flex;gap:8px;background:#111318;border-radius:24px;padding:5px">
-    <button id="tCav" onclick="switchT('cav')" class="ks-pill" style="flex:1">🛡️ Cavalry</button>
+    <button id="tCav" onclick="switchT('cav')" class="ks-pill" style="flex:1">🐴 Cavalry</button>
     <button id="tInf" onclick="switchT('inf')" class="ks-pill active" style="flex:1">🛡️ Infantry</button>
     <button id="tArc" onclick="switchT('arc')" class="ks-pill" style="flex:1">🏹 Archer</button>
-  </div>
-
-  <!-- INDIVIDUAL CATEGORY CHOOSER - Cap/Watch/Coat/Pants/Belt/Weapon -->
-  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Cap" checked onchange="renderGears()"> Cap</label>
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Watch" checked onchange="renderGears()"> Watch</label>
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Coat" checked onchange="renderGears()"> Coat</label>
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Pants" checked onchange="renderGears()"> Pants</label>
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Belt" checked onchange="renderGears()"> Belt</label>
-    <label style="display:flex;gap:6px;align-items:center;background:#2a2e38;padding:6px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:700"><input type="checkbox" class="gcat" value="Weapon" checked onchange="renderGears()"> Weapon</label>
   </div>
 </div>
 
 <div id="gearsWrap"></div>
 
-<!-- TOTALS -->
 <div class="ks-box" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:10px">
   <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">GUIDES</div><div id="kG" style="color:#fbbf24;font-weight:900">0</div></div>
   <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">DESIGNS</div><div id="kD" style="color:#fbbf24;font-weight:900">0</div></div>
@@ -1297,21 +1285,29 @@ load2F();
 </div>
 
 <script>
-const CH={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},3:{g:60,d:40,p:370000,s:3125},4:{g:80,d:100,p:452000,s:8750},5:{g:100,d:200,p:576000,s:11250},6:{g:120,d:300,p:700000,s:12500},7:{g:140,d:400,p:824000,s:12500},8:{g:200,d:400,p:948000,s:13000},9:{g:300,d:400,p:1072000,s:14000},10:{g:420,d:420,p:1196000,s:15000},11:{g:560,d:420,p:1320000,s:16000},12:{g:580,d:600,p:1444000,s:17000},13:{g:610,d:780,p:1568000,s:18000},14:{g:645,d:960,p:1692000,s:19000},15:{g:685,d:1140,p:1816000,s:20000},16:{g:730,d:1320,p:1940000,s:21000},17:{g:780,d:1500,p:2064000,s:22000},18:{g:835,d:1680,p:2188000,s:23000},19:{g:895,d:1860,p:2312000,s:24000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
-function cum(l){let g=0,d=0;for(let i=1;i<=l;i++){g+=CH[i].g; d+=CH[i].d;} return {cg:g,cd:d,p:CH[l]?.p||0,s:CH[l]?.s||0};}
+const CH={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},5:{g:100,d:200,p:576000,s:11250},10:{g:420,d:420,p:1196000,s:15000},15:{g:685,d:1140,p:1816000,s:20000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
+// skipped levels mapping - cum calculates correctly even if skipped in dropdown
+const CH_FULL={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},3:{g:60,d:40,p:370000,s:3125},4:{g:80,d:100,p:452000,s:8750},5:{g:100,d:200,p:576000,s:11250},6:{g:120,d:300,p:700000,s:12500},7:{g:140,d:400,p:824000,s:12500},8:{g:200,d:400,p:948000,s:13000},9:{g:300,d:400,p:1072000,s:14000},10:{g:420,d:420,p:1196000,s:15000},11:{g:560,d:420,p:1320000,s:16000},12:{g:580,d:600,p:1444000,s:17000},13:{g:610,d:780,p:1568000,s:18000},14:{g:645,d:960,p:1692000,s:19000},15:{g:685,d:1140,p:1816000,s:20000},16:{g:730,d:1320,p:1940000,s:21000},17:{g:780,d:1500,p:2064000,s:22000},18:{g:835,d:1680,p:2188000,s:23000},19:{g:895,d:1860,p:2312000,s:24000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
+function cum(l){let g=0,d=0;for(let i=1;i<=l;i++){if(CH_FULL[i]){g+=CH_FULL[i].g; d+=CH_FULL[i].d;}} return {cg:g,cd:d,p:CH_FULL[l]?.p||0,s:CH_FULL[l]?.s||0};}
 let troop='inf';
-function switchT(t){ troop=t; document.getElementById('tCav').classList.remove('active'); document.getElementById('tInf').classList.remove('active'); document.getElementById('tArc').classList.remove('active'); document.getElementById('t'+(t==='cav'?'Cav':t==='inf'?'Inf':'Arc')).classList.add('active'); renderGears(); }
-function getGears(){ return Array.from(document.querySelectorAll('.gcat')).filter(c=>c.checked).map(c=>c.value); }
-function renderGears(){
- let gears=getGears(); if(gears.length===0) gears=['Coat','Pants','Cap','Watch','Belt','Weapon'];
+const MAP={cav:['Cap','Watch'], inf:['Coat','Pants'], arc:['Belt','Weapon']};
+const LVLS = [{v:0,t:'Not Started'},{v:1,t:'Level 1'},{v:5,t:'Level 5'},{v:10,t:'Level 10'},{v:15,t:'Level 15'},{v:20,t:'Level 20'},{v:21,t:'Level 21'},{v:22,t:'Level 22'}];
+function opts(cur){
+  let h=''; LVLS.forEach(o=>{ if(cur===0 || o.v!==0) h+=`<option value="${o.v}">${o.t}</option>`; }); return h;
+}
+function optsTarget(){ let h=''; LVLS.filter(o=>o.v!==0).forEach(o=>{ h+=`<option value="${o.v}" ${o.v===21?'selected':''}>${o.t}</option>`; }); return h; }
+function switchT(t){ troop=t; document.getElementById('tCav').classList.remove('active'); document.getElementById('tInf').classList.remove('active'); document.getElementById('tArc').classList.remove('active'); document.getElementById('t'+(t==='cav'?'Cav':t==='inf'?'Inf':'Arc')).classList.add('active'); render(); }
+function render(){
+ let gears=MAP[troop];
  let h='';
  gears.forEach(gear=>{
   let col=troop==='inf'?'#ef4444':troop==='cav'?'#facc15':'#22d3ee';
+  let bg=troop==='inf'?'#2a1a1a':troop==='cav'?'#2a2410':'#102a2a';
   let icon=troop==='inf'?'🛡️':troop==='cav'?'🐴':'🏹';
-  h+=`<div class="ks-gear"><div class="ks-gear-head" style="background:${troop==='inf'?'#2a1a1a':troop==='cav'?'#2a2410':'#102a2a'}"><div style="color:${col};font-weight:900;display:flex;gap:6px;align-items:center"><span>${icon}</span> ${gear}</div><div style="display:flex;gap:6px"><select id="${gear}_lvl" class="ks-select" style="width:auto;padding:6px 10px;font-size:11px"><option value="">Level</option><option value="5">Lv5</option><option value="10">Lv10</option><option value="21">Lv21</option><option value="22">Lv22</option></select><button onclick="setGear('${gear}')" class="ks-pill" style="font-size:11px">Set All</button></div></div>`;
+  h+=`<div class="ks-gear"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:${bg}"><div style="color:${col};font-weight:900;display:flex;gap:6px"><span>${icon}</span> ${gear}</div><div style="display:flex;gap:6px"><select id="${gear}_lvl" class="ks-pill" style="padding:6px 10px"><option>Level</option><option value="5">Lv5</option><option value="10">Lv10</option><option value="21">Lv21</option></select><button onclick="setGear('${gear}')" class="ks-pill" style="font-size:11px">Set All</button></div></div>`;
   for(let i=1;i<=3;i++){
    let id=`${troop}_${gear}_${i}`;
-   h+=`<div style="padding:12px;display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,0.05)"><input type="checkbox" id="${id}_chk" onchange="calc()" style="width:18px;height:18px"><div style="width:34px;height:34px;background:#1e2e1e;border-radius:50%;display:flex;align-items:center;justify-content:center">🟢</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:14px">Charm ${i}</div><div style="display:grid;grid-template-columns:1fr 12px 1fr;gap:8px;align-items:center;margin-top:6px"><div><div style="color:#64748b;font-size:10px">Current Level</div><select id="${id}_cur" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px"><option value="0">Not Started</option><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21">Level 21</option></select></div><div style="color:#64748b;margin-top:18px;text-align:center">›</div><div><div style="color:#64748b;font-size:10px">Target Level</div><select id="${id}_targ" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px"><option value="1">Level 1</option><option value="5">Level 5</option><option value="10">Level 10</option><option value="15">Level 15</option><option value="21" selected>Level 21</option><option value="22">Level 22</option></select></div></div></div></div>`;
+   h+=`<div style="padding:12px;display:flex;gap:12px;align-items:center;border-top:1px solid rgba(255,255,255,0.05)"><input type="checkbox" id="${id}_chk" onchange="calc()" style="width:18px;height:18px"><div style="width:34px;height:34px;background:#1e2e1e;border-radius:50%;display:flex;align-items:center;justify-content:center">🟢</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:14px">Charm ${i}</div><div style="display:grid;grid-template-columns:1fr 12px 1fr;gap:8px;align-items:center;margin-top:6px"><div><div style="color:#64748b;font-size:10px">Current Level</div><select id="${id}_cur" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px">${opts(0)}</select></div><div style="color:#64748b;margin-top:18px;text-align:center">›</div><div><div style="color:#64748b;font-size:10px">Target Level</div><select id="${id}_targ" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px">${optsTarget()}</select></div></div></div></div>`;
   }
   h+=`</div>`;
  });
@@ -1320,7 +1316,7 @@ function renderGears(){
 }
 function setGear(g){ let lvl=document.getElementById(g+'_lvl').value; if(!lvl) return; for(let i=1;i<=3;i++){ let el=document.getElementById(`${troop}_${g}_${i}_targ`); if(el) el.value=lvl; } calc(); }
 function selAll(v){ document.querySelectorAll('[id$=_chk]').forEach(c=>c.checked=v); calc(); }
-function selAllTroop(t){ switchT(t); setTimeout(()=>selAll(true),60); }
+function selTroop(t){ switchT(t); setTimeout(()=>selAll(true),50); }
 function setMax(){ document.querySelectorAll('[id$=_targ]').forEach(s=>s.value='22'); calc(); }
 function calc(){
  let G=0,D=0,P=0,S=0;
@@ -1336,7 +1332,7 @@ function calc(){
  document.getElementById('kP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
  document.getElementById('kS').textContent=S.toLocaleString();
 }
-renderGears();
+render();
 </script>
 <!-- 3B - LIVE SUMMARY (Auto from 3A) - DARK THEME DEFAULT -->
 <div class="card" id="div3B" style="background:#1E293B;color:#fff;border:0">
