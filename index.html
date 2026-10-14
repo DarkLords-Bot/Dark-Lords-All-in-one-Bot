@@ -208,24 +208,23 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
     <span>▼</span>
   </button>
   <div id="dropList" class="myDropList">
-    <div button class="btn"blue onclick="selectCat('building','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
+  <div button class="btn" blue onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('governor','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('governor_charm','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
   </div>
 </div>
 
 <script>
-function selectCat(val,label){
+function selectCat(val, label){
   document.getElementById('dropLabel').textContent = label;
-  document.getElementById('dropList').style.display='none';
-  document.getElementById('dropList').style.display ='governor_charm';
+  document.getElementById('dropList').style.display = 'none';
   switchTab(val);
 }
 </script>
 
 
 <!-- BUILDING = 1A-1F -->
-<div id="buildingContent">
+<div id="tab-1A">
  <p class="page-sub">Real game data</p>
 <div class="card"><div class="grid2"><div><span class="lbl">Set All Current</span><select id="setAllCur"></select></div><div><span class="lbl">Set All Target</span><select id="setAllTgt"></select></div></div><div class="row" style="margin-top:12px"><div><button class="btn btn-ghost" onclick="applyAll('cur')">Apply Current to All</button></div><div><button class="btn btn-ghost" onclick="applyAll('tgt')">Apply Target to All</button></div><div><button class="btn btn-ghost" onclick="resetAll()">Reset</button></div></div></div>
 <div class="card"><h2>Troop Buildings</h2><div id="troopGrid" class="grid3" style="margin-top:10px"></div><h2 style="margin-top:16px">Other Buildings</h2><div id="otherGrid" class="grid3" style="margin-top:10px"></div></div>
@@ -1248,9 +1247,8 @@ load2F();
 
 <script>
 function switchTab(val){
-  const b = document.getElementById('buildingContent');
+  const b = document.getElementById('tab-'+t);
   const g = document.getElementById('gearContent');
-  const c = document.getElementById('Governer_Charm');
   if(val==='building'){
     b.style.display='block';
     g.style.display='none';
