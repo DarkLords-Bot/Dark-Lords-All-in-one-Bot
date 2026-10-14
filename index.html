@@ -1611,82 +1611,9 @@ setInterval(load3D, 400);
 window.addEventListener('storage', load3D);
 </script>
 <!-- ========== END 3D ========== -->
-  
- <div class="card" id="div3E" style="background:#1E293B;color:#fff;border:0">
-  <!-- 3E - SHARE / EXPORT / RESET - SAME AS 2E -->
-<div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
-  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
-    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
-    📤 3E - SHARE & SAVE
-  </h3>
-  <p style="margin:6px 0 12px;color:#94a3b8;font-size:12px">Copy your Charm upgrade plan or reset all 3A values</p>
 
-  <div style="background:#1a2436;border-radius:10px;padding:12px;margin-bottom:10px">
-    <div style="color:#94a3b8;font-size:11px;margin-bottom:4px">PREVIEW - Will be copied</div>
-    <div id="preview3E" style="color:#fff;font-size:12px;white-space:pre-line;line-height:1.5">—</div>
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-    <button onclick="copyPlan3E()" style="background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:800;border:none;padding:12px;border-radius:10px;cursor:pointer">📋 COPY PLAN</button>
-    <button onclick="resetAll3E()" style="background:#1a2436;color:#fff;font-weight:700;border:1px solid rgba(255,255,255,0.15);padding:12px;border-radius:10px;cursor:pointer">↺ RESET 3A</button>
-  </div>
-  <div id="msg3E" style="margin-top:8px;font-size:12px;color:#4ade80;font-weight:700;text-align:center;min-height:16px"></div>
-</div>
-
-<script>
-window.updatePreview3E = function(){
-  var totalG = window.G_TOTAL3A?.g || 0;
-  var totalD = window.G_TOTAL3A?.d || 0;
-  var inG = document.getElementById('inGuides3C')?.value || '0';
-  var inD = document.getElementById('inDesigns3C')?.value || '0';
-  var needG = document.getElementById('needGuides3C')?.textContent || '—';
-  var needD = document.getElementById('needDesigns3C')?.textContent || '—';
-
-  var txt = '🔮 GOVERNOR CHARM PLAN\n' +
-    'Total Needed: ' + totalG.toLocaleString() + ' Guides, ' + totalD.toLocaleString() + ' Designs\n' +
-    'In Bag: ' + inG + ' Guides, ' + inD + ' Designs\n' +
-    'Still Need: ' + needG + ' Guides, ' + needD + ' Designs\n' +
-    'Power Gain: ' + (totalG+totalD).toLocaleString();
-
-  var p = document.getElementById('preview3E');
-  if(p) p.textContent = txt;
-  return txt;
-};
-
-window.copyPlan3E = function(){
-  var txt = window.updatePreview3E();
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(txt).then(()=>{
-      var m=document.getElementById('msg3E'); if(m) m.textContent='✅ Copied to clipboard!';
-      setTimeout(()=>{ if(m) m.textContent=''; }, 2000);
-    });
-  } else {
-    var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-    var m=document.getElementById('msg3E'); if(m) m.textContent='✅ Copied!';
-  }
-};
-
-window.resetAll3E = function(){
-  // Reset 3C inputs
-  var g=document.getElementById('inGuides3C'); if(g) g.value='';
-  var d=document.getElementById('inDesigns3C'); if(d) d.value='';
-  // Reset 3A grid to defaults if your init exists
-  if(window.initGrid3A) initGrid3A();
-  if(window.updateDiv3B) window.updateDiv3B();
-  if(window.updateDiv3C) window.updateDiv3C();
-  if(window.updateDiv3D) window.updateDiv3D();
-  window.updatePreview3E();
-  var m=document.getElementById('msg3E'); if(m) m.textContent='↺ Reset done';
-  setTimeout(()=>{ if(m) m.textContent=''; }, 2000);
-};
-
-// Hook preview to updates
-var _old3D = window.updateDiv3D;
-window.updateDiv3D = function(){ if(_old3D) _old3D(); window.updatePreview3E(); };
-</script>
-
-<!-- 3F - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
-<div class="card" id="div3F" style="background:#1E293B;color:#fff;border:0">
+<!-- 3E - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
+<div class="card" id="div3E" style="background:#1E293B;color:#fff;border:0">
   <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
   <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
     <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
@@ -1756,11 +1683,11 @@ window.addVideo3F = function(){
   document.getElementById('ytLink3F').value='';
 };
 </script>
- <!-- 3G - LIVE UPDATES (AUTO UPDATING EVERY DAY) - SAME AS 2E -->
-<div class="card" id="div3G">
-<div style="width:100vw !important;max-width:100vw !important;margin-left:calc(-50vw + 50%) !important;box-sizing:border-box;padding:0 12px">
-<div style="width:100%;max-width:600px;margin:0 auto;box-sizing:border-box;background:#8a95a5;border-radius:16px;padding:16px">
-
+ <!-- 3F - LIVE UPDATES (AUTO UPDATING EVERY DAY) - SAME AS 2E -->
+<div class="card" id="div3F" style="background:#1E293B;color:#fff;border:0">
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
   <!-- HEADER -->
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
     <div style="color:#fff;font-weight:900;font-size:18px;line-height:1.2;max-width:70%">3G - LATEST GOVERNOR CHARM (AUTO)</div>
