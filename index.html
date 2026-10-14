@@ -210,7 +210,7 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
   <div id="dropList" class="myDropList">
   <div button class="btn" blue onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('2A','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
-    <div button class="btn" blue onclick="selectCat('governor_charm','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
+    <div button class="btn" blue onclick="selectCat('3A','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
   </div>
 </div>
 
@@ -654,6 +654,7 @@ load1F();
 
 <!-- GOVERNOR TAB = 2A-2F -->
 <div id="tab-2A" style="display:none;">
+ <p class="page-sub">Real game data</p>
 <div class="card" id="div2A">
 <h2>⚔️ GOVERNER GEAR </h2>
 <p style="font-size:11px;color:#6B7280">REAL GAME DATA</p>
@@ -1244,6 +1245,70 @@ load2F();
 </div>
 </div>
 </div>
+ <div id="tab-3A" style="display:none">
+  <!-- 3A - GOVERNOR CHARM SELECT -->
+<div style="background:#FFF;border:1px solid #000;padding:14px;border-radius:16px;margin-top:16px">
+<h3 style="margin:0;color:#000">🔮 3A - CHARM SELECT (By Troop)</h3>
+<p style="font-size:11px;color:#000">18 Charms = 6 Gear pieces x 3 Charms each • Same costs for all</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0">
+<button onclick="setAllCharm3A()" style="padding:10px;background:#000;color:#FFF;border:none;border-radius:10px;font-weight:900">Set All to Max</button>
+<button onclick="clearAllCharm3A()" style="padding:10px;background:#FFF;color:#000;border:1px solid #000;border-radius:10px;font-weight:900">Clear All</button>
+<button onclick="selectInfCharm3A()" style="padding:10px;background:#FFF;color:#000;border:1px solid #000;border-radius:10px;font-weight:900">Select All (Infantry)</button>
+</div>
+
+<div id="charmGrid3A" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>
+
+<button onclick="calc3A()" style="width:100%;margin-top:12px;padding:14px;background:#000;color:#FFF;border:none;border-radius:12px;font-weight:900">🧮 CALCULATE 3A</button>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+<div style="border:1px solid #000;padding:10px;border-radius:12px;background:#FFF"><b style="color:#000">Guides</b><br><span id="rGuides" style="color:#000;font-weight:900">—</span></div>
+<div style="border:1px solid #000;padding:10px;border-radius:12px;background:#FFF"><b style="color:#000">Designs</b><br><span id="rDesigns" style="color:#000;font-weight:900">—</span></div>
+</div>
+<div id="charmBreakdown3A" style="margin-top:10px;background:#FFF;border:1px solid #000;padding:10px;border-radius:12px;color:#000;font-size:13px">Select Current → Target then CALCULATE</div>
+</div>
+
+<script>
+var CHARM_PIECES3A=[
+"Cav Hat - Charm 1","Cav Hat - Charm 2","Cav Hat - Charm 3",
+"Inf Coat - Charm 1","Inf Coat - Charm 2","Inf Coat - Charm 3",
+"Inf Pants - Charm 1","Inf Pants - Charm 2","Inf Pants - Charm 3",
+"Arc Ring - Charm 1","Arc Ring - Charm 2","Arc Ring - Charm 3",
+"Cav Neck - Charm 1","Cav Neck - Charm 2","Cav Neck - Charm 3",
+"Arc Staff - Charm 1","Arc Staff - Charm 2","Arc Staff - Charm 3"
+];
+// NOTE: Use 9 if you want lighter - above is exact 18 as kingshot.net (6 gear x 3)
+var LEVELS3A=["Not Started","Level 1","Level 2","Level 3","Level 4","Level 5","Level 6","Level 7","Level 8","Level 9","Level 10","Level 11","Level 12","Level 13","Level 14","Level 15","Level 16","Level 17","Level 18","Level 19","Level 20","Level 21"];
+// Exact kingshot.net cost per level
+var COSTS3A=[
+{g:5,d:5,p:205700,attr:"9%"},{g:40,d:15,p:288000,attr:"12%"},{g:60,d:40,p:370000,attr:"16%"},{g:80,d:100,p:452000,attr:"19%"},{g:100,d:200,p:576000,attr:"25%"},{g:120,d:300,p:700000,attr:"30%"},{g:140,d:400,p:824000,attr:"35%"},{g:200,d:400,p:948000,attr:"40%"},{g:300,d:400,p:1072000,attr:"45%"},{g:420,d:420,p:1196000,attr:"50%"},{g:560,d:420,p:1320000,attr:"55%"},{g:580,d:600,p:1400000,attr:"59%"},{g:610,d:780,p:1500000,attr:"63%"},{g:645,d:960,p:1600000,attr:"67%"},{g:685,d:1140,p:1700000,attr:"71%"},{g:730,d:1320,p:1800000,attr:"75%"},{g:780,d:1500,p:1900000,attr:"79%"},{g:835,d:1680,p:2000000,attr:"83%"},{g:895,d:1860,p:2100000,attr:"87%"},{g:960,d:2040,p:2200000,attr:"91%"},{g:1030,d:2220,p:2300000,attr:"95%"}
+];
+function lvlOpt3A(){var o='';for(var i=0;i<LEVELS3A.length;i++) o+='<option value="'+i+'">'+LEVELS3A[i]+'</option>';return o;}
+function initGrid3A(){var grid=document.getElementById('charmGrid3A');if(!grid)return;grid.innerHTML=CHARM_PIECES3A.map(function(n){var safe=n.replace(/[^a-zA-Z0-9]/g,'_');return '<div style="background:#FFF;border:1px solid #000;padding:10px;border-radius:12px"><b style="color:#000">'+n+'</b><div style="margin-top:6px"><span style="font-size:11px;font-weight:700;color:#000">Current</span><select id="cur_'+safe+'" style="width:100%;padding:10px;background:#FFF;color:#000;border:1px solid #000;border-radius:10px;font-weight:700">'+lvlOpt3A()+'</select></div><div style="margin-top:4px"><span style="font-size:11px;font-weight:700;color:#000">Target</span><select id="tgt_'+safe+'" style="width:100%;padding:10px;background:#FFF;color:#000;border:1px solid #000;border-radius:10px;font-weight:700">'+lvlOpt3A()+'</select></div></div>'}).join('');}
+var G_TOTAL3A={g:0,d:0};
+function calc3A(){
+ var tg=0,td=0,html='';
+ for(var p=0;p<CHARM_PIECES3A.length;p++){
+  var name=CHARM_PIECES3A[p];var safe=name.replace(/[^a-zA-Z0-9]/g,'_');
+  var cur=parseInt(document.getElementById('cur_'+safe).value)||0;
+  var tgt=parseInt(document.getElementById('tgt_'+safe).value)||0;
+  if(tgt<=cur) continue;
+  var lg=0,ld=0;for(var i=cur;i<tgt;i++){lg+=COSTS3A[i].g;ld+=COSTS3A[i].d;}
+  tg+=lg;td+=ld;html+='<div style="padding:5px 0;border-bottom:1px solid #000"><b style="color:#000">'+name+'</b> '+LEVELS3A[cur]+' → '+LEVELS3A[tgt]+'<br><span style="font-size:11px;color:#000">'+lg.toLocaleString()+' Guides | '+ld.toLocaleString()+' Designs</span></div>';
+ }
+ G_TOTAL3A={g:tg,d:td};
+ document.getElementById('rGuides').textContent=tg.toLocaleString();
+ document.getElementById('rDesigns').textContent=td.toLocaleString();
+ document.getElementById('charmBreakdown3A').innerHTML= tg===0?'<b style="color:#000">Select at least 1 charm</b>':html+'<div style="margin-top:8px;font-weight:900;color:#000">✓ Total: '+tg.toLocaleString()+' Guides | '+td.toLocaleString()+' Designs</div>';
+ updateDiv3B(); calc3C();
+}
+function setAllCharm3A(){CHARM_PIECES3A.forEach(n=>{var s=n.replace(/[^a-zA-Z0-9]/g,'_');document.getElementById('tgt_'+s).value=21;});calc3A();}
+function clearAllCharm3A(){CHARM_PIECES3A.forEach(n=>{var s=n.replace(/[^a-zA-Z0-9]/g,'_');document.getElementById('cur_'+s).value=0;document.getElementById('tgt_'+s).value=0;});calc3A();}
+function selectInfCharm3A(){CHARM_PIECES3A.forEach(n=>{var s=n.replace(/[^a-zA-Z0-9]/g,'_');if(n.includes('Inf')) document.getElementById('tgt_'+s).value=21;});calc3A();}
+document.addEventListener('DOMContentLoaded',initGrid3A);
+</script>
+  
+ </div>
 
  <script>
 function switchTab(val){
