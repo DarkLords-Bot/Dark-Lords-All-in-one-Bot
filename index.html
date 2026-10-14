@@ -1323,24 +1323,23 @@ function calc(){
 }
 render();
 </script>
-<!-- ==================== TAB-3B - LIVE SUMMARY ==================== -->
+<!-- ==================== TAB-3B - FIXED AUTO PULL FROM 3A ==================== -->
 <div id="tab-3B" style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
 <div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px">
-  <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px;letter-spacing:1px">
+  <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px">
     <span style="width:4px;height:18px;background:#f59e0b;border-radius:2px;display:inline-block"></span>✨ LIVE SUMMARY
   </div>
   <div style="color:#64748b;font-size:11px;margin:4px 0 12px">Auto updates from 3A calculation</div>
 
   <div style="background:#242838;border-radius:12px;padding:12px">
-    <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><div style="color:#fff;font-weight:700">📖 Guides</div><div id="liveG" style="color:#60a5fa;font-weight:900">-</div></div>
+    <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><div style="color:#fff;font-weight:700">📖 Guides</div><div id="liveG" style="color:#60a5fa;font-weight:900">Waiting for 3A...</div></div>
     <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><div style="color:#fff;font-weight:700">🎨 Designs</div><div id="liveD" style="color:#a78bfa;font-weight:900">-</div></div>
     <div style="display:flex;justify-content:space-between;padding:10px 0"><div style="color:#fff;font-weight:700">⚡ Power</div><div id="liveP" style="color:#4ade80;font-weight:900">-</div></div>
     <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:6px"><div style="color:#fff;font-weight:700">🏆 Score</div><div id="liveS" style="color:#fbbf24;font-weight:900">-</div></div>
   </div>
 
-  <div style="background:#1e222a;border-radius:12px;padding:12px;margin-top:12px;border:1px solid rgba(255,255,255,0.05)">
-    <div style="color:#fff;font-weight:900;font-size:13px">📦 SELF BACKPACK INVENTORY</div>
-    <div style="color:#64748b;font-size:11px;margin-top:4px">Type K/M/B. auto minus from 3A totals</div>
+  <div style="background:#1e222a;border-radius:12px;padding:12px;margin-top:12px">
+    <div style="color:#fff;font-weight:900;font-size:13px">📦 SELF BACKPACK</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
       <input id="myGuides" placeholder="My Guides e.g. 5K" oninput="calcNeed()" style="background:#2a2e38;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:8px;font-weight:700">
       <input id="myDesigns" placeholder="My Designs e.g. 2K" oninput="calcNeed()" style="background:#2a2e38;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:8px;font-weight:700">
@@ -1357,8 +1356,30 @@ render();
 let curG=0,curD=0;
 function parseK(v){if(!v) return 0; v=v.toString().toUpperCase().trim(); let m=1; if(v.endsWith('K')){m=1000; v=v.slice(0,-1);} else if(v.endsWith('M')){m=1000000; v=v.slice(0,-1);} else if(v.endsWith('B')){m=1000000000; v=v.slice(0,-1);} return (parseFloat(v)||0)*m;}
 function calcNeed(){ let myG=parseK(document.getElementById('myGuides').value); let myD=parseK(document.getElementById('myDesigns').value); document.getElementById('needG').textContent=Math.max(0,curG-myG).toLocaleString(); document.getElementById('needD').textContent=Math.max(0,curD-myD).toLocaleString(); }
-window.updateLiveSummary=function(G,D,P,S){ curG=G; curD=D; document.getElementById('liveG').textContent=G.toLocaleString(); document.getElementById('liveD').textContent=D.toLocaleString(); document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); document.getElementById('liveS').textContent=S.toLocaleString(); calcNeed(); }
-setTimeout(()=>{ let G=parseInt(localStorage.getItem('ks_3A_G')||0); let D=parseInt(localStorage.getItem('ks_3A_D')||0); let P=parseInt(localStorage.getItem('ks_3A_P')||0); let S=parseInt(localStorage.getItem('ks_3A_S')||0); if(G>0) window.updateLiveSummary(G,D,P,S); },200);
+
+function loadFrom3A(){
+  let G=parseInt(localStorage.getItem('ks_3A_G')||0);
+  let D=parseInt(localStorage.getItem('ks_3A_D')||0);
+  let P=parseInt(localStorage.getItem('ks_3A_P')||0);
+  let S=parseInt(localStorage.getItem('ks_3A_S')||0);
+  if(G>0 || D>0){
+    curG=G; curD=D;
+    document.getElementById('liveG').textContent=G.toLocaleString();
+    document.getElementById('liveD').textContent=D.toLocaleString();
+    document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
+    document.getElementById('liveS').textContent=S.toLocaleString();
+    calcNeed();
+  }
+}
+
+// 1. Load immediately
+loadFrom3A();
+// 2. Listen to storage event (when 3A updates in another tab)
+window.addEventListener('storage', loadFrom3A);
+// 3. Poll every 500ms (works even in same browser, different div)
+setInterval(loadFrom3A, 500);
+// 4. Also support direct call from 3A if same window
+window.updateLiveSummary = function(G,D,P,S){ curG=G; curD=D; document.getElementById('liveG').textContent=G.toLocaleString(); document.getElementById('liveD').textContent=D.toLocaleString(); document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); document.getElementById('liveS').textContent=S.toLocaleString(); calcNeed(); }
 </script>
 
  <!-- 3C - SELF BACKPACK INVENTORY (AUTO MINUS FROM 3B) - SAME AS 2C -->
