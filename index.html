@@ -1251,7 +1251,8 @@ load2F();
 </div>
 </div>
 </div>
-<!-- ==================== TAB-3A ONLY - NO LIVE SUMMARY ==================== -->
+
+<!--DIV-3B,3C,3D,3E,3F INSIDE OF TAB-3A --> 
 <div id="tab-3A" style="width:100%;max-width:480px;...;display:none">
  <style>
 .ks-box{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:10px;margin-bottom:10px}
@@ -1329,7 +1330,7 @@ function calc(){
 }
 render();
 </script>
-<!-- ==================== TAB-3B - FIXED AUTO PULL FROM 3A ==================== -->
+<!-- ==================== DIV-3B - FIXED AUTO PULL FROM 3A ==================== -->
 <div class="card" id="div3B"style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
 <div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px">
   <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px">
@@ -1415,7 +1416,7 @@ window.updateLiveSummary = function(G,D,P,S){
 }
 </script>
 
-<!-- ==================== TAB-3C - INVENTORY RESULTS - NO INPUT ==================== -->
+<!-- ==================== DIV-3C - INVENTORY RESULTS - NO INPUT ==================== -->
 <div class="card" id="div3C" style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
 <div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px">
   <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px">
@@ -1472,7 +1473,7 @@ load3C();
 setInterval(load3C, 500);
 window.addEventListener('storage', load3C);
 </script>
-<!-- ========== 3D FINAL PLAN & EXPORT (Reads directly from 3C) ========== -->
+<!-- ========== DIV-3D FINAL PLAN & EXPORT (Reads directly from 3C) ========== -->
 <div class="card" id="div3D"style="background:#ffffff; border-radius:24px; padding:16px; margin:12px; border:2px solid #111; font-family:system-ui,-apple-system,Segoe UI,Roboto; color:#000;">
   <div style="font-weight:900; font-size:22px; letter-spacing:-0.5px;">⚡ FINAL PLAN & EXPORT</div>
   <div style="font-size:13px; opacity:.6; margin:4px 0 12px; font-weight:600;">Auto from 3C — 3A Need minus 3B Inventory</div>
@@ -1615,9 +1616,9 @@ load3D();
 setInterval(load3D, 400);
 window.addEventListener('storage', load3D);
 </script>
-<!-- ========== END 3D ========== -->
+<!-- ========== END DIV-3D ========== -->
 
-<!-- 3E - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
+<!-- DIV-3E - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
 <div class="card" id="div3E" style="background:#1E293B;color:#fff;border:0">
   <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
   <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
@@ -1725,7 +1726,7 @@ window.addVideo3F = function(){
   document.getElementById('ytLink3F').value='';
 };
 </script>
-<!-- ========== 3F 🔴 AUTO LIVE - ONLY CHARM & DESIGN (NO GEAR) ========== -->
+<!-- ========== DIV-3F 🔴 AUTO LIVE - ONLY CHARM & DESIGN (NO GEAR) ========== -->
 <div class="card" id="div3E"style="background:#0f172a; border:2px solid #111; border-radius:20px; margin:12px; padding:14px; font-family:system-ui; color:#fff;">
   <div style="display:flex; justify-content:space-between; align-items:center;">
     <div style="display:flex; align-items:center; gap:8px;">
