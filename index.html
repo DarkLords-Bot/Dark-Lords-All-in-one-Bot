@@ -1293,7 +1293,6 @@ load2F();
   <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">POWER</div><div id="kP" style="color:#4ade80;font-weight:900;font-size:18px">0</div></div>
   <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">SCORE</div><div id="kS" style="color:#60a5fa;font-weight:900;font-size:18px">0</div></div>
 </div>
-</div>
 
 <script>
 const CH_FULL={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},3:{g:60,d:40,p:370000,s:3125},4:{g:80,d:100,p:452000,s:8750},5:{g:100,d:200,p:576000,s:11250},6:{g:120,d:300,p:700000,s:12500},7:{g:140,d:400,p:824000,s:12500},8:{g:200,d:400,p:948000,s:13000},9:{g:300,d:400,p:1072000,s:14000},10:{g:420,d:420,p:1196000,s:15000},11:{g:560,d:420,p:1320000,s:16000},12:{g:580,d:600,p:1444000,s:17000},13:{g:610,d:780,p:1568000,s:18000},14:{g:645,d:960,p:1692000,s:19000},15:{g:685,d:1140,p:1816000,s:20000},16:{g:730,d:1320,p:1940000,s:21000},17:{g:780,d:1500,p:2064000,s:22000},18:{g:835,d:1680,p:2188000,s:23000},19:{g:895,d:1860,p:2312000,s:24000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
@@ -1416,6 +1415,8 @@ window.updateLiveSummary = function(G,D,P,S){
   calcNeed(); 
 }
 </script>
+</div>
+</div>
 
 <!-- ==================== DIV-3C - INVENTORY RESULTS - NO INPUT ==================== -->
 <div class="card" id="div3C" style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
@@ -1474,6 +1475,8 @@ load3C();
 setInterval(load3C, 500);
 window.addEventListener('storage', load3C);
 </script>
+</div>
+</div>
 <!-- ========== DIV-3D FINAL PLAN & EXPORT (Reads directly from 3C) ========== -->
 <div class="card" id="div3D"style="background:#ffffff; border-radius:24px; padding:16px; margin:12px; border:2px solid #111; font-family:system-ui,-apple-system,Segoe UI,Roboto; color:#000;">
   <div style="font-weight:900; font-size:22px; letter-spacing:-0.5px;">⚡ FINAL PLAN & EXPORT</div>
@@ -1617,6 +1620,8 @@ load3D();
 setInterval(load3D, 400);
 window.addEventListener('storage', load3D);
 </script>
+</div>
+</div>
 <!-- ========== END DIV-3D ========== -->
 
 <!-- DIV-3E - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
@@ -1727,8 +1732,10 @@ window.addVideo3F = function(){
   document.getElementById('ytLink3F').value='';
 };
 </script>
+  </div>
+</div>
 <!-- ========== DIV-3F 🔴 AUTO LIVE - ONLY CHARM & DESIGN (NO GEAR) ========== -->
-<div class="card" id="div3E"style="background:#0f172a; border:2px solid #111; border-radius:20px; margin:12px; padding:14px; font-family:system-ui; color:#fff;">
+<div class="card" id="div3F"style="background:#0f172a; border:2px solid #111; border-radius:20px; margin:12px; padding:14px; font-family:system-ui; color:#fff;">
   <div style="display:flex; justify-content:space-between; align-items:center;">
     <div style="display:flex; align-items:center; gap:8px;">
       <span style="width:10px; height:10px; background:#f59e0b; border-radius:50%; box-shadow:0 0 0 6px rgba(245,158,11,.2); animation:pulse 1.5s infinite; display:inline-block;"></span>
@@ -1842,7 +1849,6 @@ loadAutoLive();
 setInterval(loadAutoLive, 1000*60*60*6);
 </script>
 </div>
-</div>
  <script>
   function switchTab(val){
   const allTabs = ['1A','2A','3A','4A'];
@@ -1863,4 +1869,3 @@ setInterval(loadAutoLive, 1000*60*60*6);
   if(dd) dd.style.display='none';
 }
  </script>
-</div>
