@@ -215,7 +215,7 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
   <div button class="btn" blue onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('2A','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
     <div button class="btn" blue onclick="selectCat('3A','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
-   <div button class="btn blue" onclick="selectCat('4A','🐾 PETS CALCULATOR - Gen 1 to Gen 7')">🐾 PETS CALCULATOR</div>
+   <div button class="btn" blue onclick="selectCat('4A','🐾 PETS CALCULATOR - Gen 1 to Gen 7')">🐾 PETS CALCULATOR</div>
   </div>
 </div>
 
@@ -1355,7 +1355,6 @@ render();
     </div>
   </div>
 </div>
-</div>
 
 <script>
 let curG=0,curD=0;
@@ -1839,8 +1838,6 @@ function forceRefreshLive(){
 loadAutoLive();
 setInterval(loadAutoLive, 1000*60*60*6);
 </script>
-<!-- ========== END AUTO LIVE CHARM ONLY ========== -->
-  </div>
 </div>
 </div>
  <!-- ========== 4A PETS - CORRECTED LV 0-60 + 1 FINAL ADV ========== -->
@@ -1987,7 +1984,9 @@ function calcPot(){
 }
 render();
 </script>
+ 
 <!-- ========== END 4A CORRECTED ========== -->
+ 
  <script>
 function switchTab(val){
   // LIST ALL TABS HERE - just add '4A', '5A' when you make them
@@ -2001,8 +2000,20 @@ function switchTab(val){
   const show = document.getElementById('tab-' + val);
   if(show) show.style.display = 'block';
 
-  // Init charm when opening 3A
+  // Init when opening tabs
   if(val === '3A' && window.initGrid3A) initGrid3A();
+  if(val === '4A' && window.render4A) render4A(); // <-- ADD THIS for pets
+
+  // Safety: hide 3A extra blocks if they are outside tab-3A
+  const extra3A = ['liveSummaryBlock','selfBackpackBlock','inventoryResultsBlock'];
+  extra3A.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display = (val==='3A') ? 'block' : 'none';
+  });
+
+  // Close dropdown if you have it
+  const dd=document.getElementById('categoryDropdown');
+  if(dd) dd.style.display='none';
 }
  </script>
 </div>
