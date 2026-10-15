@@ -144,6 +144,95 @@ select:focus,input:focus{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,
 </style>
 </head>
 <body>
+ <!-- ========== LANGUAGE SELECTOR + AUTO TRANSLATE ========== -->
+<div id="langPopup" style="position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px">
+<div style="background:#121a2b;border-radius:20px;padding:20px;max-width:360px;width:100%;border:1px solid rgba(255,255,255,0.1)">
+<div style="text-align:center;margin-bottom:16px">
+<div style="font-size:40px">🌐</div>
+<div style="color:#fff;font-weight:900;font-size:18px;margin-top:8px">Choose Your Language</div>
+<div style="color:#7c8193;font-size:12px;margin-top:4px">Site will auto translate</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button onclick="setLang('en')" class="langBtn">🇺🇸 English</button>
+<button onclick="setLang('es')" class="langBtn">🇪🇸 Español</button>
+<button onclick="setLang('fr')" class="langBtn">🇫🇷 Français</button>
+<button onclick="setLang('de')" class="langBtn">🇩🇪 Deutsch</button>
+<button onclick="setLang('pt')" class="langBtn">🇧🇷 Português</button>
+<button onclick="setLang('tr')" class="langBtn">🇹🇷 Türkçe</button>
+<button onclick="setLang('hi')" class="langBtn">🇮🇳 हिंदी</button>
+<button onclick="setLang('ar')" class="langBtn">🇸🇦 العربية</button>
+<button onclick="setLang('ru')" class="langBtn">🇷🇺 Русский</button>
+<button onclick="setLang('id')" class="langBtn">🇮🇩 Indonesia</button>
+<button onclick="setLang('ja')" class="langBtn">🇯🇵 日本語</button>
+<button onclick="setLang('ko')" class="langBtn">🇰🇷 한국어</button>
+<button onclick="setLang('zh-CN')" class="langBtn">🇨🇳 中文</button>
+</div>
+</div>
+</div>
+
+<!-- LANGUAGE FLOAT BUTTON - TO CHANGE LATER -->
+<div id="langFloat" onclick="showLangPopup()" style="position:fixed;bottom:20px;right:20px;background:#f59e0b;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:9998;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,0.4)">🌐</div>
+
+<style>
+.langBtn{background:#1c2130;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:12px;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer}
+.langBtn:hover{background:#f59e0b;color:#000}
+</style>
+
+<div id="google_translate_element" style="display:none"></div>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'en', autoDisplay:false}, 'google_translate_element');
+}
+
+function setLang(lang){
+  localStorage.setItem('userLang', lang);
+  document.getElementById('langPopup').style.display='none';
+  translatePage(lang);
+}
+
+function showLangPopup(){
+  document.getElementById('langPopup').style.display='flex';
+}
+
+function translatePage(lang){
+  if(lang==='en'){ location.reload(); return; }
+  
+  // Method 1: Google Translate Cookie Hack - Works instantly
+  const cookieVal = '/en/'+lang;
+  document.cookie = 'googtrans='+cookieVal+';path=/';
+  document.cookie = 'googtrans='+cookieVal+';domain=.'+location.hostname+';path=/';
+  
+  // Force google translate
+  const googleSelect = document.querySelector('.goog-te-combo');
+  if(googleSelect){
+    googleSelect.value=lang;
+    googleSelect.dispatchEvent(new Event('change'));
+  } else {
+    // Reload to trigger translate
+    setTimeout(()=>location.reload(), 500);
+  }
+}
+
+// On page load - check if language chosen
+window.addEventListener('load', ()=>{
+  const savedLang = localStorage.getItem('userLang');
+  if(!savedLang){
+    document.getElementById('langPopup').style.display='flex';
+  } else {
+    translatePage(savedLang);
+  }
+});
+
+// Hide google banner
+setInterval(()=>{
+  const banner = document.querySelector('.goog-te-banner-frame');
+  if(banner) banner.style.display='none';
+  document.body.style.top='0px';
+},1000);
+</script>
+<!-- ========== END LANGUAGE SELECTOR ========== -->
 <div class="wrap">
 <div style="background:#0A0A0A;border-radius:10px;padding:6px 10px;display:flex;align-items:center;gap:10px">
 <b style="color:#D4AF37;font-size:14px">⬇️SELECT YOUR CATEGORY⬇️</b>
