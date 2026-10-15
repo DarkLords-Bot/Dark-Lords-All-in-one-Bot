@@ -1840,18 +1840,24 @@ setInterval(loadAutoLive, 1000*60*60*6);
 </script>
 </div>
 </div>
-  <script>
-function switchTab(val){
-  // AUTO HIDE ALL TABS - no need to list
-  document.querySelectorAll('[id^="tab-"]').forEach(el=>{
-    el.style.display='none';
+ <script>
+  function switchTab(val){
+  const allTabs = ['1A','2A','3A','4A'];
+
+  allTabs.forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if(el) el.style.display = 'none';
   });
 
   const show = document.getElementById('tab-' + val);
   if(show) show.style.display = 'block';
 
+  // Init when opening
   if(val === '3A' && window.initGrid3A) initGrid3A();
-  if(val === '4A' && window.render4A) render4A();
+
+  // Close dropdown
+  const dd=document.getElementById('categoryDropdown');
+  if(dd) dd.style.display='none';
 }
-</script>
+ </script>
 </div>
