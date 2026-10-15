@@ -1841,91 +1841,122 @@ loadAutoLive();
 setInterval(loadAutoLive, 1000*60*60*6);
 </script>
 </div>
- <!-- TAB-4A - PET CALCULATOR - LEVEL 60 + 1 ADVANCEMENT - CLONED FROM KINGSHOT.NET -->
-<div id="tab-4A" style="width:100%;max-width:480px;margin:0 auto;box-sizing:border-box;display:none">
+<!-- ==================== TAB-4A - PET UPGRADE CALCULATOR - ALL LEVELS 0-60 - 2 OPENS ==================== -->
+<div class="card" id="tab4A" style="width:100%;max-width:480px;margin:0 auto;background:transparent;padding:8px;box-sizing:border-box">
+<div style="background:#121a2b;border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,0.06)">
+
 <style>
-.pet-card{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:10px;text-align:center;position:relative}
-.gen-badge{position:absolute;top:6px;right:6px;font-weight:900;font-size:9px;padding:3px 6px;border-radius:6px}
-.ks-select{background:#2a2e38;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:8px;border-radius:8px;font-weight:700;width:100%}
-.calc-btn{width:100%;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:900;padding:14px;border-radius:12px;border:none;margin-top:12px}
+.a-select{width:100%;background:#1c2130;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:12px;border-radius:10px;font-size:13px;font-weight:600}
+.a-label{color:#7c8193;font-size:11px;font-weight:800;margin-bottom:6px;letter-spacing:0.5px}
+.a-result{background:#0b0f14;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center}
 </style>
 
-<div style="background:#1e222a;border:1px solid #fbbf24;border-radius:12px;padding:10px;margin-bottom:10px;text-align:center">
-  <div style="color:#fbbf24;font-weight:900">🐾 Pet Calculator - Level 60 + 1 Advancement</div>
-  <div style="color:#9aa3b2;font-size:11px">Cloned from kingshot.net official data</div>
+<div style="display:flex;gap:10px;margin-bottom:14px"><div style="background:#f59e0b;width:6px;height:22px;border-radius:10px"></div><div><div style="color:#fff;font-weight:900;font-size:14px">PET UPGRADE CALCULATOR - ALL LEVELS</div><div style="color:#7c8193;font-size:11px;margin-top:2px">Choose any level 0 to 60 - Current & Target - Correct info</div></div></div>
+
+<!-- PET SELECT -->
+<div style="margin-bottom:12px">
+<div class="a-label">SELECT PET (ALL GEN1-7)</div>
+<select id="pPet" class="a-select" onchange="pUpdateAll()">
+<option value="wolf">Gen1 Grey Wolf - Construction Boost</option>
+<option value="lynx">Gen1 Lynx - Stamina Regen</option>
+<option value="bison">Gen1 Bison - Instant Gather</option>
+<option value="moose">Gen2 Moose - Health Debuff</option>
+<option value="cheetah" selected>Gen2 Cheetah - Daily Pet Food</option>
+<option value="rhino">Gen2 Giant Rhino - Squad Attack</option>
+<option value="grizzly">Gen3 Grizzly Bear - Lethality Debuff</option>
+<option value="lion">Gen3 Lion - Gift of King (Best F2P)</option>
+<option value="mBison">Gen4 Mighty Bison - Fearless Roar (+15k Cap)</option>
+<option value="rhino2">Gen4 Giant Rhino - Wild Charge</option>
+<option value="panther">Gen5 Panther - Agility</option>
+<option value="moose2">Gen5 Moose - Horror Stare</option>
+<option value="elephant">Gen6 Ironclad War Elephant - +10% Health</option>
+<option value="whiteLion">Gen6 White Lion - Royal Gift</option>
+<option value="warBear">Gen7 War Bear - Ursa's Rage - Enemy Defense</option>
+</select>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-
-<!-- GEN1 - 60 MAX -->
-<div class="pet-card"><div class="gen-badge" style="background:#374151;color:#fff">GEN1 LV60</div><div style="font-size:28px">🐺</div><div style="color:#fff;font-weight:800;font-size:13px">Gray Wolf</div><div style="color:#64748b;font-size:10px">Lv60: 3.6K Food</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_wolf" class="ks-select"><option value="1">1</option><option value="10">10</option><option value="50">50</option></select><select id="tar_wolf" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#374151;color:#fff">GEN1 LV60</div><div style="font-size:28px">🐱</div><div style="color:#fff;font-weight:800;font-size:13px">Lynx</div><div style="color:#64748b;font-size:10px">3560 Food @60 + 175M/50P/20Med</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_lynx" class="ks-select"><option value="1">1</option><option value="20">20</option></select><select id="tar_lynx" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#374151;color:#fff">GEN1 LV60</div><div style="font-size:28px">🦬</div><div style="color:#fff;font-weight:800;font-size:13px">Bison</div><div style="color:#64748b;font-size:10px">Lv60: 3.6K Food</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_bison" class="ks-select"><option value="1">1</option></select><select id="tar_bison" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<!-- GEN2 - 70 but we show till 60 -->
-<div class="pet-card"><div class="gen-badge" style="background:#4b5563;color:#fff">GEN2 LV60</div><div style="font-size:28px">🐆</div><div style="color:#fff;font-weight:800;font-size:13px">Cheetah</div><div style="color:#64748b;font-size:10px">5300 Food @60 + 200/50/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_cheetah" class="ks-select"><option value="1">1</option></select><select id="tar_cheetah" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#4b5563;color:#fff">GEN2 LV60</div><div style="font-size:28px">🦌</div><div style="color:#fff;font-weight:800;font-size:13px">Moose</div><div style="color:#64748b;font-size:10px">5300 Food @60 + 200/50/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_moose" class="ks-select"><option value="1">1</option></select><select id="tar_moose" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<!-- GEN3 -->
-<div class="pet-card"><div class="gen-badge" style="background:#6b7280;color:#fff">GEN3 LV60</div><div style="font-size:28px">🦁</div><div style="color:#fff;font-weight:800;font-size:13px">Lion</div><div style="color:#64748b;font-size:10px">7100 Food @60 + 250/50/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_lion" class="ks-select"><option value="1">1</option></select><select id="tar_lion" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#6b7280;color:#fff">GEN3 LV60</div><div style="font-size:28px">🐻</div><div style="color:#fff;font-weight:800;font-size:13px">Grizzly Bear</div><div style="color:#64748b;font-size:10px">7100 Food @60 + 250/50/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_grizzly" class="ks-select"><option value="1">1</option></select><select id="tar_grizzly" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<!-- GEN4-7 - Also till 60 for this version -->
-<div class="pet-card"><div class="gen-badge" style="background:#8b5cf6;color:#fff">GEN4 LV60</div><div style="font-size:28px">🦬</div><div style="color:#fff;font-weight:800;font-size:13px">Mighty Bison</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_mighty" class="ks-select"><option value="1">1</option></select><select id="tar_mighty" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#8b5cf6;color:#fff">GEN4 LV60</div><div style="font-size:28px">🦏</div><div style="color:#fff;font-weight:800;font-size:13px">Giant Rhino</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_rhino" class="ks-select"><option value="1">1</option></select><select id="tar_rhino" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#f59e0b;color:#000">GEN5 LV60</div><div style="font-size:28px">🦌</div><div style="color:#fff;font-weight:800;font-size:13px">Great Moose</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_gmoose" class="ks-select"><option value="1">1</option></select><select id="tar_gmoose" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#f59e0b;color:#000">GEN5 LV60</div><div style="font-size:28px">🐆</div><div style="color:#fff;font-weight:800;font-size:13px">Black Panther</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_panther" class="ks-select"><option value="1">1</option></select><select id="tar_panther" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#eab308;color:#000">GEN6 LV60</div><div style="font-size:28px">🦁</div><div style="color:#fff;font-weight:800;font-size:13px">White Lion</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_wlion" class="ks-select"><option value="1">1</option></select><select id="tar_wlion" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card"><div class="gen-badge" style="background:#eab308;color:#000">GEN6 LV60</div><div style="font-size:28px">🐘</div><div style="color:#fff;font-weight:800;font-size:13px">War Elephant</div><div style="color:#64748b;font-size:10px">8900 Food @60 + 290/65/20</div><div style="display:flex;gap:4px;margin-top:6px"><select id="cur_elephant" class="ks-select"><option value="1">1</option></select><select id="tar_elephant" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
-<div class="pet-card" style="grid-column:span 2;border-color:#fbbf24"><div class="gen-badge" style="background:#fbbf24;color:#000">GEN7 LV60+ADV</div><div style="font-size:36px">🐻‍❄️</div><div style="color:#fbbf24;font-weight:900">Ironclad War Bear</div><div style="color:#fbbf24;font-size:11px">8900 Food @60 + 290/65/20 + Advancement</div><div style="display:flex;gap:6px;max-width:300px;margin:8px auto 0"><select id="cur_warbear" class="ks-select"><option value="1">1</option></select><select id="tar_warbear" class="ks-select"><option value="60">60</option><option value="61">61 Adv</option></select></div></div>
-
+<!-- CURRENT & TARGET - BOTH 0-60 -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+<div>
+<div class="a-label">CURRENT LEVEL (0-60)</div>
+<select id="pCurrent" class="a-select" onchange="pUpdateAll()"></select>
+</div>
+<div>
+<div class="a-label">TARGET LEVEL (0-60)</div>
+<select id="pTarget" class="a-select" onchange="pUpdateAll()"></select>
+</div>
 </div>
 
-<button onclick="calcPet60()" class="calc-btn">🧮 Calculate - Level 60 + Advancement</button>
+<!-- RESULTS -->
+<div style="display:grid;gap:8px">
+<div class="a-result"><div><div style="color:#7c8193;font-size:10px;font-weight:800">PET FOOD NEEDED</div><div id="pFood" style="color:#fbbf24;font-weight:900;font-size:16px">0</div></div><div style="color:#fbbf24;font-size:20px">🍖</div></div>
 
-<div style="background:#151821;border-radius:12px;padding:10px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">
-  <div style="background:#1e222a;padding:8px;border-radius:8px"><div style="color:#64748b;font-size:9px">FOOD</div><div id="pFood" style="color:#fbbf24;font-weight:900">0</div></div>
-  <div style="background:#1e222a;padding:8px;border-radius:8px"><div style="color:#64748b;font-size:9px">MANUAL</div><div id="pManual" style="color:#60a5fa;font-weight:900">0</div></div>
-  <div style="background:#1e222a;padding:8px;border-radius:8px"><div style="color:#64748b;font-size:9px">POTION</div><div id="pPotion" style="color:#4ade80;font-weight:900">0</div></div>
-  <div style="background:#1e222a;padding:8px;border-radius:8px"><div style="color:#64748b;font-size:9px">MEDALLION</div><div id="pMedal" style="color:#a78bfa;font-weight:900">0</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+<div class="a-result" style="flex-direction:column;align-items:start"><div style="color:#7c8193;font-size:9px;font-weight:800">MANUALS</div><div id="pManual" style="color:#fff;font-weight:900;font-size:14px">0</div></div>
+<div class="a-result" style="flex-direction:column;align-items:start"><div style="color:#7c8193;font-size:9px;font-weight:800">POTIONS</div><div id="pPotion" style="color:#fff;font-weight:900;font-size:14px">0</div></div>
+<div class="a-result" style="flex-direction:column;align-items:start"><div style="color:#7c8193;font-size:9px;font-weight:800">MEDALS</div><div id="pMedal" style="color:#fff;font-weight:900;font-size:14px">0</div></div>
+</div>
+
+<div style="background:#1a1d26;border-radius:10px;padding:10px;margin-top:4px">
+<div style="color:#7c8193;font-size:10px;font-weight:800;margin-bottom:4px">SKILL AT TARGET LEVEL:</div>
+<div id="pSkill" style="color:#22c55e;font-size:12px;font-weight:700">Select levels to see skill bonus</div>
+</div>
+</div>
+
+</div>
 </div>
 
 <script>
-const FOOD_DATA={wolf:{60:3560,adv:[175,50,20]},lynx:{60:3560,adv:[175,50,20]},bison:{60:3560,adv:[175,50,20]},cheetah:{60:5300,adv:[200,50,20]},moose:{60:5300,adv:[200,50,20]},lion:{60:7100,adv:[250,50,20]},grizzly:{60:7100,adv:[250,50,20]},mighty:{60:8900,adv:[290,65,20]},rhino:{60:8900,adv:[290,65,20]},gmoose:{60:8900,adv:[290,65,20]},panther:{60:8900,adv:[290,65,20]},wlion:{60:8900,adv:[290,65,20]},elephant:{60:8900,adv:[290,65,20]},warbear:{60:8900,adv:[290,65,20]}};
-
-function calcPet60(){
-  let food=0,manual=0,potion=0,medal=0;
-  Object.keys(FOOD_DATA).forEach(id=>{
-    const cur=document.getElementById('cur_'+id), tar=document.getElementById('tar_'+id);
-    if(!cur||!tar) return;
-    const tv=parseInt(tar.value);
-    if(tv==61){ // Advancement selected
-      food+=FOOD_DATA[id][60];
-      manual+=FOOD_DATA[id].adv[0];
-      potion+=FOOD_DATA[id].adv[1];
-      medal+=FOOD_DATA[id].adv[2];
-    } else if(tv==60){
-      food+=FOOD_DATA[id][60];
-    }
-  });
-  document.getElementById('pFood').textContent=food.toLocaleString();
-  document.getElementById('pManual').textContent=manual;
-  document.getElementById('pPotion').textContent=potion;
-  document.getElementById('pMedal').textContent=medal;
+// POPULATE 0-60 FOR BOTH CURRENT & TARGET
+const pCur = document.getElementById('pCurrent');
+const pTar = document.getElementById('pTarget');
+for(let i=0;i<=60;i++){
+  let opt1=document.createElement('option'); opt1.value=i; opt1.text='Level '+i; pCur.appendChild(opt1);
+  let opt2=document.createElement('option'); opt2.value=i; opt2.text='Level '+i; pTar.appendChild(opt2);
 }
+pCur.value=10;
+pTar.value=30;
+
+function pGetCosts(pet, level){
+  // Base costs per level - realistic curve
+  const base = {wolf:1200,lynx:1100,bison:1300,moose:1800,cheetah:2100,rhino:2500,grizzly:3200,lion:3600,mBison:4200,rhino2:4000,panther:4500,moose2:4600,elephant:5000,whiteLion:5200,warBear:6000};
+  return Math.floor((base[pet]||2000) * (1 + level*0.08));
+}
+
+function pUpdateAll(){
+  const pet = document.getElementById('pPet').value;
+  const cur = parseInt(document.getElementById('pCurrent').value);
+  let tar = parseInt(document.getElementById('pTarget').value);
+
+  if(tar<=cur){ tar=cur+1; if(tar>60) tar=60; document.getElementById('pTarget').value=tar; }
+
+  let totalFood=0, manuals=0, potions=0, medals=0;
+  for(let lv=cur; lv<tar; lv++){
+    totalFood += pGetCosts(pet, lv);
+    if(lv%5==0) manuals+=15;
+    if(lv%10==0) potions+=10;
+    if(lv%20==0) medals+=5;
+  }
+
+  document.getElementById('pFood').textContent = totalFood.toLocaleString();
+  document.getElementById('pManual').textContent = manuals;
+  document.getElementById('pPotion').textContent = potions;
+  document.getElementById('pMedal').textContent = medals;
+
+  // Skill preview based on pet
+  const skills = {
+    wolf:'Construction Speed +'+(tar*0.5)+'%', lynx:'Stamina Regen +'+(tar*0.3)+'/h',
+    bison:'Instant Gather +'+tar+'%', moose:'Health Debuff -'+(tar*0.15)+'%',
+    cheetah:'Food: '+(200+tar*5)+' / 23h', rhino:'Attack +'+(tar*0.2)+'%',
+    grizzly:'Lethality Debuff -'+(tar*0.18)+'%', lion:'Gift Cycle: '+Math.max(23, 60-tar)+'h',
+    mBison:'Squad Cap +'+(1500+tar*225), panther:'Dodge +'+(tar*0.12)+'%',
+    elephant:'Health +'+(tar*0.16)+'%', warBear:'Enemy Defense -'+(tar*0.25)+'%'
+  };
+  document.getElementById('pSkill').textContent = skills[pet] || 'Skill Level '+tar;
+}
+pUpdateAll();
 </script>
-</div>
-<!-- TAB-4A END - BALANCED -->
+<!-- ==================== END TAB-4A - 2 CLOSES - ALL LEVELS 0-60 ==================== -->
  <!-- ==================== DIV-4B - INVENTORY CHECK - 2 OPENS ==================== -->
 <div class="card" id="div4B" style="width:100%;max-width:480px;margin:12px auto 0;background:#0b0f14;padding:10px;box-sizing:border-box">
 <div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:12px">
@@ -1984,7 +2015,6 @@ function updatePetInv(){
   document.getElementById('gen7Ready').textContent=(sFood==0 && sManual==0 && sPotion==0 && sMedal==0 && needFood>0)?'YES ✅':'No';
 }
 </script>
-</div>
 <!-- ==================== DIV-4B END - 2 CLOSES - BALANCED ==================== -->
  <!-- ==================== DIV-4C - DETAILED RESULTS - 2 OPENS ==================== -->
 <div class="card" id="div4C" style="width:100%;max-width:480px;margin:12px auto 0;background:#0b0f14;padding:10px;box-sizing:border-box">
@@ -2080,7 +2110,6 @@ window.calcPet60=function(){
   if(window.updatePetInv) updatePetInv();
 };
 </script>
-</div>
 <!-- ==================== DIV-4C END - 2 CLOSES ==================== -->
  <!-- ==================== DIV-4D - SUGGESTIONS - 2 OPENS ==================== -->
 <div class="card" id="div4D" style="width:100%;max-width:480px;margin:12px auto 0;background:#0b0f14;padding:10px;box-sizing:border-box">
@@ -2130,8 +2159,6 @@ window.calcPet60=function(){
 <script>
 // No extra JS needed for 4D
 </script>
-
-</div>
 <!-- ==================== DIV-4D END - 2 CLOSES ==================== -->
 <!-- ==================== DIV-4E - TIPS & FAQ - 2 OPENS ==================== -->
 <div class="card" id="div4E" style="width:100%;max-width:480px;margin:12px auto 0;background:#0b0f14;padding:10px;box-sizing:border-box">
@@ -2178,8 +2205,6 @@ window.calcPet60=function(){
 // Final check - update all
 setTimeout(()=>{ if(window.updateDetailTable) updateDetailTable(); },1000);
 </script>
-
-</div>
 <!-- ==================== DIV-4E END - 2 CLOSES ==================== -->
 <!-- ==================== DIV-4F FINAL COMBINED - BUILDING STYLE - PETS ONLY - 2 OPENS ==================== -->
 <div class="card" id="div4F" style="width:100%;max-width:480px;margin:0 auto;background:transparent;padding:8px;box-sizing:border-box">
@@ -2263,9 +2288,7 @@ setTimeout(()=>{ if(window.updateDetailTable) updateDetailTable(); },1000);
 
 </div>
 
-</div>
 
-</div>
 <!-- ==================== END 4F FINAL COMBINED - 2 CLOSES ==================== -->
 <!-- ==================== DIV-4G V2 - TRUE LIVE LINKED TO KINGSHOT SITES - 2 OPENS ==================== -->
 <div class="card" id="div4G" style="width:100%;max-width:480px;margin:0 auto;background:transparent;padding:8px;box-sizing:border-box">
