@@ -1984,10 +1984,10 @@ function calcPot(){
 }
 render();
 </script>
- 
+</div>
 <!-- ========== END 4A CORRECTED ========== -->
  
- <script>
+  <script>
 function switchTab(val){
   // LIST ALL TABS HERE - just add '4A', '5A' when you make them
   const allTabs = ['1A','2A','3A','4A'];
@@ -2000,20 +2000,9 @@ function switchTab(val){
   const show = document.getElementById('tab-' + val);
   if(show) show.style.display = 'block';
 
-  // Init when opening tabs
+
+  // Init charm when opening 3A
   if(val === '3A' && window.initGrid3A) initGrid3A();
-  if(val === '4A' && window.render4A) render4A(); // <-- ADD THIS for pets
-
-  // Safety: hide 3A extra blocks if they are outside tab-3A
-  const extra3A = ['liveSummaryBlock','selfBackpackBlock','inventoryResultsBlock'];
-  extra3A.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.style.display = (val==='3A') ? 'block' : 'none';
-  });
-
-  // Close dropdown if you have it
-  const dd=document.getElementById('categoryDropdown');
-  if(dd) dd.style.display='none';
 }
  </script>
 </div>
