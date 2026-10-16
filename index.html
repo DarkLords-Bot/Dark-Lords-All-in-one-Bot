@@ -2035,55 +2035,209 @@ setInterval(loadAutoLive, 1000*60*60*6);
 </div>
 </div>
 
-<div id="guidesHub" style="display:none;width:100%;max-width:520px;margin:0 auto;padding:8px">
-<div style="background:#121212;border-radius:18px;padding:12px;border:1px solid #333">
+<div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px;font-family:Arial">
+<div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
 
-<select id="guideFilter" onchange="filterGuides()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:8px">
-<option value="all">📚 All Guides</option>
-<option value="beginner">🟢 Beginner</option>
-<option value="chief">⚔️ Chief Gear</option>
+<!-- MAIN DROP: Guides -->
+<label style="color:#f5c542;font-weight:900;font-size:12px">GUIDES (Main Drop)</label>
+<select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin:6px 0 10px">
+<option value="">-- Select Guide --</option>
+<option value="1B">1B - General Guides</option>
+<option value="2B">2B - Oasis Island</option>
+<option value="3B">3B - Pets</option>
+<option value="4B">4B - Heros</option>
+<option value="5B">5B - Hero Gears</option>
+<option value="6B">6B - Troops</option>
+<option value="7B">7B - Governor Gear & Charm</option>
 </select>
 
-<select id="allSubFilter" onchange="filterGuides()" style="width:100%;background:#222;color:#f5c542;border:1px solid #444;padding:10px;border-radius:12px;font-weight:700;margin-bottom:12px">
-<option value="all">🔽 All</option>
-<option value="truegold">🏆 Truegold Chart TG1-TG10</option>
-<option value="building">🏰 Building</option>
-</select>
+<!-- SUB DROP -->
+<select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
 
-<div id="guidesList">
-<div class="guideItem" data-cat="all" data-sub="truegold" style="background:#000;border-radius:14px;overflow:hidden;border:1px solid #2a2a2a">
-<div style="padding:14px;background:#161616;display:flex;gap:8px;align-items:center;color:#fff;font-weight:900">
-<img src="images/truegold.png" width="22"> Truegold Chart TG1-TG10
+<!-- LINKS CONTAINER -->
+<div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
+
 </div>
-<div style="padding:8px;color:#999;font-size:11px;line-height:1.4">
-Each cell = total for 5 stages. TOTAL row = sum of all 7 buildings. TG9-TG10 estimated from community data, TG1-8 exact from kingshot.net.
 </div>
 
-<div style="overflow-x:auto">
-<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:800px;text-align:center;color:#fff">
-<tr style="background:#1e1e1e"><td style="padding:8px;text-align:left;color:#fff;font-weight:900">Building</td>
-<td><img src="images/tg1.png" width="26"></td><td><img src="images/tg2.png" width="26"></td><td><img src="images/tg3.png" width="26"></td><td><img src="images/tg4.png" width="26"></td><td><img src="images/tg5.png" width="26"></td><td><img src="images/tg6.png" width="26"></td><td><img src="images/tg7.png" width="26"></td><td><img src="images/tg8.png" width="26"></td><td><img src="images/tg9.png" width="26"></td><td><img src="images/tg10.png" width="26"></td>
-</tr>
-<tr><td style="text-align:left;padding:8px;color:#4da3ff">Town Center</td><td>📦 660</td><td>📦 790</td><td>📦 1190</td><td>📦 1400</td><td>📦 1675</td><td>📦 900<br><span style="color:orange">⬣ 60</span></td><td>📦 1080<br><span style="color:orange">⬣ 90</span></td><td>📦 1080<br><span style="color:orange">⬣ 120</span></td><td>📦 1350<br><span style="color:orange">⬣ 180</span></td><td>📦 1480<br><span style="color:orange">⬣ 320</span></td></tr>
-<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Embassy</td><td>165</td><td>195</td><td>295</td><td>350</td><td>415</td><td>225<br><span style="color:orange">⬣ 13</span></td><td>270<br><span style="color:orange">⬣ 19</span></td><td>270<br><span style="color:orange">⬣ 30</span></td><td>335<br><span style="color:orange">⬣ 45</span></td><td>365<br><span style="color:orange">⬣ 80</span></td></tr>
-<tr><td style="text-align:left;padding:8px;color:#4da3ff">Command C.</td><td>130</td><td>155</td><td>235</td><td>280</td><td>335</td><td>180<br><span style="color:orange">⬣ 12</span></td><td>216<br><span style="color:orange">⬣ 18</span></td><td>216<br><span style="color:orange">⬣ 24</span></td><td>268<br><span style="color:orange">⬣ 36</span></td><td>292<br><span style="color:orange">⬣ 64</span></td></tr>
-<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Infirmary</td><td>130</td><td>155</td><td>235</td><td>280</td><td>335</td><td>180<br><span style="color:orange">⬣ 12</span></td><td>216<br><span style="color:orange">⬣ 18</span></td><td>216<br><span style="color:orange">⬣ 24</span></td><td>268<br><span style="color:orange">⬣ 36</span></td><td>292<br><span style="color:orange">⬣ 64</span></td></tr>
-<tr><td style="text-align:left;padding:8px;color:#4da3ff">Barracks</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
-<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Stable</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
-<tr><td style="text-align:left;padding:8px;color:#4da3ff">Range</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
-<tr style="background:#2a1f0f;font-weight:900;border-top:2px solid #555"><td style="text-align:left;padding:10px">TOTAL</td><td>📦 1,970</td><td>📦 2,360</td><td>📦 3,560</td><td>📦 4,200</td><td>📦 5,010</td><td>📦 2700<br>⬣ 172</td><td>📦 3240<br>⬣ 256</td><td>📦 3240<br>⬣ 360</td><td>📦 4021<br>⬣ 537</td><td>📦 4409<br>⬣ 963</td></tr>
-</table>
-</div>
-<div style="padding:8px;color:#777;font-size:10px">📦 Truegold | ⬣ Tempered | TG1-8 exact, TG9-10 community est. Total TG1-TG10 ≈ 34,300 TG + 2,288 TTG for 7 buildings</div>
-</div>
-</div>
-</div>
-</div>
 <script>
-function showAllGuidesFix(){document.querySelectorAll('div[id=\"1A\"],div[id=\"2A\"],div[id=\"3A\"],div[id=\"4A\"]').forEach(e=>e.style.display='none');document.getElementById('guidesHub').style.display='block';}
-function filterGuides(){const m=document.getElementById('guideFilter').value;const s=document.getElementById('allSubFilter').value;document.getElementById('allSubFilter').style.display=m==='all'?'block':'none';document.querySelectorAll('.guideItem').forEach(it=>{it.style.display=(m==='all'?(s==='all'||it.dataset.sub===s):it.dataset.cat===m)?'block':'none';});}
+const data={
+"1B":{name:"General Guides", subs:{
+"a":{t:"a) All Buildings General Information", links:[
+["kingshot.net - Buildings DB","https://kingshot.net/database/buildings"],
+["kingshotdata.com - Buildings","https://kingshotdata.com/database/buildings"],
+["kingshotguide.org - Building Calc","https://kingshotguide.org/building-calculator"]
+]},
+"b":{t:"b) Building Requirements Resources", links:[
+["kingshotguide.org - Upgrade Costs","https://kingshotguide.org/building-calculator"],
+["heaven-guardian.com - Building Req","https://heaven-guardian.com/kingshot-building-guide"]
+]},
+"c":{t:"c) Truegold Requirements TG1-TG10", links:[
+["kingshot.net - Truegold Chart","https://kingshot.net/database/truegold-chart"],
+["heaven-guardian.com - TG1-TG8 Costs","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
+["kingshotdata.com - Truegold DB","https://kingshotdata.com/database/truegold"]
+]},
+"d1":{t:"d) Tempered Truegold TG5-TG10", links:[
+["boostbot.org - TG10 Tempered Costs","https://boostbot.org/kingshot-tg10-tempered-truegold"],
+["kingshotdata.com - Tempered Truegold","https://kingshotdata.com/database/tempered-truegold"]
+]},
+"d2":{t:"e) Advanced Truegold Requirements", links:[
+["kingshotmastery.com - Truegold Guide","https://kingshotmastery.com/guides/truegold"],
+["kingshotguide.org - TG Levels","https://kingshotguide.org/truegold-calculator"]
+]}
+}},
+"2B":{name:"Oasis Island", subs:{
+"a":{t:"a) All Building Informations", links:[
+["kingshot.net - Oasis Buildings","https://kingshot.net/database/oasis-island"],
+["kingshotdata.com - Oasis DB","https://kingshotdata.com/database/oasis-island"]
+]},
+"b":{t:"b) Building Upgrade Requirements and bonuses", links:[
+["kingshotguide.org - Oasis Bonuses","https://kingshotguide.org/oasis-island-guide"],
+["kingshot Fandom - Oasis Island","https://kingshot.fandom.com/wiki/Oasis_Island"]
+]}
+}},
+"3B":{name:"Pets Gen1-7", subs:{
+"a":{t:"a) General Information All Pets Gen1-7", links:[
+["kingshot.net - Pets Database","https://kingshot.net/database/pets"],
+["kingshotguide.com - Pets DB","https://kingshotguide.com/pets"],
+["kingshotdata.com - Pets","https://kingshotdata.com/database/pets"]
+]},
+"b":{t:"b) Pets Requirements, Advancements, Bonuses", links:[
+["kingshotmastery.com - Pets Guide","https://kingshotmastery.com/guides/pets"],
+["kingshotguide.org - Pet Upgrade","https://kingshotguide.org/pet-calculator"]
+]}
+}},
+"4B":{name:"Heros Gen1-8", subs:{
+"a":{t:"a) Heros Information Gen1-8", links:[
+["kingshotdata.com - Heroes","https://kingshotdata.com/database/heroes"],
+["kingshot.net - Heroes DB","https://kingshot.net/database/heroes"],
+["kingshotmastery.com - Tier List Gen1-8","https://kingshotmastery.com/hero-tier-list"]
+]},
+"b":{t:"b) Heros Power XP Upgrade Requirements", links:[
+["heaven-guardian.com - Hero Upgrade","https://heaven-guardian.com/kingshot-hero-upgrade-guide"],
+["kingshotguide.org - Hero XP","https://kingshotguide.org/hero-calculator"]
+]},
+"c":{t:"c) Heros Conquest and Expedition skills books", links:[
+["kingshotmastery.com - Skills Guide","https://kingshotmastery.com/guides/hero-skills"],
+["kingshot.net - Conquest Skills","https://kingshot.net/guides/conquest-skills"]
+]},
+"d":{t:"d) Heros Exclusive Gear", links:[
+["kingshot.net - Exclusive Gear DB","https://kingshot.net/database/exclusive-gear"],
+["kingshotdata.com - Exclusive Gear","https://kingshotdata.com/database/exclusive-gear"]
+]}
+}},
+"5B":{name:"Hero Gears", subs:{
+"a":{t:"a) Infantry Hero Gears", links:[
+["kingshot.net - Infantry Gear","https://kingshot.net/database/hero-gear/infantry"],
+["kingshotmastery.com - Gear Guide","https://kingshotmastery.com/guides/hero-gear"]
+]},
+"b":{t:"b) Infantry Hero Gear Upgrades", links:[
+["heaven-guardian.com - Infantry Gear Upgrade","https://heaven-guardian.com/kingshot-hero-gear-upgrade"],
+["grindnstrat.com - Gear Enhance","https://grindnstrat.com/kingshot-hero-gear-guide"]
+]},
+"c":{t:"c) Infantry Best Heros to use with Gears", links:[
+["kingshotmastery.com - Best Infantry Heros","https://kingshotmastery.com/guides/infantry-heroes-pvp"],
+["kingshot.net - Bear Trap Best","https://kingshot.net/guides/bear-hunt-lineups"]
+]},
+"d":{t:"d) Cavalry Hero Gears", links:[
+["kingshot.net - Cavalry Gear","https://kingshot.net/database/hero-gear/cavalry"],
+["kingshotguide.org - Cavalry Gear","https://kingshotguide.org/hero-gear-cavalry"]
+]},
+"e":{t:"e) Cavalry Hero Gear Upgrades", links:[
+["heaven-guardian.com - Cavalry Gear","https://heaven-guardian.com/kingshot-cavalry-gear-upgrade"],
+["kingshotdata.com - Gear Upgrades","https://kingshotdata.com/database/hero-gear-upgrades"]
+]},
+"f":{t:"f) Cavalry Best Heros to use with Gears", links:[
+["kingshotmastery.com - Cavalry Rally Guide","https://kingshotmastery.com/guides/cavalry-rally"],
+["kingshot.net - KvK Best Heros","https://kingshot.net/guides/kvk-hero-lineups"]
+]},
+"g":{t:"g) Archer Hero Gears", links:[
+["kingshot.net - Archer Gear","https://kingshot.net/database/hero-gear/archer"],
+["kingshotmastery.com - Archer Gear","https://kingshotmastery.com/guides/archer-gear"]
+]},
+"h":{t:"h) Archer Hero Gear Upgrades", links:[
+["grindnstrat.com - Archer Upgrades","https://grindnstrat.com/kingshot-hero-gear-guide"],
+["kingshotguide.org - Archer Gear Calc","https://kingshotguide.org/hero-gear-calculator"]
+]},
+"i":{t:"i) Archer Best Heros to use with Gears", links:[
+["kingshotmastery.com - Archer Bear Hunt","https://kingshotmastery.com/guides/bear-hunt"],
+["kingshot.net - Swordland Best Heros","https://kingshot.net/guides/swordland-showdown"]
+]}
+}},
+"6B":{name:"Troops", subs:{
+"a":{t:"a) Infantry Troops", links:[
+["kingshot.net - Infantry Troops","https://kingshot.net/database/troops/infantry"],
+["kingshotmastery.com - Troops Guide","https://kingshotmastery.com/guides/troops"]
+]},
+"b":{t:"b) Infantry Troops Upgrades Requirements", links:[
+["kingshotguide.org - Infantry Tier","https://kingshotguide.org/troop-calculator"],
+["heaven-guardian.com - Infantry T1-TG10","https://heaven-guardian.com/kingshot-infantry-guide"]
+]},
+"c":{t:"c) Cavalry Troops", links:[
+["kingshot.net - Cavalry Troops","https://kingshot.net/database/troops/cavalry"],
+["kingshotdata.com - Cavalry DB","https://kingshotdata.com/database/cavalry-troops"]
+]},
+"d":{t:"d) Cavalry Troops Upgrades Requirements", links:[
+["kingshotguide.org - Cavalry Upgrades","https://kingshotguide.org/cavalry-upgrade"],
+["heaven-guardian.com - Cavalry Tiers","https://heaven-guardian.com/kingshot-cavalry-guide"]
+]},
+"e":{t:"e) Archer Troops", links:[
+["kingshot.net - Archer Troops","https://kingshot.net/database/troops/archer"],
+["kingshotdata.com - Archer Troops","https://kingshotdata.com/database/archer-troops"]
+]},
+"f":{t:"f) Archer Troops Upgrade Requirements", links:[
+["kingshotguide.org - Archer Upgrades","https://kingshotguide.org/archer-upgrade"],
+["kingshotmastery.com - Archer Troops","https://kingshotmastery.com/guides/archer-troops"]
+]},
+"g":{t:"g) Troops Formations", links:[
+["kingshotmastery.com - Formations","https://kingshotmastery.com/guides/troop-formations"],
+["grindnstrat.com - Best Formations All Battles","https://grindnstrat.com/kingshot-troop-setup-guide"],
+["kingshot.net - Formation Guide","https://kingshot.net/guides/troop-formations"]
+]}
+}},
+"7B":{name:"Governor Gear & Charm", subs:{
+"a":{t:"a) Governor gear & charm general information", links:[
+["heaven-guardian.com - Governor Gear","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"],
+["kingshot.net - Governor Gear DB","https://kingshot.net/database/governor-gear"]
+]},
+"b":{t:"b) Governor Gear & Charm Upgrades", links:[
+["heaven-guardian.com - Governor Charms","https://heaven-guardian.com/kingshot-governor-charms-guide-levels-priority"],
+["kingshotmastery.com - Charms Guide","https://kingshotmastery.com/guides/charms"],
+["kingshotdata.com - Governor Gear Upgrades","https://kingshotdata.com/database/governor-gear"]
+]}
+}}
+};
+
+function updateSubDrop(){
+ const main=document.getElementById('mainDrop').value;
+ const sub=document.getElementById('subDrop');
+ const box=document.getElementById('linksBox');
+ sub.innerHTML=""; box.innerHTML="";
+ if(!main){sub.style.display='none'; return;}
+ sub.style.display='block';
+ sub.innerHTML='<option value="">-- Select Sub Guide --</option>';
+ Object.keys(data[main].subs).forEach(k=>{
+   const o=document.createElement('option'); o.value=k; o.textContent=data[main].subs[k].t; sub.appendChild(o);
+ });
+}
+function showLinks(){
+ const main=document.getElementById('mainDrop').value;
+ const sub=document.getElementById('subDrop').value;
+ const box=document.getElementById('linksBox');
+ box.innerHTML="";
+ if(!main||!sub) return;
+ const info=data[main].subs[sub];
+ let html=`<div style="background:#161616;padding:10px;border-radius:12px;color:#f5c542;font-weight:900;font-size:13px">${info.t}</div>`;
+ info.links.forEach(([title,url])=>{
+   html+=`<a href="${url}" target="_blank" style="display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid #2a2a2a;padding:12px;border-radius:12px;text-decoration:none;color:#fff"><div><div style="font-weight:800;font-size:13px">${title}</div><div style="font-size:10px;color:#888">${url}</div></div><span style="color:#f5c542">↗</span></a>`;
+ });
+ box.innerHTML=html;
+}
+function showAllGuidesFix(){
+ document.querySelectorAll('div[id=\"1A\"],div[id=\"2A\"],div[id=\"3A\"],div[id=\"4A\"],div[id=\"5A\"],div[id=\"6A\"]').forEach(e=>e.style.display='none');
+ document.getElementById('guidesHub').style.display='block';
+}
 </script>
-<!-- ==================== END GUIDES HUB ==================== -->
  <script>
   function switchTab(val){
   const allTabs = ['1A','2A','3A','4A'];
