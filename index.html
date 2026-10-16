@@ -366,7 +366,7 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 
 <div class="myDrop">
   <button class="btn" style onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
-    <span id="dropLabel">🏰 BUILDING CALCULATOR</span>
+    <span id="dropLabel">🏰 CALCULATORS </span>
     <span>▼</span>
   </button>
   <div id="dropList" class="myDropList">
@@ -377,50 +377,55 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   </div>
 </div>
 
-<!-- GUIDES DROPDOWN - BESIDE CALCULATOR -->
-<!-- GUIDES DROPDOWN - FIXED - BESIDE CALCULATOR -->
+<!-- MAIN GUIDES BUTTON - CORRECT -->
 <div class="myDrop">
-  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; document.getElementById('dropList').style.display='none'">
+  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
     <span id="guidesDropLabel">📚 GUIDES</span>
     <span>▼</span>
   </button>
   <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
-    <div onclick="selectGuideNew('1B','1B-General Guides')">1B-General Guides</div>
-    <div onclick="selectGuideNew('2B','2B-Oasis Island')">2B-Oasis Island</div>
-    <div onclick="selectGuideNew('3B','3B-Pets')">3B-Pets</div>
-    <div onclick="selectGuideNew('4B','4B-Heros')">4B-Heros</div>
-    <div onclick="selectGuideNew('5B','5B-Hero Gears')">5B-Hero Gears</div>
-    <div onclick="selectGuideNew('6B','6B-Troops')">6B-Troops</div>
-    <div onclick="selectGuideNew('7B','7B-Governor Gear & Charm')">7B-Governor Gear</div>
+    <div onclick="selectGuideNew('1B','General Guides')">1B-Building Guides</div>
+    <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
+    <div onclick="selectGuideNew('3B','Pets')">3B-Pets</div>
+    <div onclick="selectGuideNew('4B','Heros')">4B-Heros</div>
+    <div onclick="selectGuideNew('5B','Hero Gears')">5B-Hero Gears</div>
+    <div onclick="selectGuideNew('6B','Troops')">6B-Troops</div>
+    <div onclick="selectGuideNew('7B','Governor Gear & Charm')">7B-Governor Gear</div>
+  </div>
+</div>
+
+<!-- THIS DIV IS MANDATORY - YOU WERE MISSING THIS -->
+<div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px">
+  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+    <select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:10px">
+      <option value="">-- Select --</option>
+      <option value="1B">1B-Building Guides</option>
+      <option value="2B">2B-Oasis Island</option>
+      <option value="3B">3B-Pets</option>
+      <option value="4B">4B-Heros</option>
+      <option value="5B">5B-Hero Gears</option>
+      <option value="6B">6B-Troops</option>
+      <option value="7B">7B-Governor Gear & Charm</option>
+    </select>
+    <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
+    <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
 </div>
 
 <script>
-// FIXED - Hide all 1A-6A tabs and SHOW guidesHub
 function showAllGuidesFix(){
-  document.querySelectorAll('div[id="1A"],div[id="2A"],div[id="3A"],div[id="4A"],div[id="5A"],div[id="6A"],div[id="7A"],div[id="8A"]').forEach(el=>{ el.style.display='none'; });
+  document.querySelectorAll('div[id="1A"],div[id="2A"],div[id="3A"],div[id="4A"],div[id="5A"],div[id="6A"]').forEach(el=>el.style.display='none');
   const hub=document.getElementById('guidesHub');
-  if(hub){ hub.style.display='block'; window.scrollTo({top:hub.offsetTop-20,behavior:'smooth'}); }
+  if(hub) hub.style.display='block';
 }
-
-function selectGuideNew(val, label){
-  document.getElementById('guidesDropLabel').textContent = '📚 '+label;
-  document.getElementById('guidesDropList').style.display = 'none';
-  
-  // 1. Show guidesHub
+function selectGuideNew(val,label){
+  document.getElementById('guidesDropLabel').textContent='📚 '+label;
+  document.getElementById('guidesDropList').style.display='none';
   showAllGuidesFix();
-  
-  // 2. Auto-select main dropdown inside hub
-  setTimeout(()=>{
-    const mainDrop=document.getElementById('mainDrop');
-    if(mainDrop){
-      mainDrop.value=val;
-      updateSubDrop(); // this populates sub-dropdown
-    }
-  },200);
+  setTimeout(()=>{ const m=document.getElementById('mainDrop'); if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); } },200);
 }
-
-// Keep old selectCat as is
+</script>
+ <script>
 function selectCat(val, label){
   document.getElementById('dropLabel').textContent = label;
   document.getElementById('dropList').style.display = 'none';
@@ -2258,23 +2263,52 @@ function showAllGuidesFix(){
 }
 </script>
  <script>
-  function switchTab(val){
-  const allTabs = ['1A','2A','3A','4A'];
+function switchTab(val){
+  // ALL your main tabs + guides
+  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub'];
 
   allTabs.forEach(t => {
-    const el = document.getElementById('tab-' + t);
+    // Try both id formats: tab-1A and 1A (covers both cases)
+    let el = document.getElementById('tab-' + t) || document.getElementById(t);
     if(el) el.style.display = 'none';
   });
 
-  const show = document.getElementById('tab-' + val);
+  // Show selected - try both formats
+  let show = document.getElementById('tab-' + val) || document.getElementById(val);
   if(show) show.style.display = 'block';
 
-  // Init when opening
+  // Init when opening calculators
   if(val === '3A' && window.initGrid3A) initGrid3A();
+  if(val === '4A' && window.initGrid4A) initGrid4A();
 
-  // Close dropdown
+  // Close dropdowns
   const dd=document.getElementById('categoryDropdown');
   if(dd) dd.style.display='none';
+  const gd=document.getElementById('guidesDropList');
+  if(gd) gd.style.display='none';
+  const cd=document.getElementById('dropList');
+  if(cd) cd.style.display='none';
+}
+
+// Special function for guides button
+function showAllGuidesFix(){
+  switchTab('guidesHub');
+}
+
+function selectGuideNew(val,label){
+  document.getElementById('guidesDropLabel').textContent='📚 '+label;
+  document.getElementById('guidesDropList').style.display='none';
+  switchTab('guidesHub');
+  setTimeout(()=>{
+    const m=document.getElementById('mainDrop');
+    if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
+  },200);
+}
+
+function selectCat(val,label){
+  document.getElementById('dropLabel').textContent=label;
+  document.getElementById('dropList').style.display='none';
+  switchTab(val);
 }
  </script>
 </div>
