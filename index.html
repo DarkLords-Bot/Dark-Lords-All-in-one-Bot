@@ -195,48 +195,158 @@ function setLang(lang){
   localStorage.setItem('userLang', lang);
   document.getElementById('langPopup').style.display='none';
   
+<div id="langPopup" style="position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:999999;display:none;align-items:center;justify-content:center;padding:20px">
+<div style="background:#121a2b;border-radius:20px;padding:20px;max-width:360px;width:100%;border:1px solid rgba(255,255,255,0.1)">
+<div style="text-align:center;margin-bottom:16px">
+<div style="font-size:40px">🌐</div>
+<div style="color:#fff;font-weight:900;font-size:18px;margin-top:8px">Choose Language</div>
+<div style="color:#7c8193;font-size:12px;margin-top:4px">English is default - stays until you change</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button onclick="setLang('en')" class="langBtn">🇺🇸 English</button>
+<button onclick="setLang('es')" class="langBtn">🇪🇸 Español</button>
+<button onclick="setLang('fr')" class="langBtn">🇫🇷 Français</button>
+<button onclick="setLang('de')" class="langBtn">🇩🇪 Deutsch</button>
+<button onclick="setLang('pt')" class="langBtn">🇧🇷 Português</button>
+<button onclick="setLang('tr')" class="langBtn">🇹🇷 Türkçe</button>
+<button onclick="setLang('hi')" class="langBtn">🇮🇳 हिंदी</button>
+<button onclick="setLang('ar')" class="langBtn">🇸🇦 العربية</button>
+<button onclick="setLang('ru')" class="langBtn">🇷🇺 Русский</button>
+<button onclick="setLang('id')" class="langBtn">🇮🇩 Indonesia</button>
+</div>
+</div>
+</div>
+
+<div id="langFloat" onclick="document.getElementById('langPopup').style.display='flex'" style="position:fixed;bottom:20px;right:20px;background:#f59e0b;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:9998;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,0.4)">🌐</div>
+
+<style>
+.langBtn{background:#1c2130;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:12px;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer}
+.langBtn:active{transform:scale(0.96)}
+.goog-te-banner-frame{display:none!important}
+.goog-te-gadget{display:none!important}
+body{top:0!important}
+#goog-gt-tt{display:none!important}
+.skiptranslate{display:none!important}
+.goog-text-highlight{background:transparent!important;box-shadow:none!important}
+</style>
+
+<div id="google_translate_element" style="display:none"></div>
+
+<script>
+let translateInitialized = false;
+let langApplying = false;
+
+function googleTranslateElementInit(){
+  if(translateInitialized) return;
+  translateInitialized = true;
+  new google.translate.TranslateElement({
+    pageLanguage:'en', 
+    includedLanguages:'en,es,fr,de,pt,tr,hi,ar,ru,id', 
+    autoDisplay:false
+  }, 'google_translate_element');
+  
+  // Apply saved lang ONLY after Google is ready
+  setTimeout(applySavedLang, 1200);
+}
+
+function setLang(lang){
+  // SAVE CHOICE - This is the ONLY place language changes
+  localStorage.setItem('userLang', lang);
+  document.getElementById('langPopup').style.display='none';
+  
   if(lang==='en'){
-    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    // CLEAR ALL GOOGLE COOKIES - FORCE ENGLISH
+    clearGoogleCookies();
     location.reload();
     return;
   }
   
-  // Set cookie - NO RELOAD LOOP
+  // For other languages - set cookie + change combo
+  langApplying = true;
   document.cookie = 'googtrans=/en/'+lang+';path=/';
-  document.cookie = 'googtrans=/en/'+lang+';domain='+location.hostname+';path=/';
   
-  // If google combo exists, change it
   const combo = document.querySelector('.goog-te-combo');
   if(combo){
     combo.value=lang;
     combo.dispatchEvent(new Event('change'));
   } else {
+    // If combo not ready, reload and applySavedLang will handle it
     location.reload();
+  }
+  setTimeout(()=>{ langApplying = false; }, 2000);
+}
+
+function clearGoogleCookies(){
+  // Clear all possible googtrans cookies
+  document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+  document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain='+location.hostname+';';
+  document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.'+location.hostname+';';
+  const parts = location.hostname.split('.');
+  if(parts.length>1){
+    const rootDomain = '.'+parts.slice(-2).join('.');
+    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain='+rootDomain+';';
   }
 }
 
 function applySavedLang(){
+  if(langApplying) return;
   const saved = localStorage.getItem('userLang');
-  if(!saved || saved==='en') return;
   
+  // FIX 1: If no saved lang, DEFAULT TO ENGLISH AND STOP - Don't translate
+  if(!saved){
+    localStorage.setItem('userLang','en');
+    clearGoogleCookies();
+    document.getElementById('langPopup').style.display='flex';
+    return;
+  }
+  
+  // FIX 2: If saved is ENGLISH, make SURE we are in English - clear cookies, don't translate
+  if(saved==='en'){
+    clearGoogleCookies();
+    return; // Stay English, do nothing
+  }
+  
+  // FIX 3: Only if saved is NOT English, apply translation
   const combo = document.querySelector('.goog-te-combo');
-  if(combo){
+  if(combo && combo.value!==saved){
+    langApplying = true;
     combo.value=saved;
     combo.dispatchEvent(new Event('change'));
+    setTimeout(()=>{ langApplying = false; }, 2000);
   }
 }
 
-// Show popup only first time
+// Load Google script once
 window.addEventListener('load', ()=>{
+  // Show popup only first visit
   const saved = localStorage.getItem('userLang');
   if(!saved){
-    document.getElementById('langPopup').style.display='flex';
+    setTimeout(()=>{
+      document.getElementById('langPopup').style.display='flex';
+    }, 800);
   }
-  // Load google script only once
+  
+  // Load google translate
   if(!document.querySelector('script[src*="translate_a"]')){
     const s=document.createElement('script');
     s.src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.body.appendChild(s);
+  }
+  
+  // Extra safety: If userLang is EN but cookie still exists (old bug), clear it
+  if(localStorage.getItem('userLang')==='en'){
+    clearGoogleCookies();
+  }
+});
+
+// Close popup when clicking outside
+document.getElementById('langPopup').addEventListener('click', (e)=>{
+  if(e.target.id==='langPopup'){
+    e.target.style.display='none';
+    // If first time and they close without choosing, set English
+    if(!localStorage.getItem('userLang')){
+      localStorage.setItem('userLang','en');
+    }
   }
 });
 </script>
