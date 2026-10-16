@@ -316,14 +316,40 @@ window.addEventListener('load', ()=>{
   </div>
 </div>
 
+<!-- GUIDES DROPDOWN - BESIDE CALCULATOR -->
+<div class="myDrop">
+  <button class="myDropBtn guidesBtn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; document.getElementById('dropList').style.display='none'">
+    <span id="guidesDropLabel">📚 GUIDES</span>
+    <span>▼</span>
+  </button>
+  <div id="guidesDropList" class="myDropList">
+    <div onclick="selectGuide('all','📚 ALL GUIDES')">📚 ALL GUIDES</div>
+    <div onclick="selectGuide('beginner','🟢 BEGINNER')">🟢 BEGINNER</div>
+    <div onclick="selectGuide('chief','⚔️ CHIEF GEAR')">⚔️ CHIEF GEAR</div>
+    <div onclick="selectGuide('pet','🐾 PETS')">🐾 PETS</div>
+    <div onclick="selectGuide('hero','🦸 HEROES')">🦸 HEROES</div>
+    <div onclick="selectGuide('event','🎉 EVENTS')">🎉 EVENTS</div>
+    <div onclick="selectGuide('f2p','💎 F2P TIPS')">💎 F2P TIPS</div>
+  </div>
+</div>
+
 <script>
 function selectCat(val, label){
   document.getElementById('dropLabel').textContent = label;
   document.getElementById('dropList').style.display = 'none';
   switchTab(val);
 }
+function selectGuide(cat, label){
+  document.getElementById('guidesDropLabel').textContent = label;
+  document.getElementById('guidesDropList').style.display = 'none';
+  // OPEN GUIDES HUB - NOT 5A, NOT TAB5 - SAFE NAME
+  switchTab('guidesHub');
+  setTimeout(()=>{
+    const sel=document.getElementById('guideFilter');
+    if(sel){ sel.value=cat; filterGuides(); }
+  },150);
+}
 </script>
-
 
 <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
