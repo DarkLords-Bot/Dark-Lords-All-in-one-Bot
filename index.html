@@ -2033,108 +2033,55 @@ setInterval(loadAutoLive, 1000*60*60*6);
 <div id="gUpdateTime2" style="color:#64748b;font-size:10px;margin-top:4px">CHECK THIS SITE EVERYDAY FOR ANY UPDATES...</div>
 <div style="color:#fbbf24;font-size:10px;margin-top:6px">🔧 YOUTUBE VIDEOS AND GUIDES AUTO UPDATES EVERY 6HRS - CAPTURES NEWLY RELEASED EVENTS/GUIDES/VIDEOS RELATED TO KINGSHOT...(FOR ANY QUERRY- (EMAIL-CHAITTU6S@GMAIL.COM))</div>
 </div>
-
 </div>
 
-<!-- ==================== GUIDES HUB WITH SUB DROPDOWN ==================== -->
-<div id="guidesHub" style="display:none;width:100%;max-width:480px;margin:0 auto;padding:8px;box-sizing:border-box">
-<div style="background:#121a2b;border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,0.06)">
+<div id="guidesHub" style="display:none;width:100%;max-width:520px;margin:0 auto;padding:8px">
+<div style="background:#121212;border-radius:18px;padding:12px;border:1px solid #333">
 
-<!-- MAIN FILTER -->
-<select id="guideFilter" onchange="filterGuides()" style="width:100%;background:#0f1628;color:#fff;border:1px solid rgba(255,255,255,0.1);padding:12px;border-radius:12px;font-weight:700;font-size:13px;margin-bottom:10px;outline:none">
+<select id="guideFilter" onchange="filterGuides()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:8px">
 <option value="all">📚 All Guides</option>
 <option value="beginner">🟢 Beginner</option>
 <option value="chief">⚔️ Chief Gear</option>
-<option value="pet">🐾 Pets</option>
-<option value="hero">🦸 Heroes</option>
-<option value="event">🎉 Events</option>
-<option value="f2p">💎 F2P Tips</option>
 </select>
 
-<!-- SUB FILTER - ONLY FOR ALL GUIDES -->
-<select id="allSubFilter" onchange="filterGuides()" style="width:100%;background:#1C253B;color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:10px;border-radius:12px;font-weight:700;font-size:12px;margin-bottom:12px;outline:none;display:block">
-<option value="all">🔽 All - Show Everything in All Guides</option>
-<option value="truegold">🏆 Truegold Requirements</option>
-<option value="building">🏰 Building Upgrades</option>
-<option value="research">🔬 Research Guide</option>
-<option value="resources">📦 Resources</option>
-<option value="war">⚔️ War & Rallies</option>
-<option value="other">📚 Other Guides</option>
+<select id="allSubFilter" onchange="filterGuides()" style="width:100%;background:#222;color:#f5c542;border:1px solid #444;padding:10px;border-radius:12px;font-weight:700;margin-bottom:12px">
+<option value="all">🔽 All</option>
+<option value="truegold">🏆 Truegold Chart TG1-TG10</option>
+<option value="building">🏰 Building</option>
 </select>
 
-<div id="guidesList" style="display:flex;flex-direction:column;gap:10px">
-
-<!-- ===== GUIDE 1: TRUEGOLD ===== -->
-<div class="guideItem" data-cat="all" data-sub="truegold" style="background:#0f1628;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden">
-<div onclick="toggleGuide(this)" style="padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
-<div style="display:flex;gap:10px;align-items:center">
-<div style="background:linear-gradient(180deg,#F59E0B,#D97706);width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🏆</div>
-<div>
-<div style="color:#fff;font-weight:900;font-size:13px">Truegold Requirements TG1-TG8</div>
-<div style="color:#7c8193;font-size:11px">🏆 Truegold • 26,887 Total</div>
+<div id="guidesList">
+<div class="guideItem" data-cat="all" data-sub="truegold" style="background:#000;border-radius:14px;overflow:hidden;border:1px solid #2a2a2a">
+<div style="padding:14px;background:#161616;display:flex;gap:8px;align-items:center;color:#fff;font-weight:900">
+<img src="images/truegold.png" width="22"> Truegold Chart TG1-TG10
 </div>
-</div>
-<div style="background:#1C253B;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-size:12px">▼</div>
-</div>
-<div class="guideContent" style="display:none;padding:0 12px 12px 12px">
-<div style="background:#121a2b;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);color:#c5c9d6;font-size:12.5px;line-height:1.6">
-Total Truegold: 26,887 | Tempered: 826<br>
-Town Center 8,775, Embassy 2,185, etc. Full table inside.
-</div>
-</div>
+<div style="padding:8px;color:#999;font-size:11px;line-height:1.4">
+Each cell = total for 5 stages. TOTAL row = sum of all 7 buildings. TG9-TG10 estimated from community data, TG1-8 exact from kingshot.net.
 </div>
 
-<!-- ===== GUIDE 2: EXAMPLE FOR BUILDING (COPY PASTE TEMPLATE) ===== -->
-<div class="guideItem" data-cat="all" data-sub="building" style="background:#0f1628;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden">
-<div onclick="toggleGuide(this)" style="padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
-<div style="display:flex;gap:10px;align-items:center">
-<div style="background:linear-gradient(180deg,#3B82F6,#1D4ED8);width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🏰</div>
-<div>
-<div style="color:#fff;font-weight:900;font-size:13px">Building Requirements</div>
-<div style="color:#7c8193;font-size:11px">🏰 Building • All Levels</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:800px;text-align:center;color:#fff">
+<tr style="background:#1e1e1e"><td style="padding:8px;text-align:left;color:#fff;font-weight:900">Building</td>
+<td><img src="images/tg1.png" width="26"></td><td><img src="images/tg2.png" width="26"></td><td><img src="images/tg3.png" width="26"></td><td><img src="images/tg4.png" width="26"></td><td><img src="images/tg5.png" width="26"></td><td><img src="images/tg6.png" width="26"></td><td><img src="images/tg7.png" width="26"></td><td><img src="images/tg8.png" width="26"></td><td><img src="images/tg9.png" width="26"></td><td><img src="images/tg10.png" width="26"></td>
+</tr>
+<tr><td style="text-align:left;padding:8px;color:#4da3ff">Town Center</td><td>📦 660</td><td>📦 790</td><td>📦 1190</td><td>📦 1400</td><td>📦 1675</td><td>📦 900<br><span style="color:orange">⬣ 60</span></td><td>📦 1080<br><span style="color:orange">⬣ 90</span></td><td>📦 1080<br><span style="color:orange">⬣ 120</span></td><td>📦 1350<br><span style="color:orange">⬣ 180</span></td><td>📦 1480<br><span style="color:orange">⬣ 320</span></td></tr>
+<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Embassy</td><td>165</td><td>195</td><td>295</td><td>350</td><td>415</td><td>225<br><span style="color:orange">⬣ 13</span></td><td>270<br><span style="color:orange">⬣ 19</span></td><td>270<br><span style="color:orange">⬣ 30</span></td><td>335<br><span style="color:orange">⬣ 45</span></td><td>365<br><span style="color:orange">⬣ 80</span></td></tr>
+<tr><td style="text-align:left;padding:8px;color:#4da3ff">Command C.</td><td>130</td><td>155</td><td>235</td><td>280</td><td>335</td><td>180<br><span style="color:orange">⬣ 12</span></td><td>216<br><span style="color:orange">⬣ 18</span></td><td>216<br><span style="color:orange">⬣ 24</span></td><td>268<br><span style="color:orange">⬣ 36</span></td><td>292<br><span style="color:orange">⬣ 64</span></td></tr>
+<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Infirmary</td><td>130</td><td>155</td><td>235</td><td>280</td><td>335</td><td>180<br><span style="color:orange">⬣ 12</span></td><td>216<br><span style="color:orange">⬣ 18</span></td><td>216<br><span style="color:orange">⬣ 24</span></td><td>268<br><span style="color:orange">⬣ 36</span></td><td>292<br><span style="color:orange">⬣ 64</span></td></tr>
+<tr><td style="text-align:left;padding:8px;color:#4da3ff">Barracks</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
+<tr style="background:#161616"><td style="text-align:left;padding:8px;color:#4da3ff">Stable</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
+<tr><td style="text-align:left;padding:8px;color:#4da3ff">Range</td><td>295</td><td>355</td><td>535</td><td>630</td><td>750</td><td>405<br><span style="color:orange">⬣ 25</span></td><td>486<br><span style="color:orange">⬣ 37</span></td><td>486<br><span style="color:orange">⬣ 54</span></td><td>600<br><span style="color:orange">⬣ 80</span></td><td>660<br><span style="color:orange">⬣ 145</span></td></tr>
+<tr style="background:#2a1f0f;font-weight:900;border-top:2px solid #555"><td style="text-align:left;padding:10px">TOTAL</td><td>📦 1,970</td><td>📦 2,360</td><td>📦 3,560</td><td>📦 4,200</td><td>📦 5,010</td><td>📦 2700<br>⬣ 172</td><td>📦 3240<br>⬣ 256</td><td>📦 3240<br>⬣ 360</td><td>📦 4021<br>⬣ 537</td><td>📦 4409<br>⬣ 963</td></tr>
+</table>
 </div>
-</div>
-<div style="background:#1C253B;width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#f59e0b;font-size:12px">▼</div>
-</div>
-<div class="guideContent" style="display:none;padding:0 12px 12px 12px">
-<div style="background:#121a2b;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);color:#c5c9d6;font-size:12.5px;line-height:1.6">
-Add your building guide content here...
-</div>
-</div>
-</div>
-
-<!-- ADD MORE GUIDES LIKE THIS - Just change data-sub="truegold/building/research etc" -->
-
+<div style="padding:8px;color:#777;font-size:10px">📦 Truegold | ⬣ Tempered | TG1-8 exact, TG9-10 community est. Total TG1-TG10 ≈ 34,300 TG + 2,288 TTG for 7 buildings</div>
 </div>
 </div>
 </div>
-
+</div>
 <script>
-function toggleGuide(el){
- const c=el.nextElementSibling; const a=el.querySelector('div:last-child');
- if(c.style.display==='none'){c.style.display='block';a.textContent='▲';}else{c.style.display='none';a.textContent='▼';}
-}
-function filterGuides(){
- const mainV=document.getElementById('guideFilter').value;
- const subV=document.getElementById('allSubFilter').value;
- const subFilterEl=document.getElementById('allSubFilter');
- 
- // Show sub filter only when All Guides selected
- if(mainV==='all'){subFilterEl.style.display='block';}else{subFilterEl.style.display='none';}
- 
- document.querySelectorAll('.guideItem').forEach(item=>{
-   const cat=item.dataset.cat;
-   const sub=item.dataset.sub || 'all';
-   
-   if(mainV==='all'){
-     // Inside All Guides - check sub filter
-     if(subV==='all' || sub===subV){item.style.display='block';}else{item.style.display='none';}
-   } else {
-     // Other categories - normal filter
-     if(cat===mainV){item.style.display='block';}else{item.style.display='none';}
-   }
- });
-}
+function showAllGuidesFix(){document.querySelectorAll('div[id=\"1A\"],div[id=\"2A\"],div[id=\"3A\"],div[id=\"4A\"]').forEach(e=>e.style.display='none');document.getElementById('guidesHub').style.display='block';}
+function filterGuides(){const m=document.getElementById('guideFilter').value;const s=document.getElementById('allSubFilter').value;document.getElementById('allSubFilter').style.display=m==='all'?'block':'none';document.querySelectorAll('.guideItem').forEach(it=>{it.style.display=(m==='all'?(s==='all'||it.dataset.sub===s):it.dataset.cat===m)?'block':'none';});}
 </script>
 <!-- ==================== END GUIDES HUB ==================== -->
  <script>
