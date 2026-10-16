@@ -378,37 +378,56 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 </div>
 
 <!-- GUIDES DROPDOWN - BESIDE CALCULATOR -->
+<!-- GUIDES DROPDOWN - FIXED - BESIDE CALCULATOR -->
 <div class="myDrop">
-  <button class="btn" style onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; document.getElementById('dropList').style.display='none'">
+  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; document.getElementById('dropList').style.display='none'">
     <span id="guidesDropLabel">📚 GUIDES</span>
     <span>▼</span>
   </button>
-  <div id="guidesDropList" class="myDropList">
-    <div onclick="selectGuide('all','📚 ALL GUIDES')">📚 ALL GUIDES</div>
-    <div onclick="selectGuide('beginner','🟢 BEGINNER')">🟢 BEGINNER</div>
-    <div onclick="selectGuide('chief','⚔️ CHIEF GEAR')">⚔️ CHIEF GEAR</div>
-    <div onclick="selectGuide('pet','🐾 PETS')">🐾 PETS</div>
-    <div onclick="selectGuide('hero','🦸 HEROES')">🦸 HEROES</div>
-    <div onclick="selectGuide('event','🎉 EVENTS')">🎉 EVENTS</div>
-    <div onclick="selectGuide('f2p','💎 F2P TIPS')">💎 F2P TIPS</div>
+  <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
+    <div onclick="selectGuideNew('1B','1B-General Guides')">1B-General Guides</div>
+    <div onclick="selectGuideNew('2B','2B-Oasis Island')">2B-Oasis Island</div>
+    <div onclick="selectGuideNew('3B','3B-Pets')">3B-Pets</div>
+    <div onclick="selectGuideNew('4B','4B-Heros')">4B-Heros</div>
+    <div onclick="selectGuideNew('5B','5B-Hero Gears')">5B-Hero Gears</div>
+    <div onclick="selectGuideNew('6B','6B-Troops')">6B-Troops</div>
+    <div onclick="selectGuideNew('7B','7B-Governor Gear & Charm')">7B-Governor Gear</div>
   </div>
 </div>
 
 <script>
+// FIXED - Hide all 1A-6A tabs and SHOW guidesHub
+function showAllGuidesFix(){
+  document.querySelectorAll('div[id="1A"],div[id="2A"],div[id="3A"],div[id="4A"],div[id="5A"],div[id="6A"],div[id="7A"],div[id="8A"]').forEach(el=>{ el.style.display='none'; });
+  const hub=document.getElementById('guidesHub');
+  if(hub){ hub.style.display='block'; window.scrollTo({top:hub.offsetTop-20,behavior:'smooth'}); }
+}
+
+function selectGuideNew(val, label){
+  document.getElementById('guidesDropLabel').textContent = '📚 '+label;
+  document.getElementById('guidesDropList').style.display = 'none';
+  
+  // 1. Show guidesHub
+  showAllGuidesFix();
+  
+  // 2. Auto-select main dropdown inside hub
+  setTimeout(()=>{
+    const mainDrop=document.getElementById('mainDrop');
+    if(mainDrop){
+      mainDrop.value=val;
+      updateSubDrop(); // this populates sub-dropdown
+    }
+  },200);
+}
+
+// Keep old selectCat as is
 function selectCat(val, label){
   document.getElementById('dropLabel').textContent = label;
   document.getElementById('dropList').style.display = 'none';
-  switchTab(val);
-}
-function selectGuide(cat, label){
-  document.getElementById('guidesDropLabel').textContent = label;
-  document.getElementById('guidesDropList').style.display = 'none';
-  // OPEN GUIDES HUB - NOT 5A, NOT TAB5 - SAFE NAME
-  switchTab('guidesHub');
-  setTimeout(()=>{
-    const sel=document.getElementById('guideFilter');
-    if(sel){ sel.value=cat; filterGuides(); }
-  },150);
+  // hide guidesHub when switching to other tabs
+  const hub=document.getElementById('guidesHub');
+  if(hub) hub.style.display='none';
+  if(typeof switchTab==='function') switchTab(val);
 }
 </script>
 
