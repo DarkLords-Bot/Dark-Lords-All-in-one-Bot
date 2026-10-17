@@ -377,29 +377,29 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   </div>
 </div>
 
-<!-- MAIN GUIDES BUTTON - CORRECT -->
+<!-- MAIN GUIDES BUTTON - 100% OK -->
 <div class="myDrop">
   <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
     <span id="guidesDropLabel">📚 GUIDES</span>
     <span>▼</span>
   </button>
   <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
-    <div onclick="selectGuideNew('1B','General Guides')">1B-Building Guides</div>
+    <div onclick="selectGuideNew('1B','Building Guides')">1B-Building Guides</div>
     <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
     <div onclick="selectGuideNew('3B','Pets')">3B-Pets</div>
     <div onclick="selectGuideNew('4B','Heros')">4B-Heros</div>
     <div onclick="selectGuideNew('5B','Hero Gears')">5B-Hero Gears</div>
     <div onclick="selectGuideNew('6B','Troops')">6B-Troops</div>
-    <div onclick="selectGuideNew('7B','Governor Gear & Charm')">7B-Governor Gear</div>
+    <div onclick="selectGuideNew('7B','Governor Gear')">7B-Governor Gear</div>
     <div onclick="selectGuideNew('8B','Beginners Guide')">8B-Beginners Guide</div>
-<div onclick="selectGuideNew('9B','F2P Guide')">9B-F2P Guide</div>
-<div onclick="selectGuideNew('10B','P2W Guides')">10B-P2W Guides</div>
-<div onclick="selectGuideNew('11B','Farm Account Guide')">11B-Farm Account Guide</div>
-<div onclick="selectGuideNew('12B','Alliance Matters')">12B-Alliance Matters</div>
+    <div onclick="selectGuideNew('9B','F2P Guide')">9B-F2P Guide</div>
+    <div onclick="selectGuideNew('10B','P2W Guides')">10B-P2W Guides</div>
+    <div onclick="selectGuideNew('11B','Farm Account Guide')">11B-Farm Account Guide</div>
+    <div onclick="selectGuideNew('12B','Alliance Matters')">12B-Alliance Matters</div>
   </div>
 </div>
 
-<!-- THIS DIV IS MANDATORY - YOU WERE MISSING THIS -->
+<!-- GUIDES HUB - 100% OK -->
 <div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px">
   <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
     <select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:10px">
@@ -410,12 +410,12 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
       <option value="4B">4B-Heros</option>
       <option value="5B">5B-Hero Gears</option>
       <option value="6B">6B-Troops</option>
-      <option value="7B">7B-Governor Gear & Charm</option>
-     <option value="8B">8B-Beginners Guide</option>
-<option value="9B">9B-F2P Guide</option>
-<option value="10B">10B-P2W Guides</option>
-<option value="11B">11B-Farm Account Guide</option>
-<option value="12B">12B-Alliance Matters</option>
+      <option value="7B">7B-Governor Gear</option>
+      <option value="8B">8B-Beginners Guide</option>
+      <option value="9B">9B-F2P Guide</option>
+      <option value="10B">10B-P2W Guides</option>
+      <option value="11B">11B-Farm Account Guide</option>
+      <option value="12B">12B-Alliance Matters</option>
     </select>
     <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
@@ -423,26 +423,40 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 </div>
 
 <script>
-function showAllGuidesFix(){
-  document.querySelectorAll('div[id="1A"],div[id="2A"],div[id="3A"],div[id="4A"],div[id="5A"],div[id="6A"]').forEach(el=>el.style.display='none');
-  const hub=document.getElementById('guidesHub');
-  if(hub) hub.style.display='block';
+// SINGLE unified system for both calculators + guides
+function switchAllTabs(val){
+  const all = ['1A','2A','3A','4A','5A','6A','guidesHub'];
+  all.forEach(t=>{
+    let el=document.getElementById(t) || document.getElementById('tab-'+t);
+    if(el) el.style.display='none';
+  });
+  let show=document.getElementById(val) || document.getElementById('tab-'+val);
+  if(show) show.style.display='block';
 }
+
+function showAllGuidesFix(){
+  switchAllTabs('guidesHub');
+}
+
 function selectGuideNew(val,label){
   document.getElementById('guidesDropLabel').textContent='📚 '+label;
   document.getElementById('guidesDropList').style.display='none';
   showAllGuidesFix();
-  setTimeout(()=>{ const m=document.getElementById('mainDrop'); if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); } },200);
+  setTimeout(()=>{
+    const m=document.getElementById('mainDrop');
+    if(m){ m.value=val; updateSubDrop(); }
+  },200);
 }
-</script>
- <script>
-function selectCat(val, label){
-  document.getElementById('dropLabel').textContent = label;
-  document.getElementById('dropList').style.display = 'none';
-  // hide guidesHub when switching to other tabs
+
+function selectCat(val,label){
+  const dl=document.getElementById('dropLabel');
+  if(dl) dl.textContent=label;
+  const ddl=document.getElementById('dropList');
+  if(ddl) ddl.style.display='none';
   const hub=document.getElementById('guidesHub');
   if(hub) hub.style.display='none';
   if(typeof switchTab==='function') switchTab(val);
+  else switchAllTabs(val);
 }
 </script>
 
@@ -2244,7 +2258,7 @@ const data={
 ["kingshotmastery.com - Charms Guide","https://kingshotmastery.com/guides/charms"],
 ["kingshotdata.com - Governor Gear Upgrades","https://kingshotdata.com/database/governor-gear"]
 ]}
-}}
+}},
 "8B":{name:"Beginners Guide", subs:{
 "a":{t:"a) Beginners guide", links:[
 ["kingshot.net - Beginner Guide","https://kingshot.net/guides/beginner-guide"],
@@ -2318,7 +2332,8 @@ const data={
 ["kingshotguide.org - Alliance Help & Tech","https://kingshotguide.org/guides/alliance-help"],
 ["kingshot Fandom - Alliance Wiki","https://kingshot.fandom.com/wiki/Alliance"]
 ]}
-}}
+}
+}
 };
 
 function updateSubDrop(){
