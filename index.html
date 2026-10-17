@@ -462,40 +462,48 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 <script>
 function toggleSmallerEventDrop(){
   const list = document.getElementById('SmallerEventDropList')
-<div id="smallerEventHub">
-<select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()">
-<option value="">-- SMALLER EVENT GUIDES --</option>
-<option value="1C">1C - BEAST WHISPERER</option>
-<option value="2C">2C - ARMAMENT COMPETITION</option>
-<option value="3C">3C - DEFEAT NEARBY BEAST</option>
-<option value="4C">4C - CALL OF THE SOVEREIGN</option>
-<option value="5C">5C - PLAN YOUR CITY</option>
-<option value="6C">6C - CITY DEVELOPMENT</option>
-<option value="7C">7C - PATH OF GROWTH</option>
-<option value="8C">8C - POWERUP</option>
-<option value="9C">9C - WAR PREPARATION</option>
-<option value="10C">10C - DEVELOP NEW TECH</option>
-<option value="11C">11C - DESERT TRAIL</option>
-<option value="12C">12C - WORKING OVERTIME</option>
-<option value="13C">13C - OFFICER PROJECT</option>
-<option value="14C">14C - WINDWARD VOYAGE</option>
-<option value="15C">15C - ELYSIUM QUEST</option>
-<option value="16C">16C - FOOTBALL FIESTA</option>
-<option value="17C">17C - STAND OF ARMS</option>
-<option value="18C">18C - CHILDHOOD SOJOURN</option>
-<option value="19C">19C - SPRING TIDE CELEBRATION</option>
-<option value="20C">20C - ALL OUT</option>
-<option value="21C">21C - FORSAKEN TEMPLE</option>
-<option value="22C">22C - TREASURE RAIDERS</option>
-<option value="23C">23C - KINGDOM OF ROMANCE</option>
-<option value="24C">24C - DRAGONS CARAVEN</option>
-<option value="25C">25C - FLAMEDRAGON TYRANT</option>
-<option value="26C">26C - STEEL EDGE</option>
-</select>
-<select id="smallerEventSubDrop" style="display:none" onchange="showSmallerEventLinks()"></select>
-<div id="smallerEventLinksBox" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
-</div>
+<!-- === SMALLER EVENT HUB - HIDDEN BY DEFAULT === -->
+<div id="smallerEventHub" class="tab-content" style="display:none; margin-top:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
+  <h3 style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 10px 0;">🎯 SMALLER EVENT GUIDES</h3>
+  
+  <select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #ff9500;">
+    <option value="">-- Select Event 1C-26C --</option>
+    <option value="1C">1C - BEAST WHISPERER</option>
+    <option value="2C">2C - ARMAMENT COMPETITION</option>
+    <option value="3C">3C - DEFEAT NEARBY BEAST</option>
+    <option value="4C">4C - CALL OF THE SOVEREIGN</option>
+    <option value="5C">5C - PLAN YOUR CITY</option>
+    <option value="6C">6C - CITY DEVELOPMENT</option>
+    <option value="7C">7C - PATH OF GROWTH</option>
+    <option value="8C">8C - POWERUP</option>
+    <option value="9C">9C - WAR PREPARATION</option>
+    <option value="10C">10C - DEVELOP NEW TECH</option>
+    <option value="11C">11C - DESERT TRAIL</option>
+    <option value="12C">12C - WORKING OVERTIME</option>
+    <option value="13C">13C - OFFICER PROJECT</option>
+    <option value="14C">14C - WINDWARD VOYAGE</option>
+    <option value="15C">15C - ELYSIUM QUEST</option>
+    <option value="16C">16C - FOOTBALL FIESTA</option>
+    <option value="17C">17C - STAND OF ARMS</option>
+    <option value="18C">18C - CHILDHOOD SOJOURN</option>
+    <option value="19C">19C - SPRING TIDE CELEBRATION</option>
+    <option value="20C">20C - ALL OUT</option>
+    <option value="21C">21C - FORSAKEN TEMPLE</option>
+    <option value="22C">22C - TREASURE RAIDERS</option>
+    <option value="23C">23C - KINGDOM OF ROMANCE</option>
+    <option value="24C">24C - DRAGONS CARAVEN</option>
+    <option value="25C">25C - FLAMEDRAGON TYRANT</option>
+    <option value="26C">26C - STEEL EDGE</option>
+  </select>
 
+  <select id="smallerEventSubDrop" style="display:none; width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px;" onchange="showSmallerEventLinks()">
+    <option value="">-- Select Sub Category a-i --</option>
+  </select>
+
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+</div> <!-- END smallerEventHub - ONLY 1 CLOSE -->
+
+<!-- === NOW SCRIPT STARTS AFTER ALL DIVS CLOSED === -->
  <script>
 // === FIXED - WORKS WITH YOUR switchAllTabs ===
 function switchAllTabs(val){
