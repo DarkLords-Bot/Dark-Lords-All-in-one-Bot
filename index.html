@@ -427,7 +427,14 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <span id="smallerEventDropLabel">🎯 SMALLER EVENT GUIDES</span>
     <span>▼</span>
   </button>
-  
+ <div id="smallerEventHub" class="tab-content" style="display:none !important; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
+  <h3 style="color:#ff9500; text-align:center; font-weight:900;">🎯 SMALLER EVENT GUIDES</h3>
+  <select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #ff9500;">
+    <option value="">-- Select Event 1C-26C --</option>
+  </select>
+  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px; display:none;"></select>
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+ </div> 
   <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:95%; max-width:400px; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px;">
     <!-- Options will be auto filled by JS, but you can also hardcode -->
     <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem">1C - BEAST WHISPERER</div>
@@ -2527,14 +2534,6 @@ function showAllGuidesFix(){
 <option value="25C">25C - FLAMEDRAGON TYRANT</option>
 <option value="26C">26C - STEEL EDGE</option>
 </select>
-<div id="smallerEventHub" class="tab-content" style="display:none !important; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
-  <h3 style="color:#ff9500; text-align:center; font-weight:900;">🎯 SMALLER EVENT GUIDES</h3>
-  <select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #ff9500;">
-    <option value="">-- Select Event 1C-26C --</option>
-  </select>
-  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px; display:none;"></select>
-  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
-</div>
  </div>
 
 <script>
