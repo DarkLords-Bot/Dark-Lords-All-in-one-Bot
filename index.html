@@ -434,12 +434,6 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   </select>
   <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px; display:none;"></select>
   <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
-<select id="smallerEventSubDrop" style="display:none; width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px;" onchange="showSmallerEventLinks()">
-    <option value="">-- Select Sub Category a-i --</option>
-  </select>
-
-  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
-</div> <!-- END smallerEventHub - ONLY 1 CLOSE -->
  </div> 
   <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:95%; max-width:400px; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px;">
     <!-- Options will be auto filled by JS, but you can also hardcode -->
@@ -2962,13 +2956,23 @@ function selectGuideNew(val,label){
 function selectSmallerEventNew(val,label){
   document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
   document.getElementById('smallerEventDropList').style.display='none';
-  switchTab('smallerEventHub');
+  
+  const hub = document.getElementById('smallerEventHub');
+  hub.style.display='block';
+  
+  // Hide all other main tabs
+  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t => {
+    let el = document.getElementById('tab-' + t) || document.getElementById(t);
+    if(el) el.style.display = 'none';
+  });
+
   setTimeout(()=>{
     const m=document.getElementById('smallerEventMainDrop');
     if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
-  },200);
+    // Scroll to hub so user sees it right below button
+    hub.scrollIntoView({behavior:'smooth', block:'start'});
+  },100);
 }
-
 function toggleSmallerEventDrop(){
   const list = document.getElementById('smallerEventDropList');
   const guidesList = document.getElementById('guidesDropList');
