@@ -422,53 +422,63 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   </div>
 </div>
  <!-- SMALLER EVENT GUIDES DROPDOWN - SAME STYLE AS GUIDES -->
-<div class="myDrop">
-  <button class="btn" style="background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900;" onclick="toggleSmallerEventDrop()">
+<div class="myDrop" style="position:relative; width:100%;">
+  <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleSmallerEventDrop()">
     <span id="smallerEventDropLabel">🎯 SMALLER EVENT GUIDES</span>
     <span>▼</span>
   </button>
- <div id="smallerEventHub" class="tab-content" style="display:none !important; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
-  <h3 style="color:#ff9500; text-align:center; font-weight:900;">🎯 SMALLER EVENT GUIDES</h3>
-  <select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #ff9500;">
-    <option value="">-- Select Event 1C-26C --</option>
-  </select>
-  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px; display:none;"></select>
-  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
- </div> 
-  <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:95%; max-width:400px; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px;">
-    <!-- Options will be auto filled by JS, but you can also hardcode -->
-    <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem">1C - BEAST WHISPERER</div>
-    <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')" class="dropItem">2C - ARMAMENT COMPETITION</div>
-    <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')" class="dropItem">3C - DEFEAT NEARBY BEAST</div>
-    <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')" class="dropItem">4C - CALL OF THE SOVEREIGN</div>
-    <div onclick="selectSmallerEventNew('5C','5C - PLAN YOUR CITY')" class="dropItem">5C - PLAN YOUR CITY</div>
-    <div onclick="selectSmallerEventNew('6C','6C - CITY DEVELOPMENT')" class="dropItem">6C - CITY DEVELOPMENT</div>
-    <div onclick="selectSmallerEventNew('7C','7C - PATH OF GROWTH')" class="dropItem">7C - PATH OF GROWTH</div>
-    <div onclick="selectSmallerEventNew('8C','8C - POWERUP')" class="dropItem">8C - POWERUP</div>
-    <div onclick="selectSmallerEventNew('9C','9C - WAR PREPARATION')" class="dropItem">9C - WAR PREPARATION</div>
-    <div onclick="selectSmallerEventNew('10C','10C - DEVELOP NEW TECH')" class="dropItem">10C - DEVELOP NEW TECH</div>
-    <div onclick="selectSmallerEventNew('11C','11C - DESERT TRAIL')" class="dropItem">11C - DESERT TRAIL</div>
-    <div onclick="selectSmallerEventNew('12C','12C - WORKING OVERTIME')" class="dropItem">12C - WORKING OVERTIME</div>
-    <div onclick="selectSmallerEventNew('13C','13C - OFFICER PROJECT')" class="dropItem">13C - OFFICER PROJECT</div>
-    <div onclick="selectSmallerEventNew('14C','14C - WINDWARD VOYAGE')" class="dropItem">14C - WINDWARD VOYAGE</div>
-    <div onclick="selectSmallerEventNew('15C','15C - ELYSIUM QUEST')" class="dropItem">15C - ELYSIUM QUEST</div>
-    <div onclick="selectSmallerEventNew('16C','16C - FOOTBALL FIESTA')" class="dropItem">16C - FOOTBALL FIESTA</div>
-    <div onclick="selectSmallerEventNew('17C','17C - STAND OF ARMS')" class="dropItem">17C - STAND OF ARMS</div>
-    <div onclick="selectSmallerEventNew('18C','18C - CHILDHOOD SOJOURN')" class="dropItem">18C - CHILDHOOD SOJOURN</div>
-    <div onclick="selectSmallerEventNew('19C','19C - SPRING TIDE CELEBRATION')" class="dropItem">19C - SPRING TIDE CELEBRATION</div>
-    <div onclick="selectSmallerEventNew('20C','20C - ALL OUT')" class="dropItem">20C - ALL OUT</div>
-    <div onclick="selectSmallerEventNew('21C','21C - FORSAKEN TEMPLE')" class="dropItem">21C - FORSAKEN TEMPLE</div>
-    <div onclick="selectSmallerEventNew('22C','22C - TREASURE RAIDERS')" class="dropItem">22C - TREASURE RAIDERS</div>
-    <div onclick="selectSmallerEventNew('23C','23C - KINGDOM OF ROMANCE')" class="dropItem">23C - KINGDOM OF ROMANCE</div>
-    <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')" class="dropItem">24C - DRAGONS CARAVEN</div>
-    <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')" class="dropItem">25C - FLAMEDRAGON TYRANT</div>
-    <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')" class="dropItem">26C- STEEL EDGE</div>
+
+  <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:100%; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px; left:0; top:100%;">
+    <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">1C - BEAST WHISPERER</div>
+    <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">2C - ARMAMENT COMPETITION</div>
+    <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">3C - DEFEAT NEARBY BEAST</div>
+    <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">4C - CALL OF THE SOVEREIGN</div>
+    <div onclick="selectSmallerEventNew('5C','5C - PLAN YOUR CITY')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">5C - PLAN YOUR CITY</div>
+    <div onclick="selectSmallerEventNew('6C','6C - CITY DEVELOPMENT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">6C - CITY DEVELOPMENT</div>
+    <div onclick="selectSmallerEventNew('7C','7C - PATH OF GROWTH')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">7C - PATH OF GROWTH</div>
+    <div onclick="selectSmallerEventNew('8C','8C - POWERUP')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">8C - POWERUP</div>
+    <div onclick="selectSmallerEventNew('9C','9C - WAR PREPARATION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">9C - WAR PREPARATION</div>
+    <div onclick="selectSmallerEventNew('10C','10C - DEVELOP NEW TECH')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">10C - DEVELOP NEW TECH</div>
+    <div onclick="selectSmallerEventNew('11C','11C - DESERT TRAIL')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">11C - DESERT TRAIL</div>
+    <div onclick="selectSmallerEventNew('12C','12C - WORKING OVERTIME')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">12C - WORKING OVERTIME</div>
+    <div onclick="selectSmallerEventNew('13C','13C - OFFICER PROJECT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">13C - OFFICER PROJECT</div>
+    <div onclick="selectSmallerEventNew('14C','14C - WINDWARD VOYAGE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">14C - WINDWARD VOYAGE</div>
+    <div onclick="selectSmallerEventNew('15C','15C - ELYSIUM QUEST')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">15C - ELYSIUM QUEST</div>
+    <div onclick="selectSmallerEventNew('16C','16C - FOOTBALL FIESTA')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">16C - FOOTBALL FIESTA</div>
+    <div onclick="selectSmallerEventNew('17C','17C - STAND OF ARMS')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">17C - STAND OF ARMS</div>
+    <div onclick="selectSmallerEventNew('18C','18C - CHILDHOOD SOJOURN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">18C - CHILDHOOD SOJOURN</div>
+    <div onclick="selectSmallerEventNew('19C','19C - SPRING TIDE CELEBRATION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">19C - SPRING TIDE CELEBRATION</div>
+    <div onclick="selectSmallerEventNew('20C','20C - ALL OUT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">20C - ALL OUT</div>
+    <div onclick="selectSmallerEventNew('21C','21C - FORSAKEN TEMPLE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">21C - FORSAKEN TEMPLE</div>
+    <div onclick="selectSmallerEventNew('22C','22C - TREASURE RAIDERS')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">22C - TREASURE RAIDERS</div>
+    <div onclick="selectSmallerEventNew('23C','23C - KINGDOM OF ROMANCE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">23C - KINGDOM OF ROMANCE</div>
+    <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">24C - DRAGONS CARAVEN</div>
+    <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">25C - FLAMEDRAGON TYRANT</div>
+    <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')" class="dropItem" style="padding:10px; color:#fff; cursor:pointer;">26C - STEEL EDGE</div>
   </div>
 </div>
 
+<!-- HUB MUST BE OUTSIDE myDrop, RIGHT AFTER IT - NO !important -->
+<div id="smallerEventHub" class="tab-content" style="display:none; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
+  <h3 id="smallerEventHubTitle" style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 12px 0;">🎯 SMALLER EVENT GUIDES</h3>
+  <select id="smallerEventMainDrop" style="display:none;">
+    <option value="">-- Select Event --</option>
+  </select>
+  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:2px solid #f5c542;"></select>
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+</div>
 <script>
 function toggleSmallerEventDrop(){
-  const list = document.getElementById('SmallerEventDropList')
+  const list = document.getElementById('smallerEventDropList');
+  if(!list) return;
+  const gd = document.getElementById('guidesDropList');
+  if(gd) gd.style.display='none';
+  const cd = document.getElementById('dropList');
+  if(cd) cd.style.display='none';
+  list.style.display = list.style.display === 'flex' || list.style.display === 'block' ? 'none' : 'flex';
+}
+</script>
+
 <!-- === SMALLER EVENT HUB - HIDDEN BY DEFAULT === -->
 <div id="smallerEventHub" class="tab-content" style="display:none; margin-top:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
   <h3 style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 10px 0;">🎯 SMALLER EVENT GUIDES</h3>
@@ -508,11 +518,9 @@ function toggleSmallerEventDrop(){
   </select>
 
   <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
-</div> <!-- END smallerEventHub - ONLY 1 CLOSE -->
+</div>
 
-<!-- === NOW SCRIPT STARTS AFTER ALL DIVS CLOSED === -->
- <script>
-// === FIXED - WORKS WITH YOUR switchAllTabs ===
+<script>
 function switchAllTabs(val){
   const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
   all.forEach(t=>{
@@ -558,7 +566,7 @@ function selectCat(val,label){
   else switchAllTabs(val);
 }
 
-// === NEEDED FOR 1C-26C SMALLER EVENTS - YOU WERE MISSING THIS ===
+// === NEEDED FOR 1C-26C SMALLER EVENTS ===
 function updateSmallerEventSubDrop(){
  const main=document.getElementById('smallerEventMainDrop');
  const sub=document.getElementById('smallerEventSubDrop');
@@ -566,7 +574,10 @@ function updateSmallerEventSubDrop(){
  if(!main || !sub || !box) return;
  const val=main.value;
  sub.innerHTML=""; box.innerHTML="";
- if(!val || !smallerEventData[val] || !smallerEventData[val].subs){ sub.style.display='none'; return; }
+ if(!val || !smallerEventData[val] || !smallerEventData[val].subs){ 
+   sub.style.display='none'; 
+   return; 
+ }
  sub.style.display='block';
  sub.innerHTML='<option value="">-- Select Sub Category (a-i) --</option>';
  Object.keys(smallerEventData[val].subs).forEach(k=>{
@@ -597,7 +608,7 @@ function showSmallerEventLinks(){
  });
  box.innerHTML=html;
 }
- </script>
+</script>
 <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
  <p class="page-sub">Real game data</p>
