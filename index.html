@@ -2527,9 +2527,15 @@ function showAllGuidesFix(){
 <option value="25C">25C - FLAMEDRAGON TYRANT</option>
 <option value="26C">26C - STEEL EDGE</option>
 </select>
-<select id="smallerEventSubDrop" style="display:none" onchange="showSmallerEventLinks()"></select>
-<div id="smallerEventLinksBox" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
+<div id="smallerEventHub" class="tab-content" style="display:none !important; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
+  <h3 style="color:#ff9500; text-align:center; font-weight:900;">🎯 SMALLER EVENT GUIDES</h3>
+  <select id="smallerEventMainDrop" onchange="updateSmallerEventSubDrop()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #ff9500;">
+    <option value="">-- Select Event 1C-26C --</option>
+  </select>
+  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:1px solid #f5c542; margin-top:10px; display:none;"></select>
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
 </div>
+ </div>
 
 <script>
 const smallerEventData = {
@@ -2901,8 +2907,8 @@ function showSmallerEventLinks(){
 </script>
  <script>
 function switchTab(val){
-  // ALL your main tabs + guides
-  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub'];
+  // ALL your main tabs + guides + smaller event
+  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
 
   allTabs.forEach(t => {
     // Try both id formats: tab-1A and 1A (covers both cases)
@@ -2918,18 +2924,25 @@ function switchTab(val){
   if(val === '3A' && window.initGrid3A) initGrid3A();
   if(val === '4A' && window.initGrid4A) initGrid4A();
 
-  // Close dropdowns
+  // Close dropdowns - INCLUDING SMALLER EVENT
   const dd=document.getElementById('categoryDropdown');
   if(dd) dd.style.display='none';
   const gd=document.getElementById('guidesDropList');
   if(gd) gd.style.display='none';
   const cd=document.getElementById('dropList');
   if(cd) cd.style.display='none';
+  const sd=document.getElementById('smallerEventDropList');
+  if(sd) sd.style.display='none';
 }
 
 // Special function for guides button
 function showAllGuidesFix(){
   switchTab('guidesHub');
+}
+
+// Special function for smaller event button
+function showSmallerEventFix(){
+  switchTab('smallerEventHub');
 }
 
 function selectGuideNew(val,label){
@@ -2941,11 +2954,28 @@ function selectGuideNew(val,label){
     if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
   },200);
 }
+function selectSmallerEventNew(val,label){
+  document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
+  document.getElementById('smallerEventDropList').style.display='none';
+  switchTab('smallerEventHub');
+  setTimeout(()=>{
+    const m=document.getElementById('smallerEventMainDrop');
+    if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
+  },200);
+}
 
+function toggleSmallerEventDrop(){
+  const list = document.getElementById('smallerEventDropList');
+  const guidesList = document.getElementById('guidesDropList');
+  const mainList = document.getElementById('dropList');
+  if(guidesList) guidesList.style.display='none';
+  if(mainList) mainList.style.display='none';
+  list.style.display = list.style.display==='block' ? 'none' : 'flex';
+ 
+}
 function selectCat(val,label){
   document.getElementById('dropLabel').textContent=label;
   document.getElementById('dropList').style.display='none';
   switchTab(val);
 }
  </script>
-</div>
