@@ -467,19 +467,7 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:2px solid #f5c542;"></select>
   <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
 </div>
-<script>
-function toggleSmallerEventDrop(){
-  const list = document.getElementById('smallerEventDropList');
-  if(!list) return;
-  const gd = document.getElementById('guidesDropList');
-  if(gd) gd.style.display='none';
-  const cd = document.getElementById('dropList');
-  if(cd) cd.style.display='none';
-  list.style.display = list.style.display === 'flex' || list.style.display === 'block' ? 'none' : 'flex';
-}
-</script>
-
-<!-- === SMALLER EVENT HUB - HIDDEN BY DEFAULT === -->
+ <!-- === SMALLER EVENT HUB - HIDDEN BY DEFAULT === -->
 <div id="smallerEventHub" class="tab-content" style="display:none; margin-top:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
   <h3 style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 10px 0;">🎯 SMALLER EVENT GUIDES</h3>
   
@@ -519,7 +507,17 @@ function toggleSmallerEventDrop(){
 
   <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
 </div>
-
+<script>
+function toggleSmallerEventDrop(){
+  const list = document.getElementById('smallerEventDropList');
+  if(!list) return;
+  const gd = document.getElementById('guidesDropList');
+  if(gd) gd.style.display='none';
+  const cd = document.getElementById('dropList');
+  if(cd) cd.style.display='none';
+  list.style.display = list.style.display === 'flex' || list.style.display === 'block' ? 'none' : 'flex';
+}
+</script>
 <script>
 function switchAllTabs(val){
   const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
