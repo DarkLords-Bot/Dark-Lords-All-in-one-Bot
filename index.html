@@ -2969,10 +2969,9 @@ function showAllGuidesFix(){
  document.getElementById('guidesHub').style.display='block';
 }
 </script>
-
 <script>
 function switchTab(val){
-  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
+  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub','valuableEventHub'];
   allTabs.forEach(t => {
     let el = document.getElementById('tab-' + t) || document.getElementById(t);
     if(el) el.style.display = 'none';
@@ -2981,14 +2980,36 @@ function switchTab(val){
   if(show) show.style.display = 'block';
   if(val === '3A' && window.initGrid3A) initGrid3A();
   if(val === '4A' && window.initGrid4A) initGrid4A();
+  
+  // HIDE ALL DROPDOWN LISTS - SAME FOR ALL
   const dd=document.getElementById('categoryDropdown'); if(dd) dd.style.display='none';
   const gd=document.getElementById('guidesDropList'); if(gd) gd.style.display='none';
   const cd=document.getElementById('dropList'); if(cd) cd.style.display='none';
   const sd=document.getElementById('smallerEventDropList'); if(sd) sd.style.display='none';
+  const vd=document.getElementById('valuableEventOptions'); if(vd) vd.style.display='none';
+  const vsd=document.getElementById('valuableEventSubOptions'); if(vsd) vsd.style.display='none';
+
+  // FIX: HIDE VALUABLE EVENT BOXES WHEN CLICK CALCULATOR/GUIDES
+  if(['1A','2A','3A','4A','5A','6A','guidesHub'].includes(val)){
+    let vMain = document.getElementById('valuableEventMainDrop');
+    let vSub = document.getElementById('valuableEventSubDrop');
+    let vLinks = document.getElementById('valuableEventLinks');
+    // Don't hide completely if valuable is inside guidesHub, just hide links
+    if(vLinks && val !== 'valuableEventHub') vLinks.innerHTML='';
+  }
 }
 
-function showAllGuidesFix(){ switchTab('guidesHub'); }
-function showSmallerEventFix(){ switchTab('smallerEventHub'); }
+function showAllGuidesFix(){ 
+  // HIDE valuable when showing guides
+  let vOpts=document.getElementById('valuableEventOptions'); if(vOpts) vOpts.style.display='none';
+  let vSubOpts=document.getElementById('valuableEventSubOptions'); if(vSubOpts) vSubOpts.style.display='none';
+  switchTab('guidesHub'); 
+}
+function showSmallerEventFix(){ 
+  let vOpts=document.getElementById('valuableEventOptions'); if(vOpts) vOpts.style.display='none';
+  let vSubOpts=document.getElementById('valuableEventSubOptions'); if(vSubOpts) vSubOpts.style.display='none';
+  switchTab('smallerEventHub'); 
+}
 
 function selectGuideNew(val,label){
   document.getElementById('guidesDropLabel').textContent='📚 '+label;
@@ -3005,7 +3026,7 @@ function selectSmallerEventNew(val,label){
   document.getElementById('smallerEventDropList').style.display='none';
   const hub = document.getElementById('smallerEventHub');
   if(!hub) return;
-  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t => {
+  ['1A','2A','3A','4A','5A','6A','guidesHub','valuableEventHub'].forEach(t => {
     let el = document.getElementById('tab-' + t) || document.getElementById(t);
     if(el) el.style.display = 'none';
   });
@@ -3019,12 +3040,16 @@ function selectSmallerEventNew(val,label){
 
 function toggleSmallerEventDrop(){
   const list = document.getElementById('smallerEventDropList');
-  const guidesList = document.getElementById('guidesDropList');
-  const mainList = document.getElementById('dropList');
-  if(guidesList) guidesList.style.display='none';
-  if(mainList) mainList.style.display='none';
   if(!list) return;
-  list.style.display = (list.style.display==='flex' || list.style.display==='block') ? 'none' : 'flex';
+  // CLICK SHOW / CLICK AGAIN CLOSE - SAME LOGIC
+  if(list.style.display==='flex' || list.style.display==='block'){ list.style.display='none'; return; }
+  // Close others
+  document.getElementById('guidesDropList').style.display='none';
+  document.getElementById('dropList').style.display='none';
+  document.getElementById('categoryDropdown').style.display='none';
+  document.getElementById('valuableEventOptions').style.display='none';
+  document.getElementById('valuableEventSubOptions').style.display='none';
+  list.style.display='flex';
 }
 
 function updateSmallerEventSubDrop(){
@@ -3059,14 +3084,19 @@ function showSmallerEventLinks(){
   });
   box.innerHTML=html;
 } 
-// ===== FIXED VALUABLE EVENT 1D-12D - REPLACE OLD =====
+
+// ===== VALUABLE EVENT 1D-12D - TOGGLE SAME AS ALL =====
 let selectedValuableMain = "";
 let selectedValuableSub = "";
 
 function toggleValuableEventDrop(){
  const el=document.getElementById("valuableEventOptions");
- if(el.style.display==="block"){ el.style.display="none"; return; }
- el.style.display="block";
+ if(!el) return;
+ if(el.style.display==="block"){ el.style.display="none"; return; } // CLICK AGAIN CLOSE
+ // Close others
+ const sd=document.getElementById('smallerEventDropList'); if(sd) sd.style.display='none';
+ const gd=document.getElementById('guidesDropList'); if(gd) gd.style.display='none';
+ el.style.display="block"; // CLICK SHOW
  el.innerHTML="";
  for(let code in valuableEventData){
    let div=document.createElement("div");
@@ -3079,7 +3109,6 @@ function toggleValuableEventDrop(){
 
 function selectValuableEventNew(code){
  selectedValuableMain=code;
- // FIXED ID HERE
  const btn = document.getElementById("valuableMainBtn");
  if(btn) btn.innerHTML = `✅ ${code} - ${valuableEventData[code].name} ▼`;
  document.getElementById("valuableEventOptions").style.display="none";
@@ -3091,14 +3120,11 @@ function updateValuableEventSubDrop(code){
  const subOptions=document.getElementById("valuableEventSubOptions");
  const subSelected=document.getElementById("valuableEventSubSelected");
  const linksBox=document.getElementById("valuableEventLinks");
- 
  if(!subDrop || !subOptions) return;
- 
  subDrop.style.display="block";
  subSelected.innerHTML="👉 Select a-i Category ▼";
  if(linksBox) linksBox.innerHTML="";
  subOptions.innerHTML="";
- 
  for(let sCode in valuableEventData[code].subs){
    let div=document.createElement("div");
    div.className="dropdown-item";
@@ -3106,14 +3132,14 @@ function updateValuableEventSubDrop(code){
    div.onclick=(e)=>{ e.stopPropagation(); selectValuableSubNew(sCode); };
    subOptions.appendChild(div);
  }
- // FIXED - SHOW IT! NOT HIDE!
- subOptions.style.display="block"; // <-- THIS WAS NONE BEFORE!
+ subOptions.style.display="block"; // AUTO OPEN
 }
 
 function toggleValuableEventSubDrop(){
  const el=document.getElementById("valuableEventSubOptions");
  if(!el) return;
- el.style.display=el.style.display==="block"?"none":"block";
+ if(el.style.display==="block"){ el.style.display="none"; return; } // CLICK AGAIN CLOSE
+ el.style.display="block"; // CLICK SHOW
 }
 
 function selectValuableSubNew(sCode){
@@ -3131,15 +3157,18 @@ function showValuableEventLinksNew(mainCode,subCode){
  let html=`<div style="background:#1a1a1a; padding:10px; border-radius:12px; border:2px solid #ffcc00;"><h4 style="color:#ffcc00; margin:0 0 10px 0;">${data.t}</h4>`;
  data.links.forEach(([title,url])=>{
    let isYT=url.includes("youtube");
-   let icon=isYT?"🎥":"📘";
-   html+=`<a href="${url}" target="_blank" style="display:block; margin:6px 0; padding:10px; background:#111; border:1px solid ${isYT?'#ff5555':'#55ff55'}; border-radius:10px; text-decoration:none; color:${isYT?'#ff5555':'#55ff55'}; font-weight:700;">${icon} ${title}</a>`;
+   html+=`<a href="${url}" target="_blank" style="display:block; margin:6px 0; padding:10px; background:#111; border:1px solid ${isYT?'#ff5555':'#55ff55'}; border-radius:10px; text-decoration:none; color:${isYT?'#ff5555':'#55ff55'}; font-weight:700;">${isYT?"🎥":"📘"} ${title}</a>`;
  });
  html+=`</div>`;
  container.innerHTML=html;
 }
+
 function selectCat(val,label){
   document.getElementById('dropLabel').textContent=label;
   document.getElementById('dropList').style.display='none';
+  // HIDE valuable also when select cat
+  let vO=document.getElementById('valuableEventOptions'); if(vO) vO.style.display='none';
+  let vSO=document.getElementById('valuableEventSubOptions'); if(vSO) vSO.style.display='none';
   switchTab(val);
 }
 </script>
