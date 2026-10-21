@@ -474,6 +474,91 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   
   <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
 </div>
+<!-- ========= VALUABLE EVENT 1D-12D - SAME STYLE AS SCREENSHOT ========= -->
+<style>
+/* MATCHES YOUR ORANGE BUTTONS IN SCREENSHOT */
+.valuable-orange-btn{
+background: linear-gradient(180deg, #ffae2b 0%, #ff8a00 100%);
+border: none;
+border-radius: 16px;
+padding: 14px 20px;
+font-weight: 800;
+font-size: 14px;
+color: #000;
+text-align: center;
+width: 100%;
+box-shadow: 0 0 12px rgba(255,140,0,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+cursor: pointer;
+margin: 8px 0;
+letter-spacing: 0.5px;
+}
+.valuable-orange-btn:active{transform: scale(0.98);}
+
+.valuable-black-gold-btn{
+background: #000;
+border: 2px solid #ff9c00;
+border-radius: 16px;
+padding: 14px 20px;
+font-weight: 800;
+font-size: 15px;
+color: #ffb52b;
+text-align: center;
+width: 100%;
+box-shadow: 0 0 15px rgba(255,140,0,0.5);
+cursor: pointer;
+margin: 8px 0;
+}
+
+/* Dropdown items same dark theme */
+#valuableEventOptions .dropdown-item, #valuableEventSubOptions .dropdown-item{
+background: #1a1a1a;
+color: #ffae2b;
+padding: 12px;
+border-bottom: 1px solid #333;
+cursor: pointer;
+font-weight: 600;
+}
+#valuableEventOptions .dropdown-item:hover, #valuableEventSubOptions .dropdown-item:hover{
+background: #ff8a00;
+color: #000;
+}
+#valuableEventOptions, #valuableEventSubOptions{
+background: #111;
+border: 2px solid #ff8a00;
+border-radius: 12px;
+max-height: 300px;
+overflow-y: auto;
+box-shadow: 0 0 15px rgba(255,140,0,0.5);
+}
+.links-container a{
+display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:none; font-weight:700;
+}
+.guide-btn{background:#111; border:1px solid #55ff55; color:#55ff55;}
+.yt-btn{background:#111; border:1px solid #ff5555; color:#ff5555;}
+</style>
+
+<div id="valuableEventHub" style="margin-top:20px;">
+
+<!-- MAIN DROP BUTTON - SAME AS 1C - BEAST WHISPERER -->
+<div class="custom-dropdown" id="valuableEventMainDrop">
+<div class="valuable-orange-btn" onclick="toggleValuableEventDrop()" id="valuableMainBtn">
+🎯 1D - SELECT VALUABLE EVENT ▼
+</div>
+<div class="dropdown-options" id="valuableEventOptions" style="display:none;"></div>
+</div>
+
+<!-- SUB DROP BUTTON - SAME AS SMALLER EVENT GUIDES BLACK/GOLD STYLE -->
+<div class="custom-dropdown" id="valuableEventSubDrop" style="display:none;">
+<div class="valuable-black-gold-btn" id="valuableEventSubSelected" onclick="toggleValuableEventSubDrop()">
+🎯 SMALLER EVENT GUIDES - wait VALUABLE EVENT GUIDES ▼
+</div>
+<div class="dropdown-options" id="valuableEventSubOptions" style="display:none;"></div>
+</div>
+
+<div id="valuableEventLinks" class="links-container" style="margin-top:12px;"></div>
+</div>
+<!-- ========= END ========= -->
+ 
 <script>
 function switchAllTabs(val){
   const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
