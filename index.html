@@ -429,7 +429,7 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <span>▼</span>
   </button>
   <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:100%; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px; left:0; top:100%;">
-        <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">1C - BEAST WHISPERER</div>
+    <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">1C - BEAST WHISPERER</div>
     <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">2C - ARMAMENT COMPETITION</div>
     <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">3C - DEFEAT NEARBY BEAST</div>
     <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">4C - CALL OF THE SOVEREIGN</div>
@@ -455,24 +455,33 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">24C - DRAGONS CARAVEN</div>
     <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">25C - FLAMEDRAGON TYRANT</div>
     <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')" class="dropItem" style="padding:10px; color:#fff; cursor:pointer;">26C - STEEL EDGE</div>
+  </div>
 </div>
-</div>
-  <!-- === SMALLER EVENT HUB - SINGLE - RIGHT ABOVE 1A === -->
-<div id="smallerEventHub" class="tab-content" style="display:none; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
-  <h3 id="smallerEventHubTitle" style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 12px 0;">🎯 SMALLER EVENT GUIDES</h3>
+
+<!-- === SMALLER EVENT HUB - SAME STYLE AS 9D SCREENSHOT === -->
+<div id="smallerEventHub" class="tab-content" style="display:none; margin:15px; background:transparent; border:none; padding:0;">
   
-  <!-- Hidden main value holder -->
+  <!-- Hidden holders -->
   <select id="smallerEventMainDrop" style="display:none;">
     <option value="">-- Select Event --</option>
     <option value="1C">1C</option><option value="2C">2C</option><option value="3C">3C</option><option value="4C">4C</option><option value="5C">5C</option><option value="6C">6C</option><option value="7C">7C</option><option value="8C">8C</option><option value="9C">9C</option><option value="10C">10C</option><option value="11C">11C</option><option value="12C">12C</option><option value="13C">13C</option><option value="14C">14C</option><option value="15C">15C</option><option value="16C">16C</option><option value="17C">17C</option><option value="18C">18C</option><option value="19C">19C</option><option value="20C">20C</option><option value="21C">21C</option><option value="22C">22C</option><option value="23C">23C</option><option value="24C">24C</option><option value="25C">25C</option><option value="26C">26C</option>
   </select>
+
+  <!-- 1C MAIN BUTTON - ORANGE LIKE 9D -->
+  <div id="smallerEventMainDisplay" style="display:none; width:100%; background:linear-gradient(180deg,#ffb347,#ff8c00); color:#000; font-weight:900; padding:14px; border-radius:14px; text-align:center; margin-bottom:8px; border:2px solid #ff9500;">
+    🎯 1C - SMALLER EVENT GUIDES & YT LINKS ▼
+  </div>
+
+  <!-- a-i SUB BUTTON - BLACK + GOLD BORDER LIKE YOUR g) SCREENSHOT -->
+  <div id="smallerEventSubWrapper" style="display:none;">
+    <div id="smallerEventSubSelected" onclick="toggleSmallerEventSubDrop()" style="width:100%; background:#000; color:#ffcc00; font-weight:900; padding:14px; border-radius:14px; text-align:center; border:2px solid #ff9500; cursor:pointer; margin-bottom:8px;">
+      ✅ g) Smart way to play ▼
+    </div>
+    <div id="smallerEventSubOptions" style="display:none; background:#121212; border:2px solid #ff9500; border-radius:14px; padding:6px; max-height:300px; overflow-y:auto; margin-bottom:8px;"></div>
+  </div>
   
-  <!-- THIS IS YOUR SUB CATEGORY - WILL SHOW a-i -->
-  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="display:none; width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:2px solid #f5c542;">
-    <option value="">-- Select Sub Category --</option>
-  </select>
-  
-  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+  <!-- GUIDE BOX - GOLD BORDER LIKE SCREENSHOT -->
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px;"></div>
 </div>
 <!-- ========= VALUABLE EVENT 1D-12D - SAME STYLE AS SCREENSHOT ========= -->
 <style>
@@ -542,7 +551,7 @@ display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:n
 <!-- MAIN DROP BUTTON - SAME AS 1C - BEAST WHISPERER -->
 <div class="custom-dropdown" id="valuableEventMainDrop">
 <div class="valuable-orange-btn" onclick="toggleValuableEventDrop()" id="valuableMainBtn">
-🎯 1D - SELECT VALUABLE EVENT ▼
+🎯 1D - VALUABLE EVENT GUIDE & YT LINKS▼
 </div>
 <div class="dropdown-options" id="valuableEventOptions" style="display:none;"></div>
 </div>
@@ -3001,29 +3010,27 @@ function selectGuideNew(val,label){
     if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
   },200);
 }
-
 function selectSmallerEventNew(val,label){
   document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
   document.getElementById('smallerEventDropList').style.display='none';
-  const hub = document.getElementById('smallerEventHub');
+  const hub=document.getElementById('smallerEventHub');
   if(!hub) return;
-  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t => {
-    let el = document.getElementById('tab-' + t) || document.getElementById(t);
-    if(el) el.style.display = 'none';
+  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t=>{
+    let el=document.getElementById('tab-'+t)||document.getElementById(t);
+    if(el) el.style.display='none';
   });
   hub.style.display='block';
   setTimeout(()=>{
     const m=document.getElementById('smallerEventMainDrop');
-    if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
-    hub.scrollIntoView({behavior:'smooth', block:'start'});
+    if(m){ m.value=val; updateSmallerEventSubDrop(); }
+    hub.scrollIntoView({behavior:'smooth',block:'start'});
   },100);
 }
 
 function toggleSmallerEventDrop(){
-  const list = document.getElementById('smallerEventDropList');
+  const list=document.getElementById('smallerEventDropList');
   if(!list) return;
-  if(list.style.display==='flex' || list.style.display==='block'){ list.style.display='none'; return; }
-  // HIDE OTHER MAIN'S SUB ONLY - NOT MAIN!
+  if(list.style.display==='flex'||list.style.display==='block'){list.style.display='none';return;}
   const gd=document.getElementById('guidesDropList'); if(gd) gd.style.display='none';
   const cd=document.getElementById('dropList'); if(cd) cd.style.display='none';
   const dd=document.getElementById('categoryDropdown'); if(dd) dd.style.display='none';
@@ -3034,36 +3041,54 @@ function toggleSmallerEventDrop(){
 
 function updateSmallerEventSubDrop(){
   const main=document.getElementById('smallerEventMainDrop');
-  const sub=document.getElementById('smallerEventSubDrop');
+  const mainD=document.getElementById('smallerEventMainDisplay');
+  const wrap=document.getElementById('smallerEventSubWrapper');
+  const opts=document.getElementById('smallerEventSubOptions');
+  const sel=document.getElementById('smallerEventSubSelected');
   const box=document.getElementById('smallerEventLinksBox');
-  if(!main||!sub||!box) return;
-  const val=main.value;
-  sub.innerHTML=""; box.innerHTML="";
-  if(!val||typeof smallerEventData==='undefined'||!smallerEventData[val]){sub.style.display='none';return;}
-  sub.style.display='block';
-  sub.innerHTML='<option value="">-- Select Sub Category a-i --</option>';
+  if(!main) return; const val=main.value;
+  if(box) box.innerHTML=""; if(opts) opts.innerHTML="";
+  if(!val||typeof smallerEventData==='undefined'||!smallerEventData[val]){wrap.style.display='none';return;}
+  mainD.style.display='block'; mainD.innerHTML='✅ '+val+' - '+(smallerEventData[val].name||val)+' ▼';
+  wrap.style.display='block'; sel.innerHTML='👉 Select g) Category ▼'; opts.style.display='block';
   Object.keys(smallerEventData[val].subs).forEach(k=>{
-    const o=document.createElement('option'); o.value=k; o.textContent=smallerEventData[val].subs[k].t; sub.appendChild(o);
+    let d=document.createElement('div');
+    d.style.cssText='padding:12px; color:#ffcc00; border-bottom:1px solid #333; cursor:pointer; font-weight:700;';
+    d.textContent=smallerEventData[val].subs[k].t;
+    d.onclick=function(e){ e.stopPropagation(); selectSmallerSubNew(k); };
+    opts.appendChild(d);
   });
 }
 
-function showSmallerEventLinks(){
-  const mval=document.getElementById('smallerEventMainDrop').value;
-  const sval=document.getElementById('smallerEventSubDrop').value;
+function selectSmallerSubNew(sCode){
+  const main=document.getElementById('smallerEventMainDrop').value;
+  document.getElementById('smallerEventSubSelected').innerHTML='✅ '+smallerEventData[main].subs[sCode].t+' ▼';
+  document.getElementById('smallerEventSubOptions').style.display='none';
+  showSmallerEventLinksNew(main,sCode);
+}
+
+function toggleSmallerEventSubDrop(){
+  const el=document.getElementById('smallerEventSubOptions');
+  if(!el) return;
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+function showSmallerEventLinksNew(mval,sval){
   const box=document.getElementById('smallerEventLinksBox');
-  if(!box) return;
-  box.innerHTML=""; if(!mval||!sval) return;
-  if(typeof smallerEventData==='undefined'||!smallerEventData[mval]||!smallerEventData[mval].subs[sval]) return;
+  if(!box) return; box.innerHTML="";
   const info=smallerEventData[mval].subs[sval];
-  let html=`<div style="background:#1e1e1e;padding:10px;border-radius:12px;color:#f5c542;font-weight:900;border:1px solid #f5c542">${info.t}</div>`;
-  info.links.forEach(([title,url])=>{
-    let isYT=url.includes('youtube.com')||url.includes('youtu.be');
-    let bg=isYT?'#2a1515':'#151515';
-    let bd=isYT?'#ff4444':'#f5c542';
-    html+=`<a href="${url}" target="_blank" style="display:flex;justify-content:space-between;align-items:center;background:${bg};border:1px solid ${bd};padding:12px;border-radius:12px;text-decoration:none;color:#fff;margin-top:8px"><div><div style="font-weight:800;font-size:13px">${title}</div><div style="font-size:10px;color:#888;word-break:break-all">${url}</div></div><span style="color:${bd};font-weight:900;font-size:10px">${isYT?'▶ YOUTUBE':'↗ GUIDE'}</span></a>`;
+  let html='<div style="background:#0a0a0a; padding:12px; border-radius:14px; border:2px solid #ffcc00;"><h4 style="color:#ffcc00; margin:0 0 12px 4px; font-weight:900; font-size:16px;">'+info.t+'</h4>';
+  info.links.forEach(function(x){
+    let title=x[0], url=x[1], isYT=url.includes('youtube')||url.includes('youtu.be');
+    html+='<a href="'+url+'" target="_blank" style="display:block; margin:8px 0; padding:12px; background:#111; border:1.5px solid '+(isYT?'#ff4444':'#2eff7b')+'; border-radius:12px; text-decoration:none; color:'+(isYT?'#ff5555':'#2eff7b')+'; font-weight:800;">'+(isYT?'🎥 ':'📘 ')+title+'</a>';
   });
-  box.innerHTML=html;
-} 
+  html+='</div>'; box.innerHTML=html;
+}
+function showSmallerEventLinks(){
+  const m=document.getElementById('smallerEventMainDrop').value;
+  const s=document.getElementById('smallerEventSubSelected');
+  if(m&&s) return;
+ }
 
 // ===== VALUABLE EVENT 1D-12D =====
 let selectedValuableMain = "";
