@@ -565,7 +565,6 @@ display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:n
 </div>
 
 <div id="valuableEventLinks" class="links-container" style="margin-top:12px;"></div>
-</div>
 <!-- ========= END ========= -->
  <div class="myDrop" style="position:relative; width:100%; margin-top:8px;">
   <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleMajorEventDrop()">
@@ -598,16 +597,50 @@ display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:n
   </div>
   <div id="majorEventLinksBox" style="margin-top:8px;"></div>
 </div>
+ <script>
+ function toggleMajorEventDrop(){
+  const list = document.getElementById('majorEventDropList');
+  if(!list) return;
+  if(list.style.display === 'flex' || list.style.display === 'block'){
+    list.style.display = 'none';
+    return;
+  }
+  // hide other dropdowns
+  const vd = document.getElementById('valuableEventOptions'); if(vd) vd.style.display='none';
+  const vsd = document.getElementById('valuableEventSubOptions'); if(vsd) vsd.style.display='none';
+  const sd = document.getElementById('smallerEventDropList'); if(sd) sd.style.display='none';
+  
+  list.style.display = 'flex';
+}
+
+function selectMajorEventNew(val,label){
+  document.getElementById('majorEventDropLabel').innerHTML = label + ' <span>▼</span>';
+  document.getElementById('majorEventDropList').style.display = 'none';
+  const hub = document.getElementById('majorEventHub');
+  hub.style.display = 'block';
+  
+  // set main value
+  const main = document.getElementById('majorEventMainDrop');
+  if(main){ 
+    main.value = val; 
+    document.getElementById('majorEventMainDisplay').style.display='block';
+    document.getElementById('majorEventMainDisplay').innerText = '✅ ' + label;
+    document.getElementById('majorEventSubWrapper').style.display='block';
+    if(typeof updateMajorEventSubDrop === 'function') updateMajorEventSubDrop();
+  }
+  hub.scrollIntoView({behavior:'smooth'});
+}
+ </script>
 <script>
 function switchAllTabs(val){
-  const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
+  const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub','majorEventHub'];
   all.forEach(t=>{
     let el=document.getElementById(t) || document.getElementById('tab-'+t);
     if(el) el.style.display='none';
   });
   let show=document.getElementById(val) || document.getElementById('tab-'+val);
   if(show) show.style.display='block';
-  
+} // <-- THIS } was missing
 
 function showAllGuidesFix(){
   switchAllTabs('guidesHub');
@@ -630,12 +663,9 @@ function selectCat(val,label){
   if(dl) dl.textContent=label;
   const ddl=document.getElementById('dropList');
   if(ddl) ddl.style.display='none';
-  const hub=document.getElementById('guidesHub');
-  if(hub) hub.style.display='none';
   if(typeof switchTab==='function') switchTab(val);
   else switchAllTabs(val);
 }
-
 </script>
 <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
