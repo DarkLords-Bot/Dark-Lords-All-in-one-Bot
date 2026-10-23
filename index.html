@@ -372,7 +372,8 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
   background:rgba(8,12,22,0.85);
   backdrop-filter:blur(12px);
   padding:12px 0 14px 0;
-  margin:0 -18px 20px -18px;
+  margin:0 -18px 12px -18px;
+display:flex;flex-direction:column;gap:10px;
   padding-left:18px;padding-right:18px;
   border-bottom:1px solid rgba(255,255,255,0.06);
 }
@@ -418,9 +419,6 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     </div>
   </div>
 </div>
-
-</div> <!-- close wrap -->
-<!-- MAIN GUIDES BUTTON - 100% OK -->
 <div class="myDrop" style="margin-top:12px">
   <button class="myDropBtn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
     <span id="guidesDropLabel">📚 GUIDES</span>
