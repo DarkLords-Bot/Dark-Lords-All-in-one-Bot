@@ -566,128 +566,90 @@ display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:n
 
 <div id="valuableEventLinks" class="links-container" style="margin-top:12px;"></div>
 <!-- ========= END ========= -->
- <div class="myDrop" style="position:relative; width:100%; margin-top:8px;">
-  <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleMajorEventDrop()">
-    <span id="majorEventDropLabel">🏆 MAJOR EVENTS</span><span>▼</span>
-  </button>
-  <div id="majorEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:100%; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px; left:0; top:100%;">
-    <div onclick="selectMajorEventNew('bear-trap','🐻 Bear Trap')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🐻 BEAR TRAP</div>
-    <div onclick="selectMajorEventNew('kingdom-transfer','🧳 Kingdom Transfer')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🧳 KINGDOM TRANSFER</div>
-    <div onclick="selectMajorEventNew('alliance-mobilization','🚩 Alliance Mobilization')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🚩 ALLIANCE MOBILIZATION</div>
-    <div onclick="selectMajorEventNew('kvk','⚔️ Kingdom of Power KvK')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">⚔️ KINGDOM OF POWER - KvK</div>
-    <div onclick="selectMajorEventNew('mystic-trials','✨ Mystic Trials')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">✨ MYSTIC TRIALS</div>
-    <div onclick="selectMajorEventNew('tri-alliance','⛩️ Tri-Alliance Clash')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">⛩️ TRI-ALLIANCE CLASH</div>
-    <div onclick="selectMajorEventNew('eternia-reach','⛏️ Eternia Reach')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">⛏️ ETERNIA REACH</div>
-    <div onclick="selectMajorEventNew('swordland','🏳️ Swordland Showdown')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🏳️ SWORDLAND SHOWDOWN</div>
-    <div onclick="selectMajorEventNew('castle-battle','🏰 Castle Battle Tactics')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🏰 CASTLE BATTLE</div>
-    <div onclick="selectMajorEventNew('vikings','🪓 Vikings Vengeance')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🪓 VIKINGS VENGEANCE</div>
-    <div onclick="selectMajorEventNew('hall-governors','🏛️ Hall of Governors')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🏛️ HALL OF GOVERNORS</div>
-    <div onclick="selectMajorEventNew('alliance-champ','🥇 Alliance Championship')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🥇 ALLIANCE CHAMPIONSHIP</div>
-    <div onclick="selectMajorEventNew('alliance-brawl','🥊 Alliance Brawl')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">🥊 ALLIANCE BRAWL</div>
-    <div onclick="selectMajorEventNew('strongest-gov','👑 Strongest Governor')" class="dropItem" style="padding:10px; color:#fff; cursor:pointer;">👑 STRONGEST GOVERNOR</div>
-  </div>
-</div>
-
-<div id="majorEventHub" style="display:none; margin-top:12px;">
-  <select id="majorEventMainDrop" style="display:none;"></select>
-  <div id="majorEventMainDisplay" style="display:none; background:linear-gradient(180deg,#ffb347,#ff8c00); color:#000; font-weight:900; padding:14px; border-radius:14px; text-align:center; border:2px solid #ff9500; margin-bottom:8px;"></div>
-  <div id="majorEventSubWrapper" style="display:none;">
-    <div id="majorEventSubSelected" onclick="toggleMajorEventSubDrop()" style="background:#000; color:#ffcc00; font-weight:900; padding:14px; border-radius:14px; text-align:center; border:2px solid #ff9500; cursor:pointer; margin-bottom:8px;">Select a-i ▼</div>
-    <div id="majorEventSubOptions" style="display:none; background:#121212; border:2px solid #ff9500; border-radius:14px; padding:6px; max-height:300px; overflow-y:auto;"></div>
-  </div>
-  <div id="majorEventLinksBox" style="margin-top:8px;"></div>
-</div>
- <script>
- function toggleMajorEventDrop(){
-  const list = document.getElementById('majorEventDropList');
-  if(!list) return;
-  if(list.style.display === 'flex' || list.style.display === 'block'){
-    list.style.display = 'none';
-    return;
-  }
-  // hide other dropdowns
-  const vd = document.getElementById('valuableEventOptions'); if(vd) vd.style.display='none';
-  const vsd = document.getElementById('valuableEventSubOptions'); if(vsd) vsd.style.display='none';
-  const sd = document.getElementById('smallerEventDropList'); if(sd) sd.style.display='none';
-  
-  list.style.display = 'flex';
-}
-
-function selectMajorEventNew(val,label){
-  document.getElementById('majorEventDropLabel').innerHTML = label + ' <span>▼</span>';
-  document.getElementById('majorEventDropList').style.display = 'none';
-  const hub = document.getElementById('majorEventHub');
-  hub.style.display = 'block';
-  
-  // set main value
-  const main = document.getElementById('majorEventMainDrop');
-  if(main){ 
-    main.value = val; 
-    document.getElementById('majorEventMainDisplay').style.display='block';
-    document.getElementById('majorEventMainDisplay').innerText = '✅ ' + label;
-    document.getElementById('majorEventSubWrapper').style.display='block';
-    if(typeof updateMajorEventSubDrop === 'function') updateMajorEventSubDrop();
-  }
-  hub.scrollIntoView({behavior:'smooth'});
-}
- </script>
 <script>
-function switchAllTabs(val){
-  const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub','majorEventHub'];
-  all.forEach(t=>{
-    let el = document.getElementById(t) || document.getElementById('tab-'+t);
+function switchTab(val){
+  // ALL your main tabs + guides + smaller event
+  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
+
+  allTabs.forEach(t => {
+    // Try both id formats: tab-1A and 1A (covers both cases)
+    let el = document.getElementById('tab-' + t) || document.getElementById(t);
     if(el) el.style.display = 'none';
   });
-  let show = document.getElementById(val) || document.getElementById('tab-'+val);
+
+  // Show selected - try both formats
+  let show = document.getElementById('tab-' + val) || document.getElementById(val);
   if(show) show.style.display = 'block';
+
+  // Init when opening calculators
+  if(val === '3A' && window.initGrid3A) initGrid3A();
+  if(val === '4A' && window.initGrid4A) initGrid4A();
+
+  // Close dropdowns - INCLUDING SMALLER EVENT
+  const dd=document.getElementById('categoryDropdown');
+  if(dd) dd.style.display='none';
+  const gd=document.getElementById('guidesDropList');
+  if(gd) gd.style.display='none';
+  const cd=document.getElementById('dropList');
+  if(cd) cd.style.display='none';
+  const sd=document.getElementById('smallerEventDropList');
+  if(sd) sd.style.display='none';
 }
 
+// Special function for guides button
 function showAllGuidesFix(){
-  switchAllTabs('guidesHub');
+  switchTab('guidesHub');
+}
+
+// Special function for smaller event button
+function showSmallerEventFix(){
+  switchTab('smallerEventHub');
 }
 
 function selectGuideNew(val,label){
-  const lbl = document.getElementById('guidesDropLabel');
-  if(lbl) lbl.textContent = '📚 ' + label;
-  const list = document.getElementById('guidesDropList');
-  if(list) list.style.display = 'none';
-  showAllGuidesFix();
+  document.getElementById('guidesDropLabel').textContent='📚 '+label;
+  document.getElementById('guidesDropList').style.display='none';
+  switchTab('guidesHub');
   setTimeout(()=>{
-    const m = document.getElementById('mainDrop');
-    if(m){ 
-      m.value = val; 
-      if(typeof updateSubDrop === 'function') updateSubDrop(); 
-    }
+    const m=document.getElementById('mainDrop');
+    if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
   },200);
 }
+function selectSmallerEventNew(val,label){
+  document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
+  document.getElementById('smallerEventDropList').style.display='none';
+  
+  const hub = document.getElementById('smallerEventHub');
+  hub.style.display='block';
+  
+  // Hide all other main tabs
+  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t => {
+    let el = document.getElementById('tab-' + t) || document.getElementById(t);
+    if(el) el.style.display = 'none';
+  });
 
-function selectCat(val,label){
-  const dl = document.getElementById('dropLabel');
-  if(dl) dl.textContent = label;
-  const ddl = document.getElementById('dropList');
-  if(ddl) ddl.style.display = 'none';
-  if(typeof switchTab === 'function') switchTab(val);
-  else switchAllTabs(val);
+  setTimeout(()=>{
+    const m=document.getElementById('smallerEventMainDrop');
+    if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
+    // Scroll to hub so user sees it right below button
+    hub.scrollIntoView({behavior:'smooth', block:'start'});
+  },100);
 }
-
-// Extra fix - make dropdowns toggle on click without breaking
-document.addEventListener('DOMContentLoaded', ()=>{
-  const dropLabel = document.getElementById('dropLabel');
-  const dropList = document.getElementById('dropList');
-  if(dropLabel && dropList){
-    dropLabel.addEventListener('click', ()=> {
-      dropList.style.display = dropList.style.display === 'block' ? 'none' : 'block';
-    });
-  }
-  const guidesLabel = document.getElementById('guidesDropLabel');
+function toggleSmallerEventDrop(){
+  const list = document.getElementById('smallerEventDropList');
   const guidesList = document.getElementById('guidesDropList');
-  if(guidesLabel && guidesList){
-    guidesLabel.addEventListener('click', ()=> {
-      guidesList.style.display = guidesList.style.display === 'block' ? 'none' : 'block';
-    });
-  }
-});
-</script>
+  const mainList = document.getElementById('dropList');
+  if(guidesList) guidesList.style.display='none';
+  if(mainList) mainList.style.display='none';
+  list.style.display = list.style.display==='block' ? 'none' : 'flex';
+ 
+}
+function selectCat(val,label){
+  document.getElementById('dropLabel').textContent=label;
+  document.getElementById('dropList').style.display='none';
+  switchTab(val);
+}
+ </script>
 <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
  <p class="page-sub">Real game data</p>
