@@ -376,142 +376,324 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
    <div button class="btn" blue onclick="selectCat('4A','🐾 PETS CALCULATOR - Gen 1 to Gen 7')">🐾 PETS CALCULATOR</div>
   </div>
 </div>
-
-<!-- MAIN GUIDES BUTTON - 100% OK -->
+<!-- MAIN GUIDES BUTTON -->
 <div class="myDrop">
-  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
+  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'">
     <span id="guidesDropLabel">📚 GUIDES</span>
     <span>▼</span>
   </button>
-  <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
-    <div onclick="selectGuideNew('1B','Building Guides')">1B-Building Guides</div>
-    <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
-    <div onclick="selectGuideNew('3B','Pets')">3B-Pets</div>
-    <div onclick="selectGuideNew('4B','Heros')">4B-Heros</div>
-    <div onclick="selectGuideNew('5B','Hero Gears')">5B-Hero Gears</div>
-    <div onclick="selectGuideNew('6B','Troops')">6B-Troops</div>
-    <div onclick="selectGuideNew('7B','Governor Gear')">7B-Governor Gear</div>
-    <div onclick="selectGuideNew('8B','Beginners Guide')">8B-Beginners Guide</div>
-    <div onclick="selectGuideNew('9B','F2P Guide')">9B-F2P Guide</div>
-    <div onclick="selectGuideNew('10B','P2W Guides')">10B-P2W Guides</div>
-    <div onclick="selectGuideNew('11B','Farm Account Guide')">11B-Farm Account Guide</div>
-    <div onclick="selectGuideNew('12B','Alliance Matters')">12B-Alliance Matters</div>
+  <div id="guidesDropList" class="myDropList" style="display:none;max-height:320px;overflow-y:auto;background:#0e0e0e;border:1px solid #2a2a2a;border-radius:12px">
+    <div onclick="selectGuideNew('1B','General Guides')" style="color:#fff;padding:10px;border-bottom:1px solid #222">1B-General Guides</div>
+    <div onclick="selectGuideNew('2B','Oasis Island')" style="color:#fff;padding:10px;border-bottom:1px solid #222">2B-Oasis Island</div>
+    <div onclick="selectGuideNew('3B','Pets Gen1-7')" style="color:#fff;padding:10px;border-bottom:1px solid #222">3B-Pets Gen1-7</div>
+    <div onclick="selectGuideNew('4B','Heros Gen1-8')" style="color:#fff;padding:10px;border-bottom:1px solid #222">4B-Heros Gen1-8</div>
+    <div onclick="selectGuideNew('5B','Hero Gears')" style="color:#fff;padding:10px;border-bottom:1px solid #222">5B-Hero Gears</div>
+    <div onclick="selectGuideNew('6B','Troops')" style="color:#fff;padding:10px;border-bottom:1px solid #222">6B-Troops</div>
+    <div onclick="selectGuideNew('7B','Governor Gear & Charm')" style="color:#fff;padding:10px;border-bottom:1px solid #222">7B-Governor Gear</div>
+    <div onclick="selectGuideNew('8B','Beginners Guide')" style="color:#fff;padding:10px;border-bottom:1px solid #222">8B-Beginners Guide</div>
+    <div onclick="selectGuideNew('9B','F2P guide')" style="color:#fff;padding:10px;border-bottom:1px solid #222">9B-F2P guide</div>
+    <div onclick="selectGuideNew('10B','P2W Guides')" style="color:#fff;padding:10px;border-bottom:1px solid #222">10B-P2W Guides</div>
+    <div onclick="selectGuideNew('11B','Farm Account guide')" style="color:#fff;padding:10px;border-bottom:1px solid #222">11B-Farm Account</div>
+    <div onclick="selectGuideNew('12B','Alliance Matters')" style="color:#fff;padding:10px">12B-Alliance Matters</div>
   </div>
 </div>
 
-<!-- GUIDES HUB - 100% OK -->
+<!-- GUIDES HUB -->
 <div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px">
   <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
     <select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:10px">
-      <option value="">-- Select --</option>
-      <option value="1B">1B-Building Guides</option>
+      <option value="">-- Select Category --</option>
+      <option value="1B">1B-General Guides</option>
       <option value="2B">2B-Oasis Island</option>
-      <option value="3B">3B-Pets</option>
-      <option value="4B">4B-Heros</option>
+      <option value="3B">3B-Pets Gen1-7</option>
+      <option value="4B">4B-Heros Gen1-8</option>
       <option value="5B">5B-Hero Gears</option>
       <option value="6B">6B-Troops</option>
-      <option value="7B">7B-Governor Gear</option>
+      <option value="7B">7B-Governor Gear & Charm</option>
       <option value="8B">8B-Beginners Guide</option>
-      <option value="9B">9B-F2P Guide</option>
+      <option value="9B">9B-F2P guide</option>
       <option value="10B">10B-P2W Guides</option>
-      <option value="11B">11B-Farm Account Guide</option>
-      <option value="12B">12B-Alliance Matters</option>
+      <option value="11B">11B-Farm Account guide</option>
+      <option value="12B">12B-Why joining Alliance Matters</option>
     </select>
     <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
 </div>
- <script>
-// ==== GUIDES DATA - EDIT HERE IF NEEDED ====
-const guidesData = {
-  "1B": ["Town Hall", "Resource Buildings", "Military Buildings", "Wall & Traps"],
-  "2B": ["Oasis Overview", "Oasis Rewards", "Oasis Tips"],
-  "3B": ["Pets Overview", "Pet Skills", "Pet Upgrades"],
-  "4B": ["Hero List", "Hero Skills", "Best Pairs"],
-  "5B": ["Gear Overview", "Gear Stats", "Gear Enhance"],
-  "6B": ["Troop Types", "Troop Counters", "March Setup"],
-  "7B": ["Governor Gear Set", "Governor Talents", "Governor Build"],
-  "8B": ["Starter Tips", "Day 1-7 Guide", "Common Mistakes"],
-  "9B": ["F2P Tips", "F2P Heroes", "F2P Events"],
-  "10B": ["P2W Packs", "Best Value", "Spending Guide"],
-  "11B": ["Farm Setup", "Farm Tips", "Farm Protection"],
-  "12B": ["Alliance Tech", "Alliance Wars", "Alliance Help"]
-};
 
-const guidesLinks = {
-  "Town Hall": [{title:"Town Hall Guide", url:"https://darklords-bot.github.io/"}],
-  // Add your real YT / sheet links here
+<script>
+const data={
+"1B":{name:"General Guides", subs:{
+"a":{t:"a) All Buildings General Information", links:[
+["kingshot.net - Buildings DB","https://kingshot.net/database/buildings"],
+["kingshotdata.com - Buildings","https://kingshotdata.com/database/buildings"],
+["kingshotguide.org - Building Calc","https://kingshotguide.org/building-calculator"]
+]},
+"b":{t:"b) Building Requirements Resources", links:[
+["kingshotguide.org - Upgrade Costs","https://kingshotguide.org/building-calculator"],
+["heaven-guardian.com - Building Req","https://heaven-guardian.com/kingshot-building-guide"]
+]},
+"c":{t:"c) Truegold Requirements TG1-TG10", links:[
+["kingshot.net - Truegold Chart","https://kingshot.net/database/truegold-chart"],
+["heaven-guardian.com - TG1-TG8 Costs","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
+["kingshotdata.com - Truegold DB","https://kingshotdata.com/database/truegold"]
+]},
+"d1":{t:"d) Tempered Truegold TG5-TG10", links:[
+["boostbot.org - TG10 Tempered Costs","https://boostbot.org/kingshot-tg10-tempered-truegold"],
+["kingshotdata.com - Tempered Truegold","https://kingshotdata.com/database/tempered-truegold"]
+]},
+"d2":{t:"e) Advanced Truegold Requirements", links:[
+["kingshotmastery.com - Truegold Guide","https://kingshotmastery.com/guides/truegold"],
+["kingshotguide.org - TG Levels","https://kingshotguide.org/truegold-calculator"]
+]}
+}},
+"2B":{name:"Oasis Island", subs:{
+"a":{t:"a) All Building Informations", links:[
+["kingshot.net - Oasis Buildings","https://kingshot.net/database/oasis-island"],
+["kingshotdata.com - Oasis DB","https://kingshotdata.com/database/oasis-island"]
+]},
+"b":{t:"b) Building Upgrade Requirements and bonuses", links:[
+["kingshotguide.org - Oasis Bonuses","https://kingshotguide.org/oasis-island-guide"],
+["kingshot Fandom - Oasis Island","https://kingshot.fandom.com/wiki/Oasis_Island"]
+]}
+}},
+"3B":{name:"Pets Gen1-7", subs:{
+"a":{t:"a) General Information All Pets Gen1-7", links:[
+["kingshot.net - Pets Database","https://kingshot.net/database/pets"],
+["kingshotguide.com - Pets DB","https://kingshotguide.com/pets"],
+["kingshotdata.com - Pets","https://kingshotdata.com/database/pets"]
+]},
+"b":{t:"b) Pets Requirements, Advancements, Bonuses", links:[
+["kingshotmastery.com - Pets Guide","https://kingshotmastery.com/guides/pets"],
+["kingshotguide.org - Pet Upgrade","https://kingshotguide.org/pet-calculator"]
+]}
+}},
+"4B":{name:"Heros Gen1-8", subs:{
+"a":{t:"a) Heros Information Gen1-8", links:[
+["kingshotdata.com - Heroes","https://kingshotdata.com/database/heroes"],
+["kingshot.net - Heroes DB","https://kingshot.net/database/heroes"],
+["kingshotmastery.com - Tier List Gen1-8","https://kingshotmastery.com/hero-tier-list"]
+]},
+"b":{t:"b) Heros Power XP Upgrade Requirements", links:[
+["heaven-guardian.com - Hero Upgrade","https://heaven-guardian.com/kingshot-hero-upgrade-guide"],
+["kingshotguide.org - Hero XP","https://kingshotguide.org/hero-calculator"]
+]},
+"c":{t:"c) Heros Conquest and Expedition skills books", links:[
+["kingshotmastery.com - Skills Guide","https://kingshotmastery.com/guides/hero-skills"],
+["kingshot.net - Conquest Skills","https://kingshot.net/guides/conquest-skills"]
+]},
+"d":{t:"d) Heros Exclusive Gear", links:[
+["kingshot.net - Exclusive Gear DB","https://kingshot.net/database/exclusive-gear"],
+["kingshotdata.com - Exclusive Gear","https://kingshotdata.com/database/exclusive-gear"]
+]}
+}},
+"5B":{name:"Hero Gears", subs:{
+"a":{t:"a) Infantry Hero Gears", links:[
+["kingshot.net - Infantry Gear","https://kingshot.net/database/hero-gear/infantry"],
+["kingshotmastery.com - Gear Guide","https://kingshotmastery.com/guides/hero-gear"]
+]},
+"b":{t:"b) Infantry Hero Gear Upgrades", links:[
+["heaven-guardian.com - Infantry Gear Upgrade","https://heaven-guardian.com/kingshot-hero-gear-upgrade"],
+["grindnstrat.com - Gear Enhance","https://grindnstrat.com/kingshot-hero-gear-guide"]
+]},
+"c":{t:"c) Infantry Best Heros to use with Gears", links:[
+["kingshotmastery.com - Best Infantry Heros","https://kingshotmastery.com/guides/infantry-heroes-pvp"],
+["kingshot.net - Bear Trap Best","https://kingshot.net/guides/bear-hunt-lineups"]
+]},
+"d":{t:"d) Cavalry Hero Gears", links:[
+["kingshot.net - Cavalry Gear","https://kingshot.net/database/hero-gear/cavalry"],
+["kingshotguide.org - Cavalry Gear","https://kingshotguide.org/hero-gear-cavalry"]
+]},
+"e":{t:"e) Cavalry Hero Gear Upgrades", links:[
+["heaven-guardian.com - Cavalry Gear","https://heaven-guardian.com/kingshot-cavalry-gear-upgrade"],
+["kingshotdata.com - Gear Upgrades","https://kingshotdata.com/database/hero-gear-upgrades"]
+]},
+"f":{t:"f) Cavalry Best Heros to use with Gears", links:[
+["kingshotmastery.com - Cavalry Rally Guide","https://kingshotmastery.com/guides/cavalry-rally"],
+["kingshot.net - KvK Best Heros","https://kingshot.net/guides/kvk-hero-lineups"]
+]},
+"g":{t:"g) Archer Hero Gears", links:[
+["kingshot.net - Archer Gear","https://kingshot.net/database/hero-gear/archer"],
+["kingshotmastery.com - Archer Gear","https://kingshotmastery.com/guides/archer-gear"]
+]},
+"h":{t:"h) Archer Hero Gear Upgrades", links:[
+["grindnstrat.com - Archer Upgrades","https://grindnstrat.com/kingshot-hero-gear-guide"],
+["kingshotguide.org - Archer Gear Calc","https://kingshotguide.org/hero-gear-calculator"]
+]},
+"i":{t:"i) Archer Best Heros to use with Gears", links:[
+["kingshotmastery.com - Archer Bear Hunt","https://kingshotmastery.com/guides/bear-hunt"],
+["kingshot.net - Swordland Best Heros","https://kingshot.net/guides/swordland-showdown"]
+]}
+}},
+"6B":{name:"Troops", subs:{
+"a":{t:"a) Infantry Troops", links:[
+["kingshot.net - Infantry Troops","https://kingshot.net/database/troops/infantry"],
+["kingshotmastery.com - Troops Guide","https://kingshotmastery.com/guides/troops"]
+]},
+"b":{t:"b) Infantry Troops Upgrades Requirements", links:[
+["kingshotguide.org - Infantry Tier","https://kingshotguide.org/troop-calculator"],
+["heaven-guardian.com - Infantry T1-TG10","https://heaven-guardian.com/kingshot-infantry-guide"]
+]},
+"c":{t:"c) Cavalry Troops", links:[
+["kingshot.net - Cavalry Troops","https://kingshot.net/database/troops/cavalry"],
+["kingshotdata.com - Cavalry DB","https://kingshotdata.com/database/cavalry-troops"]
+]},
+"d":{t:"d) Cavalry Troops Upgrades Requirements", links:[
+["kingshotguide.org - Cavalry Upgrades","https://kingshotguide.org/cavalry-upgrade"],
+["heaven-guardian.com - Cavalry Tiers","https://heaven-guardian.com/kingshot-cavalry-guide"]
+]},
+"e":{t:"e) Archer Troops", links:[
+["kingshot.net - Archer Troops","https://kingshot.net/database/troops/archer"],
+["kingshotdata.com - Archer Troops","https://kingshotdata.com/database/archer-troops"]
+]},
+"f":{t:"f) Archer Troops Upgrade Requirements", links:[
+["kingshotguide.org - Archer Upgrades","https://kingshotguide.org/archer-upgrade"],
+["kingshotmastery.com - Archer Troops","https://kingshotmastery.com/guides/archer-troops"]
+]},
+"g":{t:"g) Troops Formations", links:[
+["kingshotmastery.com - Formations","https://kingshotmastery.com/guides/troop-formations"],
+["grindnstrat.com - Best Formations All Battles","https://grindnstrat.com/kingshot-troop-setup-guide"],
+["kingshot.net - Formation Guide","https://kingshot.net/guides/troop-formations"]
+]}
+}},
+"7B":{name:"Governor Gear & Charm", subs:{
+"a":{t:"a) Governor gear & charm general information", links:[
+["heaven-guardian.com - Governor Gear","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"],
+["kingshot.net - Governor Gear DB","https://kingshot.net/database/governor-gear"]
+]},
+"b":{t:"b) Governor Gear & Charm Upgrades", links:[
+["heaven-guardian.com - Governor Charms","https://heaven-guardian.com/kingshot-governor-charms-guide-levels-priority"],
+["kingshotmastery.com - Charms Guide","https://kingshotmastery.com/guides/charms"],
+["kingshotdata.com - Governor Gear Upgrades","https://kingshotdata.com/database/governor-gear"]
+]}
+}},
+"8B":{name:"Beginners Guide", subs:{
+"a":{t:"a) Beginners guide", links:[
+["kingshot.net - Beginner Guide","https://kingshot.net/guides/beginner-guide"],
+["kingshotmastery.com - Complete Beginner","https://kingshotmastery.com/guides/beginner-guide"],
+["kingshotguide.org - Starter Guide","https://kingshotguide.org/guides/beginner-tips"]
+]},
+"b":{t:"b) What mistake beginners do?", links:[
+["kingshot.net - 10 Mistakes to Avoid","https://kingshot.net/guides/beginner-mistakes"],
+["kingshotmastery.com - Resource Waste Mistakes","https://kingshotmastery.com/guides/resource-management"],
+["kingshotdata.com - Hero Upgrade Mistakes","https://kingshotdata.com/database/heroes"],
+["kingshot.net - Wrong Hero Gear Upgrades","https://kingshot.net/database/hero-gear"],
+["kingshotguide.org - Troop Training Mistakes","https://kingshotguide.org/guides/troop-guide"],
+["kingshotmastery.com - Governor Gear Mistakes","https://kingshotmastery.com/guides/governor-gear"],
+["kingshot Fandom - Farming Mistakes","https://kingshot.fandom.com/wiki/Resources"],
+["kingshot.net - Chief Gear Mistakes","https://kingshot.net/database/chief-gear"],
+["kingshotdata.com - Building Upgrade Order","https://kingshotdata.com/database/buildings"],
+["kingshotguide.org - Beginner Pitfalls","https://kingshotguide.org/guides/common-mistakes"]
+]},
+"c":{t:"c) Simple Plan to play smart in kingshot", links:[
+["kingshot.net - Smart Play Guide","https://kingshot.net/guides/smart-play"],
+["kingshotmastery.com - Tips & Tricks","https://kingshotmastery.com/guides/tips-and-tricks"],
+["kingshotguide.org - Pro Strategy","https://kingshotguide.org/guides/pro-tips"],
+["kingshotdata.com - Efficient Growth","https://kingshotdata.com/guides/efficient-growth"],
+["kingshot Fandom - Beginner Strategy","https://kingshot.fandom.com/wiki/Beginner_Guide"]
+]}
+}},
+"9B":{name:"F2P guide", subs:{
+"a":{t:"a) F2P kingshot guide", links:[
+["kingshot.net - F2P Complete Guide","https://kingshot.net/guides/f2p-guide"],
+["kingshotmastery.com - Free to Play Guide","https://kingshotmastery.com/guides/f2p-guide"]
+]},
+"b":{t:"b) Smart ways to grow as F2P", links:[
+["kingshotguide.org - F2P Growth Strategy","https://kingshotguide.org/guides/f2p-growth"],
+["kingshotmastery.com - F2P Resource Management","https://kingshotmastery.com/guides/f2p-resources"],
+["kingshot.net - F2P Hero Priority","https://kingshot.net/guides/f2p-heroes"],
+["kingshotdata.com - F2P Efficiency Calculator","https://kingshotdata.com/calculators/f2p-efficiency"]
+]}
+}},
+"10B":{name:"P2W Guides", subs:{
+"a":{t:"a) P2W kingshot guide", links:[
+["kingshot.net - P2W Guide","https://kingshot.net/guides/p2w-guide"],
+["kingshotmastery.com - P2W Investment Guide","https://kingshotmastery.com/guides/p2w-guide"]
+]},
+"b":{t:"b) Smart ways to grow as P2W", links:[
+["kingshotguide.org - P2W Spending Guide","https://kingshotguide.org/guides/p2w-spending"],
+["kingshotmastery.com - Best Packs Value","https://kingshotmastery.com/guides/best-value-packs"],
+["kingshot.net - VIP & Spending Strategy","https://kingshot.net/guides/vip-guide"],
+["kingshotdata.com - Top-up Efficiency","https://kingshotdata.com/guides/spending-efficiency"]
+]}
+}},
+"11B":{name:"Farm Account guide", subs:{
+"a":{t:"a) Why Farm Account guide?", links:[
+["kingshot.net - Farm Account Importance","https://kingshot.net/guides/farm-accounts"],
+["kingshotmastery.com - Why You Need Farm","https://kingshotmastery.com/guides/farm-account-benefits"]
+]},
+"b":{t:"b) Smart Way to Use Farm Account to grow fast", links:[
+["kingshotguide.org - Farm Strategy","https://kingshotguide.org/guides/farm-strategy"],
+["kingshot.net - Fast Growth with Farms","https://kingshot.net/guides/farm-growth"],
+["kingshotmastery.com - Farm Resource Transfer","https://kingshotmastery.com/guides/farm-transfer"],
+["kingshot Fandom - Farm Account Setup","https://kingshot.fandom.com/wiki/Farm_Account"]
+]}
+}},
+"12B":{name:"Why joining Alliance Matters most", subs:{
+"a":{t:"a) Benefits to Join An Alliance", links:[
+["kingshot.net - Alliance Benefits","https://kingshot.net/guides/alliance-benefits"],
+["kingshotmastery.com - Why Join Alliance","https://kingshotmastery.com/guides/alliance-guide"],
+["kingshotguide.org - Alliance Help & Tech","https://kingshotguide.org/guides/alliance-help"],
+["kingshot Fandom - Alliance Wiki","https://kingshot.fandom.com/wiki/Alliance"]
+]}
+}
+}
 };
 
 function updateSubDrop(){
-  const main = document.getElementById('mainDrop');
-  const sub = document.getElementById('subDrop');
-  const box = document.getElementById('linksBox');
-  if(!main || !sub) return;
-  
-  const val = main.value;
-  if(!val || !guidesData[val]){
-    sub.style.display = 'none';
-    sub.innerHTML = '';
-    if(box) box.innerHTML = '';
-    return;
-  }
-  
-  // FIX: Show subDrop - this was missing
-  sub.style.display = 'block';
-  sub.innerHTML = '<option value="">-- Select Sub Category --</option>';
-  guidesData[val].forEach(item=>{
-    const opt = document.createElement('option');
-    opt.value = item;
-    opt.textContent = item;
-    sub.appendChild(opt);
-  });
-  if(box) box.innerHTML = '<div style="color:#aaa;padding:10px">Select sub category above...</div>';
-}
-
-function showLinks(){
-  const sub = document.getElementById('subDrop');
-  const box = document.getElementById('linksBox');
-  if(!sub || !box) return;
-  
-  const val = sub.value;
-  if(!val){
-    box.innerHTML = '';
-    return;
-  }
-  
-function showLinks(){
+  var main = document.getElementById('mainDrop');
   var sub = document.getElementById('subDrop');
   var box = document.getElementById('linksBox');
-  if(!sub || !box) return;
-  var val = sub.value;
-  if(!val){ box.innerHTML = ''; return; }
-  
-  box.innerHTML = '<div style="background:#1a1a1a;border:1px solid #333;padding:14px;border-radius:12px;color:#fff">'
-    + '<div style="font-weight:800;margin-bottom:8px">📖 ' + val + '</div>'
-    + '<div style="color:#aaa;font-size:13px">Links for ' + val + ' will show here.</div>'
-    + '<button onclick="window.open(\'https://darklords-bot.github.io/\',\'_blank\')" style="margin-top:10px;width:100%;padding:10px;background:#ff8c00;border:none;border-radius:8px;font-weight:800">Open Guide</button>'
-    + '</div>';
-}
+  var val = main.value;
+  if(!val || !data[val]){
+    sub.style.display='none';
+    sub.innerHTML='';
+    box.innerHTML='';
+    return;
+  }
+  sub.style.display='block';
+  sub.innerHTML='<option value="">-- Select Sub Category --</option>';
+  var subs = data[val].subs;
+  for(var key in subs){
+    var opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = subs[key].t;
+    sub.appendChild(opt);
+  }
+  box.innerHTML='<div style="color:#aaa;padding:10px">Select sub category above...</div>';
 }
 
-// Fix your selectGuideNew to use this
-function selectGuideNew(val,label){
-  const lbl = document.getElementById('guidesDropLabel');
-  if(lbl) lbl.textContent = '📚 ' + label;
-  const list = document.getElementById('guidesDropList');
-  if(list) list.style.display = 'none';
-  
-  const hub = document.getElementById('guidesHub');
-  if(hub) hub.style.display = 'block';
-  
-  const main = document.getElementById('mainDrop');
-  if(main){
-    main.value = val;
-    updateSubDrop(); // <-- THIS WAS FAILING BEFORE
-  }
+function showLinks(){
+  var main = document.getElementById('mainDrop');
+  var sub = document.getElementById('subDrop');
+  var box = document.getElementById('linksBox');
+  if(!main || !sub || !box) return;
+  var mainVal = main.value;
+  var subVal = sub.value;
+  if(!subVal){ box.innerHTML=''; return; }
+  var item = data[mainVal].subs[subVal];
+  if(!item){ box.innerHTML=''; return; }
+  var html = '<div style="background:#1a1a1a;border:1px solid #333;padding:14px;border-radius:12px;color:#fff">'
+    + '<div style="font-weight:800;margin-bottom:10px">📚 ' + item.t + '</div>';
+  item.links.forEach(function(l){
+    html += '<a href="' + l[1] + '" target="_blank" style="display:block;background:#222;border:1px solid #444;color:#ff8c00;padding:10px;border-radius:8px;margin-bottom:8px;text-decoration:none;font-weight:700">🔗 ' + l[0] + '</a>';
+  });
+  html += '</div>';
+  box.innerHTML = html;
 }
-    </script>
+
+function selectGuideNew(val,label){
+  var lbl = document.getElementById('guidesDropLabel');
+  if(lbl) lbl.textContent = '📚 ' + label;
+  var list = document.getElementById('guidesDropList');
+  if(list) list.style.display='none';
+  var hub = document.getElementById('guidesHub');
+  if(hub) hub.style.display='block';
+  var main = document.getElementById('mainDrop');
+  if(main){ main.value=val; updateSubDrop(); }
+}
+</script>
+
 <!-- 3rd ORANGE BUTTON - SMALLER EVENTS -->
 <div class="myDrop" style="position:relative; width:100%; margin-top:8px;">
   <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleSmallerEventDrop()">
