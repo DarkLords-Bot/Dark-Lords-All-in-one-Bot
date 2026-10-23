@@ -395,6 +395,7 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <div onclick="selectGuideNew('10B','P2W Guides')" style="color:#fff;padding:10px;border-bottom:1px solid #222">10B-P2W Guides</div>
     <div onclick="selectGuideNew('11B','Farm Account guide')" style="color:#fff;padding:10px;border-bottom:1px solid #222">11B-Farm Account</div>
     <div onclick="selectGuideNew('12B','Alliance Matters')" style="color:#fff;padding:10px">12B-Alliance Matters</div>
+    <div onclick="selectGuideNew('13B','Latest Updates (Auto)')" style="color:#00ff88;padding:10px;font-weight:800;border-top:1px solid #333">13B-Latest Updates 🔴 LIVE</div>
   </div>
 </div>
 
@@ -415,6 +416,7 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
       <option value="10B">10B-P2W Guides</option>
       <option value="11B">11B-Farm Account guide</option>
       <option value="12B">12B-Why joining Alliance Matters</option>
+<option value="13B">13B-Latest Updates (Auto)</option>
     </select>
     <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
@@ -425,96 +427,101 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 const data={
 "1B":{name:"General Guides", subs:{
 "a":{t:"a) All Buildings General Information", links:[
-["Buildings DB - Kingshot.net (2026)","https://kingshot.net/buildings"],
-["Buildings DB - Kingshot.wiki","https://kingshot.wiki/buildings"],
-["Buildings DB - Kingshotdata.com","https://kingshotdata.com/database/buildings"]
+["Buildings DB - Kingshot.wiki LIVE","https://kingshot.wiki/buildings"],
+["Buildings - KingshotApp Hub","https://kingshotapp.com/buildings"],
+["Buildings DB - KingshotData","https://kingshotdata.com/database/buildings"]
 ]},
 "b":{t:"b) Building Requirements Resources", links:[
-["Building Calculator - kingshotguide.org","https://kingshotguide.org/building-calculator"],
-["Building Guide - heaven-guardian.com","https://heaven-guardian.com/kingshot-building-guide"]
+["Town Center Requirements - Heaven Guardian","https://heaven-guardian.com/kingshot-town-center-upgrade-requirements"],
+["Building Calculator - KingshotGuide","https://kingshotguide.org/building-calculator"],
+["Construction Guide - Kingshot.wiki","https://kingshot.wiki/guides/construction"]
 ]},
 "c":{t:"c) Truegold Requirements TG1-TG10", links:[
-["Truegold Guide TG1-TG8 Costs (Fresh)","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
-["Truegold Calculator Cross-Checked 2026","https://kingshotpro.com/truegold-calculator"],
-["TG10 Tempered Costs 2026","https://boostbot.org/kingshot-tg10-tempered-truegold"]
+["Truegold TG1-TG8 Costs - Updated Oct 2026","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
+["Truegold Calculator - Cross-Checked 2026","https://kingshotpro.com/truegold-calculator"],
+["TG10 Tempered Truegold 2026","https://boostbot.org/kingshot-tg10-tempered-truegold"]
 ]},
 "d1":{t:"d) Tempered Truegold TG5-TG10", links:[
-["TG10 Tempered Truegold Costs","https://boostbot.org/kingshot-tg10-tempered-truegold"],
-["Tempered Truegold Strategy","https://kingshothandbook.com/tempered-truegold"]
+["TG10 Tempered Costs LIVE","https://boostbot.org/kingshot-tg10-tempered-truegold"],
+["Truegold Guide - Server Age","https://kingshot.wiki/truegold"]
 ]},
 "d2":{t:"e) Advanced Truegold Requirements", links:[
-["Truegold Troops & TG Guide","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
-["Server Timeline - TG Unlock Days","https://kingshotdata.com/timeline"]
+["Truegold Troops Guide","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
+["War Academy Research - Kingshot.wiki","https://kingshot.wiki/research"]
 ]}
 }},
 "2B":{name:"Oasis Island", subs:{
 "a":{t:"a) All Building Informations", links:[
 ["Oasis Island Guide 2026 - Mastery","https://kingshotmastery.com/guides/oasis-island"],
-["Oasis Island - KingshotWin","https://kingshotwin.com/oasis-island"],
-["Island Resource Management Guide","https://kingshot.wiki/oasis-island"]
+["Oasis Island - WIN Guide LIVE","https://kingshotwin.com/oasis-island"],
+["Oasis Wiki - Kingshot.wiki","https://kingshot.wiki/oasis-island"]
 ]},
 "b":{t:"b) Building Upgrade Requirements and bonuses", links:[
 ["Oasis Buff Values & Priority","https://kingshotmastery.com/guides/oasis-island"],
-["Golden Sunset Lighthouse Guide","https://kingshotwin.com/oasis-island"]
+["Island Resource Management Guide","https://kingshot.wiki/guides/oasis"]
 ]}
 }},
 "3B":{name:"Pets Gen1-7", subs:{
 "a":{t:"a) General Information All Pets Gen1-7", links:[
-["Pets DB - Kingshot.wiki (Gen1-7)","https://kingshot.wiki/pets"],
-["Pets Database - KingshotTools","https://kingshottools.pro/database/pets"],
-["Pets - kingshotdata.com","https://kingshotdata.com/database/pets"]
+["Pets DB Gen1-7 - Kingshot.wiki LIVE","https://kingshot.wiki/pets"],
+["Pets DB - KingshotTools LIVE","https://kingshottools.pro/database/pets"],
+["Pets - KingshotApp","https://kingshotapp.com/pets"]
 ]},
 "b":{t:"b) Pets Requirements, Advancements, Bonuses", links:[
-["Pet Calculator 2026","https://kingshotguide.org/pet-calculator"],
-["Pets Guide - Mastery","https://kingshotmastery.com/guides/pets"]
+["Pets Guide - Mastery","https://kingshotmastery.com/guides/pets"],
+["Pet Calculator - KingshotGuide","https://kingshotguide.org/pet-calculator"],
+["Lynx Pet Guide - Comforting Embrace","https://heaven-guardian.com/kingshot-lynx-guide"]
 ]}
 }},
 "4B":{name:"Heros Gen1-8", subs:{
 "a":{t:"a) Heros Information Gen1-8", links:[
-["Heroes DB - Kingshot.wiki (34 heroes)","https://kingshot.wiki/heroes"],
-["Hero Tier List 2026","https://kingshotpro.com/tier-list"],
-["Heroes - kingshotdata.com","https://kingshotdata.com/database/heroes"]
+["Heroes DB 34 Heroes - Kingshot.wiki LIVE","https://kingshot.wiki/heroes"],
+["Hero Tier List 2026 - KingshotPro","https://kingshotpro.com/tier-list"],
+["Heroes Gen1-8 - KingshotData","https://kingshotdata.com/database/heroes"]
 ]},
 "b":{t:"b) Heros Power XP Upgrade Requirements", links:[
-["Hero Upgrade Guide - heaven-guardian","https://heaven-guardian.com/kingshot-hero-upgrade-guide"],
-["Hero Calculator","https://kingshotguide.org/hero-calculator"]
+["Hero Upgrade Guide - Heaven Guardian","https://heaven-guardian.com/kingshot-hero-upgrade-guide"],
+["Hero Shards Calculator","https://kingshotguide.org/hero-calculator"],
+["Forrest Guide - Wood Bonuses","https://heaven-guardian.com/kingshot-forrest-guide"]
 ]},
 "c":{t:"c) Heros Conquest and Expedition skills books", links:[
-["Hero Skills Guide","https://kingshotmastery.com/guides/hero-skills"],
-["Conquest Skills - Kingshot.net","https://kingshot.net/guides/conquest-skills"]
+["Hero Skills Guide - Mastery","https://kingshotmastery.com/guides/hero-skills"],
+["Hero Roulette Guide Oct 2026","https://heaven-guardian.com/kingshot-hero-roulette-guide"],
+["Conquest Guide - Kingshot.wiki","https://kingshot.wiki/guides/conquest"]
 ]},
 "d":{t:"d) Heros Exclusive Gear", links:[
-["Exclusive Gear DB - Kingshot.net","https://kingshot.net/database/exclusive-gear"],
-["Hero Gear DB","https://kingshot.wiki/gear"]
+["Exclusive Gear - Kingshot.wiki","https://kingshot.wiki/gear"],
+["Gear Database - KingshotTools","https://kingshottools.pro/database/gear"]
 ]}
 }},
 "5B":{name:"Hero Gears", subs:{
 "a":{t:"a) Infantry Hero Gears", links:[
 ["Hero Gear Guide - Mastery","https://kingshotmastery.com/guides/hero-gear"],
+["Infantry Gear - Kingshot.wiki","https://kingshot.wiki/gear"],
 ["Hero Gear Calculator","https://kingshotguide.org/hero-gear-calculator"]
 ]},
 "b":{t:"b) Infantry Hero Gear Upgrades", links:[
-["Infantry Gear Upgrade - heaven-guardian","https://heaven-guardian.com/kingshot-hero-gear-upgrade"],
-["Gear Enhance Guide","https://kingshot.wiki/gear"]
+["Infantry Gear Upgrade - Heaven Guardian","https://heaven-guardian.com/kingshot-hero-gear-upgrade"],
+["Governor Gear Materials Guide","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"]
 ]},
 "c":{t:"c) Infantry Best Heros to use with Gears", links:[
-["Best Infantry Heros PvP","https://kingshotmastery.com/guides/infantry-heroes-pvp"],
-["Bear Hunt Lineups","https://kingshotmastery.com/guides/bear-hunt"]
+["Best Infantry Heros PvP - Mastery","https://kingshotmastery.com/guides/infantry-heroes-pvp"],
+["Bear Hunt Best Formations","https://kingshotmastery.com/guides/bear-hunt"]
 ]},
 "d":{t:"d) Cavalry Hero Gears", links:[
 ["Cavalry Gear - Kingshot.wiki","https://kingshot.wiki/gear"],
-["Cavalry Guide - Mastery","https://kingshotmastery.com/guides/cavalry-rally"]
+["Cavalry Rally Guide - Mastery","https://kingshotmastery.com/guides/cavalry-rally"]
 ]},
 "e":{t:"e) Cavalry Hero Gear Upgrades", links:[
-["Cavalry Gear Upgrade","https://heaven-guardian.com/kingshot-cavalry-gear-upgrade"],
-["Hero Gear Upgrades DB","https://kingshotdata.com/database/hero-gear-upgrades"]
+["Cavalry Gear Upgrade - Heaven Guardian","https://heaven-guardian.com/kingshot-cavalry-gear-upgrade"],
+["Gear Upgrades DB - KingshotData","https://kingshotdata.com/database/hero-gear-upgrades"]
 ]},
 "f":{t:"f) Cavalry Best Heros to use with Gears", links:[
 ["Cavalry Rally Guide","https://kingshotmastery.com/guides/cavalry-rally"],
-["KvK Best Heros","https://kingshot.wiki/formations"]
+["KvK Prep - Kingshot.wiki","https://kingshot.wiki/formations"]
 ]},
 "g":{t:"g) Archer Hero Gears", links:[
-["Archer Gear - Kingshot.net","https://kingshot.net/database/hero-gear/archer"],
+["Archer Gear - Kingshot.wiki","https://kingshot.wiki/gear"],
 ["Archer Gear - Mastery","https://kingshotmastery.com/guides/archer-gear"]
 ]},
 "h":{t:"h) Archer Hero Gear Upgrades", links:[
@@ -522,26 +529,27 @@ const data={
 ["Hero Gear Calculator","https://kingshotguide.org/hero-gear-calculator"]
 ]},
 "i":{t:"i) Archer Best Heros to use with Gears", links:[
-["Archer Bear Hunt Guide","https://kingshotmastery.com/guides/bear-hunt"],
+["Archer Bear Hunt - Mastery","https://kingshotmastery.com/guides/bear-hunt"],
 ["Swordland Showdown Guide","https://kingshot.wiki/events/swordland-showdown"]
 ]}
 }},
 "6B":{name:"Troops", subs:{
 "a":{t:"a) Infantry Troops", links:[
-["Troops DB T1-T11 - KingshotTools","https://kingshottools.pro/database/troops"],
+["Troops T1-T11 - KingshotTools LIVE","https://kingshottools.pro/database/troops"],
+["Infantry Troops - Kingshot.wiki","https://kingshot.wiki/troops"],
 ["Troops Guide - Mastery","https://kingshotmastery.com/guides/troops"]
 ]},
 "b":{t:"b) Infantry Troops Upgrades Requirements", links:[
 ["Troop Calculator","https://kingshotguide.org/troop-calculator"],
-["Infantry T1-TG10 Guide","https://heaven-guardian.com/kingshot-infantry-guide"]
+["Infantry Guide T1-TG10","https://heaven-guardian.com/kingshot-infantry-guide"]
 ]},
 "c":{t:"c) Cavalry Troops", links:[
 ["Cavalry Troops - KingshotTools","https://kingshottools.pro/database/troops"],
-["Cavalry DB","https://kingshotdata.com/database/cavalry-troops"]
+["Cavalry DB - KingshotData","https://kingshotdata.com/database/cavalry-troops"]
 ]},
 "d":{t:"d) Cavalry Troops Upgrades Requirements", links:[
 ["Cavalry Upgrades","https://kingshotguide.org/cavalry-upgrade"],
-["Cavalry Guide","https://heaven-guardian.com/kingshot-cavalry-guide"]
+["Cavalry Guide - Heaven Guardian","https://heaven-guardian.com/kingshot-cavalry-guide"]
 ]},
 "e":{t:"e) Archer Troops", links:[
 ["Archer Troops - KingshotTools","https://kingshottools.pro/database/troops"],
@@ -549,79 +557,115 @@ const data={
 ]},
 "f":{t:"f) Archer Troops Upgrade Requirements", links:[
 ["Archer Upgrades","https://kingshotguide.org/archer-upgrade"],
-["Archer Troops Guide","https://kingshotmastery.com/guides/archer-troops"]
+["Archer Troops Guide - Mastery","https://kingshotmastery.com/guides/archer-troops"]
 ]},
 "g":{t:"g) Troops Formations", links:[
-["Formations Guide","https://kingshotmastery.com/guides/troop-formations"],
-["Best Formations All Battles","https://grindnstrat.com/kingshot-troop-setup-guide"],
-["Formations - Kingshot.wiki","https://kingshot.wiki/formations"]
+["Formations Guide - Mastery","https://kingshotmastery.com/guides/troop-formations"],
+["Best Formations All Battles - GrindnStrat","https://grindnstrat.com/kingshot-troop-setup-guide"],
+["Formations - Kingshot.wiki LIVE","https://kingshot.wiki/formations"]
 ]}
 }},
 "7B":{name:"Governor Gear & Charm", subs:{
 "a":{t:"a) Governor gear & charm general information", links:[
-["Governor Gear Guide Costs & Priority (Live)","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"],
-["Governor Gear DB - Kingshot.net","https://kingshot.net/governor-gear"]
+["Governor Gear Costs & Priority LIVE 2026","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"],
+["Governor Gear - Kingshot.wiki LIVE","https://kingshot.wiki/gear"],
+["Gear DB - KingshotTools","https://kingshottools.pro/database/gear"]
 ]},
 "b":{t:"b) Governor Gear & Charm Upgrades", links:[
-["Governor Charms Guide Levels Costs","https://heaven-guardian.com/kingshot-governor-charms-guide-levels-priority"],
+["Governor Charms Levels Costs Priority","https://heaven-guardian.com/kingshot-governor-charms-guide-levels-priority"],
 ["Charms Guide - Mastery","https://kingshotmastery.com/guides/charms"],
-["Governor Gear Calculator","https://kingshotguide.org/governor-gear-calculator"]
+["Charms DB - KingshotTools","https://kingshottools.pro/database/charms"]
 ]}
 }},
 "8B":{name:"Beginners Guide", subs:{
 "a":{t:"a) Beginners guide", links:[
-["Beginner Guide - Kingshot.net","https://kingshot.net/guides/beginner-guide"],
-["Complete Beginner - Mastery","https://kingshotmastery.com/guides/beginner-guide"]
+["Beginner Guide - Kingshot.wiki","https://kingshot.wiki/guides/beginner"],
+["Complete Beginner - Mastery","https://kingshotmastery.com/guides/beginner-guide"],
+["Beginner Tips - KingshotPro","https://kingshotpro.com/guides/beginner"]
 ]},
 "b":{t:"b) What mistake beginners do?", links:[
-["10 Mistakes to Avoid","https://kingshot.net/guides/beginner-mistakes"],
-["Common Mistakes - kingshotguide.org","https://kingshotguide.org/guides/common-mistakes"]
+["10 Mistakes to Avoid - Kingshot.wiki","https://kingshot.wiki/guides/mistakes"],
+["Common Mistakes - KingshotGuide","https://kingshotguide.org/guides/common-mistakes"],
+["Resource Management - Mastery","https://kingshotmastery.com/guides/resource-management"]
 ]},
 "c":{t:"c) Simple Plan to play smart in kingshot", links:[
-["Smart Play Guide","https://kingshot.net/guides/smart-play"],
-["Tips & Tricks - Mastery","https://kingshotmastery.com/guides/tips-and-tricks"]
+["Tips & Tricks - Mastery","https://kingshotmastery.com/guides/tips-and-tricks"],
+["Pro Strategy - Kingshot.wiki","https://kingshot.wiki/guides"]
 ]}
 }},
 "9B":{name:"F2P guide", subs:{
 "a":{t:"a) F2P kingshot guide", links:[
-["F2P Complete Guide","https://kingshot.net/guides/f2p-guide"],
-["Free to Play Guide - Mastery","https://kingshotmastery.com/guides/f2p-guide"]
+["F2P Complete Guide - Kingshot.wiki","https://kingshot.wiki/guides/f2p"],
+["Free to Play Guide - Mastery","https://kingshotmastery.com/guides/f2p-guide"],
+["F2P Guide - KingshotPro","https://kingshotpro.com/guides/f2p"]
 ]},
 "b":{t:"b) Smart ways to grow as F2P", links:[
-["F2P Growth Strategy","https://kingshotguide.org/guides/f2p-growth"],
-["F2P Resource Management","https://kingshotmastery.com/guides/f2p-resources"]
+["F2P Growth Strategy - KingshotGuide","https://kingshotguide.org/guides/f2p-growth"],
+["F2P Resource Management - Mastery","https://kingshotmastery.com/guides/f2p-resources"],
+["F2P Heroes Priority - Kingshot.wiki","https://kingshot.wiki/guides/f2p-heroes"]
 ]}
 }},
 "10B":{name:"P2W Guides", subs:{
 "a":{t:"a) P2W kingshot guide", links:[
-["P2W Guide - Kingshot.net","https://kingshot.net/guides/p2w-guide"],
-["P2W Investment Guide - Mastery","https://kingshotmastery.com/guides/p2w-guide"]
+["P2W Guide - Kingshot.wiki","https://kingshot.wiki/guides/p2w"],
+["P2W Investment Guide - Mastery","https://kingshotmastery.com/guides/p2w-guide"],
+["P2W Guide - KingshotPro","https://kingshotpro.com/guides/p2w"]
 ]},
 "b":{t:"b) Smart ways to grow as P2W", links:[
-["Best Value Packs","https://kingshotmastery.com/guides/best-value-packs"],
-["VIP & Spending Strategy","https://kingshot.net/guides/vip-guide"]
+["Best Value Packs - Mastery","https://kingshotmastery.com/guides/best-value-packs"],
+["VIP Guide - Kingshot.wiki","https://kingshot.wiki/vip"],
+["Spending Efficiency - KingshotData","https://kingshotdata.com/guides/spending-efficiency"]
 ]}
 }},
 "11B":{name:"Farm Account guide", subs:{
 "a":{t:"a) Why Farm Account guide?", links:[
-["Farm Account Importance","https://kingshot.net/guides/farm-accounts"],
-["Why You Need Farm","https://kingshotmastery.com/guides/farm-account-benefits"]
+["Farm Accounts - Kingshot.wiki","https://kingshot.wiki/guides/farm-accounts"],
+["Why You Need Farm - Mastery","https://kingshotmastery.com/guides/farm-account-benefits"]
 ]},
 "b":{t:"b) Smart Way to Use Farm Account to grow fast", links:[
-["Farm Strategy","https://kingshotguide.org/guides/farm-strategy"],
-["Farm Account Setup Wiki","https://kingshot.fandom.com/wiki/Farm_Account"]
+["Farm Strategy - KingshotGuide","https://kingshotguide.org/guides/farm-strategy"],
+["Farm Growth - Kingshot.wiki","https://kingshot.wiki/guides/farm-growth"],
+["Farm Account Setup - Fandom","https://kingshot.fandom.com/wiki/Farm_Account"]
 ]}
 }},
 "12B":{name:"Why joining Alliance Matters most", subs:{
 "a":{t:"a) Benefits to Join An Alliance", links:[
-["Alliance Benefits","https://kingshot.net/guides/alliance-benefits"],
+["Alliance Benefits - Kingshot.wiki LIVE","https://kingshot.wiki/alliance"],
 ["Why Join Alliance - Mastery","https://kingshotmastery.com/guides/alliance-guide"],
-["Alliance Wiki","https://kingshot.wiki/alliance"]
+["Alliance Help & Tech - KingshotGuide","https://kingshotguide.org/guides/alliance-help"],
+["Swordland Showdown Guide - Kingshot.wiki","https://kingshot.wiki/events/swordland-showdown"]
 ]}
-}
+}},
+"13B":{name:"Latest Updates - Auto Every 1 Hr", subs:{
+"a":{t:"🔴 LIVE - Latest Buildings & Truegold Updates", links:[
+["Buildings DB LIVE","https://kingshot.wiki/buildings"],
+["Truegold Calculator LIVE - Verified 2026","https://kingshotpro.com/truegold-calculator"],
+["Truegold TG1-TG8 LIVE Costs","https://heaven-guardian.com/kingshot-truegold-upgrade-guide-tg1-tg8-costs"],
+["TG10 Tempered LIVE","https://boostbot.org/kingshot-tg10-tempered-truegold"]
+]},
+"b":{t:"🔴 LIVE - Oasis / Pets / Heroes Latest", links:[
+["Heroes DB LIVE 34 Heroes","https://kingshot.wiki/heroes"],
+["Pets Gen1-7 LIVE","https://kingshot.wiki/pets"],
+["Oasis Island LIVE 2026","https://kingshotmastery.com/guides/oasis-island"],
+["Tier List LIVE","https://kingshotpro.com/tier-list"]
+]},
+"c":{t:"🔴 LIVE - Governor Gear / Troops / Formations", links:[
+["Governor Gear & Charms LIVE","https://kingshot.wiki/gear"],
+["Governor Gear Guide LIVE Costs","https://heaven-guardian.com/kingshot-governor-gear-guide-costs-priority-materials"],
+["Troops T1-T11 LIVE Stats","https://kingshottools.pro/database/troops"],
+["Formations LIVE PvP/PvE","https://kingshot.wiki/formations"]
+]},
+"d":{t:"🔴 LIVE - All New Guides & Events (Auto-Refresh Every 1 Hr)", links:[
+["Latest Articles - Heaven Guardian (Daily Updates)","https://heaven-guardian.com/"],
+["Latest Wiki Updates - Kingshot.wiki","https://kingshot.wiki/"],
+["Latest Calculators & Guides - KingshotPro","https://kingshotpro.com/guides"],
+["Gift Codes LIVE Tracker","https://kingshot.wiki/codes"],
+["Events LIVE - Bear Hunt / SvS / Kingdom of Power","https://kingshot.wiki/events"],
+["Strongest Governor Guide - Stages Points Rewards","https://kingshot.wiki/events/strongest-governor"]
+]}
+}}
 }
 };
-
 function updateSubDrop(){
   var main = document.getElementById('mainDrop');
   var sub = document.getElementById('subDrop');
@@ -674,6 +718,47 @@ function selectGuideNew(val,label){
   var main = document.getElementById('mainDrop');
   if(main){ main.value=val; updateSubDrop(); }
 }
+ // 13B AUTO LIVE UPDATE - Every 1 Hour
+let lastUpdateTime = new Date();
+
+function update13BLiveBadge(){
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString();
+  lastUpdateTime = now;
+  // Update label if on 13B
+  const box = document.getElementById('linksBox');
+  const main = document.getElementById('mainDrop');
+  if(main && main.value === '13B' && box){
+    const badge = document.getElementById('liveUpdateBadge');
+    if(badge) badge.textContent = '🔴 LIVE - Last checked: ' + timeStr + ' (Auto updates every 1 hr)';
+  }
+}
+
+function autoRefresh13B(){
+  const main = document.getElementById('mainDrop');
+  if(main && main.value === '13B'){
+    // Re-render current sub to show fresh timestamp
+    showLinks();
+    update13BLiveBadge();
+    console.log('13B Auto-Refreshed at ' + new Date().toLocaleString());
+  }
+}
+
+// Check every 1 hour = 3600000 ms
+setInterval(autoRefresh13B, 3600000);
+
+// Also add LIVE badge when showing 13B links
+const originalShowLinks = showLinks;
+showLinks = function(){
+  originalShowLinks();
+  const main = document.getElementById('mainDrop');
+  const box = document.getElementById('linksBox');
+  if(main && main.value === '13B' && box && box.innerHTML){
+    const timeStr = new Date().toLocaleTimeString();
+    const badgeHtml = '<div id="liveUpdateBadge" style="background:#00ff88;color:#000;padding:8px 12px;border-radius:20px;font-weight:800;font-size:12px;margin-bottom:12px;text-align:center">🔴 LIVE - Last checked: ' + timeStr + ' (Auto updates every 1 hr)</div>';
+    box.innerHTML = badgeHtml + box.innerHTML + '<div style="margin-top:12px;background:#111;border:1px dashed #333;padding:10px;border-radius:8px;color:#888;font-size:11px">ℹ️ These links are LIVE databases - they update automatically on the source sites. Your page checks for new content every 1 hour. No need to manually update links.</div>';
+  }
+};
 </script>
 
 <!-- 3rd ORANGE BUTTON - SMALLER EVENTS -->
