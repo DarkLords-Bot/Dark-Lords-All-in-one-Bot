@@ -420,3 +420,49 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 </div>
 
 </div> <!-- close wrap -->
+<!-- MAIN GUIDES BUTTON - 100% OK -->
+<div class="myDrop" style="margin-top:12px">
+  <button class="myDropBtn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
+    <span id="guidesDropLabel">📚 GUIDES</span>
+    <span>▼</span>
+  </button>
+  <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
+    <div onclick="selectGuideNew('1B','Building Guides')">1B-Building Guides</div>
+    <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
+    <div onclick="selectGuideNew('3B','Pets')">3B-Pets Gen1-7</div>
+    <div onclick="selectGuideNew('4B','Heros')">4B-Heros Gen1-8</div>
+    <div onclick="selectGuideNew('5B','Hero Gears')">5B-Hero Gears</div>
+    <div onclick="selectGuideNew('6B','Troops')">6B-Troops & Formations</div>
+    <div onclick="selectGuideNew('7B','Governor Gear')">7B-Governor Gear & Charm</div>
+    <div onclick="selectGuideNew('8B','Beginners Guide')">8B-Beginners Guide</div>
+    <div onclick="selectGuideNew('9B','F2P Guide')">9B-F2P Guide</div>
+    <div onclick="selectGuideNew('10B','P2W Guides')">10B-P2W Guides</div>
+    <div onclick="selectGuideNew('11B','Farm Account Guide')">11B-Farm Account Guide</div>
+    <div onclick="selectGuideNew('12B','Alliance Matters')">12B-Alliance Matters</div>
+    <div onclick="selectGuideNew('13B','Latest Updates LIVE')" style="background:linear-gradient(90deg,#00ff88,#00ccff);color:#000;font-weight:900;border-top:2px solid #fff">🔴 13B-Latest Updates LIVE</div>
+  </div>
+</div>
+
+<!-- GUIDES HUB - 100% OK -->
+<div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px">
+  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+    <select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:10px">
+      <option value="">-- Select Category --</option>
+      <option value="1B">1B-Building Guides</option>
+      <option value="2B">2B-Oasis Island</option>
+      <option value="3B">3B-Pets</option>
+      <option value="4B">4B-Heros</option>
+      <option value="5B">5B-Hero Gears</option>
+      <option value="6B">6B-Troops</option>
+      <option value="7B">7B-Governor Gear</option>
+      <option value="8B">8B-Beginners Guide</option>
+      <option value="9B">9B-F2P Guide</option>
+      <option value="10B">10B-P2W Guides</option>
+      <option value="11B">11B-Farm Account Guide</option>
+      <option value="12B">12B-Alliance Matters</option>
+      <option value="13B">🔴 13B-Latest Updates LIVE</option>
+    </select>
+    <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
+    <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+</div>
