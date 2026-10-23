@@ -567,89 +567,91 @@ display:block; margin:6px 0; padding:12px; border-radius:12px; text-decoration:n
 <div id="valuableEventLinks" class="links-container" style="margin-top:12px;"></div>
 <!-- ========= END ========= -->
 <script>
-function switchTab(val){
-  // ALL your main tabs + guides + smaller event
-  const allTabs = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
-
-  allTabs.forEach(t => {
-    // Try both id formats: tab-1A and 1A (covers both cases)
-    let el = document.getElementById('tab-' + t) || document.getElementById(t);
+<script>
+// FIX 1 - Make all tabs visible logic clean
+function switchAllTabs(val){
+  const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub','valuableEventHub','1C','1D'];
+  all.forEach(t=>{
+    let el = document.getElementById(t) || document.getElementById('tab-'+t);
     if(el) el.style.display = 'none';
   });
-
-  // Show selected - try both formats
-  let show = document.getElementById('tab-' + val) || document.getElementById(val);
+  // Show requested
+  let show = document.getElementById(val) || document.getElementById('tab-'+val);
   if(show) show.style.display = 'block';
-
-  // Init when opening calculators
-  if(val === '3A' && window.initGrid3A) initGrid3A();
-  if(val === '4A' && window.initGrid4A) initGrid4A();
-
-  // Close dropdowns - INCLUDING SMALLER EVENT
-  const dd=document.getElementById('categoryDropdown');
-  if(dd) dd.style.display='none';
-  const gd=document.getElementById('guidesDropList');
-  if(gd) gd.style.display='none';
-  const cd=document.getElementById('dropList');
-  if(cd) cd.style.display='none';
-  const sd=document.getElementById('smallerEventDropList');
-  if(sd) sd.style.display='none';
+  
+  // Always keep the 3 hubs containers visible if they contain the active tab
+  if(val.startsWith('1B') || val === 'guidesHub'){
+     let g = document.getElementById('guidesHub'); if(g) g.style.display='block';
+  }
 }
 
-// Special function for guides button
 function showAllGuidesFix(){
-  switchTab('guidesHub');
+  let g = document.getElementById('guidesHub');
+  if(g) g.style.display = 'block';
 }
 
-// Special function for smaller event button
-function showSmallerEventFix(){
-  switchTab('smallerEventHub');
-}
-
+// FIX 2 - Dropdown selectors
 function selectGuideNew(val,label){
-  document.getElementById('guidesDropLabel').textContent='📚 '+label;
-  document.getElementById('guidesDropList').style.display='none';
-  switchTab('guidesHub');
-  setTimeout(()=>{
-    const m=document.getElementById('mainDrop');
-    if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
-  },200);
+  const lbl = document.getElementById('guidesDropLabel');
+  if(lbl) lbl.textContent = '📚 ' + label;
+  const list = document.getElementById('guidesDropList');
+  if(list) list.style.display = 'none';
+  showAllGuidesFix();
+  const m = document.getElementById('mainDrop');
+  if(m){ m.value = val; if(typeof updateSubDrop === 'function') updateSubDrop(); }
 }
-function selectSmallerEventNew(val,label){
-  document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
-  document.getElementById('smallerEventDropList').style.display='none';
-  
-  const hub = document.getElementById('smallerEventHub');
-  hub.style.display='block';
-  
-  // Hide all other main tabs
-  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t => {
-    let el = document.getElementById('tab-' + t) || document.getElementById(t);
-    if(el) el.style.display = 'none';
+
+function selectCat(val,label){
+  const dl = document.getElementById('dropLabel');
+  if(dl) dl.textContent = label;
+  const ddl = document.getElementById('dropList');
+  if(ddl) ddl.style.display = 'none';
+  switchAllTabs(val);
+}
+
+// FIX 3 - THE REAL FIX FOR YOUR SCREENSHOT - Orange buttons toggle
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Fix CALCULATORS and BUILDING GUIDES orange buttons
+  document.querySelectorAll('button, div').forEach(btn=>{
+    if(btn.textContent && btn.textContent.includes('CALCULATORS') || btn.textContent.includes('BUILDING GUIDES')){
+      btn.style.cursor = 'pointer';
+      btn.onclick = function(){
+        // Find next black container
+        let next = this.nextElementSibling;
+        while(next){
+          if(next.id && (next.id.includes('Hub') || next.id.includes('Guide') || next.id.includes('Building')) || next.classList.contains('dropdown-container')){
+             next.style.display = next.style.display === 'none' ? 'block' : 'block';
+             // force show inner
+             next.querySelectorAll('*').forEach(c=>{ if(c.style.display==='none') c.style.display='block'; });
+             break;
+          }
+          // if it's the orange button itself, check parent
+          if(next.tagName === 'BUTTON' || next.tagName === 'DIV' && next.textContent.includes('BEAST')){
+            break;
+          }
+          next = next.nextElementSibling;
+        }
+        // Simple: force show all guides hubs
+        ['guidesHub','smallerEventHub','valuableEventHub','guidesDropList','dropList'].forEach(id=>{
+          let e = document.getElementById(id);
+          if(e) e.style.display='block';
+        });
+      };
+    }
   });
 
+  // Force show the 3 hubs you said are missing
   setTimeout(()=>{
-    const m=document.getElementById('smallerEventMainDrop');
-    if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
-    // Scroll to hub so user sees it right below button
-    hub.scrollIntoView({behavior:'smooth', block:'start'});
-  },100);
-}
-function toggleSmallerEventDrop(){
-  const list = document.getElementById('smallerEventDropList');
-  const guidesList = document.getElementById('guidesDropList');
-  const mainList = document.getElementById('dropList');
-  if(guidesList) guidesList.style.display='none';
-  if(mainList) mainList.style.display='none';
-  list.style.display = list.style.display==='block' ? 'none' : 'flex';
- 
-}
-function selectCat(val,label){
-  document.getElementById('dropLabel').textContent=label;
-  document.getElementById('dropList').style.display='none';
-  switchTab(val);
-}
- </script>
+    ['guidesHub','smallerEventHub','valuableEventHub','1B-Building Guides','tab-1B'].forEach(id=>{
+      let e = document.getElementById(id);
+      if(e) e.style.display='block';
+    });
+    // also show guidesDropList
+    let gl = document.getElementById('guidesDropList');
+    if(gl) gl.style.display='block';
+  },500);
+});
+</script>
 <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
  <p class="page-sub">Real game data</p>
