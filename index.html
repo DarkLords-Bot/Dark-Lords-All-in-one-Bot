@@ -421,7 +421,92 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
 </div>
+ <script>
+// ==== GUIDES DATA - EDIT HERE IF NEEDED ====
+const guidesData = {
+  "1B": ["Town Hall", "Resource Buildings", "Military Buildings", "Wall & Traps"],
+  "2B": ["Oasis Overview", "Oasis Rewards", "Oasis Tips"],
+  "3B": ["Pets Overview", "Pet Skills", "Pet Upgrades"],
+  "4B": ["Hero List", "Hero Skills", "Best Pairs"],
+  "5B": ["Gear Overview", "Gear Stats", "Gear Enhance"],
+  "6B": ["Troop Types", "Troop Counters", "March Setup"],
+  "7B": ["Governor Gear Set", "Governor Talents", "Governor Build"],
+  "8B": ["Starter Tips", "Day 1-7 Guide", "Common Mistakes"],
+  "9B": ["F2P Tips", "F2P Heroes", "F2P Events"],
+  "10B": ["P2W Packs", "Best Value", "Spending Guide"],
+  "11B": ["Farm Setup", "Farm Tips", "Farm Protection"],
+  "12B": ["Alliance Tech", "Alliance Wars", "Alliance Help"]
+};
 
+const guidesLinks = {
+  "Town Hall": [{title:"Town Hall Guide", url:"https://darklords-bot.github.io/"}],
+  // Add your real YT / sheet links here
+};
+
+function updateSubDrop(){
+  const main = document.getElementById('mainDrop');
+  const sub = document.getElementById('subDrop');
+  const box = document.getElementById('linksBox');
+  if(!main || !sub) return;
+  
+  const val = main.value;
+  if(!val || !guidesData[val]){
+    sub.style.display = 'none';
+    sub.innerHTML = '';
+    if(box) box.innerHTML = '';
+    return;
+  }
+  
+  // FIX: Show subDrop - this was missing
+  sub.style.display = 'block';
+  sub.innerHTML = '<option value="">-- Select Sub Category --</option>';
+  guidesData[val].forEach(item=>{
+    const opt = document.createElement('option');
+    opt.value = item;
+    opt.textContent = item;
+    sub.appendChild(opt);
+  });
+  if(box) box.innerHTML = '<div style="color:#aaa;padding:10px">Select sub category above...</div>';
+}
+
+function showLinks(){
+  const sub = document.getElementById('subDrop');
+  const box = document.getElementById('linksBox');
+  if(!sub || !box) return;
+  
+  const val = sub.value;
+  if(!val){
+    box.innerHTML = '';
+    return;
+  }
+  
+  // Simple card display - replace with your actual links
+  box.innerHTML = `
+    <div style="background:#1a1a1a;border:1px solid #333;padding:14px;border-radius:12px;color:#fff">
+      <div style="font-weight:800;margin-bottom:8px">📖 ${val}</div>
+      <div style="color:#aaa;font-size:13px">Links for ${val} will show here. Add your sheets / YT links in guidesLinks object.</div>
+      <button onclick="window.open('https://darklords-bot.github.io/','_blank')" style="margin-top:10px;width:100%;padding:10px;background:#ff8c00;border:none;border-radius:8px;font-weight:800">Open Guide</button>
+    </div>
+  `;
+}
+
+// Fix your selectGuideNew to use this
+function selectGuideNew(val,label){
+  const lbl = document.getElementById('guidesDropLabel');
+  if(lbl) lbl.textContent = '📚 ' + label;
+  const list = document.getElementById('guidesDropList');
+  if(list) list.style.display = 'none';
+  
+  const hub = document.getElementById('guidesHub');
+  if(hub) hub.style.display = 'block';
+  
+  const main = document.getElementById('mainDrop');
+  if(main){
+    main.value = val;
+    updateSubDrop(); // <-- THIS WAS FAILING BEFORE
+  }
+}
+    </script>
 <!-- 3rd ORANGE BUTTON - SMALLER EVENTS -->
 <div class="myDrop" style="position:relative; width:100%; margin-top:8px;">
   <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleSmallerEventDrop()">
@@ -457,6 +542,12 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')" class="dropItem" style="padding:10px; color:#fff; cursor:pointer;">26C - STEEL EDGE</div>
   </div>
 </div>
+
+    <div style="background:#1a1a1a;border:1px solid #333;padding:14px;border-radius:12px;color:#fff">
+      <div style="font-weight:800;margin-bottom:8px">📖 ${val}</div>
+      <div style="color:#aaa;font-size:13px">Links for ${val} will show here. Add your sheets / YT links in guidesLinks object.</div>
+      <button onclick="window.open('https://darklords-bot.github.io/','_blank')" style="margin-top:10px;width:100%;padding:10px;background:#ff8c00;border:none;border-radius:8px;font-weight:800">Open Guide</button>
+    </div>
 
 <!-- === SMALLER EVENT HUB - SAME STYLE AS 9D SCREENSHOT === -->
 <div id="smallerEventHub" class="tab-content" style="display:none; margin:15px; background:transparent; border:none; padding:0;">
