@@ -464,3 +464,139 @@ display:flex;flex-direction:column;gap:10px;
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
 </div>
+
+   <!-- 3rd BUTTON - SMALLER EVENTS - INSIDE SAME sticky-tabs -->
+  <div class="myDrop">
+    <button class="myDropBtn" onclick="toggleSmallerEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'">
+      <span id="smallerEventDropLabel">🎯 SMALLER EVENT GUIDES</span>
+      <span>▼</span>
+    </button>
+    <div id="smallerEventDropList" class="myDropList" style="max-height:400px;overflow-y:auto">
+      <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')">1C - BEAST WHISPERER</div>
+      <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')">2C - ARMAMENT COMPETITION</div>
+      <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')">3C - DEFEAT NEARBY BEAST</div>
+      <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')">4C - CALL OF THE SOVEREIGN</div>
+      <div onclick="selectSmallerEventNew('5C','5C - PLAN YOUR CITY')">5C - PLAN YOUR CITY</div>
+      <div onclick="selectSmallerEventNew('6C','6C - CITY DEVELOPMENT')">6C - CITY DEVELOPMENT</div>
+      <div onclick="selectSmallerEventNew('7C','7C - PATH OF GROWTH')">7C - PATH OF GROWTH</div>
+      <div onclick="selectSmallerEventNew('8C','8C - POWERUP')">8C - POWERUP</div>
+      <div onclick="selectSmallerEventNew('9C','9C - WAR PREPARATION')">9C - WAR PREPARATION</div>
+      <div onclick="selectSmallerEventNew('10C','10C - DEVELOP NEW TECH')">10C - DEVELOP NEW TECH</div>
+      <div onclick="selectSmallerEventNew('11C','11C - DESERT TRAIL')">11C - DESERT TRAIL</div>
+      <div onclick="selectSmallerEventNew('12C','12C - WORKING OVERTIME')">12C - WORKING OVERTIME</div>
+      <div onclick="selectSmallerEventNew('13C','13C - OFFICER PROJECT')">13C - OFFICER PROJECT</div>
+      <div onclick="selectSmallerEventNew('14C','14C - WINDWARD VOYAGE')">14C - WINDWARD VOYAGE</div>
+      <div onclick="selectSmallerEventNew('15C','15C - ELYSIUM QUEST')">15C - ELYSIUM QUEST</div>
+      <div onclick="selectSmallerEventNew('16C','16C - FOOTBALL FIESTA')">16C - FOOTBALL FIESTA</div>
+      <div onclick="selectSmallerEventNew('17C','17C - STAND OF ARMS')">17C - STAND OF ARMS</div>
+      <div onclick="selectSmallerEventNew('18C','18C - CHILDHOOD SOJOURN')">18C - CHILDHOOD SOJOURN</div>
+      <div onclick="selectSmallerEventNew('19C','19C - SPRING TIDE CELEBRATION')">19C - SPRING TIDE CELEBRATION</div>
+      <div onclick="selectSmallerEventNew('20C','20C - ALL OUT')">20C - ALL OUT</div>
+      <div onclick="selectSmallerEventNew('21C','21C - FORSAKEN TEMPLE')">21C - FORSAKEN TEMPLE</div>
+      <div onclick="selectSmallerEventNew('22C','22C - TREASURE RAIDERS')">22C - TREASURE RAIDERS</div>
+      <div onclick="selectSmallerEventNew('23C','23C - KINGDOM OF ROMANCE')">23C - KINGDOM OF ROMANCE</div>
+      <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')">24C - DRAGONS CARAVEN</div>
+      <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')">25C - FLAMEDRAGON TYRANT</div>
+      <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')">26C - STEEL EDGE</div>
+    </div>
+  </div>
+
+<!-- HUBS - ALL OUTSIDE sticky, hidden -->
+<div id="smallerEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
+  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+    <select id="smallerEventMainDrop" style="display:none"></select>
+    <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700"></select>
+    <div id="smallerEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
+  </div>
+</div>
+   <!-- 4th BUTTON - MAJOR EVENTS - YOUR EXACT LIST -->
+  <div class="myDrop">
+    <button class="myDropBtn" onclick="toggleMajorEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'; document.getElementById('smallerEventDropList').style.display='none'">
+      <span id="majorEventDropLabel">🔥 MAJOR EVENT GUIDES</span>
+      <span>▼</span>
+    </button>
+    <div id="majorEventDropList" class="myDropList" style="max-height:400px;overflow-y:auto">
+      <div onclick="selectMajorEventNew('1D','🐻 BEAR TRAP')">🐻 BEAR TRAP</div>
+      <div onclick="selectMajorEventNew('2D','🧳 KINGDOM TRANSFER')">🧳 KINGDOM TRANSFER</div>
+      <div onclick="selectMajorEventNew('3D','🚩 ALLIANCE MOBILIZATION')">🚩 ALLIANCE MOBILIZATION</div>
+      <div onclick="selectMajorEventNew('4D','⚔️ KINGDOM OF POWER KVK')">⚔️ KINGDOM OF POWER KVK</div>
+      <div onclick="selectMajorEventNew('5D','✨ MYSTIC TRIALS')">✨ MYSTIC TRIALS</div>
+      <div onclick="selectMajorEventNew('6D','🗼 TRI ALLIANCE CLASH')">🗼 TRI ALLIANCE CLASH</div>
+      <div onclick="selectMajorEventNew('7D','⛏️ ETERNIA REACH')">⛏️ ETERNIA REACH</div>
+      <div onclick="selectMajorEventNew('8D','🏳️ SWORDLAND SHOWDOWN')">🏳️ SWORDLAND SHOWDOWN</div>
+      <div onclick="selectMajorEventNew('9D','🏰 CASTLE BATTLE TACTICS')">🏰 CASTLE BATTLE TACTICS</div>
+      <div onclick="selectMajorEventNew('10D','🪓 VIKINGS VENGEANCE')">🪓 VIKINGS VENGEANCE</div>
+      <div onclick="selectMajorEventNew('11D','🏛️ HALL OF GOVERNORS')">🏛️ HALL OF GOVERNORS</div>
+      <div onclick="selectMajorEventNew('12D','🏅 ALLIANCE CHAMPIONSHIP')">🏅 ALLIANCE CHAMPIONSHIP</div>
+      <div onclick="selectMajorEventNew('13D','🥊 ALLIANCE BRAWL')">🥊 ALLIANCE BRAWL</div>
+      <div onclick="selectMajorEventNew('14D','👑 STRONGEST GOVERNOR')">👑 STRONGEST GOVERNOR</div>
+    </div>
+  </div>
+
+<!-- MAJOR EVENT HUB - OUTSIDE sticky, hidden -->
+<div id="majorEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
+  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+    <select id="majorEventMainDrop" style="display:none">
+      <option value="1D">bear-trap</option>
+      <option value="2D">kingdom-transfer</option>
+      <option value="3D">alliance-mobilization</option>
+      <option value="4D">kingdom-of-power-kvk</option>
+      <option value="5D">mystic-trials</option>
+      <option value="6D">tri-alliance-clash</option>
+      <option value="7D">eternia-reach</option>
+      <option value="8D">swordland-showdown</option>
+      <option value="9D">castle-battle-tactics</option>
+      <option value="10D">vikings-vengeance</option>
+      <option value="11D">hall-of-governors</option>
+      <option value="12D">alliance-championship</option>
+      <option value="13D">alliance-brawl</option>
+      <option value="14D">strongest-governor</option>
+    </select>
+    <select id="majorEventSubDrop" onchange="showMajorEventLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700"></select>
+    <div id="majorEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
+  </div>
+</div>
+  <!-- 5th BUTTON - VALUABLE EVENTS - YOUR EXACT LIST -->
+  <div class="myDrop">
+    <button class="myDropBtn" onclick="toggleValuableEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'; document.getElementById('smallerEventDropList').style.display='none'; document.getElementById('majorEventDropList').style.display='none'">
+      <span id="valuableEventDropLabel">💰 VALUABLE EVENT GUIDES</span>
+      <span>▼</span>
+    </button>
+    <div id="valuableEventDropList" class="myDropList" style="max-height:400px;overflow-y:auto">
+      <div onclick="selectValuableEventNew('1E','🪖 CESARES FURY')">🪖 CESARES FURY</div>
+      <div onclick="selectValuableEventNew('2E','🏆 HALL OF HEROS EVENT')">🏆 HALL OF HEROS EVENT</div>
+      <div onclick="selectValuableEventNew('3E','🐟 FISHING TOURNAMENT')">🐟 FISHING TOURNAMENT</div>
+      <div onclick="selectValuableEventNew('4E','🔮 MYSTIC DIVINATION')">🔮 MYSTIC DIVINATION</div>
+      <div onclick="selectValuableEventNew('5E','☠️ BUCCANEER BOUNTY')">☠️ BUCCANEER BOUNTY</div>
+      <div onclick="selectValuableEventNew('6E','🏹 STRONGEST GOVERNER')">🏹 STRONGEST GOVERNER</div>
+      <div onclick="selectValuableEventNew('7E','🛡️ GROW YOUR HEROS EVENT')">🛡️ GROW YOUR HEROS EVENT</div>
+      <div onclick="selectValuableEventNew('8E','🍾 CHAMPAGNE FAIR')">🍾 CHAMPAGNE FAIR</div>
+      <div onclick="selectValuableEventNew('9E','🗡️ GOLDEN GLAIVES')">🗡️ GOLDEN GLAIVES</div>
+      <div onclick="selectValuableEventNew('10E','🎰 HERO ROULETTE')">🎰 HERO ROULETTE</div>
+      <div onclick="selectValuableEventNew('11E','💰 MERCHANT EMPIRE')">💰 MERCHANT EMPIRE</div>
+      <div onclick="selectValuableEventNew('12E','🏆 CHAMPIONS WAY')">🏆 CHAMPIONS WAY</div>
+    </div>
+  </div>
+</div> <!-- close sticky-tabs - NOW ALL 5 BUTTONS INSIDE -->
+
+<!-- VALUABLE EVENT HUB - OUTSIDE sticky, hidden -->
+<div id="valuableEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
+  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+    <select id="valuableEventMainDrop" style="display:none">
+      <option value="1E">cesares-fury</option>
+      <option value="2E">hall-of-heros-event</option>
+      <option value="3E">fishing-tournament</option>
+      <option value="4E">mystic-divination</option>
+      <option value="5E">buccaneer-bounty</option>
+      <option value="6E">strongest-governer</option>
+      <option value="7E">grow-your-heros-event</option>
+      <option value="8E">champagne-fair</option>
+      <option value="9E">golden-glaives</option>
+      <option value="10E">hero-roulette</option>
+      <option value="11E">merchant-empire</option>
+      <option value="12E">champions-way</option>
+    </select>
+    <select id="valuableEventSubDrop" onchange="showValuableEventLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700"></select>
+    <div id="valuableEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
+  </div>
+</div>
