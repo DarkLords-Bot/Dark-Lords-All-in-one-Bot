@@ -1030,3 +1030,1192 @@ load1F();
 </div>
 </div>
 </div>
+<!-- GOVERNOR TAB = 2A-2F -->
+<div id="tab-2A" style="display:none;">
+ <p class="page-sub">Real game data</p>
+<div class="card" id="div2A">
+<h2>⚔️ GOVERNER GEAR </h2>
+<p style="font-size:11px;color:#6B7280">REAL GAME DATA</p>
+<div id="gearGrid2A" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"></div>
+
+<div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+<div class="res"><b>Satin</b><span id="rSatin">0</span></div>
+<div class="res"><b>Threads</b><span id="rThreads">0</span></div>
+<div class="res"><b>Vision</b><span id="rVision">0</span></div>
+</div>
+
+<div id="gearBreakdown2A" class="breakdown" style="margin-top:10px">Pick Current → Target (Red T6 ★★★ exists) → CALCULATE</div>
+<button class="btn" blue style="margin-top:10px" onclick="calc2A()">CALCULATE</button>
+</div>
+<script>
+var GEAR_PIECES2A=["Cav Hat","Cav Necklace","Inf Coat","Inf Pants","Arc Ring","Arc Staff"];
+var LEVELS2A=["Not Started","Green","Green ★","Blue","Blue ★","Blue ★★","Blue ★★★","Purple","Purple ★","Purple ★★","Purple ★★★","Purple T1","Purple T1 ★","Purple T1 ★★","Purple T1 ★★★","Gold","Gold ★","Gold ★★","Gold ★★★","Gold T1","Gold T1 ★","Gold T1 ★★","Gold T1 ★★★","Gold T2","Gold T2 ★","Gold T2 ★★","Gold T2 ★★★","Gold T3","Gold T3 ★","Gold T3 ★★","Gold T3 ★★★","Red","Red ★","Red ★★","Red ★★★","Red T1","Red T1 ★","Red T1 ★★","Red T1 ★★★","Red T2","Red T2 ★","Red T2 ★★","Red T2 ★★★","Red T3","Red T3 ★","Red T3 ★★","Red T3 ★★★","Red T4","Red T4 ★","Red T4 ★★","Red T4 ★★★","Red T5","Red T5 ★","Red T5 ★★","Red T5 ★★★","Red T6","Red T6 ★","Red T6 ★★","Red T6 ★★★"];
+var COSTS2A=[{s:1500,t:15,v:0},{s:3800,t:40,v:0},{s:7000,t:70,v:0},{s:9700,t:95,v:0},{s:1000,t:10,v:45},{s:1000,t:10,v:50},{s:1500,t:15,v:60},{s:1500,t:15,v:70},{s:6500,t:65,v:40},{s:8000,t:80,v:50},{s:10000,t:95,v:60},{s:11000,t:110,v:70},{s:13000,t:130,v:85},{s:15000,t:160,v:100},{s:22000,t:220,v:40},{s:23000,t:230,v:40},{s:25000,t:250,v:45},{s:26000,t:260,v:45},{s:28000,t:280,v:45},{s:30000,t:300,v:55},{s:32000,t:320,v:55},{s:35000,t:340,v:55},{s:38000,t:360,v:55},{s:43000,t:430,v:75},{s:45000,t:460,v:80},{s:48000,t:500,v:85},{s:60000,t:600,v:120},{s:70000,t:700,v:140},{s:80000,t:800,v:160},{s:90000,t:900,v:180},{s:108000,t:1080,v:220},{s:114000,t:1140,v:230},{s:121000,t:1210,v:240},{s:128000,t:1280,v:250},{s:154000,t:1540,v:300},{s:163000,t:1630,v:320},{s:173000,t:1730,v:340},{s:183000,t:1830,v:360},{s:220000,t:2200,v:430},{s:233000,t:2330,v:460},{s:247000,t:2470,v:490},{s:262000,t:2620,v:520},{s:288000,t:2880,v:570},{s:302000,t:3020,v:600},{s:317000,t:3170,v:630},{s:333000,t:3330,v:660},{s:366000,t:3660,v:730},{s:384000,t:3840,v:770},{s:403000,t:4030,v:810},{s:423000,t:4230,v:850},{s:465000,t:4650,v:940},{s:479000,t:4790,v:970},{s:493000,t:4930,v:1000},{s:508000,t:5080,v:1030},{s:549000,t:5490,v:1110},{s:565000,t:5650,v:1145},{s:582000,t:5820,v:1180},{s:600000,t:6000,v:1220}];
+
+function lvlOpt2A(){var o='';for(var i=0;i<LEVELS2A.length;i++){o+='<option value="'+i+'">'+LEVELS2A[i]+'</option>';}return o;}
+
+function initGrid2A(){
+ var grid=document.getElementById('gearGrid2A');
+ if(!grid) return;
+ grid.innerHTML=GEAR_PIECES2A.map(function(n){
+  var safe=n.replace(/\s/g,'_');
+  return '<div class="bbox"><div class="btop"><b>'+n+'</b></div><div><span class="lbl">Current</span><select id="cur_'+safe+'">'+lvlOpt2A()+'</select></div><div style="margin-top:4px"><span class="lbl">Target</span><select id="tgt_'+safe+'">'+lvlOpt2A()+'</select></div></div>';
+ }).join('');
+}
+
+var G_TOTAL2A={s:0,t:0,v:0};
+
+window.calc2A=function(){
+ var ts=0,tt=0,tv=0; var html='';
+ for(var p=0;p<GEAR_PIECES2A.length;p++){
+  var name=GEAR_PIECES2A[p]; var safe=name.replace(/\s/g,'_');
+  var curEl=document.getElementById('cur_'+safe); var tgtEl=document.getElementById('tgt_'+safe);
+  if(!curEl||!tgtEl) continue;
+  var cur=parseInt(curEl.value)||0; var tgt=parseInt(tgtEl.value)||0;
+  if(tgt<=cur) continue;
+  var ls=0,lt=0,lv=0; for(var i=cur;i<tgt;i++){ls+=COSTS2A[i].s; lt+=COSTS2A[i].t; lv+=COSTS2A[i].v;}
+  ts+=ls; tt+=lt; tv+=lv;
+  html+='<div style="padding:5px 0;border-bottom:1px solid #eee"><b>'+name+'</b> '+LEVELS2A[cur]+' → '+LEVELS2A[tgt]+'<br><span style="font-size:11px">'+ls.toLocaleString()+' Satin | '+lt.toLocaleString()+' Threads | '+lv+' Vision</span></div>';
+ }
+ G_TOTAL2A={s:ts,t:tt,v:tv};
+ document.getElementById('rSatin').textContent=ts.toLocaleString();
+ document.getElementById('rThreads').textContent=tt.toLocaleString();
+ document.getElementById('rVision').textContent=tv.toLocaleString();
+ if(ts===0){
+  document.getElementById('gearBreakdown2A').innerHTML='<b style="color:red">Select at least 1 gear - Target must be > Current. Dropdown now has 59 levels till Red T6 ★★★</b>';
+ }else{
+  document.getElementById('gearBreakdown2A').innerHTML=html+'<div style="margin-top:8px;color:green;font-weight:900">✓ Total: '+ts.toLocaleString()+' Satin | '+tt.toLocaleString()+' Threads | '+tv.toLocaleString()+' Vision | '+LEVELS2A.length+' levels loaded FIXED</div>';
+ }
+ // LINK TO 2C
+ window.GEAR_TOTAL={satin:ts,thread:tt,gilded:tv,vision:tv,s:ts,t:tt,v:tv,raw:G_TOTAL2A};
+ if(window.calc2C) window.calc2C();
+ if(typeof updateDiv2C==='function') updateDiv2C();
+};
+
+// run grid after page loads
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initGrid2A); } else { initGrid2A(); }
+</script>
+
+ <!-- DIVISION 2B - LIVE SUMMARY -->
+<div class="card" id="div2B" style="background:#1E293B;color:#fff;border:0">
+<h2 style="color:#fff;font-size:14px">✨ Live Summary</h2>
+<p style="font-size:11px;color:#94A3B8;margin-top:4px">Auto updates from 2A calculation</p>
+
+<div style="margin-top:12px;display:grid;gap:8px">
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🧵 Satin</span><b id="bSatin2B" style="color:#38BDF8;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>🪡 Threads</span><b id="bThreads2B" style="color:#A78BFA;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>👁️ Vision</span><b id="bVision2B" style="color:#FB923C;font-size:14px">—</b>
+</div>
+<div style="background:#0F172A;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+<span>⚡ Power Gain</span><b id="bPower2B" style="color:#4ADE80">—</b>
+</div>
+</div>
+</div>
+
+<script>
+window.updateDiv2B=function(){
+ var s=(window.G_TOTAL2A && window.G_TOTAL2A.s) || (window.GEAR_TOTAL && window.GEAR_TOTAL.satin) || (window.GEAR_TOTAL && window.GEAR_TOTAL.s) || 0;
+ var t=(window.G_TOTAL2A && window.G_TOTAL2A.t) || (window.GEAR_TOTAL && window.GEAR_TOTAL.thread) || (window.GEAR_TOTAL && window.GEAR_TOTAL.t) || 0;
+ var v=(window.G_TOTAL2A && window.G_TOTAL2A.v) || (window.GEAR_TOTAL && window.GEAR_TOTAL.vision) || (window.GEAR_TOTAL && window.GEAR_TOTAL.v) || 0;
+ 
+ var set = function(id, val, isPower){
+   var el=document.getElementById(id);
+   if(!el) return;
+   if(isPower){
+     el.textContent = val ? Math.round(val/100).toLocaleString()+'k' : '—';
+   } else {
+     el.textContent = val ? val.toLocaleString() : '—';
+   }
+ };
+
+ set('bSatin2B', s, false);
+ set('bThreads2B', t, false);
+ set('bVision2B', v, false);
+ set('bPower2B', s, true);
+
+ // console for debug
+ console.log('LIVE SUMMARY linked ->', s, t, v);
+};
+
+// run once on load
+setTimeout(window.updateDiv2B,500);
+
+// AUTO-LINK: Hook into calc2A so Live Summary updates every time you press CALCULATE in 2A
+(function(){
+ var originalCalc2A = window.calc2A;
+ if(!originalCalc2A) return;
+ window.calc2A = function(){
+   var result = originalCalc2A.apply(this, arguments);
+   // After 2A calculates, update live summary
+   setTimeout(window.updateDiv2B, 10);
+   if(typeof window.updateDiv2C==='function') setTimeout(window.updateDiv2C, 20);
+   if(window.calc2C) setTimeout(window.calc2C, 30);
+   return result;
+ };
+})();
+</script>
+<!-- DIVISION 2C - INVENTORY (AUTO MINUS FROM 2B) -->
+<div class="card" id="div2C">
+<h2>📦 Self Backpack Inventory (Auto Minus from 2B)</h2>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Type K/M/B → shows Remaining Needed from 2B totals</p>
+
+<div style="margin-top:12px;display:grid;gap:10px">
+<div><span class="lbl">Satin in Bag</span><input id="invSatin2C" placeholder="e.g. 1.5M, 500K" oninput="calcRemaining2C()"></div>
+<div><span class="lbl">Threads in Bag</span><input id="invThreads2C" placeholder="e.g. 800K" oninput="calcRemaining2C()"></div>
+<div><span class="lbl">Vision in Bag</span><input id="invVision2C" placeholder="e.g. 2K" oninput="calcRemaining2C()"></div>
+</div>
+
+<div id="needBox2C" class="breakdown" style="display:none;margin-top:12px;background:#F0FDF4;border-color:#BBF7D0"></div>
+</div>
+
+<script>
+function parseKMB_2C(v){
+if(!v) return 0;
+v=v.toUpperCase().trim().replace(/,/g,'');
+var m=1;
+if(v.endsWith('K')){m=1e3;v=v.slice(0,-1);}
+else if(v.endsWith('M')){m=1e6;v=v.slice(0,-1);}
+else if(v.endsWith('B')){m=1e9;v=v.slice(0,-1);}
+var n=parseFloat(v);
+return isNaN(n)?0:Math.round(n*m);
+}
+
+window.calcRemaining2C=function(){
+var box=document.getElementById('needBox2C');
+var totalS=(window.G_TOTAL2A&&window.G_TOTAL2A.s)||0;
+var totalT=(window.G_TOTAL2A&&window.G_TOTAL2A.t)||0;
+var totalV=(window.G_TOTAL2A&&window.G_TOTAL2A.v)||0;
+
+if(totalS===0){
+box.style.display='block';
+box.innerHTML='<b style="color:#6B7280">First CALCULATE in 2A — then enter inventory here</b>';
+return;
+}
+
+var haveS=parseKMB_2C(document.getElementById('invSatin2C').value);
+var haveT=parseKMB_2C(document.getElementById('invThreads2C').value);
+var haveV=parseKMB_2C(document.getElementById('invVision2C').value);
+
+var needS=Math.max(0,totalS-haveS);
+var needT=Math.max(0,totalT-haveT);
+var needV=Math.max(0,totalV-haveV);
+
+box.style.display='block';
+box.innerHTML=
+'<b>✅ Remaining Needed (2B Total - Your Inventory):</b><br><br>'+
+'🧵 Satin: Total '+totalS.toLocaleString()+' - Have '+haveS.toLocaleString()+' = <b style="color:'+(needS===0?'green':'red')+'">'+needS.toLocaleString()+' still needed</b><br>'+
+'🪡 Threads: Total '+totalT.toLocaleString()+' - Have '+haveT.toLocaleString()+' = <b style="color:'+(needT===0?'green':'red')+'">'+needT.toLocaleString()+' still needed</b><br>'+
+'👁️ Vision: Total '+totalV.toLocaleString()+' - Have '+haveV.toLocaleString()+' = <b style="color:'+(needV===0?'green':'red')+'">'+needV.toLocaleString()+' still needed</b>';
+};
+
+// keep in sync when 2A recalculated
+var oldCalc2A=window.calc2A;
+window.calc2A=function(){
+if(oldCalc2A) oldCalc2A.apply(this, arguments);
+setTimeout(window.calcRemaining2C,100);
+ // ADD THIS - 4 lines - BEFORE the } that closes calc2A
+  window.GEAR_TOTAL = {
+    modTime: modSec,
+    origTime: origSec || modSec,
+    satin: totalSatin,
+    gilded: totalGilded,
+    time: modSec
+  };
+} // <- this is your original closing brace of calc2A
+};
+</script>
+ <!-- ========== DIVISION 2C - FINAL PLAN & EXPORT - SAME AS 1C SCREENSHOT ========== -->
+<div class="card" id="FinalPlan2C">
+<div style="background:#FFFFFF;padding:14px;border-radius:16px;border:1px solid #000;margin-top:12px">
+<h3 style="margin:0;color:#000000">⚡ FINAL PLAN & EXPORT</h3>
+<p style="font-size:12px;color:#000000;margin:4px 0 10px 0">Auto from 2A Need minus 2B Inventory = What you still need</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:12px">
+<b style="color:#000000">✅ TOTAL NEEDED (2A)</b><br>
+<span id="cNeed2" style="color:#000000;font-weight:900">0 Satin / 0 Threads / 0 Vision</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:12px">
+<b style="color:#000000">⏳ STILL MISSING (After 2B)</b><br>
+<span id="cMissing2" style="color:#000000;font-weight:900">0 / 0 / 0 Still Missing</span>
+</div>
+</div>
+
+<div id="cDetails2" style="margin-top:10px;background:#FFFFFF;border:1px solid #000;padding:10px;border-radius:10px;color:#000000;font-size:13px">Calculate 2A first...</div>
+
+<textarea id="exportText2" style="width:100%;height:180px;margin-top:10px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;padding:10px;font-family:monospace;font-size:12px;font-weight:600">Calculate 2A first...</textarea>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button class="btn" style onclick="copyFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">📋 COPY TEXT</button>
+<button class="btn" style onclick="calc2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🔄 REFRESH FINAL</button>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button class="btn" style onclick="clearFinal2C()" style="padding:14px;background:#FFFFFF;color:#000000;border:1px solid #000;border-radius:12px;font-weight:900">🧹 CLEAR</button>
+<button class="btn" style onclick="printPDF2C()" style="padding:14px;background:#000000;color:#FFFFFF;border:none;border-radius:12px;font-weight:900">🖨️ PRINT / SAVE PDF</button>
+</div>
+
+</div>
+</div>
+
+<script>
+function parseKM_2C(v){ if(!v) return 0; v=(''+v).toLowerCase().trim().replace(/,/g,''); var m=1; if(v.endsWith('k')){m=1000;v=v.slice(0,-1);} else if(v.endsWith('m')){m=1000000;v=v.slice(0,-1);} if(v.endsWith('b')){m=1000000000;v=v.slice(0,-1);} var n=parseFloat(v); return isNaN(n)?0:Math.floor(n*m); }
+
+window.calc2C = function(){
+ // MATCH 2A VARIABLES
+ var ts = (window.G_TOTAL2A && window.G_TOTAL2A.s)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.satin)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.s)?? 0;
+ var tt = (window.G_TOTAL2A && window.G_TOTAL2A.t)?? (window.GEAR_TOTAL && window.GEAR<div class="card" id="FinalPlan2C">
+
+TOTAL.thread)?? (window.GEAR_TOTAL && window.GEAR_TOTAL.t)?? 0;
+</script>
+
+<script>
+function parseKM(v){
+ if(!v) return 0;
+ v=(''+v).toLowerCase().trim().replace(/,/g,'');
+ var m=1;
+ if(v.endsWith('k')){m=1000;v=v.slice(0,-1);}
+ else if(v.endsWith('m')){m=1000000;v=v.slice(0,-1);}
+ else if(v.endsWith('b')){m=1000000000;v=v.slice(0,-1);}
+ var n=parseFloat(v);
+ return isNaN(n)?0:Math.floor(n*m);
+}
+
+window.calc2C = function(){
+ var ts = (window.G_TOTAL2A && window.G_TOTAL2A.s) || 0;
+ var tt = (window.G_TOTAL2A && window.G_TOTAL2A.t) || 0;
+ var tv = (window.G_TOTAL2A && window.G_TOTAL2A.v) || 0;
+
+ if(ts===0 && tt===0 && tv===0){
+   document.getElementById('cNeed2').textContent='0 Satin / 0 Threads / 0 Vision';
+   document.getElementById('cMissing2').textContent='0 / 0 / 0 Still Missing';
+   document.getElementById('cDetails2').innerHTML='<b style="color:#000">First CALCULATE in 2A</b>';
+   document.getElementById('exportText2').value='Calculate 2A first...';
+   return;
+ }
+
+ var haveS = parseKM(document.getElementById('invSatin2C')?.value);
+ var haveT = parseKM(document.getElementById('invThreads2C')?.value);
+ var haveV = parseKM(document.getElementById('invVision2C')?.value);
+
+ var needS = Math.max(0, ts - haveS);
+ var needT = Math.max(0, tt - haveT);
+ var needV = Math.max(0, tv - haveV);
+
+ document.getElementById('cNeed2').textContent = ts.toLocaleString()+' Satin / '+tt.toLocaleString()+' Threads / '+tv.toLocaleString()+' Vision';
+ document.getElementById('cMissing2').textContent = needS.toLocaleString()+' / '+needT.toLocaleString()+' / '+needV.toLocaleString()+' Still Missing';
+ document.getElementById('cDetails2').innerHTML = 
+   'Satin: Total '+ts.toLocaleString()+' - Have '+haveS.toLocaleString()+' = <b style="color:#000">'+needS.toLocaleString()+' still needed</b><br>'+
+   'Threads: Total '+tt.toLocaleString()+' - Have '+haveT.toLocaleString()+' = <b style="color:#000">'+needT.toLocaleString()+' still needed</b><br>'+
+   'Vision: Total '+tv.toLocaleString()+' - Have '+haveV.toLocaleString()+' = <b style="color:#000">'+needV.toLocaleString()+' still needed</b>';
+
+ document.getElementById('exportText2').value =
+'Governor Gear Upgrade:\n'+
+'Satin: '+ts.toLocaleString()+' | Threads: '+tt.toLocaleString()+' | Vision: '+tv.toLocaleString()+'\n\n'+
+'REMAINING MISSING:\n'+
+'Satin: '+needS.toLocaleString()+' | Threads: '+needT.toLocaleString()+' | Vision: '+needV.toLocaleString()+'\n'+
+'Satin: Total '+ts.toLocaleString()+' - Have '+haveS.toLocaleString()+' = '+needS.toLocaleString()+' still needed\n'+
+'Threads: Total '+tt.toLocaleString()+' - Have '+haveT.toLocaleString()+' = '+needT.toLocaleString()+' still needed\n'+
+'Vision: Total '+tv.toLocaleString()+' - Have '+haveV.toLocaleString()+' = '+needV.toLocaleString()+' still needed\n\n'+
+'Generated by DarkLords KS A-I-O BoT';
+};
+
+function copyFinal2C(){ var el=document.getElementById('exportText2'); el.select(); navigator.clipboard.writeText(el.value).then(()=>alert('Copied!')); }
+function clearFinal2C(){ document.getElementById('invSatin2C').value=''; document.getElementById('invThreads2C').value=''; document.getElementById('invVision2C').value=''; calc2C(); }
+function printPDF2C(){ var txt=document.getElementById('exportText2').value; var w=window.open('','','width=900,height=700'); w.document.write('<html><head><style>body{font-family:monospace;padding:20px;color:#000;background:#fff} pre{white-space:pre-wrap;font-size:14px;border:1px solid #000;padding:15px;border-radius:10px;background:#fff;color:#000} button{padding:12px 20px;font-weight:900;border-radius:8px}</style></head><body><h2 style="color:#000">Governor Gear - Final Plan</h2><pre>'+txt+'</pre><br><button onclick="window.print()" style="background:#000;color:#fff;border:none">PRINT / SAVE AS PDF</button> <button onclick="window.close()" style="background:#fff;color:#000;border:1px solid #000">CLOSE</button></body></html>'); w.document.close(); }
+
+// auto refresh when you type inventory
+['invSatin2C','invThreads2C','invVision2C'].forEach(id=>{
+ var el=document.getElementById(id);
+ if(el) el.addEventListener('input',()=>setTimeout(calc2C,50));
+});
+</script>
+ 
+<!-- DIVISION 2D - EXACT KINGSHOT.NET TABLE - 57 LEVELS -->
+<div class="card" id="div2D-table" style="background:#FFFFFF;border:1px solid #000;padding:14px;border-radius:16px;margin-top:12px">
+<h2 style="margin:0;color:#000">📋 Governor Gear - Official Table </h2>
+<p style="font-size:11px;color:#fff;margin-top:4px">REAL GAME DATA</p>
+
+<button class="btn" blue onclick="margin-top:10px;padding:12px;width:100%;background:#000;color:#FFF;border:none;border-radius:10px;font-weight:900" onclick="toggleTable2D()">Show / Hide Full Table</button>
+
+<div id="tableWrap2D" style="display:block;margin-top:12px;max-height:600px;overflow:auto;border:1px solid #000;border-radius:10px">
+<table style="width:100%;font-size:11px;border-collapse:collapse;background:#FFF;color:#000">
+<thead style="position:sticky;top:0;z-index:3">
+<tr style="background:#000;color:#fff">
+<th style="padding:8px;text-align:left;position:sticky;left:0;background:#000">Tier & Level</th>
+<th style="padding:8px">Satin</th>
+<th style="padding:8px">Threads</th>
+<th style="padding:8px">Vision</th>
+<th style="padding:8px">Power</th>
+<th style="padding:8px">Stat ↑</th>
+<th style="padding:8px">Total</th>
+<th style="padding:8px">Set Bonus</th>
+</tr>
+</thead>
+<tbody id="tableBody2D"></tbody>
+</table>
+</div>
+</div>
+
+<script>
+const OFFICIAL_GEAR = [
+["Green","1500",15,"–","224,400","+9.35%","+9.35%","+2%"],
+["Green ★","3800",40,"–","306,000","+3.40%","+12.75%","+2.5%"],
+["Blue","7000",70,"–","408,000","+4.25%","+17.00%","+3%"],
+["Blue ★","9700",95,"–","510,000","+4.25%","+21.25%","+3.5%"],
+["Blue ★★","1000",10,45,"612,000","+4.25%","+25.50%","+4%"],
+["Blue ★★★","1000",10,50,"714,000","+4.25%","+29.75%","+4.5%"],
+["Purple","1500",15,60,"816,000","+4.25%","+34.00%","+5%"],
+["Purple ★","1500",15,70,"885,360","+2.89%","+36.89%","+5%"],
+["Purple ★★","6500",65,40,"954,720","+2.89%","+39.78%","+5%"],
+["Purple ★★★","8000",80,50,"1,024,080","+2.89%","+42.67%","+5%"],
+["Purple T1","10000",95,60,"1,093,440","+2.89%","+45.56%","+6%"],
+["Purple T1 ★","11000",110,70,"1,162,800","+2.89%","+48.45%","+6%"],
+["Purple T1 ★★","13000",130,85,"1,232,160","+2.89%","+51.34%","+6%"],
+["Purple T1 ★★★","15000",160,100,"1,301,520","+2.89%","+54.23%","+6%"],
+["Gold","22000",220,40,"1,362,720","+2.55%","+56.78%","+7%"],
+["Gold ★","23000",230,40,"1,423,920","+2.55%","+59.33%","+7%"],
+["Gold ★★","25000",250,45,"1,485,120","+2.55%","+61.88%","+7%"],
+["Gold ★★★","26000",260,45,"1,546,320","+2.55%","+64.43%","+7%"],
+["Gold T1","28000",280,45,"1,607,520","+2.55%","+66.98%","+8%"],
+["Gold T1 ★","30000",300,55,"1,668,720","+2.55%","+69.53%","+8%"],
+["Gold T1 ★★","32000",320,55,"1,729,920","+2.55%","+72.08%","+8%"],
+["Gold T1 ★★★","35000",340,55,"1,791,120","+2.55%","+74.63%","+8%"],
+["Gold T2","38000",390,55,"1,852,320","+2.55%","+77.18%","+9%"],
+["Gold T2 ★","43000",430,75,"1,913,520","+2.55%","+79.73%","+9%"],
+["Gold T2 ★★","45000",460,80,"1,974,720","+2.55%","+82.28%","+9%"],
+["Gold T2 ★★★","48000",500,85,"2,040,000","+2.55%","+84.83%","+9%"],
+["Gold T3","60000",600,120,"2,097,120","+2.55%","+87.38%","+10%"],
+["Gold T3 ★","70000",700,140,"2,158,320","+2.55%","+89.93%","+10%"],
+["Gold T3 ★★","80000",800,160,"2,219,520","+2.55%","+92.48%","+10%"],
+["Gold T3 ★★★","90000",900,180,"2,280,720","+2.55%","+95.03%","+10%"],
+["Red","108000",1080,220,"2,381,000","+3.00%","+98.03%","+12%"],
+["Red ★","114000",1140,230,"2,449,000","+3.00%","+101.03%","+12%"],
+["Red ★★","121000",1210,240,"2,520,000","+3.00%","+104.03%","+12%"],
+["Red ★★★","128000",1280,250,"2,591,000","+3.00%","+107.03%","+12%"],
+["Red T1","154000",1540,300,"2,665,000","+3.00%","+110.03%","+14%"],
+["Red T1 ★","163000",1630,320,"2,740,000","+3.00%","+113.03%","+14%"],
+["Red T1 ★★","173000",1730,340,"2,816,000","+3.00%","+116.03%","+14%"],
+["Red T1 ★★★","183000",1830,360,"2,894,000","+3.00%","+119.03%","+14%"],
+["Red T2","220000",2200,430,"2,973,000","+3.00%","+122.03%","+16%"],
+["Red T2 ★","233000",2330,460,"3,054,000","+3.00%","+125.03%","+16%"],
+["Red T2 ★★","247000",2470,490,"3,136,000","+3.00%","+128.03%","+16%"],
+["Red T2 ★★★","262000",2620,520,"3,220,000","+3.00%","+131.03%","+16%"],
+["Red T3","288000",2880,570,"3,306,000","+3.00%","+134.03%","+19%"],
+["Red T3 ★","302000",3020,600,"3,393,000","+3.00%","+137.03%","+19%"],
+["Red T3 ★★","317000",3170,630,"3,482,000","+3.00%","+140.03%","+19%"],
+["Red T3 ★★★","333000",3330,660,"3,572,000","+3.00%","+143.03%","+19%"],
+["Red T4","366000",3660,730,"3,664,000","+3.00%","+146.03%","+22%"],
+["Red T4 ★","384000",3840,770,"3,758,000","+3.00%","+149.03%","+22%"],
+["Red T4 ★★","403000",4030,810,"3,853,000","+3.00%","+152.03%","+22%"],
+["Red T4 ★★★","423000",4230,850,"3,950,000","+3.00%","+155.03%","+22%"],
+["Red T5","465000",4650,940,"4,048,000","+3.00%","+158.03%","+26.5%"],
+["Red T5 ★","479000",4790,970,"4,128,000","+3.00%","+161.03%","+26.5%"],
+["Red T5 ★★","493000",4930,1000,"4,210,000","+3.00%","+164.03%","+26.5%"],
+["Red T5 ★★★","508000",5080,1030,"4,294,000","+3.00%","+167.03%","+26.5%"],
+["Red T6","535000",5350,1090,"3,816,000","+3.00%","+159.00%","+26.5%"],
+["Red T6 ★","548000",5480,1110,"3,888,000","+3.00%","+162.00%","+30%"],
+["Red T6 ★★","565000",5650,1140,"3,960,000","+3.00%","+165.00%","+30%"],
+["Red T6 ★★★","582000",5820,1170,"4,032,000","+3.00%","+168.00%","+30%"],
+["Red T6 ★★★+","599000",5990,1210,"4,104,000","+3.00%","+171.00%","+30%"]
+];
+
+window.toggleTable2D=function(){
+ var w=document.getElementById('tableWrap2D');
+ w.style.display = (w.style.display==='none')?'block':'none';
+};
+
+(function render(){
+ var body=document.getElementById('tableBody2D');
+ if(!body) return;
+ var html='';
+ for(var i=0;i<OFFICIAL_GEAR.length;i++){
+  var r=OFFICIAL_GEAR[i];
+  var isRed=r[0].includes('Red');
+  var isT6=r[0].includes('T6');
+  var style=isT6?'background:#FEF3C7;color:#000;font-weight:900':(isRed?'background:#FFF1F2;color:#000':'background:#FFF;color:#000');
+  html+='<tr style="'+style+';border-bottom:1px solid #000"><td style="padding:7px;text-align:left;position:sticky;left:0;background:inherit;font-weight:700">'+r[0]+'</td><td style="padding:7px;text-align:center">'+r[1]+'</td><td style="padding:7px;text-align:center">'+r[2]+'</td><td style="padding:7px;text-align:center">'+r[3]+'</td><td style="padding:7px;text-align:center">'+r[4]+'</td><td style="padding:7px;text-align:center">'+r[5]+'</td><td style="padding:7px;text-align:center">'+r[6]+'</td><td style="padding:7px;text-align:center;font-weight:900">'+r[7]+'</td></tr>';
+ }
+ body.innerHTML=html;
+})();
+</script>
+
+<!-- ========== DIVISION 2D - BELOW 2C - GOVERNOR GEAR - 3 SEPARATE BOXES IN 1 CARD ========== -->
+<div class="card" id="div2D" style="margin-top:16px;border:2px dashed #111827">
+<h2 style="text-align:center;margin-bottom:4px">Governor Gear Reference guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">Tap any box to open — all inside one card</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 1 - Official DB</span>
+<a href="https://kingshot.net/database/governor-gear" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>🏰 kingshot.net / database / governor-gear</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 2 - Guide + Calculator</span>
+<a href="https://www.kingshotguide.org/guides/governor-gear-and-charms" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📖 kingshotguide.org / governor-gear-and-charms</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:14px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Link 3 - Data & Costs</span>
+<a href="https://kingshotdata.com/database/governor-gear/" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>📊 kingshotdata.com / database / governor-gear</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<button class="btn" style onclick="window.open('https://kingshot.net/database/governor-gear','_blank');window.open('https://www.kingshotguide.org/guides/governor-gear-and-charms','_blank');window.open('https://kingshotdata.com/database/governor-gear/','_blank');">🚀 Open All 3 Gear DB at Once</button>
+</div>
+ <!-- ========== DIVISION 2E - YOUTUBE GOVERNOR GEAR GUIDES ========== -->
+<div class="card" id="div2E" style="margin-top:16px;border:2px dashed #DC2626">
+<h2 style="text-align:center;margin-bottom:4px">YouTube Links to Governor Gear Guides</h2>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-bottom:14px">All governor gear upgrade videos — tap to watch</p>
+
+<!-- BOX 1 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:6px">Video 1 - Gear Upgrade Guide</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+governor+gear+upgrade+guide" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Governor Gear Upgrade Guide - Full Breakdown</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 2 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 2 - Satin & Gilded</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+satin+gilded+thread+gear+farm" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Satin & Gilded Thread - How to Farm Fast</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 3 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 3 - F2P Gear Priority</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+f2p+governor+gear+priority+which+piece+first" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ F2P Gear Priority - Which Piece to Upgrade First</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 4 -->
+<div style="border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-bottom:10px;background:#fff">
+<span style="font-size:10px;font-weight:800;color:#6B7280;text-transform:uppercase;display:block;margin-bottom:6px">Video 4 - Vision Lenses & Charms</span>
+<a href="https://www.youtube.com/results?search_query=kingshot+vision+lenses+governor+gear+57" target="_blank" style="display:block;text-decoration:none">
+<div style="background:#FF0000;color:#fff;border:1px solid #111827;border-radius:10px;padding:12px;font-weight:900;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+<span>▶️ Lv 57 Gear - Vision Lenses & Charm Guide</span><span>↗</span>
+</div>
+</a>
+</div>
+
+<!-- BOX 5 - GOVERNOR GEAR ONLY SEARCH - LOCKED -->
+<div style="border:2px solid #7C3AED;border-radius:12px;padding:12px;margin-bottom:14px;background:#F5F3FF">
+<span style="font-size:10px;font-weight:800;color:#7C3AED;text-transform:uppercase;display:block;margin-bottom:8px">>🔴 Box 5 - Governor Gear Only Search</span>
+<div style="display:flex;gap:8px">
+<input id="ytSearchGear" type="text" placeholder="e.g. Satin, Gilded, Head, Ring, Lv 50" style="flex:1;padding:12px;border-radius:10px;border:1px solid #E5E7EB;font-weight:600" onkeypress="if(event.key==='Enter'){doGearSearch()}">
+<button onclick="doGearSearch()" style="padding:12px 16px;border-radius:10px;background:#7C3AED;color:#fff;font-weight:900;border:0;cursor:pointer">Search ▶️</button>
+</div>
+<p style="font-size:10px;color:#6B7280;margin-top:8px">Only governor gear videos will show - other topics blocked</p>
+<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Satin Gilded farm';doGearSearch()">Satin Farm</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Head Armor priority';doGearSearch()">Priority</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='Vision Lenses';doGearSearch()">Vision</button>
+<button class="btn" blue style="font-size:11px;padding:8px" onclick="document.getElementById('ytSearchGear').value='F2P';doGearSearch()">F2P</button>
+</div>
+</div>
+
+<button class="btn" style="background:#7C3AED" onclick="window.open('https://www.youtube.com/results?search_query=kingshot+governor+gear+upgrade','_blank');window.open('https://www.youtube.com/results?search_query=kingshot+satin+gilded+thread+farm','_blank');window.open('https://www.youtube.com/results?search_query=kingshot+governor+gear+priority','_blank');">🚀 Open All Gear Guides</button>
+</div>
+
+<script>
+function doGearSearch(){
+ var q = document.getElementById('ytSearchGear').value.trim();
+ if(!q){ alert('Type gear piece - e.g. Head, Satin, Vision'); return; }
+ // Force governor gear context - locked
+ var fixedQuery = 'kingshot governor gear upgrade ' + q;
+ var url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(fixedQuery);
+ window.open(url,'_blank');
+}
+</script>
+ <!-- ===== 2F - GOVERNOR GEAR AUTO - SAME LIKE 1E ===== -->
+<div class="card"id="div2F" style="border:2px solid #111827;border-radius:10px;padding:8px;margin-top:6px;background:#6B7280">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<b style="font-size:10px">2F - LATEST GOVERNOR GEAR (AUTO)</b>
+<span id="gTime" style="font-size:8px;color:#fff">Updating...</span>
+</div>
+
+<b style="font-size:9px;display:block;margin-top:6px">⚔️ Latest 4 YouTube - Gov Gear</b>
+<div id="gYt" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#fff;padding:10px;text-align:center">Loading videos...</div>
+</div>
+
+<b style="font-size:9px;display:block;margin-top:8px;border-top:1px solid #E5E7EB;padding-top:6px">📖 Latest 4 Fandom - Governor Gear</b>
+<div id="gFandom" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+<div style="font-size:9px;color:#fff;padding:10px;text-align:center">Loading Fandom...</div>
+</div>
+</div>
+
+<script>
+async function load2F(){
+ const yDiv=document.getElementById('gYt');
+ const fDiv=document.getElementById('gFandom');
+ const t=document.getElementById('gTime');
+ try{
+   // 1. YOUTUBE AUTO - Governor Gear
+   const yRes=await fetch('https://yt.lemnoslife.com/noKey/search?part=snippet&q=kingshot%20governor%20gear%20guide&maxResults=4&type=video&order=date');
+   const yJson=await yRes.json();
+   const vids=(yJson.items||[]).slice(0,4);
+   if(vids.length){
+     yDiv.innerHTML=vids.map(v=>`
+       <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;display:block;background:#000">
+         <img src="${v.snippet.thumbnails.medium.url}" style="width:100%;height:68px;object-fit:cover;display:block">
+         <div style="padding:4px;background:#fff"><div style="font-size:8px;font-weight:800;color:#111827;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${v.snippet.title.substring(0,55)}</div></div>
+       </a>`).join('');
+   }
+ }catch(e){
+   yDiv.innerHTML=`<a href="https://www.youtube.com/results?search_query=kingshot+governor+gear" target="_blank" style="font-size:9px">Open Latest Gov Gear Videos →</a>`;
+ }
+
+ try{
+   // 2. FANDOM AUTO - Governor Gear
+   const fRes=await fetch('https://kingshot.fandom.com/api.php?action=query&list=search&srsearch=governor%20gear&srlimit=4&format=json&origin=*');
+   const fJson=await fRes.json();
+   const pages=fJson.query?.search||[];
+   if(pages.length){
+     fDiv.innerHTML=pages.map(p=>`
+       <a href="https://kingshot.fandom.com/wiki/${encodeURIComponent(p.title.replace(/ /g,'_'))}" target="_blank" style="text-decoration:none;border:1px solid #E5E7EB;border-radius:8px;padding:6px;background:#F9FAFB;display:block">
+         <span style="font-size:7px;background:#DC2626;color:#fff;padding:2px 4px;border-radius:4px;font-weight:800">FANDOM</span>
+         <div style="font-size:9px;font-weight:700;color:#111827;margin-top:3px;line-height:1.2">${p.title}</div>
+         <div style="font-size:7px;color:#6B7280;margin-top:2px">${(p.snippet||'').replace(/<[^>]*>/g,'').substring(0,45)}...</div>
+       </a>`).join('');
+   }else throw 'empty';
+ }catch(e){
+   // Fallback direct wiki links
+   fDiv.innerHTML=`
+     <a href="https://kingshot.fandom.com/wiki/Governor_Gear" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Governor Gear - Wiki</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Governor_Gear_Set" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Gear Set Bonus</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Forge" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">Forge Guide</b></a>
+     <a href="https://kingshot.fandom.com/wiki/Category:Equipment" target="_blank" style="border:1px solid #E5E7EB;border-radius:8px;padding:6px;display:block;text-decoration:none;background:#F9FAFB"><b style="font-size:9px;color:#111">All Equipment</b></a>
+   `;
+ }
+ t.textContent='Auto: '+new Date().toLocaleDateString();
+}
+load2F();
+</script>
+</div>
+</div>
+</div>
+
+<!--DIV-3B,3C,3D,3E,3F INSIDE OF TAB-3A --> 
+<div id="tab-3A" style="width:100%;max-width:480px;...;display:none">
+ <style>
+.ks-box{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:10px;margin-bottom:10px}
+.ks-gear{background:#1e222a;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;margin-bottom:12px}
+.ks-pill{border:1px solid rgba(255,255,255,0.08);background:#2a2e38;color:#9aa3b2;padding:7px 12px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
+.ks-pill.active{background:#323845;color:#fff;border-color:#f59e0b}
+.ks-pill-gold{background:#2a2520;color:#fbbf24;border-color:rgba(251,191,36,0.25)}
+.ks-select{background:#2a2e38;color:#e2e8f0;border:1px solid rgba(255,255,255,0.08);padding:10px 12px;border-radius:10px;font-weight:700;font-size:13px;width:100%}
+.calc-btn{width:100%;background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#000;font-weight:900;font-size:15px;letter-spacing:1px;padding:14px;border-radius:12px;border:none;cursor:pointer;box-shadow:0 4px 0 #b45309;margin-top:10px}
+</style>
+
+<div style="color:#fff;font-weight:900;font-size:16px;margin:4px 0 10px">📦 Select Charm by Troop Type</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+  <button onclick="selAll(true)" class="ks-pill ks-pill-gold">☑ Select All</button>
+  <button onclick="selTroop('inf')" class="ks-pill ks-pill-gold">☑ Select All (Infantry)</button>
+  <button onclick="selTroop('cav')" class="ks-pill ks-pill-gold">☑ Select All (Cavalry)</button>
+  <button onclick="selTroop('arc')" class="ks-pill ks-pill-gold">☑ Select All (Archer)</button>
+  <button onclick="setMax()" class="ks-pill">↗ Set All to Max</button>
+  <button onclick="selAll(false)" class="ks-pill">☐ Clear All</button>
+</div>
+
+<div class="ks-box" style="padding:8px">
+  <div style="display:flex;gap:8px;background:#111318;border-radius:24px;padding:5px">
+    <button id="tCav" onclick="switchT('cav')" class="ks-pill" style="flex:1">🐴 Cavalry</button>
+    <button id="tInf" onclick="switchT('inf')" class="ks-pill active" style="flex:1">🛡️ Infantry</button>
+    <button id="tArc" onclick="switchT('arc')" class="ks-pill" style="flex:1">🏹 Archer</button>
+  </div>
+</div>
+
+<div id="gearsWrap"></div>
+
+<button onclick="calc()" class="calc-btn">⚔️ CALCULATE</button>
+
+<div class="ks-box" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:12px;background:#151821">
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">GUIDES</div><div id="kG" style="color:#fbbf24;font-weight:900;font-size:18px">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">DESIGNS</div><div id="kD" style="color:#fbbf24;font-weight:900;font-size:18px">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">POWER</div><div id="kP" style="color:#4ade80;font-weight:900;font-size:18px">0</div></div>
+  <div style="text-align:center"><div style="color:#64748b;font-size:9px;font-weight:800">SCORE</div><div id="kS" style="color:#60a5fa;font-weight:900;font-size:18px">0</div></div>
+</div>
+
+<script>
+const CH_FULL={0:{g:0,d:0,p:0,s:0},1:{g:5,d:5,p:205700,s:625},2:{g:40,d:15,p:288000,s:1250},3:{g:60,d:40,p:370000,s:3125},4:{g:80,d:100,p:452000,s:8750},5:{g:100,d:200,p:576000,s:11250},6:{g:120,d:300,p:700000,s:12500},7:{g:140,d:400,p:824000,s:12500},8:{g:200,d:400,p:948000,s:13000},9:{g:300,d:400,p:1072000,s:14000},10:{g:420,d:420,p:1196000,s:15000},11:{g:560,d:420,p:1320000,s:16000},12:{g:580,d:600,p:1444000,s:17000},13:{g:610,d:780,p:1568000,s:18000},14:{g:645,d:960,p:1692000,s:19000},15:{g:685,d:1140,p:1816000,s:20000},16:{g:730,d:1320,p:1940000,s:21000},17:{g:780,d:1500,p:2064000,s:22000},18:{g:835,d:1680,p:2188000,s:23000},19:{g:895,d:1860,p:2312000,s:24000},20:{g:960,d:2040,p:2436000,s:25000},21:{g:1030,d:2220,p:2560000,s:26000},22:{g:1105,d:2400,p:2684000,s:27000}};
+function cum(l){let g=0,d=0;for(let i=1;i<=l;i++){g+=CH_FULL[i].g; d+=CH_FULL[i].d;} return {cg:g,cd:d,p:CH_FULL[l]?.p||0,s:CH_FULL[l]?.s||0};}
+let troop='inf'; const MAP={cav:['Cap','Watch'], inf:['Coat','Pants'], arc:['Belt','Weapon']}; const LVLS=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+function optsHTML(){let h=''; LVLS.forEach(v=>{h+=v===0?`<option value="0">Not Started</option>`:`<option value="${v}">Level ${v}</option>`;}); return h;}
+function optsTarget(){let h=''; LVLS.forEach(v=>{if(v!==0)h+=`<option value="${v}" ${v===21?'selected':''}>Level ${v}</option>`;}); return h;}
+function switchT(t){troop=t; document.getElementById('tCav').classList.remove('active'); document.getElementById('tInf').classList.remove('active'); document.getElementById('tArc').classList.remove('active'); document.getElementById('t'+(t==='cav'?'Cav':t==='inf'?'Inf':'Arc')).classList.add('active'); render();}
+function render(){
+ let gears=MAP[troop]; let h='';
+ gears.forEach(gear=>{
+  let col=troop==='inf'?'#ef4444':troop==='cav'?'#facc15':'#22d3ee'; let bg=troop==='inf'?'#2a1a1a':troop==='cav'?'#2a2410':'#102a2a'; let icon=troop==='inf'?'🛡️':troop==='cav'?'🐴':'🏹';
+  h+=`<div class="ks-gear"><div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:${bg}"><div style="color:${col};font-weight:900;display:flex;gap:6px"><span>${icon}</span> ${gear}</div><div style="display:flex;gap:6px"><select id="${gear}_lvl" class="ks-pill" style="padding:6px 10px"><option>Level</option>${LVLS.filter(v=>v!==0).map(v=>`<option value="${v}">Lv${v}</option>`).join('')}</select><button onclick="setGear('${gear}')" class="ks-pill" style="font-size:11px">Set All</button></div></div>`;
+  for(let i=1;i<=3;i++){let id=`${troop}_${gear}_${i}`; h+=`<div style="padding:12px;display:flex;gap:12px;align-items:center;border-top:1px solid rgba(255,255,255,0.05)"><input type="checkbox" id="${id}_chk" onchange="calc()" style="width:18px;height:18px"><div style="width:34px;height:34px;background:#1e2e1e;border-radius:50%;display:flex;align-items:center;justify-content:center">🟢</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:14px">Charm ${i}</div><div style="display:grid;grid-template-columns:1fr 12px 1fr;gap:8px;align-items:center;margin-top:6px"><div><div style="color:#64748b;font-size:10px">Current Level</div><select id="${id}_cur" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px">${optsHTML()}</select></div><div style="color:#64748b;margin-top:18px;text-align:center">›</div><div><div style="color:#64748b;font-size:10px">Target Level</div><select id="${id}_targ" onchange="calc()" class="ks-select" style="margin-top:2px;font-size:12px;padding:9px">${optsTarget()}</select></div></div></div></div>`;}
+  h+=`</div>`;
+ });
+ document.getElementById('gearsWrap').innerHTML=h; calc();
+}
+function setGear(g){let lvl=document.getElementById(g+'_lvl').value; if(!lvl) return; for(let i=1;i<=3;i++){let el=document.getElementById(`${troop}_${g}_${i}_targ`); if(el) el.value=lvl;} calc();}
+function selAll(v){document.querySelectorAll('#gearsWrap [id$=_chk]').forEach(c=>c.checked=v); calc();}
+function selTroop(t){switchT(t); setTimeout(()=>selAll(true),50);}
+function setMax(){document.querySelectorAll('#gearsWrap [id$=_targ]').forEach(s=>s.value='22'); calc();}
+function calc(){
+ let G=0,D=0,P=0,S=0;
+ document.querySelectorAll('#gearsWrap [id$=_chk]').forEach(chk=>{
+  if(!chk.checked) return;
+  let b=chk.id.replace('_chk',''); let cur=parseInt(document.getElementById(b+'_cur').value||0); let targ=parseInt(document.getElementById(b+'_targ').value||0);
+  if(targ>cur){let cf=cum(cur), ct=cum(targ); G+=ct.cg-cf.cg; D+=ct.cd-cf.cd; P+=ct.p-cf.p; S+=ct.s-cf.s;}
+ });
+ document.getElementById('kG').textContent=G.toLocaleString(); document.getElementById('kD').textContent=D.toLocaleString(); document.getElementById('kP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); document.getElementById('kS').textContent=S.toLocaleString();
+ // send to 2C Live Summary
+ if(window.updateLiveSummary) window.updateLiveSummary(G,D,P,S);
+ localStorage.setItem('ks_3A_G',G); localStorage.setItem('ks_3A_D',D); localStorage.setItem('ks_3A_P',P); localStorage.setItem('ks_3A_S',S);
+}
+render();
+</script>
+<!-- ==================== DIV-3B - FIXED AUTO PULL FROM 3A ==================== -->
+<div class="card" id="div3B"style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
+<div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px">
+  <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px">
+    <span style="width:4px;height:18px;background:#f59e0b;border-radius:2px;display:inline-block"></span>✨ LIVE SUMMARY
+  </div>
+  <div style="color:#64748b;font-size:11px;margin:4px 0 12px">Auto updates from 3A calculation</div>
+
+  <div style="background:#242838;border-radius:12px;padding:12px">
+    <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><div style="color:#fff;font-weight:700">📖 Guides</div><div id="liveG" style="color:#60a5fa;font-weight:900">Waiting for 3A...</div></div>
+    <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)"><div style="color:#fff;font-weight:700">🎨 Designs</div><div id="liveD" style="color:#a78bfa;font-weight:900">-</div></div>
+    <div style="display:flex;justify-content:space-between;padding:10px 0"><div style="color:#fff;font-weight:700">⚡ Power</div><div id="liveP" style="color:#4ade80;font-weight:900">-</div></div>
+    <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:6px"><div style="color:#fff;font-weight:700">🏆 Score</div><div id="liveS" style="color:#fbbf24;font-weight:900">-</div></div>
+  </div>
+
+  <div style="background:#1e222a;border-radius:12px;padding:12px;margin-top:12px">
+    <div style="color:#fff;font-weight:900;font-size:13px">📦 SELF BACKPACK</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+      <input id="myGuides" placeholder="My Guides e.g. 5K" oninput="calcNeed()" style="background:#2a2e38;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:8px;font-weight:700">
+      <input id="myDesigns" placeholder="My Designs e.g. 2K" oninput="calcNeed()" style="background:#2a2e38;color:#fff;border:1px solid rgba(255,255,255,0.08);padding:10px;border-radius:8px;font-weight:700">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+      <div style="background:#111318;padding:8px;border-radius:8px;text-align:center"><div style="color:#64748b;font-size:9px">NEED GUIDES</div><div id="needG" style="color:#f87171;font-weight:900">0</div></div>
+      <div style="background:#111318;padding:8px;border-radius:8px;text-align:center"><div style="color:#64748b;font-size:9px">NEED DESIGNS</div><div id="needD" style="color:#f87171;font-weight:900">0</div></div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+let curG=0,curD=0;
+
+function parseK(v){
+  if(!v) return 0; 
+  v=v.toString().toUpperCase().trim(); 
+  let m=1; 
+  if(v.endsWith('K')){m=1000; v=v.slice(0,-1);} 
+  else if(v.endsWith('M')){m=1000000; v=v.slice(0,-1);} 
+  else if(v.endsWith('B')){m=1000000000; v=v.slice(0,-1);} 
+  return (parseFloat(v)||0)*m;
+}
+
+function calcNeed(){ 
+  let rawG = document.getElementById('myGuides').value;
+  let rawD = document.getElementById('myDesigns').value;
+  let myG = parseK(rawG); 
+  let myD = parseK(rawD); 
+  
+  // SAVE FOR 3C - THIS WAS THE MISSING PART
+  localStorage.setItem('ks_3B_haveG', myG);
+  localStorage.setItem('ks_3B_haveD', myD);
+  localStorage.setItem('ks_3B_rawG', rawG);
+  localStorage.setItem('ks_3B_rawD', rawD);
+
+  document.getElementById('needG').textContent = Math.max(0, curG-myG).toLocaleString(); 
+  document.getElementById('needD').textContent = Math.max(0, curD-myD).toLocaleString(); 
+}
+
+function loadFrom3A(){
+  let G=parseInt(localStorage.getItem('ks_3A_G')||0);
+  let D=parseInt(localStorage.getItem('ks_3A_D')||0);
+  let P=parseInt(localStorage.getItem('ks_3A_P')||0);
+  let S=parseInt(localStorage.getItem('ks_3A_S')||0);
+  if(G>0 || D>0){
+    curG=G; curD=D;
+    document.getElementById('liveG').textContent=G.toLocaleString();
+    document.getElementById('liveD').textContent=D.toLocaleString();
+    document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString();
+    document.getElementById('liveS').textContent=S.toLocaleString();
+    calcNeed(); // update need after loading totals
+  }
+}
+
+loadFrom3A();
+window.addEventListener('storage', loadFrom3A);
+setInterval(loadFrom3A, 500);
+
+window.updateLiveSummary = function(G,D,P,S){ 
+  curG=G; curD=D; 
+  document.getElementById('liveG').textContent=G.toLocaleString(); 
+  document.getElementById('liveD').textContent=D.toLocaleString(); 
+  document.getElementById('liveP').textContent=P>=1e6?(P/1e6).toFixed(2)+'M':P.toLocaleString(); 
+  document.getElementById('liveS').textContent=S.toLocaleString(); 
+  calcNeed(); 
+}
+</script>
+-- ==================== DIV-3C - INVENTORY RESULTS - NO INPUT <!-- ==================== DIV-3C - INVENTORY RESULTS - NO INPUT ==================== -->
+<div class="card" id="div3C" style="width:100%;max-width:480px;margin:12px auto 0;box-sizing:border-box;background:#0b0f14;padding:10px">
+<div style="background:#1a1d26;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px">
+  <div style="display:flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:14px">
+    <span style="width:4px;height:18px;background:#f59e0b;border-radius:2px;display:inline-block"></span>📦 INVENTORY RESULTS
+  </div>
+  <div style="color:#64748b;font-size:11px;margin:4px 0 14px">Auto from 3A + 3B — No input needed</div>
+
+  <div style="background:#242838;border-radius:12px;padding:14px">
+    <!-- GUIDES ROW -->
+    <div style="display:grid;grid-template-columns:1.2fr 0.8fr 0.8fr;gap:8px;padding:12px;background:#1e222a;border-radius:10px;margin-bottom:8px">
+      <div><div style="color:#9aa3b2;font-size:10px;font-weight:800">ITEM</div><div style="color:#fff;font-weight:900;margin-top:2px">📖 Guides</div></div>
+      <div style="text-align:center"><div style="color:#64748b;font-size:10px;font-weight:800">HAVE (3B)</div><div id="rHaveG" style="color:#60a5fa;font-weight:900;font-size:16px;margin-top:2px">0</div></div>
+      <div style="text-align:center"><div style="color:#64748b;font-size:10px;font-weight:800">NEED</div><div id="rNeedG" style="color:#f87171;font-weight:900;font-size:16px;margin-top:2px">0</div></div>
+    </div>
+    <!-- DESIGNS ROW -->
+    <div style="display:grid;grid-template-columns:1.2fr 0.8fr 0.8fr;gap:8px;padding:12px;background:#1e222a;border-radius:10px;margin-bottom:8px">
+      <div><div style="color:#9aa3b2;font-size:10px;font-weight:800">ITEM</div><div style="color:#fff;font-weight:900;margin-top:2px">🎨 Designs</div></div>
+      <div style="text-align:center"><div style="color:#64748b;font-size:10px;font-weight:800">HAVE (3B)</div><div id="rHaveD" style="color:#a78bfa;font-weight:900;font-size:16px;margin-top:2px">0</div></div>
+      <div style="text-align:center"><div style="color:#64748b;font-size:10px;font-weight:800">NEED</div><div id="rNeedD" style="color:#f87171;font-weight:900;font-size:16px;margin-top:2px">0</div></div>
+    </div>
+    <!-- TOTAL NEEDED FROM 3A -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+      <div style="background:#111318;padding:10px;border-radius:8px;text-align:center"><div style="color:#64748b;font-size:9px">TOTAL NEEDED (3A)</div><div style="margin-top:4px"><span style="color:#fbbf24;font-size:11px">Guides: </span><span id="rTotalG" style="color:#fff;font-weight:900">0</span></div><div><span style="color:#fbbf24;font-size:11px">Designs: </span><span id="rTotalD" style="color:#fff;font-weight:900">0</span></div></div>
+      <div style="background:#111318;padding:10px;border-radius:8px;text-align:center"><div style="color:#64748b;font-size:9px">POWER / SCORE</div><div style="margin-top:4px"><span style="color:#4ade80;font-size:11px">Power: </span><span id="rTotalP" style="color:#fff;font-weight:900">0</span></div><div><span style="color:#60a5fa;font-size:11px">Score: </span><span id="rTotalS" style="color:#fff;font-weight:900">0</span></div></div>
+    </div>
+
+    <div id="statusBox" style="margin-top:12px;padding:10px;border-radius:8px;text-align:center;font-weight:900;font-size:13px;background:#1a2e1a;color:#4ade80">✅ Ready</div>
+  </div>
+</div>
+</div>
+
+<script>
+function load3C(){
+  let totalG = parseInt(localStorage.getItem('ks_3A_G')||0);
+  let totalD = parseInt(localStorage.getItem('ks_3A_D')||0);
+  let totalP = parseInt(localStorage.getItem('ks_3A_P')||0);
+  let totalS = parseInt(localStorage.getItem('ks_3A_S')||0);
+  let haveG = parseInt(localStorage.getItem('ks_3B_haveG')||0);
+  let haveD = parseInt(localStorage.getItem('ks_3B_haveD')||0);
+
+  let needG = Math.max(0, totalG - haveG);
+  let needD = Math.max(0, totalD - haveD);
+
+  document.getElementById('rTotalG').textContent = totalG.toLocaleString();
+  document.getElementById('rTotalD').textContent = totalD.toLocaleString();
+  document.getElementById('rTotalP').textContent = totalP>=1e6?(totalP/1e6).toFixed(2)+'M':totalP.toLocaleString();
+  document.getElementById('rTotalS').textContent = totalS.toLocaleString();
+  document.getElementById('rHaveG').textContent = haveG.toLocaleString();
+  document.getElementById('rHaveD').textContent = haveD.toLocaleString();
+  document.getElementById('rNeedG').textContent = needG.toLocaleString();
+  document.getElementById('rNeedD').textContent = needD.toLocaleString();
+}
+load3C();
+setInterval(load3C, 500);
+window.addEventListener('storage', load3C);
+</script>
+<!-- ========== DIV-3D FINAL PLAN & EXPORT (Reads directly from 3C) ========== -->
+<div class="card" id="div3D"style="background:#ffffff; border-radius:24px; padding:16px; margin:12px; border:2px solid #111; font-family:system-ui,-apple-system,Segoe UI,Roboto; color:#000;">
+  <div style="font-weight:900; font-size:22px; letter-spacing:-0.5px;">⚡ FINAL PLAN & EXPORT</div>
+  <div style="font-size:13px; opacity:.6; margin:4px 0 12px; font-weight:600;">Auto from 3C — 3A Need minus 3B Inventory</div>
+  
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+    <div style="border:1.8px solid #111; border-radius:16px; padding:12px; font-weight:900; background:#f9f9f9;">
+      <div style="font-size:11px; opacity:.6;">✅ TOTAL NEEDED (3A)</div>
+      <div id="dTotalLine" style="font-size:14px; margin-top:4px;">0 Guides / 0 Designs</div>
+    </div>
+    <div style="border:1.8px solid #111; border-radius:16px; padding:12px; font-weight:900; background:#fff7ed;">
+      <div style="font-size:11px; opacity:.6;">⏳ STILL MISSING (3C)</div>
+      <div id="dMissingLine" style="font-size:14px; margin-top:4px;">0 / 0 Still Missing</div>
+    </div>
+  </div>
+
+  <div id="dStatus" style="border:1.8px solid #111; border-radius:12px; padding:12px; margin:12px 0; font-weight:800; background:#fff; font-size:13px;">Calculate 3A first...</div>
+  
+  <div style="border:1.8px solid #111; border-radius:18px; padding:0; overflow:hidden;">
+    <div style="background:#111; color:#fff; padding:8px 12px; font-size:11px; font-weight:900; letter-spacing:1px;">EXPORT TEXT — READY TO COPY / PRINT / SHARE</div>
+    <pre id="dPlan" style="white-space:pre-wrap; font-family:ui-monospace,monospace; font-size:13px; margin:0; padding:12px; min-height:190px; background:#fff;">Calculate 3A first...
+
+3D is waiting for 3C data.
+Go: 3A > CALCULATE > 3B > type Have > 3C will update > 3D will auto-fill.</pre>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
+    <button onclick="copyPlan()" style="background:linear-gradient(180deg,#ffb338 0%,#ff9000 100%); border:2px solid #111; border-radius:16px; padding:14px; font-weight:900; font-size:13px; box-shadow:0 4px 0 #111; cursor:pointer;">📋 COPY TEXT</button>
+    <button onclick="load3D()" style="background:linear-gradient(180deg,#ffb338 0%,#ff9000 100%); border:2px solid #111; border-radius:16px; padding:14px; font-weight:900; font-size:13px; box-shadow:0 4px 0 #111; cursor:pointer;">🔄 REFRESH FINAL</button>
+    <button onclick="clearPlan()" style="background:linear-gradient(180deg,#ffb338 0%,#ff9000 100%); border:2px solid #111; border-radius:16px; padding:14px; font-weight:900; font-size:13px; box-shadow:0 4px 0 #111; cursor:pointer;">🧹 CLEAR</button>
+    <button onclick="printPlan()" style="background:linear-gradient(180deg,#ffb338 0%,#ff9000 100%); border:2px solid #111; border-radius:16px; padding:14px; font-weight:900; font-size:13px; box-shadow:0 4px 0 #111; cursor:pointer;">🖨️ PRINT / PDF</button>
+  </div>
+  <button onclick="sharePlan()" style="margin-top:10px; width:100%; background:#111; color:#fff; border:2px solid #111; border-radius:16px; padding:14px; font-weight:900; font-size:14px; cursor:pointer; box-shadow:0 4px 0 #444;">📤 SHARE via Bluetooth / WhatsApp / Telegram</button>
+</div>
+
+<script>
+function load3D(){
+  // --- DIRECT READ FROM 3C ELEMENTS ---
+  let el = (id)=>document.getElementById(id);
+  let tG = el('rTotalG'), tD = el('rTotalD'), tP = el('rTotalP'), tS = el('rTotalS');
+  let hG = el('rHaveG'), hD = el('rHaveD');
+  let nG = el('rNeedG'), nD = el('rNeedD');
+
+  let finalText = '';
+  
+  if(tG && tG.textContent && tG.textContent.trim() !== '0' && tG.textContent.trim() !== ''){
+    let G = tG.textContent.trim(), D = tD ? tD.textContent.trim() : '0';
+    let P = tP ? tP.textContent.trim() : '0', S = tS ? tS.textContent.trim() : '0';
+    let haveG = hG ? hG.textContent.trim() : '0', haveD = hD ? hD.textContent.trim() : '0';
+    let needG = nG ? nG.textContent.trim() : '0', needD = nD ? nD.textContent.trim() : '0';
+
+    el('dTotalLine').textContent = `${G} Guides / ${D} Designs`;
+    el('dMissingLine').textContent = `${needG} Guides / ${needD} Designs Missing`;
+    
+    let isDone = (needG.replace(/,/g,'')=='0' && needD.replace(/,/g,'')=='0');
+    el('dStatus').textContent = isDone ? '✅ All Ready! 3C says NOTHING missing — you can craft!' : `⏳ 3C RESULT: Still need ${needG} Guides, ${needD} Designs`;
+    el('dStatus').style.background = isDone ? '#dcfce7' : '#fef3c7';
+
+    finalText = `DARK LORDS - FINAL PLAN (3A + 3B = 3C)
+Generated: ${new Date().toLocaleString()}
+Source: Direct from 3C screen
+
+TOTAL NEEDED (3A):
+
+Guides: ${G}
+Designs: ${D}
+Patterns: ${P}
+Satin: ${S}
+
+HAVE (3B - Backpack):
+
+Guides: ${haveG}
+Designs: ${haveD}
+
+STILL MISSING (3C - FINAL):
+
+Guides: ${needG}
+Designs: ${needD}
+
+${isDone ? '✅ YOU ARE READY TO CRAFT!' : '⏳ Farm more: update 3B and check 3C again.'}
+
+---
+Dark Lords All-in-one Bot - 3D Export`;
+  } else {
+    // Fallback if 3C not yet rendered — read storage
+    let G = parseInt(localStorage.getItem('ks_3A_G')||0);
+    let D = parseInt(localStorage.getItem('ks_3A_D')||0);
+    let P = parseInt(localStorage.getItem('ks_3A_P')||0);
+    let S = parseInt(localStorage.getItem('ks_3A_S')||0);
+    let haveG = parseInt(localStorage.getItem('ks_3B_haveG')||0);
+    let haveD = parseInt(localStorage.getItem('ks_3B_haveD')||0);
+    if(G==0){
+      el('dStatus').textContent = 'Calculate 3A first... then fill 3B... then 3C will appear';
+      el('dPlan').textContent = 'Calculate 3A first...\n\nSteps:\n1. 3A > Select Gears > CALCULATE\n2. 3B > Type your Have\n3. 3C > Will show result\n4. 3D > Will auto-fill here';
+      return;
+    }
+    let needG = Math.max(0, G-haveG), needD = Math.max(0, D-haveD);
+    el('dTotalLine').textContent = `${G.toLocaleString()} Guides / ${D.toLocaleString()} Designs`;
+    el('dMissingLine').textContent = `${needG.toLocaleString()} / ${needD.toLocaleString()} Missing`;
+    finalText = `DARK LORDS - FINAL PLAN (Storage Fallback)
+TOTAL (3A): ${G} / ${D} / ${P} / ${S}
+HAVE (3B): ${haveG} / ${haveD}
+NEED (3C): ${needG} / ${needD}`;
+  }
+
+  el('dPlan').textContent = finalText;
+  window._finalText = finalText;
+}
+
+function copyPlan(){ 
+  let t = window._finalText||''; 
+  navigator.clipboard.writeText(t).then(()=>{ 
+    let s=document.getElementById('dStatus'); s.textContent='📋 Copied from 3C to clipboard!'; setTimeout(load3D,1500);
+  }); 
+}
+function clearPlan(){
+  if(confirm('Clear all 3A / 3B / 3C data?')){
+    ['ks_3A_G','ks_3A_D','ks_3A_P','ks_3A_S','ks_3B_haveG','ks_3B_haveD','ks_3B_rawG','ks_3B_rawD'].forEach(k=>localStorage.removeItem(k));
+    load3D();
+  }
+}
+function printPlan(){
+  let t=window._finalText||document.getElementById('dPlan').textContent;
+  let w=window.open('','','width=800,height=900');
+  w.document.write(`<html><head><title>Dark Lords 3D Final</title></head><body><pre style="font-family:monospace; white-space:pre-wrap; padding:20px; border:2px solid #000; border-radius:12px;">${t}</pre><script>window.print()<\/script></body></html>`);
+  w.document.close();
+}
+function sharePlan(){
+  let t=window._finalText||'';
+  if(navigator.share && navigator.canShare && navigator.canShare({text:t})){
+    navigator.share({title:'Dark Lords 3D - Final Plan from 3C', text:t});
+  } else if(navigator.share){
+    navigator.share({title:'Dark Lords 3D', text:t});
+  } else {
+    copyPlan(); alert('Link copied! Now you can paste to Bluetooth / WhatsApp / Telegram / anywhere');
+  }
+}
+
+// Auto load + live sync with 3C
+load3D();
+setInterval(load3D, 400);
+window.addEventListener('storage', load3D);
+</script>
+<!-- ========== END DIV-3D ========== -->
+
+<!-- DIV-3E - GOVERNOR CHARM GUIDES & VIDEOS - 4 GUIDES + 4 VIDEOS -->
+<div class="card" id="div3E" style="background:#1E293B;color:#fff;border:0">
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:12px">
+  <h3 style="margin:0;color:#fff;font-size:15px;letter-spacing:1px;display:flex;align-items:center;gap:8px">
+    <span style="width:6px;height:20px;background:#f59e0b;border-radius:3px;display:inline-block"></span>
+    🎥 3F - GOVERNOR CHARM GUIDES & VIDEOS
+  </h3>
+  <p style="margin:6px 0 14px;color:#94a3b8;font-size:12px">All guides & videos related to Governor Charm — from kingshot.net & Kingshot guide sites</p>
+
+  <!-- ============ WRITTEN GUIDES (4) ============ -->
+  <div style="color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:1px;margin:4px 0 8px">📖 WRITTEN GUIDES (4) - KINGSHOT.NET & KINGSHOT SITES</div>
+
+  <!-- Guide 1 - kingshot.net -->
+  <a href="https://kingshot.net" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">1. Governor Charm - Official Kingshot Guide <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Official source on kingshot.net - How Governor Charms unlock at TC25, need Charm Guides + Charm Designs, Protection / Vision / Keenness charms for Infantry, Archers, Cavalry.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">kingshot.net ↗ • Official</div>
+  </a>
+
+  <!-- Guide 2 - heaven-guardian -->
+  <a href="https://heaven-guardian.com/kingshot-governor-charms-guide/" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">2. Kingshot Governor Charms Guide: Levels & Priority <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Levels, upgrade costs, material sources, troop bonuses. Max Lv 21 = 95% Health & Lethality. Priority: Protection first, Vision second, Keenness third. Broad Lv 3 baseline then push to Lv 5.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">heaven-guardian.com ↗ • Levels & Priority</div>
+  </a>
+
+  <!-- Guide 3 - kingshotmastery -->
+  <a href="https://kingshotmastery.com/kingshot-charms-guide/" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">3. Kingshot Charms Guide: Priority & Costs <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Best order Infantry first, Archer second, Cavalry third. Build Lv 3 baseline then push priority charms Lv 3 → Lv 5. Charms push Health & Lethality vs Gear pushing Attack & Defence.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">kingshotmastery.com ↗ • Priority & Costs</div>
+  </a>
+
+  <!-- Guide 4 - h5joy + kingshotdata -->
+  <a href="https://ks.h5joy-games.com/governor-charm" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)">
+    <div style="color:#fff;font-weight:800;font-size:13px">4. Governor Charm Upgrade Charts & Calculator <span style="color:#f59e0b">↗</span></div>
+    <div style="color:#94a3b8;font-size:12px;margin-top:4px;line-height:1.5">Full chart Lv 1 → 22: Guides & Designs per level and Health/Lethality bonus total. Lv 10 = 50%, Lv 21 = 95%, Lv 22 = 100%. Also see Charm Guide material sources on kingshotdata.com.</div>
+    <div style="color:#38bdf8;font-size:11px;margin-top:6px">ks.h5joy-games.com ↗ • Charts & Calculator &nbsp;|&nbsp; kingshotdata.com ↗ • Charm Guide Item</div>
+  </a>
+
+  <!-- ============ YOUTUBE VIDEOS (4) ============ -->
+  <div style="color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:1px;margin:8px 0 8px">▶️ YOUTUBE VIDEOS (4)</div>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+complete+guide+beginner+to+max" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🔮 Governor Charm Complete Guide - Beginner to Max</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">Leveling, cost table, best charm order • Watch First</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=how+to+farm+guides+designs+governor+charm+fast" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">📖 How to Farm Guides & Designs FAST - Daily Route</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">Events, shops, daily farming • F2P tips</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+vs+gear+what+to+upgrade+first" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">⚡ Charm vs Gear - What to Upgrade First? Power Guide</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">ROI comparison • When to switch priority</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+  <a href="https://www.youtube.com/results?search_query=governor+charm+best+builds+mistakes+to+avoid" target="_blank" style="text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-bottom:8px"><div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px;line-height:1.3">🏆 Best Charm Builds & 5 Mistakes to Avoid</div><div style="color:#94a3b8;font-size:11px;margin-top:3px">PvP & PvE builds • What NOT to do</div></div><span style="color:#f59e0b;font-size:18px">›</span></div></a>
+
+<!-- 🔍 GOVERNOR CHARM SEARCH - KINGSHOT VERSION -->
+<div style="display:flex; gap:8px; padding:10px; background:#1e293b; border-radius:16px; margin:10px; border:1.5px solid #334155;">
+  <input id="govSearchInput" type="text" placeholder="Search: Governor Charm, Design, Guide..." 
+  style="flex:1; background:#0f172a; color:#fff; border:1.5px solid #475569; border-radius:12px; padding:12px 14px; font-weight:600; outline:none;">
+  
+  <button onclick="searchGovCharm()" 
+  style="background:linear-gradient(180deg,#ffb338,#ff9000); border:2px solid #111; border-radius:12px; padding:12px 18px; font-weight:900; box-shadow:0 3px 0 #111; cursor:pointer; white-space:nowrap;">
+    🔍 SEARCH
+  </button>
+</div>
+
+<script>
+function searchGovCharm(){
+  let input = document.getElementById('govSearchInput');
+  let q = input.value.trim().toLowerCase();
+  
+  if(!q){
+    alert('Type something! e.g. Governor Charm Guide');
+    return;
+  }
+  
+  // ONLY ALLOW GOVERNOR CHARM / DESIGN RELATED
+  let allowedKeywords = ['governor', 'gov', 'charm', 'design', 'guide', 'gear', 'build', 'farm'];
+  let isAllowed = allowedKeywords.some(k => q.includes(k));
+  
+  if(!isAllowed){
+    alert('⚠️ Only Governor Charm & Design related searches allowed!\n\nTry: Governor Charm, Charm Design, Governor Guide');
+    input.value = '';
+    input.placeholder = 'Only Governor Charm / Design allowed!';
+    return;
+  }
+  
+  // KINGSHOT GAME SEARCH
+  let youtubeQuery = `Kingshot ${q} Governor Charm`;
+  let ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(youtubeQuery)}`;
+  
+  window.open(ytUrl, '_blank');
+}
+
+document.getElementById('govSearchInput').addEventListener('keypress', function(e){
+  if(e.key === 'Enter'){ searchGovCharm(); }
+});
+</script>
+
+<script>
+window.addVideo3F = function(){
+  var link = document.getElementById('ytLink3F').value.trim();
+  if(!link) return;
+  var container = document.getElementById('myVideos3F');
+  var div = document.createElement('a');
+  div.href = link; div.target='_blank';
+  div.style.cssText='text-decoration:none;display:block;background:#1a2436;border-radius:12px;padding:12px;margin-top:8px';
+  div.innerHTML='<div style="display:flex;gap:12px;align-items:center"><div style="min-width:80px;height:48px;background:#dc2626;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px">▶️</div><div style="flex:1"><div style="color:#fff;font-weight:800;font-size:13px">🔮 My Saved Charm Video</div><div style="color:#94a3b8;font-size:11px;margin-top:3px;word-break:break-all">'+link+'</div></div><span style="color:#f59e0b;font-size:18px">›</span></div>';
+  container.appendChild(div);
+  document.getElementById('ytLink3F').value='';
+};
+</script>
+  </div>
+</div>
+<!-- ========== DIV-3F 🔴 AUTO LIVE - ONLY CHARM & DESIGN (NO GEAR) ========== -->
+<div class="card" id="div3F"style="background:#0f172a; border:2px solid #111; border-radius:20px; margin:12px; padding:14px; font-family:system-ui; color:#fff;">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="width:10px; height:10px; background:#f59e0b; border-radius:50%; box-shadow:0 0 0 6px rgba(245,158,11,.2); animation:pulse 1.5s infinite; display:inline-block;"></span>
+      <b style="font-size:17px;">CHARM & DESIGN LIVE</b>
+      <span style="background:#f59e0b; font-size:9px; padding:2px 6px; border-radius:20px; color:#000; font-weight:900;">CHARM ONLY</span>
+    </div>
+    <div style="text-align:right;">
+      <div id="autoLiveLast" style="font-size:11px; opacity:.6;">Checking charm updates...</div>
+      <button onclick="forceRefreshLive()" style="background:#1e293b; border:1px solid #334155; border-radius:8px; padding:4px 8px; color:#fff; font-size:10px; cursor:pointer;">🔄 REFRESH</button>
+    </div>
+  </div>
+  <div id="autoLiveFeed" style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">Loading only Charm & Design...</div>
+</div>
+<style>@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.7)}70%{box-shadow:0 0 0 8px rgba(245,158,11,0)}100%{box-shadow:0 0 0 0 rgba(245,158,11,0)}}</style>
+
+<script>
+async function fetchYouTubeCharmOnly(){
+  try{
+    let res = await fetch(`https://yt.lemnoslife.com/noKey/search?part=snippet&q=${encodeURIComponent('Kingshot Governor Charm Design Charm Guide')}&type=video&maxResults=10`);
+    let data = await res.json();
+    let filtered = (data.items||[]).filter(v=>{
+      let t = (v.snippet?.title || '').toLowerCase();
+      return (t.includes('charm') || t.includes('design')) && !t.includes('gear only') && !t.includes('hero gear');
+    });
+    return filtered.map(v=>({
+      type:'YOUTUBE',
+      title: v.snippet?.title,
+      link: `https://www.youtube.com/watch?v=${v.id?.videoId}`,
+      date: v.snippet?.publishedAt,
+      source:'YouTube'
+    }));
+  }catch(e){
+    return [
+      {type:'YOUTUBE', title:'Kingshot Governor Charms Guide - Charm Design & Charm Guide Explained', link:'https://www.youtube.com/results?search_query=Kingshot+Governor+Charm+Design', date: new Date().toISOString(), source:'YouTube'},
+      {type:'YOUTUBE', title:'How to Farm Charm Design Fast - Kingshot Governor Charm', link:'https://www.youtube.com/results?search_query=Kingshot+Charm+Design+farm', date: new Date().toISOString(), source:'YouTube'}
+    ];
+  }
+}
+
+async function fetchCharmGuidesOnly(){
+  return [
+    {type:'CHARM', title:'Governor Charms: Protection Charm / Vision Charm / Keenness Charm - 18 Charms Total', link:'https://heaven-guardian.com/kingshot/governor-charms-guide', date: new Date().toISOString(), source:'heaven-guardian.com'},
+    {type:'DESIGN', title:'Charm Guide & Charm Design - Upgrade Costs & Farming (Eternity Reach / Swordland / Tidal Shop)', link:'https://kingshotwiki.com/', date: new Date(Date.now()-1000*60*60*5).toISOString(), source:'kingshotwiki.com - Charm Only'},
+    {type:'DESIGN', title:'Max Charm Level 21 = 95% Health & Lethality - Priority: Protection > Vision > Keenness', link:'https://heaven-guardian.com/kingshot/governor-charms-guide', date: new Date(Date.now()-1000*60*60*12).toISOString(), source:'Guide - Level 21'},
+    {type:'CHARM', title:'Charm Design Sources: Eternity Reach, Swordland Shop, Tidal Shop, KoP Shop, Champagne Fair', link:'https://kingshot.fandom.com/wiki/Governor_Gear', date: new Date(Date.now()-1000*60*60*20).toISOString(), source:'Fandom - Charm Design'}
+  ];
+}
+
+async function loadAutoLive(){
+  let cached = localStorage.getItem('ks_charm_live_cache');
+  let cacheTime = localStorage.getItem('ks_charm_live_time');
+  let now = Date.now();
+  let ONE_DAY = 24*60*60*1000;
+
+  if(cached && cacheTime && (now - parseInt(cacheTime) < ONE_DAY) &&!window._forceLive){
+    renderAutoLive(JSON.parse(cached));
+    document.getElementById('autoLiveLast').textContent = 'Cached Charm Only • Last: ' + new Date(parseInt(cacheTime)).toLocaleDateString();
+    return;
+  }
+
+  document.getElementById('autoLiveFeed').innerHTML = '🔄 Fetching latest Charm & Design...';
+
+  let yt = await fetchYouTubeCharmOnly();
+  let guides = await fetchCharmGuidesOnly();
+  let all = [...yt,...guides];
+
+  // FINAL FILTER - ONLY CHARM/DESIGN KEYWORDS, REMOVE GEAR
+  all = all.filter(item=>{
+    let low = item.title.toLowerCase();
+    let hasCharm = low.includes('charm') || low.includes('design') || low.includes('guide');
+    let isGearOnly = low.includes('governor gear') && !low.includes('charm');
+    return hasCharm && !isGearOnly;
+  });
+
+  localStorage.setItem('ks_charm_live_cache', JSON.stringify(all));
+  localStorage.setItem('ks_charm_live_time', now.toString());
+  window._forceLive=false;
+  renderAutoLive(all);
+}
+
+function renderAutoLive(items){
+  let feed = document.getElementById('autoLiveFeed');
+  document.getElementById('autoLiveLast').textContent = 'Live Charm & Design • ' + new Date().toLocaleString();
+  
+  if(items.length==0){ feed.innerHTML='No charm updates today. Check tomorrow!'; return; }
+
+  feed.innerHTML = items.map(it=>{
+    let icon = it.type=='YOUTUBE'?'▶️': it.type=='DESIGN'?'🎨':'🔮';
+    let color = it.type=='YOUTUBE'?'#ef4444': it.type=='DESIGN'?'#f59e0b':'#8b5cf6';
+    let timeAgo = Math.floor((Date.now() - new Date(it.date).getTime())/3600000);
+v    let timeText = timeAgo < 24? `${timeAgo}h ago` : `${Math.floor(timeAgo/24)}d ago`;
+    return `
+    <div style="background:#1e293b; border:1.5px solid #334155; border-radius:14px; padding:10px 12px; display:flex; gap:10px;">
+      <div style="background:${color}; color:#fff; font-size:10px; font-weight:900; padding:4px 6px; border-radius:6px; height:fit-content;">${icon} ${it.type}</div>
+      <div style="flex:1;">
+        <a href="${it.link}" target="_blank" style="color:#fff; text-decoration:none; font-weight:700; font-size:13px;">${it.title}</a>
+        <div style="font-size:11px; opacity:.5; margin-top:3px;">${it.source} • ${timeText} • Charm Only</div>
+      </div>
+      <a href="${it.link}" target="_blank" style="background:#f59e0b; color:#000; border-radius:8px; padding:6px 10px; font-weight:900; font-size:11px; text-decoration:none;">OPEN</a>
+    </div>`;
+  }).join('');
+}
+
+function forceRefreshLive(){
+  window._forceLive=true;
+  localStorage.removeItem('ks_charm_live_cache');
+  loadAutoLive();
+}
+
+loadAutoLive();
+setInterval(loadAutoLive, 1000*60*60*6);
+</script>
+</div>
+</div>
+</div>
+
+<div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px;font-family:Arial">
+<div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
+ 
