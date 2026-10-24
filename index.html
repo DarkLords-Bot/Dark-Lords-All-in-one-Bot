@@ -591,48 +591,6 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
     <div id="majorEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
   </div>
 </div>
-  <!-- 5th BUTTON - VALUABLE EVENTS - YOUR EXACT LIST -->
-  <div class="myDrop">
-    <button class="myDropBtn" onclick="toggleValuableEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'; document.getElementById('smallerEventDropList').style.display='none'; document.getElementById('majorEventDropList').style.display='none'">
-      <span id="valuableEventDropLabel">💰 VALUABLE EVENT GUIDES</span>
-      <span>▼</span>
-    </button>
-    <div id="valuableEventDropList" class="myDropList" style="max-height:400px;overflow-y:auto">
-      <div onclick="selectValuableEventNew('1E','🪖 CESARES FURY')">🪖 CESARES FURY</div>
-      <div onclick="selectValuableEventNew('2E','🏆 HALL OF HEROS EVENT')">🏆 HALL OF HEROS EVENT</div>
-      <div onclick="selectValuableEventNew('3E','🐟 FISHING TOURNAMENT')">🐟 FISHING TOURNAMENT</div>
-      <div onclick="selectValuableEventNew('4E','🔮 MYSTIC DIVINATION')">🔮 MYSTIC DIVINATION</div>
-      <div onclick="selectValuableEventNew('5E','☠️ BUCCANEER BOUNTY')">☠️ BUCCANEER BOUNTY</div>
-      <div onclick="selectValuableEventNew('6E','🏹 STRONGEST GOVERNER')">🏹 STRONGEST GOVERNER</div>
-      <div onclick="selectValuableEventNew('7E','🛡️ GROW YOUR HEROS EVENT')">🛡️ GROW YOUR HEROS EVENT</div>
-      <div onclick="selectValuableEventNew('8E','🍾 CHAMPAGNE FAIR')">🍾 CHAMPAGNE FAIR</div>
-      <div onclick="selectValuableEventNew('9E','🗡️ GOLDEN GLAIVES')">🗡️ GOLDEN GLAIVES</div>
-      <div onclick="selectValuableEventNew('10E','🎰 HERO ROULETTE')">🎰 HERO ROULETTE</div>
-      <div onclick="selectValuableEventNew('11E','💰 MERCHANT EMPIRE')">💰 MERCHANT EMPIRE</div>
-      <div onclick="selectValuableEventNew('12E','🏆 CHAMPIONS WAY')">🏆 CHAMPIONS WAY</div>
-    </div>
-  </div>
-
-<!-- VALUABLE EVENT HUB - OUTSIDE sticky, hidden -->
-<div id="valuableEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
-  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
-    <select id="valuableEventMainDrop" style="display:none">
-      <option value="1E">cesares-fury</option>
-      <option value="2E">hall-of-heros-event</option>
-      <option value="3E">fishing-tournament</option>
-      <option value="4E">mystic-divination</option>
-      <option value="5E">buccaneer-bounty</option>
-      <option value="6E">strongest-governer</option>
-      <option value="7E">grow-your-heros-event</option>
-      <option value="8E">champagne-fair</option>
-      <option value="9E">golden-glaives</option>
-      <option value="10E">hero-roulette</option>
-      <option value="11E">merchant-empire</option>
-      <option value="12E">champions-way</option>
-    </select>
-    <select id="valuableEventSubDrop" onchange="showValuableEventLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700"></select>
-    <div id="valuableEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
-  </div>
 </div>
 <script>
 function switchAllTabs(val){
