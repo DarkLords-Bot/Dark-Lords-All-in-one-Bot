@@ -361,19 +361,27 @@ document.getElementById('langPopup').addEventListener('click', (e)=>{
 </script>  
   
 <!-- ===== END FIXED LANGUAGE ===== -->
-<div class="wrap">
-<div style="background:#0A0A0A;border-radius:10px;padding:6px 10px;display:flex;align-items:center;gap:10px">
-<b style="color:#D4AF37;font-size:14px">⬇️SELECT CATEGORY⬇️</b>
-</div>
 
+<div class="myDrop" style="margin-top:12px">
+  <button class="myDropBtn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
+    <span id="guidesDropLabel">📚 GUIDES</span>
+    <span>▼</span>
+  </button>
+  <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
+    <div onclick="selectGuideNew('1B','Building Guides')">1B-Building Guides</div>
+    <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
+    <div onclick="se<div class="wrap">
+<div style="background:#0A0A0A;border-radius:10px;padding:6px 10px;display:flex;align-items:center;gap:10px">
+<b style="color:#D4AF37;font-size:14px">⬇️SELECT YOUR CATEGORY⬇️</b>
+</div>
+<!-- STICKY 3D TAB SWITCHER -->
 <style>
 .sticky-tabs{
   position:sticky;top:72px;z-index:40;
   background:rgba(8,12,22,0.85);
   backdrop-filter:blur(12px);
   padding:12px 0 14px 0;
-  margin:0 -18px 12px -18px;
-display:flex;flex-direction:column;gap:10px;
+  margin:0 -18px 20px -18px;
   padding-left:18px;padding-right:18px;
   border-bottom:1px solid rgba(255,255,255,0.06);
 }
@@ -391,12 +399,31 @@ display:flex;flex-direction:column;gap:10px;
 .tab-btn.active.building{
   background:linear-gradient(180deg,#3B82F6 0%, #1D4ED8 100%);
   color:#fff;box-shadow:0 6px 0 #1E3A8A, 0 12px 24px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  border-color:rgba(59,130,246,0.4);
 }
-.tab-btn.active.gear, .tab-btn.active.charm{
+.tab-btn.active.gear{
   background:linear-gradient(180deg,#F59E0B 0%, #D97706 100%);
   color:#000;box-shadow:0 6px 0 #92400E, 0 12px 24px rgba(245,158,11,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
 }
+ .tab-btn.active.charm{
+  background:linear-gradient(180deg,#F59E0B 0%, #D97706 100%);
+  color:#000;box-shadow:0 6px 0 #92400E, 0 12px 24px rgba(245,158,11,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+ }
+  .tab-btn.active.charm{
+  background:linear-gradient(180deg,#F59E0B 0%, #D97706 100%);
+  color:#000;box-shadow:0 6px 0 #92400E, 0 12px 24px rgba(245,158,11,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
 .tab-btn:active{transform:translateY(6px);box-shadow:0 0 0 transparent}
+.section-icon{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.3)}
+</style>
+
+<div class="sticky-tabs">
+<style>
+.dropdown-wrap{position:sticky;top:60px;z-index:20;background:#080C16;padding:10px 0}
+.custom-select{width:100%;background:linear-gradient(180deg,#1C253B,#151D30);color:#fff;border:1px solid rgba(255,255,255,0.15);border-top:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:14px 16px;font-weight:900;font-size:14px;outline:none;appearance:none;background-image:linear-gradient(45deg, transparent 50%, #F59E0B 50%),linear-gradient(135deg, #F59E0B 50%, transparent 50%);background-position:calc(100% - 20px) calc(1em + 2px),calc(100% - 15px) calc(1em + 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.custom-select:focus{border-color:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,0.2)}
+</style>
+<style>
 .myDrop{position:relative;width:100%;margin-top:10px}
 .myDropBtn{width:100%;background:linear-gradient(180deg,#1C253B,#151D30);color:#fff;border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:16px;font-weight:900;font-size:14px;text-align:left;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .myDropList{position:absolute;top:100%;left:0;right:0;margin-top:8px;background:#151D30;border:1px solid rgba(255,255,255,0.15);border-radius:14px;overflow:hidden;z-index:9999;display:none;box-shadow:0 12px 30px rgba(0,0,0,0.6)}
@@ -404,48 +431,47 @@ display:flex;flex-direction:column;gap:10px;
 .myDropList div:last-child{border-bottom:0}
 .myDropList div:hover{background:#1C253B;color:#F59E0B}
 </style>
-
-<div class="sticky-tabs">
-  <div class="myDrop">
-    <button class="myDropBtn" onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
-      <span id="dropLabel">🏰 CALCULATORS</span>
-      <span>▼</span>
-    </button>
-    <div id="dropList" class="myDropList">
-      <div onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
-      <div onclick="selectCat('2A','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
-      <div onclick="selectCat('3A','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
-      <div onclick="selectCat('4A','🐾 PETS CALCULATOR - Gen 1 to Gen 7')">🐾 PETS CALCULATOR</div>
-    </div>
+<div class="myDrop">
+  <button class="btn" style onclick="document.getElementById('dropList').style.display = document.getElementById('dropList').style.display==='block' ? 'none' : 'block'">
+    <span id="dropLabel">🏰 CALCULATORS </span>
+    <span>▼</span>
+  </button>
+  <div id="dropList" class="myDropList">
+  <div button class="btn" blue onclick="selectCat('1A','🏰 BUILDING CALCULATOR')">🏰 BUILDING CALCULATOR</div>
+    <div button class="btn" blue onclick="selectCat('2A','⚔️ GOVERNOR GEAR CALCULATOR')">⚔️ GOVERNOR GEAR CALCULATOR</div>
+    <div button class="btn" blue onclick="selectCat('3A','🔮 GOVERNOR CHARM CALCULATOR')">🔮 GOVERNOR CHARM CALCULATOR</div>
+   <div button class="btn" blue onclick="selectCat('4A','🐾 PETS CALCULATOR - Gen 1 to Gen 7')">🐾 PETS CALCULATOR</div>
   </div>
 </div>
-<div class="myDrop" style="margin-top:12px">
-  <button class="myDropBtn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
+
+<!-- MAIN GUIDES BUTTON - 100% OK -->
+<div class="myDrop">
+  <button class="btn" onclick="document.getElementById('guidesDropList').style.display = document.getElementById('guidesDropList').style.display==='block' ? 'none' : 'block'; if(document.getElementById('dropList')) document.getElementById('dropList').style.display='none'">
     <span id="guidesDropLabel">📚 GUIDES</span>
     <span>▼</span>
   </button>
   <div id="guidesDropList" class="myDropList" style="max-height:320px;overflow-y:auto">
     <div onclick="selectGuideNew('1B','Building Guides')">1B-Building Guides</div>
     <div onclick="selectGuideNew('2B','Oasis Island')">2B-Oasis Island</div>
-    <div onclick="selectGuideNew('3B','Pets')">3B-Pets Gen1-7</div>
-    <div onclick="selectGuideNew('4B','Heros')">4B-Heros Gen1-8</div>
+    <div onclick="selectGuideNew('3B','Pets')">3B-Pets</div>
+    <div onclick="selectGuideNew('4B','Heros')">4B-Heros</div>
     <div onclick="selectGuideNew('5B','Hero Gears')">5B-Hero Gears</div>
-    <div onclick="selectGuideNew('6B','Troops')">6B-Troops & Formations</div>
-    <div onclick="selectGuideNew('7B','Governor Gear')">7B-Governor Gear & Charm</div>
+    <div onclick="selectGuideNew('6B','Troops')">6B-Troops</div>
+    <div onclick="selectGuideNew('7B','Governor Gear')">7B-Governor Gear</div>
     <div onclick="selectGuideNew('8B','Beginners Guide')">8B-Beginners Guide</div>
     <div onclick="selectGuideNew('9B','F2P Guide')">9B-F2P Guide</div>
     <div onclick="selectGuideNew('10B','P2W Guides')">10B-P2W Guides</div>
     <div onclick="selectGuideNew('11B','Farm Account Guide')">11B-Farm Account Guide</div>
     <div onclick="selectGuideNew('12B','Alliance Matters')">12B-Alliance Matters</div>
-    <div onclick="selectGuideNew('13B','Latest Updates LIVE')" style="background:linear-gradient(90deg,#00ff88,#00ccff);color:#000;font-weight:900;border-top:2px solid #fff">🔴 13B-Latest Updates LIVE</div>
   </div>
 </div>
+
 
 <!-- GUIDES HUB - 100% OK -->
 <div id="guidesHub" style="display:none;width:100%;max-width:540px;margin:0 auto;padding:10px">
   <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
     <select id="mainDrop" onchange="updateSubDrop()" style="width:100%;background:#000;color:#fff;border:1px solid #444;padding:12px;border-radius:12px;font-weight:700;margin-bottom:10px">
-      <option value="">-- Select Category --</option>
+      <option value="">-- Select --</option>
       <option value="1B">1B-Building Guides</option>
       <option value="2B">2B-Oasis Island</option>
       <option value="3B">3B-Pets</option>
@@ -458,57 +484,66 @@ display:flex;flex-direction:column;gap:10px;
       <option value="10B">10B-P2W Guides</option>
       <option value="11B">11B-Farm Account Guide</option>
       <option value="12B">12B-Alliance Matters</option>
-      <option value="13B">🔴 13B-Latest Updates LIVE</option>
     </select>
     <select id="subDrop" onchange="showLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700;margin-bottom:14px"></select>
     <div id="linksBox" style="display:flex;flex-direction:column;gap:10px"></div>
   </div>
 </div>
 
-   <!-- 3rd BUTTON - SMALLER EVENTS - INSIDE SAME sticky-tabs -->
-  <div class="myDrop">
-    <button class="myDropBtn" onclick="toggleSmallerEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'">
-      <span id="smallerEventDropLabel">🎯 SMALLER EVENT GUIDES</span>
-      <span>▼</span>
-    </button>
-    <div id="smallerEventDropList" class="myDropList" style="max-height:400px;overflow-y:auto">
-      <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')">1C - BEAST WHISPERER</div>
-      <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')">2C - ARMAMENT COMPETITION</div>
-      <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')">3C - DEFEAT NEARBY BEAST</div>
-      <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')">4C - CALL OF THE SOVEREIGN</div>
-      <div onclick="selectSmallerEventNew('5C','5C - PLAN YOUR CITY')">5C - PLAN YOUR CITY</div>
-      <div onclick="selectSmallerEventNew('6C','6C - CITY DEVELOPMENT')">6C - CITY DEVELOPMENT</div>
-      <div onclick="selectSmallerEventNew('7C','7C - PATH OF GROWTH')">7C - PATH OF GROWTH</div>
-      <div onclick="selectSmallerEventNew('8C','8C - POWERUP')">8C - POWERUP</div>
-      <div onclick="selectSmallerEventNew('9C','9C - WAR PREPARATION')">9C - WAR PREPARATION</div>
-      <div onclick="selectSmallerEventNew('10C','10C - DEVELOP NEW TECH')">10C - DEVELOP NEW TECH</div>
-      <div onclick="selectSmallerEventNew('11C','11C - DESERT TRAIL')">11C - DESERT TRAIL</div>
-      <div onclick="selectSmallerEventNew('12C','12C - WORKING OVERTIME')">12C - WORKING OVERTIME</div>
-      <div onclick="selectSmallerEventNew('13C','13C - OFFICER PROJECT')">13C - OFFICER PROJECT</div>
-      <div onclick="selectSmallerEventNew('14C','14C - WINDWARD VOYAGE')">14C - WINDWARD VOYAGE</div>
-      <div onclick="selectSmallerEventNew('15C','15C - ELYSIUM QUEST')">15C - ELYSIUM QUEST</div>
-      <div onclick="selectSmallerEventNew('16C','16C - FOOTBALL FIESTA')">16C - FOOTBALL FIESTA</div>
-      <div onclick="selectSmallerEventNew('17C','17C - STAND OF ARMS')">17C - STAND OF ARMS</div>
-      <div onclick="selectSmallerEventNew('18C','18C - CHILDHOOD SOJOURN')">18C - CHILDHOOD SOJOURN</div>
-      <div onclick="selectSmallerEventNew('19C','19C - SPRING TIDE CELEBRATION')">19C - SPRING TIDE CELEBRATION</div>
-      <div onclick="selectSmallerEventNew('20C','20C - ALL OUT')">20C - ALL OUT</div>
-      <div onclick="selectSmallerEventNew('21C','21C - FORSAKEN TEMPLE')">21C - FORSAKEN TEMPLE</div>
-      <div onclick="selectSmallerEventNew('22C','22C - TREASURE RAIDERS')">22C - TREASURE RAIDERS</div>
-      <div onclick="selectSmallerEventNew('23C','23C - KINGDOM OF ROMANCE')">23C - KINGDOM OF ROMANCE</div>
-      <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')">24C - DRAGONS CARAVEN</div>
-      <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')">25C - FLAMEDRAGON TYRANT</div>
-      <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')">26C - STEEL EDGE</div>
-    </div>
-  </div>
 
-<!-- HUBS - ALL OUTSIDE sticky, hidden -->
-<div id="smallerEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
-  <div style="background:#0e0e0e;border-radius:18px;padding:14px;border:1px solid #2a2a2a">
-    <select id="smallerEventMainDrop" style="display:none"></select>
-    <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="display:none;width:100%;background:#222;color:#fff;border:1px solid #555;padding:11px;border-radius:12px;font-weight:700"></select>
-    <div id="smallerEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
-  </div>
+<!-- 3rd ORANGE BUTTON - SMALLER EVENTS -->
+<div class="myDrop" style="position:relative; width:100%; margin-top:8px;">
+  <button class="btn" style="width:100%; background:linear-gradient(180deg,#ff9500,#ff6a00); color:#000; font-weight:900; padding:14px; border-radius:14px; border:none; display:flex; justify-content:space-between;" onclick="toggleSmallerEventDrop()">
+    <span id="smallerEventDropLabel">🎯 SMALLER EVENT GUIDES</span>
+    <span>▼</span>
+  </button>
+  <div id="smallerEventDropList" style="display:none; position:absolute; z-index:9999; background:#121212; border:2px solid #ff9500; border-radius:14px; width:100%; max-height:400px; overflow-y:auto; margin-top:6px; flex-direction:column; padding:6px; left:0; top:100%;">
+        <div onclick="selectSmallerEventNew('1C','1C - BEAST WHISPERER')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">1C - BEAST WHISPERER</div>
+    <div onclick="selectSmallerEventNew('2C','2C - ARMAMENT COMPETITION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">2C - ARMAMENT COMPETITION</div>
+    <div onclick="selectSmallerEventNew('3C','3C - DEFEAT NEARBY BEAST')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">3C - DEFEAT NEARBY BEAST</div>
+    <div onclick="selectSmallerEventNew('4C','4C - CALL OF THE SOVEREIGN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">4C - CALL OF THE SOVEREIGN</div>
+    <div onclick="selectSmallerEventNew('5C','5C - PLAN YOUR CITY')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">5C - PLAN YOUR CITY</div>
+    <div onclick="selectSmallerEventNew('6C','6C - CITY DEVELOPMENT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">6C - CITY DEVELOPMENT</div>
+    <div onclick="selectSmallerEventNew('7C','7C - PATH OF GROWTH')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">7C - PATH OF GROWTH</div>
+    <div onclick="selectSmallerEventNew('8C','8C - POWERUP')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">8C - POWERUP</div>
+    <div onclick="selectSmallerEventNew('9C','9C - WAR PREPARATION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">9C - WAR PREPARATION</div>
+    <div onclick="selectSmallerEventNew('10C','10C - DEVELOP NEW TECH')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">10C - DEVELOP NEW TECH</div>
+    <div onclick="selectSmallerEventNew('11C','11C - DESERT TRAIL')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">11C - DESERT TRAIL</div>
+    <div onclick="selectSmallerEventNew('12C','12C - WORKING OVERTIME')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">12C - WORKING OVERTIME</div>
+    <div onclick="selectSmallerEventNew('13C','13C - OFFICER PROJECT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">13C - OFFICER PROJECT</div>
+    <div onclick="selectSmallerEventNew('14C','14C - WINDWARD VOYAGE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">14C - WINDWARD VOYAGE</div>
+    <div onclick="selectSmallerEventNew('15C','15C - ELYSIUM QUEST')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">15C - ELYSIUM QUEST</div>
+    <div onclick="selectSmallerEventNew('16C','16C - FOOTBALL FIESTA')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">16C - FOOTBALL FIESTA</div>
+    <div onclick="selectSmallerEventNew('17C','17C - STAND OF ARMS')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">17C - STAND OF ARMS</div>
+    <div onclick="selectSmallerEventNew('18C','18C - CHILDHOOD SOJOURN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">18C - CHILDHOOD SOJOURN</div>
+    <div onclick="selectSmallerEventNew('19C','19C - SPRING TIDE CELEBRATION')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">19C - SPRING TIDE CELEBRATION</div>
+    <div onclick="selectSmallerEventNew('20C','20C - ALL OUT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">20C - ALL OUT</div>
+    <div onclick="selectSmallerEventNew('21C','21C - FORSAKEN TEMPLE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">21C - FORSAKEN TEMPLE</div>
+    <div onclick="selectSmallerEventNew('22C','22C - TREASURE RAIDERS')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">22C - TREASURE RAIDERS</div>
+    <div onclick="selectSmallerEventNew('23C','23C - KINGDOM OF ROMANCE')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">23C - KINGDOM OF ROMANCE</div>
+    <div onclick="selectSmallerEventNew('24C','24C - DRAGONS CARAVEN')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">24C - DRAGONS CARAVEN</div>
+    <div onclick="selectSmallerEventNew('25C','25C - FLAMEDRAGON TYRANT')" class="dropItem" style="padding:10px; color:#fff; border-bottom:1px solid #333; cursor:pointer;">25C - FLAMEDRAGON TYRANT</div>
+    <div onclick="selectSmallerEventNew('26C','26C - STEEL EDGE')" class="dropItem" style="padding:10px; color:#fff; cursor:pointer;">26C - STEEL EDGE</div>
 </div>
+</div>
+  <!-- === SMALLER EVENT HUB - SINGLE - RIGHT ABOVE 1A === -->
+<div id="smallerEventHub" class="tab-content" style="display:none; margin:15px; background:#121212; border:2px solid #ff9500; border-radius:16px; padding:14px;">
+  <h3 id="smallerEventHubTitle" style="color:#ff9500; text-align:center; font-weight:900; margin:0 0 12px 0;">🎯 SMALLER EVENT GUIDES</h3>
+  
+  <!-- Hidden main value holder -->
+  <select id="smallerEventMainDrop" style="display:none;">
+    <option value="">-- Select Event --</option>
+    <option value="1C">1C</option><option value="2C">2C</option><option value="3C">3C</option><option value="4C">4C</option><option value="5C">5C</option><option value="6C">6C</option><option value="7C">7C</option><option value="8C">8C</option><option value="9C">9C</option><option value="10C">10C</option><option value="11C">11C</option><option value="12C">12C</option><option value="13C">13C</option><option value="14C">14C</option><option value="15C">15C</option><option value="16C">16C</option><option value="17C">17C</option><option value="18C">18C</option><option value="19C">19C</option><option value="20C">20C</option><option value="21C">21C</option><option value="22C">22C</option><option value="23C">23C</option><option value="24C">24C</option><option value="25C">25C</option><option value="26C">26C</option>
+  </select>
+  
+  <!-- THIS IS YOUR SUB CATEGORY - WILL SHOW a-i -->
+  <select id="smallerEventSubDrop" onchange="showSmallerEventLinks()" style="display:none; width:100%; padding:12px; border-radius:10px; background:#1e1e1e; color:#fff; border:2px solid #f5c542;">
+    <option value="">-- Select Sub Category --</option>
+  </select>
+  
+  <div id="smallerEventLinksBox" style="display:flex; flex-direction:column; gap:8px; margin-top:12px;"></div>
+</div>
+
    <!-- 4th BUTTON - MAJOR EVENTS - YOUR EXACT LIST -->
   <div class="myDrop">
     <button class="myDropBtn" onclick="toggleMajorEventDrop(); document.getElementById('dropList').style.display='none'; document.getElementById('guidesDropList').style.display='none'; document.getElementById('smallerEventDropList').style.display='none'">
@@ -577,7 +612,6 @@ display:flex;flex-direction:column;gap:10px;
       <div onclick="selectValuableEventNew('12E','🏆 CHAMPIONS WAY')">🏆 CHAMPIONS WAY</div>
     </div>
   </div>
-</div> <!-- close sticky-tabs - NOW ALL 5 BUTTONS INSIDE -->
 
 <!-- VALUABLE EVENT HUB - OUTSIDE sticky, hidden -->
 <div id="valuableEventHub" style="display:none;width:100%;max-width:540px;margin:10px auto;padding:10px">
@@ -600,7 +634,96 @@ display:flex;flex-direction:column;gap:10px;
     <div id="valuableEventLinksBox" style="display:flex;flex-direction:column;gap:10px;margin-top:12px"></div>
   </div>
 </div>
-</div>
+<script>
+function switchAllTabs(val){
+  const all = ['1A','2A','3A','4A','5A','6A','guidesHub','smallerEventHub'];
+  all.forEach(t=>{
+    let el=document.getElementById(t) || document.getElementById('tab-'+t);
+    if(el) el.style.display='none';
+  });
+  let show=document.getElementById(val) || document.getElementById('tab-'+val);
+  if(show) show.style.display='block';
+} // <-- THIS } WAS MISSING!
+
+function showAllGuidesFix(){
+  switchAllTabs('guidesHub');
+}
+function showSmallerEventFix(){
+  switchAllTabs('smallerEventHub');
+}
+function selectGuideNew(val,label){
+  const lbl=document.getElementById('guidesDropLabel');
+  if(lbl) lbl.textContent='📚 '+label;
+  const list=document.getElementById('guidesDropList');
+  if(list) list.style.display='none';
+  showAllGuidesFix();
+  setTimeout(()=>{
+    const m=document.getElementById('mainDrop');
+    if(m){ m.value=val; if(typeof updateSubDrop==='function') updateSubDrop(); }
+  },200);
+}
+function selectSmallerEventNew(val,label){
+  document.getElementById('smallerEventDropLabel').textContent='🎯 '+label;
+  document.getElementById('smallerEventDropList').style.display='none';
+  const hub=document.getElementById('smallerEventHub');
+  if(!hub) return;
+  hub.style.display='block';
+  ['1A','2A','3A','4A','5A','6A','guidesHub'].forEach(t=>{
+    let el=document.getElementById(t) || document.getElementById('tab-'+t);
+    if(el) el.style.display='none';
+  });
+  setTimeout(()=>{
+    const m=document.getElementById('smallerEventMainDrop');
+    if(m){ m.value=val; if(typeof updateSmallerEventSubDrop==='function') updateSmallerEventSubDrop(); }
+    hub.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+function toggleSmallerEventDrop(){
+  const list=document.getElementById('smallerEventDropList');
+  const g=document.getElementById('guidesDropList'); if(g) g.style.display='none';
+  const d=document.getElementById('dropList'); if(d) d.style.display='none';
+  if(!list) return;
+  list.style.display=(list.style.display==='flex'||list.style.display==='block')?'none':'flex';
+}
+function selectCat(val,label){
+  const dl=document.getElementById('dropLabel');
+  if(dl) dl.textContent=label;
+  const ddl=document.getElementById('dropList');
+  if(ddl) ddl.style.display='none';
+  const hub=document.getElementById('guidesHub');
+  if(hub) hub.style.display='none';
+  if(typeof switchTab==='function') switchTab(val);
+  else switchAllTabs(val);
+}
+function updateSmallerEventSubDrop(){
+  const main=document.getElementById('smallerEventMainDrop');
+  const sub=document.getElementById('smallerEventSubDrop');
+  const box=document.getElementById('smallerEventLinksBox');
+  if(!main||!sub||!box) return;
+  const val=main.value; sub.innerHTML=""; box.innerHTML="";
+  if(!val||typeof smallerEventData==='undefined'||!smallerEventData[val]){sub.style.display='none';return;}
+  sub.style.display='block';
+  sub.innerHTML='<option value="">-- Select Sub Category a-i --</option>';
+  Object.keys(smallerEventData[val].subs).forEach(k=>{
+    const o=document.createElement('option'); o.value=k; o.textContent=smallerEventData[val].subs[k].t; sub.appendChild(o);
+  });
+}
+function showSmallerEventLinks(){
+  const mval=document.getElementById('smallerEventMainDrop').value;
+  const sval=document.getElementById('smallerEventSubDrop').value;
+  const box=document.getElementById('smallerEventLinksBox');
+  if(!box) return; box.innerHTML=""; if(!mval||!sval) return;
+  if(typeof smallerEventData==='undefined'||!smallerEventData[mval]||!smallerEventData[mval].subs[sval]) return;
+  const info=smallerEventData[mval].subs[sval];
+  let html=`<div style="background:#1e1e1e;padding:10px;border-radius:12px;color:#f5c542;font-weight:900;border:1px solid #f5c542">${info.t}</div>`;
+  info.links.forEach(([title,url])=>{
+    let isYT=url.includes('youtube.com')||url.includes('youtu.be');
+    html+=`<a href="${url}" target="_blank" style="display:flex;justify-content:space-between;background:${isYT?'#2a1515':'#151515'};border:1px solid ${isYT?'#ff4444':'#f5c542'};padding:12px;border-radius:12px;text-decoration:none;color:#fff;margin-top:8px"><div><div style="font-weight:800;font-size:13px">${title}</div><div style="font-size:10px;color:#888">${url}</div></div><span style="color:${isYT?'#ff4444':'#f5c542'}">↗</span></a>`;
+  });
+  box.innerHTML=html;
+}
+</script>
+ 
  <!-- BUILDING = 1A-1F -->
 <div id="tab-1A">
  <p class="page-sub">Real game data</p>
